@@ -2,8 +2,29 @@
 <html>
 	<head>
 		<title>메인 페이지</title>
+		<style>
+			#content {
+				width: calc(100vw - 310px);
+				height: 100vh;
+				background-color: #e5e7eb;
+				float: right;
+			}
+			
+			#content_wrap {
+				width: 100%;
+				height: 100%;
+				padding: 50px;
+			}
+		</style>
 	</head>	
-	<body>
-		<th:block th:replace="fragments/sidebar :: sidebarFragment"/>
+	<body class="">
+		<div style="width: 310px; float: left;">
+			<th:block th:replace="fragments/sidebar :: sidebarFragment"/>	
+		</div>
+		<div id="content">
+			<div id="content_wrap">
+				#컨텐츠 영역 입니다.
+			</div>
+		</div>	
 	</body>
 </html>
