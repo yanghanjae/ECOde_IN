@@ -9,7 +9,7 @@ public class MainContoller {
 	@RequestMapping ("/")
 	public String index () {
 
-		return "sidebar";
+		return "main";
 
 	}
 
