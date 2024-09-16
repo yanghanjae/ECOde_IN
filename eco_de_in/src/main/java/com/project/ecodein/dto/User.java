@@ -28,7 +28,7 @@ public class User {
 	
 	@ManyToOne
 	@JoinColumn(referencedColumnName="buyer_code", nullable = false)
-	private int buyer_code;
+	private Buyer buyer_code;
 
 	@Column(name="user_password", nullable = false)
 	private String user_password;

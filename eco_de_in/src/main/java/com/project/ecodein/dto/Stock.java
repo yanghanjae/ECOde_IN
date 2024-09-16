@@ -27,11 +27,11 @@ public class Stock {
 	
 	@ManyToOne
 	@JoinColumn(referencedColumnName ="storage_no", nullable=false)
-	private int storage_no;
+	private Storage storage_no;
 
 	@ManyToOne
 	@JoinColumn(referencedColumnName ="item_no", nullable=false)
-	private int item_no;
+	private Item item_no;
 	
 	@Column(name="quantity", nullable = false)
 	private int quantity;
