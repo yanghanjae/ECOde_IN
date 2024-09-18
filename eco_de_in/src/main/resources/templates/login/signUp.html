@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+	<div class="content">
+		<form action="/signup" method="post">
+			<div class="left">
+				<label>이름</label>
+				<input type="text" required="required" name="user_name" class="input">
+			</div>
+			<div class="left">
+				<label>아이디</label>
+				<input type="text" required="required" name="user_id" class="input">
+			</div>
+			<div class="left">
+				<label>비밀번호</label>
+				<input type="password" required="required" name="user_password" class="input">
+			</div>
+			<div class="left">
+				<label>이메일</label>
+				<input type="email" required="required" name="user_email" class="input" >
+			</div>
+			<div class="left">
+				<label>상호</label>
+				<input type="text" list="buyerList" name="buyer_code" required="required" id="buyer" class="input"
+				placeholder="목록에서 골라주세요...">
+				<datalist id="buyerList" >
+					<option th:each="buyer : ${buyers}" th:value="${buyer.buyer_code}" th:text="${buyer.buyer_name}" />
+				</datalist>
+			</div>
+			<div class="left">
+				<label>보안코드</label>
+				<input type="text" required="required" name="buyer_secure_code"  class="input">
+			</div>
+			<button type="button" onclick="location.href='/'" class="confirm yes">취소</button>
+			<button type="submit" class="confirm no">회원가입</button>
+		</form>
+	</div>
+	
+</body>
+</html>
