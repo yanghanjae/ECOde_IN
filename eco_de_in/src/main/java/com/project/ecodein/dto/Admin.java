@@ -30,10 +30,10 @@ public class Admin {
 	@Column (name = "admin_name", nullable = false)
 	private String admin_name;
 
-	@Column (name = "admin_date", nullable = false)
+	@Column (name = "admin_date", nullable = false, insertable = false, updatable = false)
 	private Date admin_date;
 
-	@Column (name = "admin_recognize", nullable = false)
+	@Column (name = "admin_recognize", nullable = false, insertable = false)
 	private boolean admin_recognize;
 
 }

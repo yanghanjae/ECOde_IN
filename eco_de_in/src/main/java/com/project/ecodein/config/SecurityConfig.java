@@ -23,7 +23,8 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filter (HttpSecurity httpSecurity) throws Exception {
 
-		httpSecurity.csrf (AbstractHttpConfigurer::disable);
+		httpSecurity.csrf (AbstractHttpConfigurer::disable)
+		.logout ().disable ();
 
 		return httpSecurity.build ();
 
