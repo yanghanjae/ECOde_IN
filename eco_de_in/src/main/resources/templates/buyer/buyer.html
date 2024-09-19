@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>거래처 관리</title>
+  <link rel="stylesheet" href="/css/default-style.css">
+  <style>
+    #content {
+      width: calc(100vw - 327px);
+      height: 100vh;
+      background-color: #e5e7eb;
+      float: right;
+    }
+    
+    #content_wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 20px;
+      width: 101%;
+      height: 100%;
+      padding: 50px;
+      box-sizing: border-box;
+    }
+  
+    .breadcrumb {
+      width: 50%;
+      height: 40px;
+    }
+    
+    .menu-header {
+      width: 100%;
+      height: 70px;
+      background-color: #fff;
+      border-radius: 15px;
+    }
+    
+    .menu-header .add-btn {
+      background-color: #81CD28;
+      width: 100px;
+      height: 45px;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: bold;
+      margin: .7% .5%
+    }
+    
+    .none-data-search {
+      font-weight: bold;
+      margin-left: 100px;
+    }
+    
+    #dropdownDefaultButton {
+      border: 1px solid gray;
+      border-radius: 25px;
+      padding: 5px 15px;
+    }
+    
+    #dropdown {
+      position: relative;
+      width: 60px !important;
+      top: -19px;
+      left: 375px;
+    }
+    
+    .search_input {
+      border-radius: 25px;
+      border: 1px solid gray;
+      padding: 5px;
+      width: 270px;
+      font-size: .9rem;
+      text-align: center;
+      position: absolute;
+      top: 125px;
+      /*left: 74%;*/
+      left: calc(100% - 450px);
+    }
+    
+    .search_btn {
+      padding: 5px 20px;
+      background-color: #81CD28;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 15px;
+      position: absolute;
+      top: 125px;
+      left: calc(100% - 170px);
+    }
+    
+    .content-1 {
+      background-color: #fff;
+      width: 100%;
+      min-height: 690px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.7rem;
+    }
+    
+    .content-1 > table {
+      margin-top: 15px;
+      width: 95%;
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+    }
+    
+    thead {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      font-size: 1rem;
+    }
+    
+    thead th {
+      padding: 10px 0;
+    }
+    
+    .content-1 tbody tr {
+      font-weight: normal;
+      font-size: 1rem;
+      line-height: 3rem;
+    }
+    
+    .content-1 tbody tr:nth-of-type(even) {
+      background-color: #E6F5D4;
+    }
+    
+    .pagination {
+      position: relative;
+      bottom: 0;
+      left: 0;
+    }
+    
+    .pagination a {
+      font-weight: normal;
+      font-size: 1.1rem;
+    }
+    
+    .active a {
+      font-weight: bold;
+    }
+  
+  </style>
+</head>
+<body>
+	<div style="width: 310px; float: left;">
+	  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
+	</div>
+	<div id="content">
+	  <div id="content_wrap">
+	    <div class="breadcrumb">
+	      <img src="/img/icon/icon-home-filled.png" alt="" style="display: inline; line-height: 40px;">
+	      &nbsp;
+	      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
+	      &nbsp;
+	      <span style="color: #ababab; font-weight: bold;">거래처 관리</span>
+	      &nbsp;
+	      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
+	      &nbsp;
+	      <span style="font-weight: bold;">거래처 리스트</span>
+	    </div>
+	    <div class="menu-header">
+	      <button type="button" class="add-btn" onclick="location.href='/buyer/add'">거래처 등록</button>
+	      <span class="none-data-search">미사용 거래처 조회</span>
+	      <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="relative font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">OFF &nbsp;<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+	        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+	      </svg>
+	      </button>
+	      
+	      <!-- Dropdown menu -->
+	      <div id="dropdown" class="relative z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+	        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+	          <li>
+	            <a th:href="@{/buyer/default/{page}(page = ${page})}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">OFF</a>
+	          </li>
+	          <li>
+	            <a th:href="@{/buyer/all/{page}(page = ${page})}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ON</a>
+	          </li>
+	        </ul>
+	      </div>
+	      
+	      <form th:action="@{/buyer/{buyer_status}/{page}/{keyword}(buyer_status = ${buyer_status}, page = ${page})}" class="inline">
+	        <input type="text" name="keyword" placeholder="거래처명, 사업자번호를 입력하세요." class="search_input">
+	        <input type="submit" value="조 회" class="search_btn">
+	      </form>
+	    </div>
+	    <div class="content-1">
+	      <table>
+	        <thead>
+	          <tr>
+	            <th>거래처 번호</th>
+	            <th>상호</th>
+	            <th>대표자</th>
+	            <th>전화번호</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr th:each="buyer, status: ${buyers}">
+	            <td th:text="${buyer.buyerCode}"></td>
+	            <td>
+	              <a th:href="@{/buyer/{status}/{page}/{buyer_code}(status=${buyer_status == 0 ? 'all' : 'default'}, page=${page}, buyer_code=${buyer.buyerCode})}" th:text="${buyer.buyer_name}"></a>
+	            </td>
+	            <td th:text="${buyer.buyer_agent}"></td>
+	            <td th:text="${buyer.buyer_tel}"></td>
+	          </tr>
+	        </tbody>
+	      </table>
+	      <ul class="pagination justify-content-center inline">
+	        <li class="page-item inline" th:classappend="${!buyers.hasPrevious} ? 'disabled'">
+	          <a class="page-link" th:href="@{${page - 1}}"> &lt;&lt; </a>
+	        </li>
+	        <li th:each="page: ${#numbers.sequence(1, buyers.totalPages-1)}"
+	            th:if="${page >= buyers.number-5 and page <= buyers.number+5}"
+	            th:classappend="${page - 1 == buyers.number} ? 'active'"
+	            class="page-item inline">
+	          <a th:text="${page}" class="page-link" th:href="@{${page}}"></a>
+	        </li>
+	        <li class="page-item inline" th:classappend="${!buyers.hasNext} ? 'disabled'">
+	          <a class="page-link" th:href="@{${page + 1}}"> &gt;&gt; </a>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+
+<script>
+  const dropdownDefaultButton = document.querySelector('#dropdownDefaultButton');
+  const dropdown = document.querySelector('#dropdown');
+  
+  dropdownDefaultButton.addEventListener('click', function (e) {
+    const target = e.target;
+    
+    dropdown.classList.add('block');
+    dropdown.classList.remove('hidden');
+  });
+  
+  if (location.pathname.substring(7, 10) == 'def') {
+    dropdownDefaultButton.innerHTML = `
+                                        OFF &nbsp;
+                                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                        </svg>
+                                        `;
+  } else {
+    dropdownDefaultButton.innerHTML = `
+                                        ON &nbsp;
+                                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                        </svg>
+                                        `;
+  }
+  
+</script>
+</body>
+</html>

@@ -25,7 +25,7 @@ public class Buyer {
 	@Id
 	@Column (name = "buyer_code", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long buyer_code;
+	private Long buyerCode;
 
 	@Column (name = "buyer_name", nullable = false)
 	private String buyer_name;

@@ -15,25 +15,28 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="stock")
+@Table (name = "stock")
 public class Stock {
+
 	@Id
-	@Column(name="stock_no", nullable=false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name = "stock_no", nullable = false)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int stock_no;
-	
+
 	@ManyToOne
-	@JoinColumn(referencedColumnName ="storage_no", nullable=false)
+	@JoinColumn (referencedColumnName = "storage_no", nullable = false)
 	private Storage storage_no;
 
 	@ManyToOne
-	@JoinColumn(referencedColumnName ="item_no", nullable=false)
+	@JoinColumn (referencedColumnName = "item_no", nullable = false)
 	private Item item_no;
-	
-	@Column(name="quantity", nullable = false)
-	private int quantity;
-}
 
+	@Column (name = "quantity", nullable = false)
+	private int quantity;
+
+}

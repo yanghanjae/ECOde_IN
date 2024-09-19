@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>메인 페이지</title>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
   <script>
@@ -17,7 +18,7 @@
   </script>
   <style>
     #content {
-      width: calc(100vw - 310px);
+      width: calc(100vw - 327px);
       height: 100vh;
       background-color: #e5e7eb;
       float: right;
@@ -29,7 +30,7 @@
       justify-content: flex-start;
       align-items: flex-start;
       gap: 20px;
-      width: 100%;
+      width: 101%;
       height: 100%;
       padding: 50px;
       box-sizing: border-box;
@@ -133,53 +134,62 @@
         </p>
         <table>
           <thead>
-          <tr>
-            <th>발주번호</th>
-            <th>납기일자</th>
-            <th>출고상태</th>
-          </tr>
+	          <tr>
+	            <th>발주번호</th>
+	            <th>납기일자</th>
+	            <th>출고상태</th>
+	          </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>1</td>
-            <td>2024-09-15</td>
-            <td>진행중</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>2024-09-15</td>
-            <td>진행중</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>2024-09-15</td>
-            <td>진행중</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>2024-09-15</td>
-            <td>진행중</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>2024-09-15</td>
-            <td>진행중</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>2024-09-15</td>
-            <td>진행중</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>2024-09-15</td>
-            <td>진행중</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>2024-09-15</td>
-            <td>진행중</td>
-          </tr>
+	          <tr th:if="${order != null}">
+	            <td>1</td>
+	            <td>2024-09-15</td>
+	            <td>진행중</td>
+	          </tr>
+						<div></div>
+						<tr th:if="${order == null}">
+							<td></td>
+							<td>&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr th:if="${order == null}">
+							<td></td>
+							<td>&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr th:if="${order == null}">
+							<td></td>
+							<td>&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr th:if="${order == null}">
+							<td></td>
+							<td>&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr th:if="${order == null}">
+							<td style="font-weight: bold;" colspan="3">진행중인 발주 내역이 존재하지 않습니다.</td>
+						</tr>
+						<tr th:if="${order == null}">
+							<td></td>
+							<td>&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr th:if="${order == null}">
+							<td></td>
+							<td>&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr th:if="${order == null}">
+							<td></td>
+							<td>&nbsp;</td>
+							<td></td>
+						</tr>
+						<tr th:if="${order == null}">
+							<td></td>
+							<td>&nbsp;</td>
+							<td></td>
+						</tr>
           </tbody>
         </table>
       </div>
