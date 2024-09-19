@@ -29,15 +29,15 @@
 				<input type="text" list="buyerList" name="buyer_code" required="required" id="buyer" class="input"
 				placeholder="목록에서 골라주세요...">
 				<datalist id="buyerList" >
-					<option th:each="buyer : ${buyers}" th:value="${buyer.buyer_code}" th:text="${buyer.buyer_name}" />
+					<option th:each="buyer : ${buyers}" th:value="${buyer.buyerCode}" th:text="${buyer.buyer_name}" />
 				</datalist>
 			</div>
 			<div class="left">
 				<label>보안코드</label>
 				<input type="text" required="required" name="buyer_secure_code"  class="input">
 			</div>
-			<button type="button" onclick="location.href='/'" class="confirm yes">취소</button>
-			<button type="submit" class="confirm no">회원가입</button>
+			<button type="button" onclick="location.href='/'" class="confirm no">취소</button>
+			<button type="submit" class="confirm yes">회원가입</button>
 		</form>
 	</div>
 	

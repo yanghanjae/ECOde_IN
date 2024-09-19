@@ -31,16 +31,30 @@ public class LoginService {
 	}
 	
 	//보안코드 검사후 회원가입.
-	public String signUp (User user, String buyer_secure_code) {
+	public String signUp (User user, String buyer_secure_code, Model model) {
+		if (USER_REPOSITORY.findByUserId (user.getUser_id ()).isPresent ()) {
+			model.addAttribute ("message", "이미 가입된 아이디입니다.");
+			model.addAttribute ("url", "/signup");
+			return "errorMessage";
+		}
+		
 		if (user.getBuyer_code ().getBuyer_secure_code ().equals (buyer_secure_code)) {
+			user.setUser_password (SECURITY_CONFIG.passwordEncoder ().encode (user.getUser_password ()));
 			USER_REPOSITORY.save (user);
 			return "redirect:/";
 		} else {
-			return "redirect:/signup";
+			model.addAttribute ("message", "잘못된 보안코드입니다. 다시 확인해주세요.");
+			model.addAttribute ("url", "/signup");
+			return "errorMessage";
 		}
 	}
 	
-	public String adminSignUp (Admin admin) {
+	public String adminSignUp (Admin admin, Model model) {
+		if (ADMIN_REPOSITORY.findByAdminId (admin.getAdmin_id ()).isPresent ()) {
+			model.addAttribute ("message", "이미 가입된 아이디입니다.");
+			model.addAttribute ("url", "/signup/admin");
+			return "errorMessage";
+		}
 		admin.setAdmin_password (SECURITY_CONFIG.passwordEncoder ().encode (admin.getAdmin_password ()));
 		ADMIN_REPOSITORY.save (admin);
 		return "redirect:/";
