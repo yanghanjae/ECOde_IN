@@ -11,5 +11,6 @@ public interface BuyerRepository extends JpaRepository<Buyer, Long> {
 
 	@Query (value = "select * from buyer where buyer_name = ? or buyer_number = ?", nativeQuery = true)
 	public List<Buyer> findByBuyerNameOrBuyerNumber (String keyword);
+	
 
 }
