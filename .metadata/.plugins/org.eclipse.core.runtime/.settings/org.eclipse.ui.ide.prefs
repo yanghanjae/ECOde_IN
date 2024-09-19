@@ -1,9 +1,11 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=fd586ba75f12ede7db4991648c7572cbc563cc60
+IMPORT_FILES_AND_FOLDERS_MODE=prompt
 IMPORT_FILES_AND_FOLDERS_RELATIVE=true
 IMPORT_FILES_AND_FOLDERS_TYPE=23,1
+IMPORT_FILES_AND_FOLDERS_VIRTUAL_FOLDER_MODE=prompt
 eclipse.preferences.version=1
-platformState=1268983862403792
+platformState=1025152984362455
 quickStart=false
 tipsAndTricks=true
