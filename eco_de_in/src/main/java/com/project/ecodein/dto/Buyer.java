@@ -1,6 +1,8 @@
 package com.project.ecodein.dto;
 
 import java.time.LocalDateTime;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +45,7 @@ public class Buyer {
 	private String buyer_address;
 
 	@Column (name = "buyer_regist_date", nullable = false)
+	@CreationTimestamp
 	private LocalDateTime buyer_regist_date;
 
 	@Column (name = "buyer_status", nullable = false)

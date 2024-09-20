@@ -42,6 +42,7 @@ public class LoginController {
 	public String loginPost (@RequestParam(name = "admin", required = false) boolean admin, @RequestParam("user_id") String user_id,
 		@RequestParam("user_password") String user_password, Model model) {
 		if (admin) {
+			log.info ("admin");
 			return LOGIN_SERVICE.adminLogin (user_id, user_password, model);
 		} else {
 			return LOGIN_SERVICE.login (user_id, user_password, model);
