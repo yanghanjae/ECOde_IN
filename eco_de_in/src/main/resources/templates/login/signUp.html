@@ -29,7 +29,7 @@
 				<input type="text" list="buyerList" name="buyer_code" required="required" id="buyer" class="input"
 				placeholder="목록에서 골라주세요...">
 				<datalist id="buyerList" >
-					<option th:each="buyer : ${buyers}" th:value="${buyer.buyer_code}" th:text="${buyer.buyer_name}" />
+					<option th:each="buyer : ${buyers}" th:value="${buyer.buyerCode}" th:text="${buyer.buyer_name}" />
 				</datalist>
 			</div>
 			<div class="left">

@@ -117,87 +117,87 @@
   </style>
 </head>
 <body>
-<div style="width: 310px; float: left;">
-  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
-</div>
-<div id="content">
-  <div id="content_wrap">
-    <div class="main-content">
-      <div class="content-0">
-        <div id="calendar">
-          <span class="calendar-title">일정관리</span>
-        </div>
-      </div>
-      <div class="content-1">
-        <p class="content-title">
-          진행중인 발주
-        </p>
-        <table>
-          <thead>
-	          <tr>
-	            <th>발주번호</th>
-	            <th>납기일자</th>
-	            <th>출고상태</th>
-	          </tr>
-          </thead>
-          <tbody>
-	          <tr th:if="${order != null}">
-	            <td>1</td>
-	            <td>2024-09-15</td>
-	            <td>진행중</td>
-	          </tr>
-						<div></div>
-						<tr th:if="${order == null}">
-							<td></td>
-							<td>&nbsp;</td>
-							<td></td>
-						</tr>
-						<tr th:if="${order == null}">
-							<td></td>
-							<td>&nbsp;</td>
-							<td></td>
-						</tr>
-						<tr th:if="${order == null}">
-							<td></td>
-							<td>&nbsp;</td>
-							<td></td>
-						</tr>
-						<tr th:if="${order == null}">
-							<td></td>
-							<td>&nbsp;</td>
-							<td></td>
-						</tr>
-						<tr th:if="${order == null}">
-							<td style="font-weight: bold;" colspan="3">진행중인 발주 내역이 존재하지 않습니다.</td>
-						</tr>
-						<tr th:if="${order == null}">
-							<td></td>
-							<td>&nbsp;</td>
-							<td></td>
-						</tr>
-						<tr th:if="${order == null}">
-							<td></td>
-							<td>&nbsp;</td>
-							<td></td>
-						</tr>
-						<tr th:if="${order == null}">
-							<td></td>
-							<td>&nbsp;</td>
-							<td></td>
-						</tr>
-						<tr th:if="${order == null}">
-							<td></td>
-							<td>&nbsp;</td>
-							<td></td>
-						</tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="content-2">
-      <p>QnA</p>
-    </div>
-  </div>
-</div>
+	<div style="width: 310px; float: left;">
+	  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
+	</div>
+	<div id="content">
+	  <div id="content_wrap">
+	    <div class="main-content">
+	      <div class="content-0">
+	        <div id="calendar">
+	          <span class="calendar-title">일정관리</span>
+	        </div>
+	      </div>
+	      <div class="content-1">
+	        <p class="content-title">
+	          진행중인 발주
+	        </p>
+	        <table>
+	          <thead>
+		          <tr>
+		            <th>발주번호</th>
+		            <th>납기일자</th>
+		            <th>출고상태</th>
+		          </tr>
+	          </thead>
+	          <tbody>
+		          <tr th:if="${order != null}">
+		            <td>1</td>
+		            <td>2024-09-15</td>
+		            <td>진행중</td>
+		          </tr>
+							<div></div>
+							<tr th:if="${order == null}">
+								<td></td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+							<tr th:if="${order == null}">
+								<td></td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+							<tr th:if="${order == null}">
+								<td></td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+							<tr th:if="${order == null}">
+								<td></td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+							<tr th:if="${order == null}">
+								<td style="font-weight: bold;" colspan="3">진행중인 발주 내역이 존재하지 않습니다.</td>
+							</tr>
+							<tr th:if="${order == null}">
+								<td></td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+							<tr th:if="${order == null}">
+								<td></td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+							<tr th:if="${order == null}">
+								<td></td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+							<tr th:if="${order == null}">
+								<td></td>
+								<td>&nbsp;</td>
+								<td></td>
+							</tr>
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+	    <div class="content-2">
+	      <p>QnA</p>
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>
