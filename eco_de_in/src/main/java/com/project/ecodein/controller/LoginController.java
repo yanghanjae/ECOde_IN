@@ -42,6 +42,7 @@ public class LoginController {
 	public String loginPost (@RequestParam(name = "admin", required = false) boolean admin, @RequestParam("user_id") String user_id,
 		@RequestParam("user_password") String user_password, Model model) {
 		if (admin) {
+			log.info ("admin");
 			return LOGIN_SERVICE.adminLogin (user_id, user_password, model);
 		} else {
 			return LOGIN_SERVICE.login (user_id, user_password, model);
@@ -55,9 +56,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/signup")
-	public String singUpPost (@ModelAttribute User user, @RequestParam("buyer_secure_code") String buyer_secure_code) {
-		user.setUser_password (SECURITY_CONFIG.passwordEncoder ().encode (user.getUser_password ()));
-		return LOGIN_SERVICE.signUp (user, buyer_secure_code);
+	public String singUpPost (@ModelAttribute User user, @RequestParam("buyer_secure_code") String buyer_secure_code,
+		Model model) {
+		return LOGIN_SERVICE.signUp (user, buyer_secure_code, model);
 	}
 	
 	@GetMapping("/signup/admin")
@@ -66,8 +67,8 @@ public class LoginController {
 	}
 	
 	@PostMapping("/signup/admin")
-	public String AdminSignUpPost (@ModelAttribute Admin admin) {
-		return LOGIN_SERVICE.adminSignUp (admin);
+	public String AdminSignUpPost (@ModelAttribute Admin admin, Model model) {
+		return LOGIN_SERVICE.adminSignUp (admin, model);
 	}
 	
 	@GetMapping("/logout")

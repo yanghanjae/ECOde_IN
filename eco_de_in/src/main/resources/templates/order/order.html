@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>발주 조회 페이지</title>
+  <link rel="stylesheet" href="/css/default-style.css">
+
+  <!-- 부트스트랩 -->
+  <!--	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+-->
+  <!--  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+-->
+  <style>
+    #content {
+      width: calc(100vw - 327px);
+      height: 100vh;
+      background-color: #e5e7eb;
+      float: right;
+    }
+
+    #content_wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 20px;
+      width: 101%;
+      height: 100%;
+      padding: 50px;
+      box-sizing: border-box;
+    }
+
+
+    .main-content {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      width: 800px;
+    }
+
+    .register-content {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f3f4f6;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    .button-register {
+      background-color: #81CD28;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      float: right;
+      margin-bottom: 20px;
+    }
+
+    .rounded-input {
+      border-radius: 10px;
+    }
+
+    .rounded-button {
+      border-radius: 10px;
+    }
+
+    .search-button {
+      width: 130px;
+      background-color: #81CD28;
+    }
+
+    .button {
+          background-color: transparent;
+          color: green;
+          border: 2px solid green;
+          padding: 10px 20px;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+
+        .button:hover {
+          background-color: green;
+          color: white;
+        }
+
+        .button.active {
+          background-color: green;
+          color: white;
+        }
+
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      padding-left: 0;
+      list-style: none;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+
+    .page-link {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      margin: 0 5px;
+      text-decoration: none;
+      color: #000;
+      border-radius: 5px;
+    }
+
+    .page-link:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 사이드바 -->
+  <div style="width: 310px; float: left;">
+    <th:block th:replace="fragments/sidebar :: sidebarFragment" />
+  </div>
+
+  <!-- 메인 콘텐츠 -->
+  <div id="content">
+    <div id="content_wrap">
+
+      <!-- 발주 조회 -->
+      <div class="main-content">
+        <h2 class="text-2xl font-bold mb-4">발주 조회</h2>
+        <div class="flex mb-4">
+          <input type="text" class="border border-gray-300 p-2 w-full rounded-input"
+            placeholder="발주번호, 거래처명, 거래처코드를 입력하세요.">
+          <button class="bg-green-81CD28 text-white px-4 ml-2 rounded-button search-button">조 회</button>
+        </div>
+        
+        <p>출고 진행상태</p>
+        <div>
+            <button class="button" onclick="setActiveButton(this)">Button</button>
+            <button class="button" onclick="setActiveButton(this)">진행중</button>
+            <button class="button" onclick="setActiveButton(this)">완료</button>
+          </div>
+
+          <script>
+            function setActiveButton(clickedButton) {
+              const buttons = document.querySelectorAll('.button');
+              buttons.forEach(button => button.classList.remove('active'));
+
+              clickedButton.classList.add('active');
+            }
+          </script>
+      </div>
+
+      <!-- 발주 등록  -->
+      <div class="register-content">
+        <button class="button-register">발주 등록</button>
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>발주날짜</th>
+              <th>발주번호</th>
+              <th>거래처</th>
+              <th>상품명</th>
+              <th>납기일자</th>
+              <th>출고 진행상태</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>2024-09-12</td>
+              <td>20240912123</td>
+              <td>CU</td>
+              <td>라면, 김밥...</td>
+              <td>2024-09-20</td>
+              <td>진행중</td>
+              <td><button class="text-red-500">x</button></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>2024-09-12</td>
+              <td>20240912456</td>
+              <td>CU</td>
+              <td>라면, 김치...</td>
+              <td>2024-09-20</td>
+              <td>완료</td>
+              <td><button class="text-red-500">x</button></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 페이지네이션  -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li><a class="page-link" href="#"><</a></li>
+            <li><a class="page-link" href="#">1</a></li>
+            <li><a class="page-link" href="#">2</a></li>
+            <li><a class="page-link" href="#">3</a></li>
+            <li><a class="page-link" href="#">></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</body>
+	
+</html>
