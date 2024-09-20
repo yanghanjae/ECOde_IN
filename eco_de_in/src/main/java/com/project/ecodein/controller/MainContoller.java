@@ -12,12 +12,5 @@ public class MainContoller {
 		return "main";
 
 	}
-	
-	@RequestMapping ("/order")
-	public String order () {
-		
-		return "order/order";
-		
-	}
 
 }
