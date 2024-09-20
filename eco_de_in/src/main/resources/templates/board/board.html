@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="ko">
+
+<head>
+<meta charset="UTF-8">
+<title>Q&A</title>
+<style>
+#content {
+	width: calc(100vw - 327px);
+	height: 100vh;
+	background-color: #e5e7eb;
+	float: right;
+}
+
+#content_wrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 20px;
+	width: 101%;
+	height: 100%;
+	padding: 50px;
+	box-sizing: border-box;
+}
+
+.main-content {
+	background-color: #ffffff;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	width: 100%;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+	table-layout: fixed;
+	overflow-wrap: break-word;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+
+th {
+	background-color: #f3f4f6;
+}
+
+tbody tr {
+	font-weight: normal;
+	font-size: 1rem;
+	line-height: 3rem;
+}
+
+tbody tr:nth-of-type(even) {
+	background-color: #E6F5D4;
+}
+
+.search-group {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      position: relative;
+      right: -1000px;
+}
+
+.category-search-box {
+	display: inline-block;
+	border: 1px solid #888;
+	width: 400px;
+	line-height: 50px;
+	border-radius: 10px;
+	margin-left: auto;
+}
+
+.button-register {
+      background-color: #81CD28;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+}
+
+form>input {
+	line-height: 30px;
+	border-radius: 10px;
+	border: 1px solid #888;
+}
+#filter {
+	margin-left:5px;
+}
+select#column {
+	margin-left: 5px;
+	width: 100px;
+	padding: 2.5px 6px;
+}
+
+input#search {
+	width: 206px;
+}
+
+input#submit {
+	width: 50px;
+	line-height: 30px;
+	background-color: #D9D9D9;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	padding-left: 0;
+	list-style: none;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+.page-link {
+	border: 1px solid #ddd;
+	padding: 8px 12px;
+	margin: 0 5px;
+	text-decoration: none;
+	color: #000;
+	border-radius: 5px;
+}
+
+.page-link:hover {
+	background-color: #f1f1f1;
+}
+</style>
+</head>
+
+<body>
+	<div style="width: 310px; float: left;">
+		<th:block th:replace="fragments/sidebar :: sidebarFragment" />
+	</div>
+	<div id="content">
+		<div id="content_wrap">
+			<div class="search-group">
+
+				<!-- searchForm -->
+				<form class="category-search-box" action="${ context }board/search">
+					<label class="board-category" for="column"></label> <select
+						id="filter" name="filter">
+						<option value="board_no">게시글 번호</option>
+						<option value="board_title">글 제목</option>
+					</select> <label for="search"></label> <input type="search" name="search"
+						id="search"> <input type="submit" id="submit" value="검색">
+				</form>
+				<a href="board/add">
+					<button class="button-register">등록</button>
+				</a>
+			</div>
+
+			<div class="main-content">
+				<table>
+					<thead>
+						<tr>
+							<th>글 번호</th>
+							<th>글 제목</th>
+							<th>작성자</th>
+							<th>등록일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="boardList" items="${boardList}">
+							<td><a class="text-primary"
+								href="board/boardDetail">${
+									boardList.board_no }</a></td>
+							<td><a class="text-primary"
+								href="$board/boardDetail">${
+									boardList.board_title }</a></td>
+							<td>${ boardList.user_id}</td>
+							<td><fmt:formatDate value="${ boardList.board_date }"
+									type="both" /></td>
+						</c:forEach>
+					</tbody>
+				</table>
+
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li><a class="page-link" href="#"><</a></li>
+						<li><a class="page-link" href="#">1</a></li>
+						<li><a class="page-link" href="#">2</a></li>
+						<li><a class="page-link" href="#">3</a></li>
+						<li><a class="page-link" href="#">></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

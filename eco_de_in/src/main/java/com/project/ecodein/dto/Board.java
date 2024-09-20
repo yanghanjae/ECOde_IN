@@ -39,11 +39,11 @@ public class Board {
 	private LocalDateTime board_date;
 
 	@ManyToOne
-	@JoinColumn (referencedColumnName = "user_id", nullable = false)
+	@JoinColumn (name = "user_id", referencedColumnName = "user_id", nullable = false)
 	private User user;
 
 	@ManyToOne
-	@JoinColumn (referencedColumnName = "admin_id", nullable = true)
+	@JoinColumn (name = "admin_id",  referencedColumnName = "admin_id", nullable = true)
 	private Admin admin;
 
 	@Column (name = "comment_content", nullable = true)
