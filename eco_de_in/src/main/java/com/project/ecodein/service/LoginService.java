@@ -1,37 +1,49 @@
 package com.project.ecodein.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import com.project.ecodein.config.SecurityConfig;
 import com.project.ecodein.dto.Admin;
+import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.dto.User;
 import com.project.ecodein.repository.AdminRepository;
+import com.project.ecodein.repository.BuyerRepository;
 import com.project.ecodein.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class LoginService {
 
 	private final UserRepository USER_REPOSITORY;
 	private final AdminRepository ADMIN_REPOSITORY;
 	private final SecurityConfig SECURITY_CONFIG;
 	private final HttpSession HTTP_SESSION;
+	private final BuyerRepository BUYER_REPOSITORY;
 	
 	@Autowired
 	public LoginService (UserRepository USER_REPOSITORY,
 		AdminRepository ADMIN_REPOSITORY,
 		SecurityConfig SECURITY_CONFIG,
+		BuyerRepository BUYER_REPOSITORY,
 		HttpSession HTTP_SESSION) {
 
 		this.USER_REPOSITORY = USER_REPOSITORY;
 		this.ADMIN_REPOSITORY = ADMIN_REPOSITORY;
 		this.SECURITY_CONFIG = SECURITY_CONFIG;
+		this.BUYER_REPOSITORY = BUYER_REPOSITORY;
 		this.HTTP_SESSION = HTTP_SESSION;
 	}
 	
 	//보안코드 검사후 회원가입.
 	public String signUp (User user, String buyer_secure_code, Model model) {
+		log.info (user.getBuyer_code ().toString ());
 		if (USER_REPOSITORY.findByUserId (user.getUser_id ()).isPresent ()) {
 			model.addAttribute ("message", "이미 가입된 아이디입니다.");
 			model.addAttribute ("url", "/signup");
@@ -115,4 +127,13 @@ public class LoginService {
 		}
 	}
 	
+	public Page<Buyer> searchBuyers (String name, int page, int pageSize) {
+		Pageable pageable = PageRequest.of (page -1 , pageSize, Sort.by (Sort.Order.desc ("buyerCode")));
+
+		if (name == null || name.isEmpty ()) {
+			return BUYER_REPOSITORY.findAll (pageable);
+		} else {
+			return BUYER_REPOSITORY.findByBuyerName (name, pageable);
+		}
+	}
 }

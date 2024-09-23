@@ -30,7 +30,7 @@ public class Storage {
 	@Column(name="storage_name", nullable = false)
 	private String storage_name;
 
-	@Column(name="storage_statuse", nullable = false)
+	@Column(name="storage_status", nullable = false)
 	private String storage_status;
 	
 	@Column(name="storage_site", nullable = false)
