@@ -350,8 +350,8 @@
 	        </tbody>
 	      </table>
 	      <ul class="pagination justify-content-center inline">
-	        <li class="page-item inline" th:classappend="${!buyers.hasPrevious} ? 'disabled'">
-	          <a class="page-link" th:href="@{${page - 1}}"> &lt;&lt; </a>
+	        <li class="page-item inline" th:classappend="${!buyers.hasPrevious} ? 'hidden'">
+	          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page - 1}, keyword = ${param.keyword})}"> &lt;&lt; </a>
 	        </li>
 	        <li th:each="page: ${#numbers.sequence(1, buyers.totalPages)}"
 	            th:if="${page >= buyers.number-5 and page <= buyers.number+5}"
@@ -359,8 +359,8 @@
 	            class="page-item inline">
 	          <a th:text="${page}" class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page}, keyword = ${param.keyword})}"></a>
 	        </li>
-	        <li class="page-item inline" th:classappend="${!buyers.hasNext} ? 'disabled'">
-	          <a class="page-link" th:href="@{${page + 1}}"> &gt;&gt; </a>
+	        <li class="page-item inline" th:classappend="${!buyers.hasNext} ? 'hidden'">
+	          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page + 1}, keyword = ${param.keyword})}"> &gt;&gt; </a>
 	        </li>
 	      </ul>
 	    </div>

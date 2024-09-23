@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>창고 리스트</title>
+  <link rel="stylesheet" href="/css/default-style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    #content {
+      width: calc(100vw - 327px);
+      height: 100vh;
+      background-color: #e5e7eb;
+      float: right;
+    }
+    
+    #content_wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 20px;
+      width: 101%;
+      height: 100%;
+      padding: 50px;
+      box-sizing: border-box;
+    }
+    
+    
+    .main-content {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      width: 800px;
+    }
+    
+    .register-content {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #f3f4f6;
+    }
+    
+    tbody tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+    
+    .button-register {
+      background-color: #81CD28;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      float: right;
+      margin-bottom: 20px;
+    }
+    
+    .rounded-input {
+      border-radius: 10px;
+    }
+    
+    .rounded-button {
+      border-radius: 10px;
+    }
+    
+    .search-button {
+      width: 130px;
+      background-color: #81CD28;
+    }
+    
+    .button {
+      background-color: transparent;
+      color: green;
+      border: 2px solid green;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    
+    .button:hover {
+      background-color: green;
+      color: white;
+    }
+    
+    .button.active {
+      background-color: green;
+      color: white;
+    }
+    
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      padding-left: 0;
+      list-style: none;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+    
+    .page-link {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      margin: 0 5px;
+      text-decoration: none;
+      color: #000;
+      border-radius: 5px;
+    }
+    
+    .page-link:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+  <script>
+    function closeModal () {
+      const static_modal = document.querySelector('#static-modal');
+      
+      static_modal.classList.add('hidden');
+    }
+    
+    function activeModal () {
+      const static_modal = document.querySelector('#static-modal');
+      
+      static_modal.classList.remove('hidden');
+    }
+  </script>
+</head>
+
+<body>
+<!-- 사이드바 -->
+<div style="width: 310px; float: left;">
+  <th:block th:replace="fragments/sidebar :: sidebarFragment" />
+</div>
+
+<!-- 메인 콘텐츠 -->
+<div id="content">
+  <div id="content_wrap">
+    
+    <!-- breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/main">
+        <img src="/img/icon/icon-home-filled.png" alt="" style="display: inline; line-height: 40px;">
+      </a>
+      &nbsp;
+      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
+      &nbsp;
+      <a href="/storage">
+        <span style="color: #ababab; font-weight: bold;">창고 관리</span>
+      </a>
+      &nbsp;
+      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
+      &nbsp;
+      <span style="font-weight: bold;">창고 리스트</span>
+    </div>
+    
+    <!-- 창고 조회 -->
+    <div class="main-content">
+      <h2 class="text-2xl font-bold mb-4">창고 조회</h2>
+      <div class="flex mb-4">
+        <input type="text" class="border border-gray-300 p-2 w-full rounded-input"
+               placeholder="창고명 또는 구역을 입력하세요.">
+        <button class="bg-green-81CD28 text-white px-4 ml-2 rounded-button search-button">조 회</button>
+      </div>
+      
+      <span class="text-black mr-5">상태별 조회</span>
+      <div class="inline">
+        <button type="button" class="rounded-3xl py-3 px-7 mr-5" style="border: 2px solid darkgray">전 체</button>
+        <button type="button" class="rounded-3xl py-3 px-7 mr-5" style="border: 2px solid darkgreen">정 상</button>
+        <button type="button" class="rounded-3xl py-3 px-7 mr-5" style="border: 2px solid red">확인필요</button>
+      </div>
+    </div>
+    
+    <!-- 창고 리스트  -->
+    <div class="register-content">
+      <button class="button-register">창고 등록</button>
+      <table>
+        <caption class="text-left font-bold text-2xl mb-5" style="margin-top: -60px;">창고 조회 결과</caption>
+        <colgroup>
+          <col style="width: 30%">
+          <col style="width: 30%">
+          <col style="width: 15%">
+          <col style="width: 15%">
+          <col style="width: 10%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>창고명</th>
+            <th>창고 위치</th>
+            <th>창고 상태</th>
+            <th>창고 상세 정보</th>
+            <th>창고 삭제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:if="${storages.isEmpty()}">
+            <td colspan="4">조회 결과가 존재하지 않습니다.</td>
+          </tr>
+          <tr th:if="${storages != null}" th:each="storage, status: ${storages}">
+            <td th:text="${storage.storage_name}">CU서울1물류센터</td>
+            <td th:text="${storage.storage_site}">서울 송파구</td>
+            <td>
+              <span th:if="${storage.storage_status.equals('정상')}" class="py-1 px-10 rounded-full font-bold text-white" style="background-color: #9FF781">정상</span>
+              <span th:if="${!storage.storage_status.equals('정상')}" class="py-1 px-6 rounded-full font-bold text-white" style="background-color: #FA5858">확인 필요</span>
+            </td>
+            <td><a class="cursor-pointer py-1 px-4 bg-yellow-300 rounded-full font-bold text-white" onclick="activeModal ()">정보 보기</a></td>
+            <td><a href="/storage/remove/${storage.storage_no}">X</a></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- 페이지네이션  -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li th:classappend="${!storages.hasPrevious} ? 'hidden'">
+            <a class="page-link" th:href="@{{page}(page = ${page -1})}">&lt;</a>
+          </li>
+          <li th:each="page: ${#numbers.sequence(1, storages.totalPages)}"
+              th:if="${page >= storages.number-5 and page <= storages.number+5}"
+              th:classappend="${page - 1 == storages.number} ? 'active'">
+            <a th:text="${page}" class="page-link" th:href="@{{page}(page = ${page})}"> </a>
+          </li>
+          <li th:classappend="${!storages.hasNext()} ? 'hidden'">
+            <a class="page-link" th:href="@{{page}(page = ${page + 1})}">&gt;</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  
+  <!-- Main modal -->
+  <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden fixed w-6/12 z-50 justify-center items-center" style="top: 25%; left: 35%; width: 50%;">
+    <div class="relative p-4 w-full  max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            CU서울1물류센터 상세정보
+          </h3>
+          <button type="button" class="border-solid border-2 border-inherit py-2 px-6 rounded-2xl bg-gray-200" onclick="closeModal ()">
+            닫기
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-4 md:p-5 space-y-4">
+          <span class="font-bold text-lg">창고 주소</span>
+          <span><input type="text" style="color: black !important; padding-left: 15px; margin-left: 15px; width: 500px; border: 2px solid lightgray; border-radius: 15px; background-color: lightgray" placeholder="서울 송파구" disabled></span>
+          <span class="font-bold text-lg ml-7">상태</span>
+          <span class="ml-16 py-2 px-12 rounded-full font-bold text-white" style="background-color: #90EE90">정 상</span>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center p-4 md:p-5 rounded-b dark:border-gray-600">
+          <table>
+            <colgroup>
+              <col style="width: 15%">
+              <col style="width: 25%">
+              <col style="width: auto;">
+              <col style="width: 10%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>재고번호</th>
+                <th>이미지</th>
+                <th>재고명</th>
+                <th>재고수량(단위: 개)</th>
+              </tr>
+            </thead>
+            <tbody class="font-bold">
+              <tr>
+                <td colspan="4">조회 결과가 존재하지 않습니다.</td>
+              </tr>
+              <tr>
+                <td>10012134</td>
+                <td><img src="/img/dummy/삼각김밥.png" alt=""></td>
+                <td class="truncate md:text-clip">[매콤한]불짜장, 불짬뽕 삼각김밥</td>
+                <td>192</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

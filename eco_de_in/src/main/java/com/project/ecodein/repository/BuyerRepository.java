@@ -14,8 +14,6 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface BuyerRepository extends JpaRepository<Buyer, Long> {
-
-
 	// 검색 시 실행되는 코드
 	@Query (value = "select * from buyer where buyer_status = :status and buyer_name like concat('%', :keyword, '%') or buyer_number like concat('%', :keyword, '%')", nativeQuery = true)
 	public Page<Buyer> findByBuyerStatusAndBuyerNameOrBuyerNumber (@Param ("keyword") String keyword,
