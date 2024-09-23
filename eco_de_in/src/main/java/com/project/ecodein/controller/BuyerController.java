@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping ("/buyer")
 @Slf4j
-public class BuyerController {
+public class  BuyerController {
 
 	private final BuyerService buyerService;
 
