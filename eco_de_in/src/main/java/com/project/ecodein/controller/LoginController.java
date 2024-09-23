@@ -1,6 +1,7 @@
 package com.project.ecodein.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.ecodein.config.SecurityConfig;
 import com.project.ecodein.dto.Admin;
+import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.dto.User;
 import com.project.ecodein.repository.BuyerRepository;
 import com.project.ecodein.service.LoginService;
@@ -51,7 +53,10 @@ public class LoginController {
 	
 	@GetMapping("/signup")
 	public String signUp (Model model) {
-		model.addAttribute ("buyers", BUYER_REPOSITORY.findAll());
+		model.addAttribute ("currentPage", 1);
+		model.addAttribute ("totalPages", 1);
+		model.addAttribute ("search", "");
+		
 		return "login/signUp";
 	}
 	
@@ -59,6 +64,23 @@ public class LoginController {
 	public String singUpPost (@ModelAttribute User user, @RequestParam("buyer_secure_code") String buyer_secure_code,
 		Model model) {
 		return LOGIN_SERVICE.signUp (user, buyer_secure_code, model);
+	}
+	
+	@GetMapping("signup/modal")
+	public String signUpBuyers (@RequestParam(value = "search", required = false) String search,
+		@RequestParam(value = "page", defaultValue = "1") int page,
+		Model model) {
+		
+		int pageSize =10;
+		
+		Page<Buyer> buyers = LOGIN_SERVICE.searchBuyers (search, page, pageSize);
+		
+		model.addAttribute ("buyers", buyers.getContent ());
+		model.addAttribute ("currentPage", page);
+		model.addAttribute ("totalPages", buyers.getTotalPages ());
+		model.addAttribute ("search", search);
+		
+		return "login/signUp :: modalContent";
 	}
 	
 	@GetMapping("/signup/admin")

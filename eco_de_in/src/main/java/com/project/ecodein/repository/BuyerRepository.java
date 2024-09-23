@@ -3,11 +3,9 @@ package com.project.ecodein.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import org.springframework.stereotype.Repository;
 import com.project.ecodein.dto.Buyer;
 import jakarta.transaction.Transactional;
@@ -29,5 +27,7 @@ public interface BuyerRepository extends JpaRepository<Buyer, Long> {
 	@Modifying @Transactional
 	public void updateBuyerStatusByBuyerCode (@Param ("buyer_code") Long buyer_code);
 
-
+	// 상호명으로 검색
+	@Query ("SELECT b FROM Buyer b WHERE b.buyer_name LIKE CONCAT('%',:buyer_name,'%')")
+	public Page<Buyer> findByBuyerName (@Param("buyer_name") String buyer_name, Pageable pageable);
 }

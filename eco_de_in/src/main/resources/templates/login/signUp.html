@@ -30,12 +30,11 @@
 			</div>
 			<div class="left">
 				<label>상호</label>
-				<input type="text" list="buyerList" name="buyer_code" required="required" id="buyer" class="input"
-				placeholder="목록에서 골라주세요...">
-				<datalist id="buyerList" >
-					<option th:each="buyer : ${buyers}" th:value="${buyer.buyerCode}" th:text="${buyer.buyer_name}" />
-				</datalist>
+				<input type="text" list="buyerList" required="required" id="buyer" class="input"
+				placeholder="목록에서 골라주세요..."  onclick=openModal(event) readonly="readonly">
+				<input type="hidden" name="buyer_code" id="buyer_code_hidden">
 			</div>
+    	<div class="modal-background" id="modalBackground"></div>
 			<div class="left">
 				<label>보안코드</label>
 				<input type="text" required="required" name="buyer_secure_code"  class="input" maxlength="10">
@@ -43,10 +42,32 @@
 			<button type="button" onclick="location.href='/'" class="confirm no">취소</button>
 			<button type="submit" class="confirm yes">회원가입</button>
 		</form>
+		<div id="modal" class="modal" >
+        <div>
+            <button type="button"  onclick=closeModal() class="xButton">x</button>
+            <div id="modalContent" th:fragment="modalContent">
+	            <form id="searchForm"  method ="get" onsubmit="submitSearchForm(event)">
+	            	<input type="text" id="searchInput" name="search" placeholder="검색어를 입력해주세요..." th:value="${search}" class="input searchBar" >
+	            	
+	            	<ul th:each="buyer : ${buyers}" class="list">
+	            		<li th:text = "${buyer.buyer_name}" th:data-value = "${buyer.buyerCode}"  onclick=chooseName(this)></li>
+	            	</ul>
+	            	
+	            	<div id="pagination">
+	            		<button type="button" onclick="changePage(this);" th:disabled	="${currentPage ==1 }" th:value ="${currentPage - 1}">이전</button>
+	            		<span th:text ="${currentPage}"></span>
+	            		<button type="button" onclick="changePage(this);" th:disabled = "${currentPage == totalPages}" th:value="${currentPage + 1}">다음</button>
+	            	</div>
+	            </form>
+            </div>
+        </div>
+    	</div>
 	</div>
 	<script type="text/javascript">
 		let password = document.getElementById('password');
 		let passwordCheck = document.getElementById('passwordCheck');
+		let modal = document.getElementById("modal");
+		let modalBackground = document.getElementById("modalBackground");
 		
 		function checkPassword() {
 			if (password.value != passwordCheck.value) {
@@ -64,9 +85,57 @@
 			}
 		}
 		
+		function openModal(event) {
+			event.preventDefault();
+			modal.style.display = "block";
+			modalBackground.style.display = "block";
+			loadModalContent('', 1);
+		}
+		
+		function closeModal() {
+			modal.style.display = "none";
+			modalBackground.style.display = "none";
+		}
+		
+		function chooseName(element) {
+			let buyerName = element.textContent;
+			let buyerCode = element.getAttribute('data-value');
+			
+			document.getElementById('buyer').value = buyerName;
+			document.getElementById('buyer_code_hidden').value = buyerCode;
+			closeModal();
+		}
+		
+		function submitSearchForm(event) {
+			event.preventDefault();
+			
+			let searchInput = document.getElementById('searchInput').value;
+			let pageValue = 1;
+			
+			loadModalContent (searchInput, pageValue);
+		}
+		
+		function loadModalContent (search, page) {
+			fetch(`/signup/modal?search=${search}&page=${page}`)
+				.then(response => response.text())
+				.then (html => {
+					document.getElementById('modalContent').innerHTML = html;
+					modal.style.display = 'block';
+					modalBackground.style.display = 'block';
+				})
+		}
+		
+		function changePage(element) {
+			let searchInput = document.getElementById('searchInput').value || '';
+			let page = element.value
+			loadModalContent(searchInput, page);
+		}
+		
 		password.onchange = checkPassword;
 		password.onkeyup = checkPasswordLength;
 		passwordCheck.onkeyup = checkPassword;
+		
+		
 		
 	</script>
 </body>
