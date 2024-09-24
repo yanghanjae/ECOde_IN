@@ -85,8 +85,7 @@ public class LoginService {
 			if (SECURITY_CONFIG.passwordEncoder ().matches (user_password, 
 				USER_REPOSITORY.findByUserId (user_id).get ().getUser_password ())) {
 				
-				HTTP_SESSION.setAttribute (user_id, "user_id");
-				HTTP_SESSION.setAttribute ("user", "role");
+				HTTP_SESSION.setAttribute ("user", USER_REPOSITORY.findByUserId (user_id).get ());
 				return "redirect:/main";
 			} else {
 				model.addAttribute ("message", "아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.");
@@ -111,8 +110,7 @@ public class LoginService {
 					model.addAttribute ("url", "/");
 					return "errorMessage";
 				} else {
-					HTTP_SESSION.setAttribute (user_id, "admin_id");
-					HTTP_SESSION.setAttribute ("admin", "role");
+					HTTP_SESSION.setAttribute ("admin", ADMIN_REPOSITORY.findByAdminId (user_id).get ());
 					return "redirect:/main";
 				}
 			} else {
