@@ -9,6 +9,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.repository.BuyerRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Service
 public class BuyerService {
@@ -83,10 +85,26 @@ public class BuyerService {
 		buyerRepository.updateBuyerStatusByBuyerCode (buyer_code);
 		
 	}
+	
+	@Transactional
+	public void updateBuyer (@ModelAttribute Buyer buyer) {
+		
+//		기존 오류 발생 파악 후 수정될 코드 조각 - START
+		Long buyer_code = buyer.getBuyerCode ();
+		String buyer_name = buyer.getBuyer_name ();
+		String buyer_agent = buyer.getBuyer_agent ();
+		String buyer_number = buyer.getBuyer_number ();
+		String buyer_tel = buyer.getBuyer_tel ();
+		String buyer_address = buyer.getBuyer_address ();
+//		기존 오류 발생 파악 후 수정될 코드 조각 - END
+
+		buyerRepository.updateBuyer (buyer_code, buyer_name, buyer_agent, buyer_number, buyer_tel, buyer_address);
+		
+	}
+	
 
 	// 보안코드 생성 메서드
 	private String seruceCodeCreate () {
-
 		StringBuilder sb = new StringBuilder ();
 		Random rd = new Random ();
 

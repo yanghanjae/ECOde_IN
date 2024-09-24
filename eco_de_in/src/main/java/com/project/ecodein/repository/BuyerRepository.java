@@ -7,8 +7,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import com.project.ecodein.dto.Buyer;
 import jakarta.transaction.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 public interface BuyerRepository extends JpaRepository<Buyer, Long> {
@@ -30,4 +32,20 @@ public interface BuyerRepository extends JpaRepository<Buyer, Long> {
 	// 상호명으로 검색
 	@Query ("SELECT b FROM Buyer b WHERE b.buyer_name LIKE CONCAT('%',:buyer_name,'%')")
 	public Page<Buyer> findByBuyerName (@Param("buyer_name") String buyer_name, Pageable pageable);
+
+	// 거래처 정보 수정
+	@Modifying
+	@Query (value = "update buyer b " +
+                        "set b.buyer_name = :buyer_name, " +
+                            "b.buyer_agent = :buyer_agent, " +
+                            "b.buyer_number = :buyer_number, " +
+                            "b.buyer_tel = :buyer_tel, " +
+                            "b.buyer_address = :buyer_address" +
+                       " where b.buyer_code = :buyer_code", nativeQuery = true)
+	public void updateBuyer (@Param("buyer_code") Long buyer_code, 
+							 @Param("buyer_name") String buyer_name, 
+							 @Param("buyer_agent") String buyer_agent, 
+							 @Param("buyer_number") String buyer_number,
+							 @Param("buyer_tel") String buyer_tel,
+							 @Param("buyer_address") String buyer_address);
 }

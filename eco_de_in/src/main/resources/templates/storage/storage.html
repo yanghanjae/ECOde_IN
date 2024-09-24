@@ -132,18 +132,158 @@
     .page-link:hover {
       background-color: #f1f1f1;
     }
+    
+    .table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .table thead {
+      float: left;
+      width: 890px;
+    }
+    
+    .table thead tr {
+      display: table;
+      width: 870px;
+    }
+    
+    .table tbody {
+      overflow-y: auto;
+      overflow-x: hidden;
+      float: left;
+      width: 890px;
+      height: 350px;
+    }
+    
+    .table tbody tr {
+      display: table;
+      width: 870px;
+    }
+    
+    .table thead th:nth-of-type(1),
+    .table tbody td:nth-of-type(1) {
+      width: 15%;
+    }
+    
+    .table thead th:nth-of-type(2),
+    .table tbody td:nth-of-type(2) {
+      width: 15%;
+    }
+    
+    .table thead th:nth-of-type(3),
+    .table tbody td:nth-of-type(3) {
+      width: auto;
+    }
+    
+    .table thead th:nth-of-type(4),
+    .table tbody td:nth-of-type(4) {
+      width: 10%;
+    }
+    
+    
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: lightblue;
+    }
+    
+    ::-webkit-scrollbar-track-piece {
+      background-color: #eee;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background-color: #ccc;
+    }
+    
+    ::-webkit-scrollbar-button {
+      background-color: #eee;
+      width: 5px;
+      height: 5px;
+    }
+
   </style>
   <script>
     function closeModal () {
       const static_modal = document.querySelector('#static-modal');
+      const update_time = document.querySelector('#update_time');
       
       static_modal.classList.add('hidden');
+      update_time.textContent = '업데이트 안됨';
     }
     
-    function activeModal () {
+    function activeModal (storage_no) {
       const static_modal = document.querySelector('#static-modal');
+      const detail_storage_name = document.querySelectorAll('.detail_storage_name');
+      const detail_storage_address = document.querySelector('.detail_storage_address');
+      const status_label = document.querySelector('.status_label');
+      const storage_num = document.querySelector('input[type="number"]');
+      const data_line = document.querySelector('tbody.data-board');
+      
+      data_line.innerHTML = '';
+      
+			fetch('/storage/detail/' + storage_no, {
+				method: 'get',
+				headers: {'Content-Type' : "application/json"}
+			})
+				.then(res => res.json())
+				.then(data => {
+					detail_storage_name[0].textContent = data.storage_name;
+					detail_storage_name[1].textContent = data.storage_name;
+          detail_storage_address.value = data.storage_site;
+          storage_num.value = data.storage_no;
+          
+          if (data.storage_status == '정상') {
+            status_label.style.backgroundColor = '#9FF781';
+            status_label.innerText = data.storage_status;
+          } else {
+            status_label.style.backgroundColor = '#FA5858';
+            status_label.textContent = '확인필요';
+          }
+				})
       
       static_modal.classList.remove('hidden');
+    }
+    
+    function update_stock () {
+      const update_time = document.querySelector('#update_time');
+      const storage_num = document.querySelector('input[type="number"]').value;
+      const data_line = document.querySelector('tbody.data-board');
+      
+      let today = new Date();
+
+      update_time.innerText = today.getFullYear() + '년 ' + (today.getMonth() + 1) + '월 '
+          + today.getDate() + '일 ' + today.getHours() + '시 ' + today.getMinutes() + '분 ' + today.getSeconds() + '초에 업데이트됨.';
+
+      fetch('/storage/storageStock/' + storage_num, {
+        method: 'get',
+        headers: {'Content-Type' : 'application.json'}
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data != null) {
+            for (let idx in data) {
+              data_line.innerHTML +=
+              `
+                <tr class="data overflow-scroll">
+                  <td>${data[idx].item_no}</td>
+                  <td><img src="${data[idx].item_image}" alt="" style="width: 150px; height: auto;"></td>
+                  <td class="truncate md:text-clip">${data[idx].item_name}</td>
+                  <td>${data[idx].quantity}</td>
+                </tr>
+              `;
+            }
+          } else {
+            data_line.innerHTML += `
+                                      <tr>
+                                        <td colspan="4" class="font-bold">조회된 데이터가 없습니다!</td>
+                                      </tr>
+                                   `
+          }
+        })
     }
   </script>
 </head>
@@ -166,7 +306,7 @@
       &nbsp;
       <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
       &nbsp;
-      <a href="/storage">
+      <a href="/storage/1">
         <span style="color: #ababab; font-weight: bold;">창고 관리</span>
       </a>
       &nbsp;
@@ -215,7 +355,7 @@
         </thead>
         <tbody>
           <tr th:if="${storages.isEmpty()}">
-            <td colspan="4">조회 결과가 존재하지 않습니다.</td>
+            <td colspan="5">조회 결과가 존재하지 않습니다.</td>
           </tr>
           <tr th:if="${storages != null}" th:each="storage, status: ${storages}">
             <td th:text="${storage.storage_name}">CU서울1물류센터</td>
@@ -224,7 +364,7 @@
               <span th:if="${storage.storage_status.equals('정상')}" class="py-1 px-10 rounded-full font-bold text-white" style="background-color: #9FF781">정상</span>
               <span th:if="${!storage.storage_status.equals('정상')}" class="py-1 px-6 rounded-full font-bold text-white" style="background-color: #FA5858">확인 필요</span>
             </td>
-            <td><a class="cursor-pointer py-1 px-4 bg-yellow-300 rounded-full font-bold text-white" onclick="activeModal ()">정보 보기</a></td>
+            <td><a class="cursor-pointer py-1 px-4 bg-yellow-300 rounded-full font-bold text-white" th:onclick="activeModal ([[${storage.storage_no}]])">정보 보기</a></td>
             <td><a href="/storage/remove/${storage.storage_no}">X</a></td>
           </tr>
         </tbody>
@@ -249,15 +389,15 @@
     </div>
   </div>
   
-  <!-- Main modal -->
+  <!-- Datail modal -->
   <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden fixed w-6/12 z-50 justify-center items-center" style="top: 25%; left: 35%; width: 50%;">
-    <div class="relative p-4 w-full  max-h-full">
+    <div class="relative p-4 w-full" style="min-width: 950px; max-height: 600px;">
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <!-- Modal header -->
         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-            CU서울1물류센터 상세정보
+            <span class="detail_storage_name">CU서울1물류센터</span> 상세정보
           </h3>
           <button type="button" class="border-solid border-2 border-inherit py-2 px-6 rounded-2xl bg-gray-200" onclick="closeModal ()">
             닫기
@@ -265,17 +405,27 @@
         </div>
         <!-- Modal body -->
         <div class="p-4 md:p-5 space-y-4">
+          <input type="number" class="hidden">
           <span class="font-bold text-lg">창고 주소</span>
-          <span><input type="text" style="color: black !important; padding-left: 15px; margin-left: 15px; width: 500px; border: 2px solid lightgray; border-radius: 15px; background-color: lightgray" placeholder="서울 송파구" disabled></span>
+          <span><input class="detail_storage_address" type="text" style="color: black !important; padding-left: 15px; margin-left: 15px; width: 500px; border: 2px solid lightgray; border-radius: 15px; background-color: lightgray" placeholder="서울 송파구" disabled></span>
           <span class="font-bold text-lg ml-7">상태</span>
-          <span class="ml-16 py-2 px-12 rounded-full font-bold text-white" style="background-color: #90EE90">정 상</span>
+          <span class="status_label ml-16 py-2 px-10 rounded-full font-bold text-white"></span>
         </div>
         <!-- Modal footer -->
+        <h2 class="font-bold text-lg relative inline" style="top: 30px; left: 30px"><span class="detail_storage_name">물류센터</span> 재고 현황</h2>
+        <span class="relative" style="top: 12px; left: 175px">
+          <a onclick="update_stock ()" class="cursor-pointer absolute" style="width: 30px; top: 25px; left: -140px">
+            <img src="/img/icon/icon-refrech.png" alt="" style="width: 15px;">
+          </a>
+          <span id="update_time" class="absolute w-80" style="top: 25px; left: -120px; color: gray; font-size: .7rem">
+            업데이트 안됨.
+          </span>
+        </span>
         <div class="flex items-center p-4 md:p-5 rounded-b dark:border-gray-600">
-          <table>
+          <table class="table">
             <colgroup>
               <col style="width: 15%">
-              <col style="width: 25%">
+              <col style="width: 15%">
               <col style="width: auto;">
               <col style="width: 10%">
             </colgroup>
@@ -287,15 +437,10 @@
                 <th>재고수량(단위: 개)</th>
               </tr>
             </thead>
-            <tbody class="font-bold">
-              <tr>
+            
+            <tbody class="font-bold data-board">
+              <tr style="width: 100%">
                 <td colspan="4">조회 결과가 존재하지 않습니다.</td>
-              </tr>
-              <tr>
-                <td>10012134</td>
-                <td><img src="/img/dummy/삼각김밥.png" alt=""></td>
-                <td class="truncate md:text-clip">[매콤한]불짜장, 불짬뽕 삼각김밥</td>
-                <td>192</td>
               </tr>
             </tbody>
           </table>
@@ -303,6 +448,8 @@
       </div>
     </div>
   </div>
+  <!-- Regist modal -->
+  
 </div>
 
 </body>

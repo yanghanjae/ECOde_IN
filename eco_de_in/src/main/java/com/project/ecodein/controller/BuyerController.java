@@ -98,5 +98,16 @@ public class BuyerController {
 		buyerService.updateStatus (buyer_code);
 		return 1;
 	}
+	
+	@PostMapping ("/modify")
+	@ResponseBody
+	public String modify(@ModelAttribute Buyer buyer) {
+		System.out.println ("buyer init : " + buyer);
+		
+		 buyerService.updateBuyer (buyer);
+		
+		
+		return null;
+	}
 
 }

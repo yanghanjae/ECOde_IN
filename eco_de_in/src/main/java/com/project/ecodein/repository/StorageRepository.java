@@ -1,6 +1,8 @@
 package com.project.ecodein.repository;
 
+import com.project.ecodein.dto.ItemStockStorage;
 import com.project.ecodein.dto.Storage;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +24,10 @@ public interface StorageRepository extends JpaRepository<Storage, Integer> {
     @Query(value = "select * from storage where storage_name like :keyword or storage_site like  :keyword", nativeQuery = true)
     public Page<Storage> findAllByStorageNameOrStorageSite (@Param("keyword") String keyword,
                                                             Pageable pageable);
+
+    // 창고별 재고 조회
+    @Query(value = "select new com.project.ecodein.dto.ItemStockStorage(i.item_no, i.item_name, i.item_price, i.is_material, i.item_image, s.quantity, s.storage.storage_no) " +
+        "from Stock s left join s.item i where s.storage.storage_no = :storage_no")
+    public List<ItemStockStorage> findByItemStockByStorageNo(@Param("storage_no") int storage_no);
 
 }

@@ -210,7 +210,8 @@
 			const status_change_btn = document.querySelector('.status-change');
 			const status_off_btn = document.querySelector('.status-off');
 			const input_buyerCode = document.querySelector('.buyerCode');
-			
+			const input_secure_code = document.querySelector('input[name="buyer_secure_code"]')
+   
 			target.classList.remove('hidden');
 			const reFetch = () => {
 				fetch('/buyer/detail/' + buyer_code, {
@@ -225,6 +226,7 @@
 					input_buyer_tel.value = data.buyer_tel;
 					input_buyer_address.value = data.buyer_address;
 					input_buyerCode.value = buyer_code;
+          input_secure_code.value = data.buyer_secure_code;
 					
 					if (data.buyer_status == 0) {
 						status_change_btn.classList.add('hidden');
@@ -270,6 +272,42 @@
 			const popup_modal = document.querySelector('#popup-modal');
 			
 			popup_modal.classList.add('hidden');
+		}
+		
+		function modifyBuyer () {
+   
+      if (confirm('해당 거래처를 수정하시겠습니까?')) {
+        const input_buyer_name = document.querySelector('input[name="buyer_name"]').value;
+        const input_buyer_agent = document.querySelector('input[name="buyer_agent"]').value;
+        const input_buyer_number = document.querySelector('input[name="buyer_number"]').value;
+        const input_buyer_tel = document.querySelector('input[name="buyer_tel"]').value;
+        const input_buyer_address = document.querySelector('input[name="buyer_address"]').value;
+        const input_buyerCode = document.querySelector('.buyerCode').value;
+        
+        var formData = new FormData();
+        
+        formData.append('buyerCode', input_buyerCode);
+        formData.append('buyer_address', input_buyer_address);
+        formData.append('buyer_tel', input_buyer_tel);
+        formData.append('buyer_number', input_buyer_number);
+        formData.append('buyer_agent', input_buyer_agent);
+        formData.append('buyer_name', input_buyer_name);
+        
+        popup_modal_deActive();
+        
+        fetch('/buyer/modify', {
+          method: 'post',
+          body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+            })
+        
+        alert('거래처 수정이 완료되었습니다.');
+        modalActive (null, buyer_code);
+      }
+			
 		}
 		
 	</script>
@@ -381,25 +419,34 @@
 						<button class="bg-yellow-400 py-1 px-3 text-white rounded-lg text-sm font-black hidden status-off">이미 폐업된 거래처입니다.</button>
 						<button class="bg-red-500 py-1 px-3 text-white rounded-lg text-sm font-black status-change"
 										onclick="popup_modal_active ()">폐업 처리</button>
-						<button class="py-1 px-3 text-white rounded-lg text-sm font-black" style="background-color: #81CD28;">거래처 수정</button>
+						<button class="py-1 px-3 text-white rounded-lg text-sm font-black" style="background-color: #81CD28;" onclick="modifyBuyer()">거래처 수정</button>
 						<button class="bg-gray-300 py-1 px-3 text-black rounded-lg text-sm font-black" onclick="modalDeActive()">창닫기</button>
 					</div>
         </div>
         <!-- Modal body -->
         <form class="p-4 md:p-5">
           <div class="grid gap-4 mb-4 grid-cols-2">
-            <div class="col-span-1">
-							<input type="text" class="buyerCode hidden">
-              <label for="buyer_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">상호명</label>
-              <input type="text" name="buyer_name" id="buyer_name" 
-										 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600  block 
+            <div class="col-span-3">
+              <div class="inline float-left" style="width: 30%; margin-right: 30px; margin-left: 20px">
+                <input type="text" class="buyerCode hidden">
+                <label for="buyer_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">상호명</label>
+                <input type="text" name="buyer_name" id="buyer_name"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600  block
 										 				w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
-            </div>
-            <div class="col-span-1">
-              <label for="buyer_agent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">대표자</label>
-              <input type="text" name="buyer_agent" id="buyer_agent" 
-										 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600  block 
+              </div>
+              <div class="inline float-left" style="width: 30%; margin-right: 30px">
+                <input type="text" class="buyerCode hidden">
+                <label for="buyer_secure_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">보안코드</label>
+                <input type="text" name="buyer_secure_code" id="buyer_secure_code"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600  block
+										 				w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+              </div>
+              <div class="inline float-left" style="width: 30%; margin-right: 30px">
+                <label for="buyer_agent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">대표자</label>
+                <input type="text" name="buyer_agent" id="buyer_agent"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600  block
 																	 				w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required="">
+              </div>
             </div>
 						<div class="col-span-1">
 						  <label for="buyer_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">사업자 등록번호</label>
