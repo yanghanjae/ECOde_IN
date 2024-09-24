@@ -153,22 +153,21 @@
 
     <!-- breadcrumb -->
     <div class="breadcrumb">
-      <img alt="" src="/img/icon/icon-home-filled.png" style="display: inline; line-height: 40px;">
+      <a href="/main">
+        <img src="/img/icon/icon-home-filled.png" alt="" style="display: inline; line-height: 40px;">
+      </a>
       &nbsp;
       <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
       &nbsp;
-      <span style="color: #ababab; font-weight: bold;">발주 관리</span>
-      &nbsp;
-      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
-      &nbsp;
-      <span style="font-weight: bold;">발주 조회</span>
+      <span style="font-weight: bold;">발주 관리</span>
     </div>
 
     <!-- 발주 조회 -->
     <div class="main-content">
       <h2 class="text-2xl font-bold mb-4">발주 조회</h2>
       <div class="flex mb-4">
-        <input class="border border-gray-300 p-2 w-full rounded-input" placeholder="발주번호, 거래처명, 거래처코드를 입력하세요."
+        <input class="border border-gray-300 p-2 w-full rounded-input"
+               placeholder="발주번호, 거래처명, 거래처코드를 입력하세요."
                type="text">
         <button class="bg-green-81CD28 text-white px-4 ml-2 rounded-button search-button"
                 onclick="location.hret='/'">조 회
@@ -209,7 +208,9 @@
           <td>2024-09-20</td>
           <td>진행중</td>
           <td class="m-auto p-auto">
-            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
+            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+            dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     data-modal-target="popup-modal-a"
                     data-modal-toggle="popup-modal-a"
                     type="button">
@@ -218,6 +219,9 @@
           </td>
         </tr>
         <tr>
+
+
+
           <td>2</td>
           <td>2024-09-12</td>
           <td>20240912456</td>
@@ -277,6 +281,8 @@
           <li><a class="page-link" href="#">></a></li>
         </ul>
       </nav>
+
+
 
       <!-- modal 1 -->
       <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
