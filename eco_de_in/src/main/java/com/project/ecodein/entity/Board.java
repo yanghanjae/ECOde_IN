@@ -1,6 +1,9 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
 import java.time.LocalDateTime;
+import org.hibernate.annotations.ColumnDefault;
+import com.project.ecodein.dto.Admin;
+import com.project.ecodein.dto.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,16 +30,16 @@ public class Board {
 	@Id
 	@Column (name = "board_no", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int board_no;
+	private int boardNo;
 
 	@Column (name = "board_title", nullable = false)
-	private String board_title;
+	private String boardTitle;
 
 	@Column (name = "board_content", nullable = false)
-	private String board_content;
+	private String boardContent;
 
-	@Column (name = "board_date", nullable = false)
-	private LocalDateTime board_date;
+	@Column (name = "board_date", nullable = true)
+	private LocalDateTime boardDate;
 
 	@ManyToOne
 	@JoinColumn (name = "user_id", referencedColumnName = "user_id", nullable = false)
@@ -47,9 +50,9 @@ public class Board {
 	private Admin admin;
 
 	@Column (name = "comment_content", nullable = true)
-	private String comment_content;
+	private String commentContent;
 
 	@Column (name = "comment_date", nullable = true)
-	private LocalDateTime comment_date;
+	private LocalDateTime commentDate;
 
 }

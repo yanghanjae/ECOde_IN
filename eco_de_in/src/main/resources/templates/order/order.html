@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>[목록 페이지]발주 조회</title>
+  <link href="/css/default-style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+  <style>
+    #content {
+      width: calc(100vw - 327px);
+      height: 100vh;
+      background-color: #e5e7eb;
+      float: right;
+    }
+
+    #content_wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 20px;
+      width: 101%;
+      height: 100%;
+      padding: 50px;
+      box-sizing: border-box;
+    }
+
+    .main-content {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      width: 800px;
+    }
+
+    .register-content {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f3f4f6;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    .button-register {
+      background-color: #81CD28;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      float: right;
+      margin-bottom: 20px;
+    }
+
+    .rounded-input {
+      border-radius: 10px;
+    }
+
+    .rounded-button {
+      border-radius: 10px;
+    }
+
+    .search-button {
+      width: 130px;
+      background-color: #81CD28;
+    }
+
+    .button {
+      background-color: transparent;
+      color: green;
+      border: 2px solid green;
+      padding: 5px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      line-height: 25px;
+      margin-left: 15px;
+    }
+
+    .button:hover {
+      background-color: green;
+      color: white;
+    }
+
+    .button.active {
+      background-color: green;
+      color: white;
+    }
+
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      padding-left: 0;
+      list-style: none;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+
+    .page-link {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      margin: 0 5px;
+      text-decoration: none;
+      color: #000;
+      border-radius: 5px;
+    }
+
+    .page-link:hover {
+      background-color: #f1f1f1;
+    }
+
+    .overflow-hidden {
+      overflow: visible !important;
+    }
+  </style>
+</head>
+
+<body>
+<!-- 사이드바 -->
+<div style="width: 310px; float: left;">
+  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
+</div>
+
+<!-- 메인 콘텐츠 -->
+<div id="content">
+  <div id="content_wrap">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/main">
+        <img src="/img/icon/icon-home-filled.png" alt="" style="display: inline; line-height: 40px;">
+      </a>
+      &nbsp;
+      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
+      &nbsp;
+      <span style="font-weight: bold;">발주 관리</span>
+    </div>
+
+    <!-- 발주 조회 -->
+    <div class="main-content">
+      <h2 class="text-2xl font-bold mb-4">발주 조회</h2>
+      <div class="flex mb-4">
+        <input class="border border-gray-300 p-2 w-full rounded-input"
+               placeholder="발주번호, 거래처명, 거래처코드를 입력하세요."
+               type="text">
+        <button class="bg-green-81CD28 text-white px-4 ml-2 rounded-button search-button"
+                onclick="location.hret='/'">조 회
+        </button>
+      </div>
+
+      <span>출고 진행상태</span>
+      <div class="inline">
+        <button class="button" onclick="location.href='/order?status=all'; setActiveButton(this)">전체</button>
+        <button class="button" onclick="location.href='/order?status=in-progress'; setActiveButton(this)">진행중</button>
+        <button class="button" onclick="location.href='/order?status=completed'; setActiveButton(this)">완료</button>
+      </div>
+    </div>
+
+    <!-- 발주 등록  -->
+    <div class="register-content">
+      <button class="button-register" onclick="location.href='/order/add'">발주 등록</button>
+      <table>
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>발주날짜</th>
+          <th>발주번호</th>
+          <th>거래처</th>
+          <th>상품명</th>
+          <th>납기일자</th>
+          <th>출고 진행상태</th>
+          <th>삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>2024-09-12</td>
+          <td><a href="/order/20240912123">20240912123</a></td>
+          <td>CU</td>
+          <td>라면, 김밥...</td>
+          <td>2024-09-20</td>
+          <td>진행중</td>
+          <td class="m-auto p-auto">
+            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
+            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+            dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    data-modal-target="popup-modal-a"
+                    data-modal-toggle="popup-modal-a"
+                    type="button">
+              x
+            </button>
+          </td>
+        </tr>
+        <tr>
+
+
+
+          <td>2</td>
+          <td>2024-09-12</td>
+          <td>20240912456</td>
+          <td>CU</td>
+          <td>라면, 김치...</td>
+          <td>2024-09-20</td>
+          <td>완료</td>
+          <td>
+            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    data-modal-target="popup-modal"
+                    data-modal-toggle="popup-modal"
+                    type="button">
+              x
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- 페이지네이션  -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li><a class="page-link" href="#"><</a></li>
+          <li><a class="page-link" href="#">1</a></li>
+          <li><a class="page-link" href="#">2</a></li>
+          <li><a class="page-link" href="#">3</a></li>
+          <li><a class="page-link" href="#">></a></li>
+        </ul>
+      </nav>
+
+
+
+      <!-- modal 1 -->
+      <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+           id="popup-modal-a"
+           tabindex="-1">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="popup-modal"
+                    type="button">
+              <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 14 14"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"/>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-4 md:p-5 text-center">
+              <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                   fill="none" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2"/>
+              </svg>
+              <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">해당 발주건을 삭제하시겠습니까?</h3>
+              <button class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+                      data-modal-hide="popup-modal-a"
+                      type="button">
+                확인
+              </button>
+              <button class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                      data-modal-hide="popup-modal-a"
+                      type="button">
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- modal 2 -->
+      <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+           id="popup-modal"
+           tabindex="-1">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="popup-modal"
+                    type="button">
+              <svg aria-hidden="true" class="w-3 h-3" fill="none" viewBox="0 0 14 14"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"/>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-4 md:p-5 text-center">
+              <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                   fill="none" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2"/>
+              </svg>
+              <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">해당 발주권 삭제 불가합니다.</h3>
+              <button class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+                      data-modal-hide="popup-modal"
+                      type="button">
+                확인
+              </button>
+              <button class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                      data-modal-hide="popup-modal"
+                      type="button">
+                취소
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setActiveButton(clickedButton) {
+    const buttons = document.querySelectorAll('.button');
+    buttons.forEach(button => button.classList.remove('active'));
+
+    clickedButton.classList.add('active');
+  }
+</script>
+</body>
+</html>
