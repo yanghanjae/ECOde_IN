@@ -55,7 +55,7 @@
 							</div>
 
 							<div class="board-form">
-								<form method="post" action="${context}community/board/writeAction"
+								<form method="post" action="/board/add"
 									id="board_form">
 
 									<div class="user" style="display: none">
@@ -67,7 +67,7 @@
 											<label for="boardTitle">제목</label> <input type="text"
 												id="boardTitle"
 												class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-												name="boardTitle" placeholder="제목을 입력해 주세요" required />
+												name="board_title" placeholder="제목을 입력해 주세요" required />
 										</div>
 									</div>
 
@@ -88,7 +88,7 @@
 										<div class="col">
 											<button type="button"
 												class="text-black bg-gradient-to-r from-green-200 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-												onclick="location.href='/board'" style="font-weight: bold">뒤로
+												onclick="location.href='/board/board'" style="font-weight: bold">뒤로
 												가기</button>
 										</div>
 										<div class="col">

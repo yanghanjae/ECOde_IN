@@ -62,13 +62,13 @@ tbody tr:nth-of-type(even) {
 }
 
 .search-group {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-bottom: 10px;
-      position: relative;
-      right: -1000px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-bottom: 10px;
+	position: relative;
+	right: -1000px;
 }
 
 .category-search-box {
@@ -81,13 +81,13 @@ tbody tr:nth-of-type(even) {
 }
 
 .button-register {
-      background-color: #81CD28;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-bottom: 10px;
+	background-color: #81CD28;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-bottom: 10px;
 }
 
 form>input {
@@ -95,9 +95,11 @@ form>input {
 	border-radius: 10px;
 	border: 1px solid #888;
 }
+
 #filter {
-	margin-left:5px;
+	margin-left: 5px;
 }
+
 select#column {
 	margin-left: 5px;
 	width: 100px;
@@ -155,9 +157,7 @@ input#submit {
 					</select> <label for="search"></label> <input type="search" name="search"
 						id="search"> <input type="submit" id="submit" value="검색">
 				</form>
-				<a href="board/add">
-					<button class="button-register">등록</button>
-				</a>
+				<button class="button-register" onclick="location.href='/board/add'">등록</button>
 			</div>
 
 			<div class="main-content">
@@ -171,29 +171,46 @@ input#submit {
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="boardList" items="${boardList}">
-							<td><a class="text-primary"
-								href="board/boardDetail">${
-									boardList.board_no }</a></td>
-							<td><a class="text-primary"
-								href="$board/boardDetail">${
-									boardList.board_title }</a></td>
-							<td>${ boardList.user_id}</td>
-							<td><fmt:formatDate value="${ boardList.board_date }"
-									type="both" /></td>
-						</c:forEach>
+						<tr th:each="board : ${ boardList }">
+							<td th:text="${board.boardNo}" href="board/boardDetail"></td>
+							<td th:text="${board.boardTitle}" href="$board/boardDetail"></td>
+							<td th:text="${board.user}"></td>
+							<td th:text="${board.boardDate}"></td>
 					</tbody>
 				</table>
 
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li><a class="page-link" href="#"><</a></li>
-						<li><a class="page-link" href="#">1</a></li>
-						<li><a class="page-link" href="#">2</a></li>
-						<li><a class="page-link" href="#">3</a></li>
-						<li><a class="page-link" href="#">></a></li>
-					</ul>
-				</nav>
+
+				<div id="paging" class="pagination">
+
+					<!-- 맨 앞으로 이동 -->
+					<button class="page-link"
+						th:onclick="'location.href=\'/board/board?page=' + @{${paging.startPage}} + '\''">
+						<<</button>
+
+					<!-- 이전 페이지로 이동 -->
+					<button class="page-link"
+						th:onclick="'location.href=\'/board/board?page=' + @{${paging.currentPage - 1}} + '\''"
+						th:disabled="${ boardList.first }"><</button>
+
+					<!-- 숫자 버튼 -->
+					<th:block
+						th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+						<button class="page-link"
+							th:onclick="'location.href=\'/board/board?page=' + @{${page}} + '\''"
+							th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+						</button>
+					</th:block>
+
+					<!-- 다음 페이지로 이동 -->
+					<button class="page-link"
+						th:onclick="'location.href=\'/board/board?page=' + @{${paging.currentPage + 1}} + '\''"
+						th:disabled="${ boardList.last }">></button>
+
+					<!-- 맨 끝으로 이동 -->
+					<button class="page-link"
+						th:onclick="'location.href=\'/board/board?page=' + @{${paging.endPage}} + '\''">
+						>></button>
+				</div>
 			</div>
 		</div>
 	</div>
