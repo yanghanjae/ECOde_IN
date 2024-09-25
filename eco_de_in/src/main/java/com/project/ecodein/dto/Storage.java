@@ -1,13 +1,15 @@
 package com.project.ecodein.dto;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +22,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="storage")
+@DynamicInsert
+@DynamicUpdate
 public class Storage {
 	
 	@Id
@@ -37,6 +41,17 @@ public class Storage {
 	private String storage_site;
 
 	@Column(name="storage_regist", nullable = false)
-	private Date storage_regist;
+	@ColumnDefault("'current_date()'")
+	private LocalDate storage_regist;
+
+	public Storage (String storage_name, String storage_status, String storage_site) {
+
+		this.storage_name = storage_name;
+		this.storage_status = storage_status;
+		this.storage_site = storage_site;
+
+	}
+	
+	
 }
 

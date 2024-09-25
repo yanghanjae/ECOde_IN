@@ -26,15 +26,15 @@ public class Stock {
 	@Id
 	@Column (name = "stock_no", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int stock_no;
+	private int stockNo;
 
 	@ManyToOne
-	@JoinColumn (referencedColumnName = "storage_no", nullable = false)
-	private Storage storage_no;
+	@JoinColumn (name = "storage_no", referencedColumnName = "storage_no", nullable = false)
+	private Storage storage;
 
 	@ManyToOne
-	@JoinColumn (referencedColumnName = "item_no", nullable = false)
-	private Item item_no;
+	@JoinColumn (name = "item_no", referencedColumnName = "item_no", nullable = false)
+	private Item item;
 
 	@Column (name = "quantity", nullable = false)
 	private int quantity;

@@ -36,9 +36,14 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  implementation 'io.awspring.cloud:spring-cloud-aws-s3:3.0.2'
 	implementation 'org.modelmapper:modelmapper:3.1.1'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+compileJava {
+  options.compilerArgs << '-parameters'
 }

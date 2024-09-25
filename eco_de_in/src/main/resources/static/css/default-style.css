@@ -13,3 +13,22 @@ ul, li {
 	list-style: none;
 }
 
+#content {
+      width: calc(100vw - 327px);
+      height: 100%;
+      background-color: #e5e7eb;
+      float: right;
+    }
+    
+#content_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  width: 101%;
+  height: 100%;
+  padding: 50px;
+  box-sizing: border-box;
+}
+

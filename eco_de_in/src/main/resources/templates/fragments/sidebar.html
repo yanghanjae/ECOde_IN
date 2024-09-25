@@ -17,18 +17,40 @@
 	  </style>
 	</head>
 	<body>
-	  <div class="flex flex-col items-center h-full overflow-hidden text-gray-700 bg-gray-100 text-center" style=" height: 100vh">
+		<th:block th:if="${session.user == null && session.admin == null}">
+			<script>
+				alert('인가된 권한이 없습니다. 로그인 후 다시 시도해주세요.');
+				location.href = '/';
+			</script>
+		</th:block>
+		
+	  <div class="flex flex-col items-center h-full overflow-hidden text-gray-700 bg-gray-100 text-center" 
+				 style="height: 100vh">
 	    <a class="flex items-center w-full px-3 mt-3 justify-center" href="/main">
-	      <img src="/img/layout/ecode_in_logo.png" alt="logo" class="w-3/4">
+	      <img src="https://eco-de-in-bucket.s3.ap-northeast-2.amazonaws.com/primary/ecode_in_logo.png" alt="logo" 
+						 class="w-3/4">
 	    </a>
 	    <div class="w-full px-2 h-full">
 	      <div class="flex flex-col w-full mt-3 border-t border-gray-300">
 					<div>
 						<img src="/img/icon/user.png" alt="user_icon" class="w-1/5 ml-14 my-5">
 						<p class="float-right mr-14 my-5" style="margin-top: -70px;">
-							<span class="tracking-widest text-sm inline">고객사명</span>	
+							<span th:if="${session.user != null}"
+										th:text="${session.user.buyer_code.buyer_name}"
+										class="tracking-widest text-sm inline">고객사명
+							</span>	
+							<span th:if="${session.admin != null}"
+										class="tracking-widest text-sm inline">관 리 자
+							</span>
 							<br>
-							<span class="tracking-widest font-bold inline">홍길동 님</span>
+							<span th:if="${session.user != null}"
+										th:text="${session.user.user_name}"
+										class="tracking-widest font-bold inline">홍길동 님
+							</span>
+							<span th:if="${session.admin != null}"
+										th:text="${session.admin.admin_name}"
+										class="tracking-widest font-bold inline">홍길동 님
+							</span>
 						</p>
 					</div>
 					<div>
@@ -46,23 +68,29 @@
 	          <img src="/img/icon/home-2948025.png" class="w-1/12 mr-10">
 	          <span class="ml-2 text-base tracking-widest font-bold">HOME</span>
 	        </a>
-	        <a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" href="/buyer/default/1?keyword=">
+	        <a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" 
+						 href="/buyer/default/1?keyword=">
 	          <img src="/img/icon/buyer.png" class="w-1/12 mr-1">
 	          <span class="ml-2 text-base font-bold tracking-widest">거래처 관리</span>
 	        </a>
-	        <a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" href="/item">
+
+	        <a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" href="/stock">
+
 	          <img src="/img/icon/stock-3639205.png" class="w-1/12 mr-5">
 	          <span class="ml-2 text-base font-bold tracking-widest">상품 관리</span>
 	        </a>
-					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" href="/order">
+					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" 
+						 href="/order">
 	          <img src="/img/icon/order-3624080.png" class="w-1/12 mr-5">
 	          <span class="ml-2 text-base font-bold tracking-widest">발주 관리</span>
 	        </a>
-					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" href="/storage">
+					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" 
+						 href="/storage/1">
 	          <img src="/img/icon/warehouse-2066573.png" class="w-1/12 mr-5">
 	          <span class="ml-2 text-base font-bold tracking-widest">창고 관리</span>
 	        </a>
-					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" href="/board/board">
+					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" 
+						 href="/board/board">
 	          <img src="/img/icon/talking-15611672.png" class="w-1/12 mr-10">
 	          <span class="ml-2 text-base font-bold tracking-widest">Q n A</span>
 	        </a>

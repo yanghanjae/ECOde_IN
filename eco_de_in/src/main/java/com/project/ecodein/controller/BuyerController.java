@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.project.ecodein.dto.Admin;
 import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.dto.Search;
 import com.project.ecodein.service.BuyerService;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -21,11 +23,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class  BuyerController {
 
-	private final BuyerService buyerService;
+	private final BuyerService BUYER_SERVICE;
 
 	public BuyerController (BuyerService buyerService) {
 
-		this.buyerService = buyerService;
+		this.BUYER_SERVICE = buyerService;
 
 	}
 
@@ -48,7 +50,7 @@ public class  BuyerController {
 
 		log.info ("search - address-{}, keyword - {}", search, keyword);
 
-		Page<Buyer> list = buyerService.buyers ((int) page, keyword, buyer_status);
+		Page<Buyer> list = BUYER_SERVICE.buyers ((int) page, keyword, buyer_status);
 
 		model.addAttribute ("buyers", list);
 
@@ -66,7 +68,7 @@ public class  BuyerController {
 	@PostMapping ("/add")
 	public String buyerAdd (@ModelAttribute Buyer buyer, Model model) {
 
-		Buyer _buyer = buyerService.buyerInsert (buyer);
+		Buyer _buyer = BUYER_SERVICE.buyerInsert (buyer);
 
 		if (_buyer != null) {
 
@@ -83,7 +85,7 @@ public class  BuyerController {
 	@ResponseBody
 	public Optional<Buyer> modifty (@PathVariable ("buyer_code") Long buyer_code) {
 
-		Optional<Buyer> buyer = buyerService.buyerDetail (buyer_code);
+		Optional<Buyer> buyer = BUYER_SERVICE.buyerDetail (buyer_code);
 
 		log.info ("buyer - {}", buyer);
 
@@ -95,8 +97,19 @@ public class  BuyerController {
 	@ResponseBody
 	public int statusUpdate (@PathVariable("buyer_code") Long buyer_code) {
 		log.info ("test");
-		buyerService.updateStatus (buyer_code);
+		BUYER_SERVICE.updateStatus (buyer_code);
 		return 1;
+	}
+	
+	@PostMapping ("/modify")
+	@ResponseBody
+	public String modify(@ModelAttribute Buyer buyer) {
+		System.out.println ("buyer init : " + buyer);
+		
+		BUYER_SERVICE.updateBuyer (buyer);
+		
+		
+		return null;
 	}
 
 }
