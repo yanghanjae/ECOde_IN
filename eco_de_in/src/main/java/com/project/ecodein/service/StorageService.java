@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class StorageService {
 
-    private final StorageRepository storageRepository;
+    private final StorageRepository STORAGE_SERVICE;
 
     public StorageService (StorageRepository storageRepository) {
-        this.storageRepository = storageRepository;
+        this.STORAGE_SERVICE = storageRepository;
     }
 
     public Page<Storage> storages (int page, String keyword, String storage_status) {
@@ -28,41 +28,39 @@ public class StorageService {
         Pageable pageable = PageRequest.of (page - 1, 10, sort);
         
         if (keyword == null && storage_status == null) {
-            return storageRepository.findAll(pageable);
+            return STORAGE_SERVICE.findAll(pageable);
         } else if (storage_status != null && !storage_status.equals ("200")) {
         	if (storage_status.equals ("정상")) {
-        		return storageRepository.findAllByStorageStatus (storage_status, pageable);
+        		return STORAGE_SERVICE.findAllByStorageStatus (storage_status, pageable);
          	} else {
-         		return storageRepository.findAllByStorageStatusNegative (pageable);
+         		return STORAGE_SERVICE.findAllByStorageStatusNegative (pageable);
          	}
         }
         
-    	return storageRepository.findAllByStorageNameOrStorageSite(keyword, pageable);
-
+    	return STORAGE_SERVICE.findAllByStorageNameOrStorageSite(keyword, pageable);
 
     }
     
     public Storage getStorageByStorageNo (Integer storage_no) {
 
-        return storageRepository.findById(storage_no).orElse(null);
+        return STORAGE_SERVICE.findById(storage_no).orElse(null);
 
     }
 
 	public List<ItemStockStorage> getItemStockByStorage (int storage_no) {
-        return storageRepository.findByItemStockByStorageNo(storage_no);
+        return STORAGE_SERVICE.findByItemStockByStorageNo(storage_no);
 	}
 
 	public void storageAdd (Storage storage) {
 		storage.setStorage_regist (LocalDate.now ());
 		storage.setStorage_status ("정상");
 
-		storageRepository.save (storage);
+		STORAGE_SERVICE.save (storage);
 	}
 
 	public void storageRemove (int storage_no) {
 
-		storageRepository.deleteById (storage_no);
-		
+		STORAGE_SERVICE.deleteById (storage_no);
 		
 	}
 	
