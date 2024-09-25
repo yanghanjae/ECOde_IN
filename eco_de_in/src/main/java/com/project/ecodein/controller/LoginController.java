@@ -36,7 +36,8 @@ public class LoginController {
 	}
 
 	@GetMapping("/")
-	public String login() {
+	public String login(HttpSession httpSession) {
+		httpSession.invalidate ();
 		return "login/login";
 	}
 	
@@ -95,6 +96,7 @@ public class LoginController {
 	
 	@GetMapping("/logout")
 	public String logout (HttpSession session) {
+		session.invalidate ();
 		return "redirect:/";
 	}
 }

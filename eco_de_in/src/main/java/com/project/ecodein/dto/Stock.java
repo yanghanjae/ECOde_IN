@@ -26,7 +26,7 @@ public class Stock {
 	@Id
 	@Column (name = "stock_no", nullable = false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int stock_no;
+	private int stockNo;
 
 	@ManyToOne
 	@JoinColumn (name = "storage_no", referencedColumnName = "storage_no", nullable = false)
