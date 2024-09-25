@@ -27,7 +27,7 @@ public class Item {
 	private String item_name;
 	
 	@Column(name = "item_price", nullable = true)
-	private int item_price;
+	private Integer item_price;
 	
 	@Column(name = "is_material", nullable = false)
 	private Boolean is_material;
