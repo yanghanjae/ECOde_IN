@@ -28,11 +28,11 @@ public class Ordering {
 	private int order_no;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "buyer_code", nullable = false)
+	@JoinColumn(name = "buyer_code", referencedColumnName = "buyer_code", nullable = false)
 	private Buyer buyer_code;
 	
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "user_id", nullable = false)
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
 	private User user_id;
 	
 	@Column(name = "order_date", nullable = false)
