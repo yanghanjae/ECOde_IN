@@ -65,5 +65,20 @@ public class StorageController {
         }
 
     }
-
+    
+    @PostMapping("/add")
+    public String storageAdd (@ModelAttribute Storage storage) {
+    	
+    	storageService.storageAdd (storage);
+    	
+    	return "redirect:/storage/1";
+    }
+    
+    @GetMapping("/remove/{storage_no}")
+    public String storageRemove (@PathVariable int storage_no) {
+    	
+    	storageService.storageRemove (storage_no);
+    	
+    	return "redirect:/storage/1";
+    }
 }

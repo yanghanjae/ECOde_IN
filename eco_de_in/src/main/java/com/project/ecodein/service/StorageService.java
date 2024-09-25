@@ -1,10 +1,11 @@
 package com.project.ecodein.service;
 
-import com.project.ecodein.dto.Item;
 import com.project.ecodein.dto.ItemStockStorage;
-import com.project.ecodein.dto.Stock;
 import com.project.ecodein.dto.Storage;
 import com.project.ecodein.repository.StorageRepository;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -41,10 +42,23 @@ public class StorageService {
     }
 
 	public List<ItemStockStorage> getItemStockByStorage (int storage_no) {
-        System.out.println("storage_no = " + storage_no);
         return storageRepository.findByItemStockByStorageNo(storage_no);
-
 	}
-    
+
+	public void storageAdd (Storage storage) {
+		storage.setStorage_regist (LocalDate.now ());
+		storage.setStorage_status ("정상");
+
+		storageRepository.save (storage);
+	}
+
+	public void storageRemove (int storage_no) {
+
+		storageRepository.deleteById (storage_no);
+		
+		
+	}
+	
+	
     
 }
