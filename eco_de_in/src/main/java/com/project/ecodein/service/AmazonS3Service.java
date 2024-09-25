@@ -10,7 +10,7 @@ import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 @RequiredArgsConstructor
 public class AmazonS3Service {
 
-    private final S3Client s3Client;
+    private final S3Client S3_CLIENT;
     // 개발기간만 가용됨.
     private final String folder = "devlop/";
 
@@ -23,6 +23,11 @@ public class AmazonS3Service {
 
         GetUrlRequest getUrlRequest = GetUrlRequest.builder().bucket(bucketName).key(folder.concat(path)).build();
 
-        return s3Client.utilities().getUrl(getUrlRequest).toString();
+        return S3_CLIENT.utilities().getUrl(getUrlRequest).toString();
+    }
+    
+    // bucket 서버에 파일을 업로드하는 메서드
+    public void uploadThumnail(String path) {
+    	
     }
 }

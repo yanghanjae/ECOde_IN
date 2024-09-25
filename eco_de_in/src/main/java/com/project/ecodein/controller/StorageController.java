@@ -21,13 +21,13 @@ import java.util.Optional;
 @RequestMapping("/storage")
 public class StorageController {
 
-    private final StorageService storageService;
+    private final StorageService STORAGE_SERVICE;
 
     public StorageController (StorageService storageService) {
-        this. storageService = storageService;
+        this. STORAGE_SERVICE = storageService;
     }
 
-    @GetMapping({"/{page}/{keyword}/{storage_status}", "/{page}"})
+    @GetMapping({"/{page}/{keyword}/{storage_status}", "/{page}", "/{page}/{keyword}"})
     public String storage(Model model,
                           @PathVariable(name = "page") Integer page,
                           @PathVariable(name = "keyword", required = false) String keyword,
@@ -37,8 +37,7 @@ public class StorageController {
             page = 1;
         }
 
-
-        model.addAttribute("storages", storageService.storages(page, keyword, storage_status));
+        model.addAttribute("storages", STORAGE_SERVICE.storages(page, keyword, storage_status));
 
         return "storage/storage";
     }
@@ -48,7 +47,7 @@ public class StorageController {
     @ResponseBody
     public Storage storageDetail (@PathVariable Integer storage_no) {
     	
-    	Storage storage = storageService.getStorageByStorageNo (storage_no);
+    	Storage storage = STORAGE_SERVICE.getStorageByStorageNo (storage_no);
 
     	return storage;
     }
@@ -56,7 +55,7 @@ public class StorageController {
     @GetMapping("/storageStock/{storage_no}")
     @ResponseBody
     public List<ItemStockStorage> storageStock (@PathVariable int storage_no) {
-        List<ItemStockStorage> stockList = storageService.getItemStockByStorage(storage_no);
+        List<ItemStockStorage> stockList = STORAGE_SERVICE.getItemStockByStorage(storage_no);
 
         if (stockList.isEmpty()) {
             return null;
@@ -65,5 +64,20 @@ public class StorageController {
         }
 
     }
-
+    
+    @PostMapping("/add")
+    public String storageAdd (@ModelAttribute Storage storage) {
+    	
+    	STORAGE_SERVICE.storageAdd (storage);
+    	
+    	return "redirect:/storage/1";
+    }
+    
+    @GetMapping("/remove/{storage_no}")
+    public String storageRemove (@PathVariable int storage_no) {
+    	
+    	STORAGE_SERVICE.storageRemove (storage_no);
+    	
+    	return "redirect:/storage/1";
+    }
 }
