@@ -27,7 +27,7 @@ public class StorageController {
         this. storageService = storageService;
     }
 
-    @GetMapping({"/{page}/{keyword}/{storage_status}", "/{page}"})
+    @GetMapping({"/{page}/{keyword}/{storage_status}", "/{page}", "/{page}/{keyword}"})
     public String storage(Model model,
                           @PathVariable(name = "page") Integer page,
                           @PathVariable(name = "keyword", required = false) String keyword,

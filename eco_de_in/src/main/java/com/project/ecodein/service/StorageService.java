@@ -26,13 +26,20 @@ public class StorageService {
     public Page<Storage> storages (int page, String keyword, String storage_status) {
         Sort sort = Sort.by (Sort.Order.desc ("storage_no"));
         Pageable pageable = PageRequest.of (page - 1, 10, sort);
+        
         if (keyword == null && storage_status == null) {
             return storageRepository.findAll(pageable);
-        } else if (!storage_status.isEmpty()) {
-            return storageRepository.findAll(pageable);
+        } else if (storage_status != null && !storage_status.equals ("200")) {
+        	if (storage_status.equals ("정상")) {
+        		return storageRepository.findAllByStorageStatus (storage_status, pageable);
+         	} else {
+         		return storageRepository.findAllByStorageStatusNegative (pageable);
+         	}
         }
+        
+    	return storageRepository.findAllByStorageNameOrStorageSite(keyword, pageable);
 
-        return null;
+
     }
     
     public Storage getStorageByStorageNo (Integer storage_no) {

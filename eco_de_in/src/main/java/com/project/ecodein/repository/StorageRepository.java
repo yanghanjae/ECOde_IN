@@ -19,9 +19,12 @@ public interface StorageRepository extends JpaRepository<Storage, Integer> {
     // 상태별 조회
     @Query(value = "select * from storage where storage_status like :storage_status", nativeQuery = true)
     public Page<Storage> findAllByStorageStatus(@Param("storage_status") String storage_status, Pageable pageable);
+    
+    @Query(value = "select * from storage where storage_status not like '정상'", nativeQuery = true)
+    public Page<Storage> findAllByStorageStatusNegative(Pageable pageable);
 
     // 키워드 조회
-    @Query(value = "select * from storage where storage_name like :keyword or storage_site like  :keyword", nativeQuery = true)
+    @Query(value = "select * from storage where storage_name like concat('%', :keyword, '%') or storage_site like concat('%', :keyword, '%')", nativeQuery = true)
     public Page<Storage> findAllByStorageNameOrStorageSite (@Param("keyword") String keyword,
                                                             Pageable pageable);
 

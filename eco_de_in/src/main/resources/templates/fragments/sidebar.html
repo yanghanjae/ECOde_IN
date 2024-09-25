@@ -17,6 +17,14 @@
 	  </style>
 	</head>
 	<body>
+		<th:block th:if="${session.user == null && session.admin == null}">
+			<script>
+				alert('인가된 권한이 없습니다. 로그인 후 다시 시도해주세요.');
+				location.href = '/';
+			</script>
+		</th:block>
+		
+		
 	  <div class="flex flex-col items-center h-full overflow-hidden text-gray-700 bg-gray-100 text-center" style=" height: 100vh">
 	    <a class="flex items-center w-full px-3 mt-3 justify-center" href="/main">
 	      <img src="https://eco-de-in-bucket.s3.ap-northeast-2.amazonaws.com/primary/ecode_in_logo.png" alt="logo" class="w-3/4">
