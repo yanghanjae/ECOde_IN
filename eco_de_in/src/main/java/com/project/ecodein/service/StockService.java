@@ -26,9 +26,17 @@ public class StockService {
 		Pageable pageable = PageRequest.of (page, 10, Sort.by ("stock_no").descending ()); 
 		
 		if(storage_no == null) {
-			return STOCK_REPOSITORY.findStockByKeyword(search, !is_item, pageable);
+			if(!is_item) {
+				return STOCK_REPOSITORY.findAllStockByKeyword(search,pageable);
+			} else {
+				return STOCK_REPOSITORY.findStockByKeyword(search, pageable);
+			}
 		} else {
-			return STOCK_REPOSITORY.findyStockByKeywordStorage(search,!is_item,storage_no, pageable);
+			if(!is_item) {
+				return STOCK_REPOSITORY.findAllStockByKeywordStorage(search,storage_no,pageable);
+			} else {
+				return STOCK_REPOSITORY.findyStockByKeywordStorage(search,storage_no, pageable);
+			}	
 		}
 		
 	}
