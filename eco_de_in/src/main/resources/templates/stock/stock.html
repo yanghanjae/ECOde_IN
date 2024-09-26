@@ -176,6 +176,18 @@
 			right: 20px;
 			bottom: 20px;
 		}
+		
+		.input {
+			width: 400px;
+			height: 30px;
+			background-color: #D9D9D9;
+		}	
+
+		.input:focus {
+			width: 400px;
+			height: 30px;
+			background-color: #FFF;
+		}
 </style>
 </head>
 <body>
@@ -280,9 +292,39 @@
 		    	<label>수량 : </label>
 		    	<input id="modal_quantity" readonly="readonly" class="noFocus" >
 	    	</div>
-	    	<button class="lime modalButton">재고 수정</button>
+	    	<button class="lime modalButton" type="button" onclick="openModalEdit()">재고 수정</button>
+	    </div>
+	    
+	    <div class="modal" id="modalEdit">
+	    	<form action="/stock/edit" method="post">
+		    	<button type="button" onclick="closeModal()" class="closeModal">
+		    		<img class="closeButton" alt="closeButton" src="/img/icon/closebutton.png">
+		    	</button>
+		    	<div class="modalContent">
+			    	<label>재고번호 : </label>
+			    	<input id="modalEdit_stock_no" readonly="readonly" class="noFocus" name="editStockNo">
+		    	</div>
+		    	<div class="modalContent">
+			    	<label>재고명 : </label>
+			    	<input id="modalEdit_item_name" readonly="readonly" class="noFocus" >
+		    	</div>
+		    	<div class="modalContent">
+			    	<label>창고 : </label>
+			    	<input id="modalEdit_storage_no" readonly="readonly" class="noFocus" >
+		    	</div>
+		    	<div class="modalContent">
+			    	<label>사진 : </label>
+			    	<img alt="stock_image" src="" id="modalEdit_item_image">
+		    	</div>
+		    	<div class="modalContent">
+			    	<label>수량 : </label>
+			    	<input id="modalEdit_quantity" class="input" name="editQuantity" type="number" min="0" autofocus="false">
+		    	</div>
+		    	<button class="lime modalButton" type="submit">재고 수정</button>	
+	    	</form>
 	    	
 	    </div>
+	    
 	    <div class="modalBackground" id="modalBackground">
 	    </div>
 	  </div>
@@ -291,6 +333,7 @@
 	
 	let modal = document.getElementById('modal');
 	let modalBackground = document.getElementById('modalBackground');
+	let modalEdit = document.getElementById('modalEdit');
 	
 	function changePage(element) {
 		let search = document.getElementById('search').value || '';
@@ -316,11 +359,25 @@
 		
 		modal.style.display = 'block';
 		modalBackground.style.display = 'block';
+		modalEdit.style.display = 'none';
+	}
+	
+	function openModalEdit() {
+		document.getElementById('modalEdit_stock_no').value = document.getElementById('modal_stock_no').value;
+		document.getElementById('modalEdit_item_name').value = document.getElementById('modal_item_name').value;
+		document.getElementById('modalEdit_storage_no').value = document.getElementById('modal_storage_no').value;
+		document.getElementById('modalEdit_item_image').src = document.getElementById('modal_item_image').src;
+		document.getElementById('modalEdit_quantity').value = document.getElementById('modal_quantity').value;
+		modal.style.display = 'none';
+		modalBackground.style.display = 'block';
+		modalEdit.style.display = 'block';
+		document.getElementById('modalEdit_quantity').focus();
 	}
 	
 	function closeModal() {
 		modal.style.display = 'none';
 		modalBackground.style.display = 'none';
+		modalEdit.style.display = 'none';
 	}
 	</script>
 </body>

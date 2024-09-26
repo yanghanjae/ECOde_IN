@@ -17636,3 +17636,996 @@ This generated password is for development use only. Your security configuration
 2024-09-26T11:29:38.213+09:00  INFO 8284 --- [RMI TCP Connection(38)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-09-26T11:29:38.215+09:00  INFO 8284 --- [RMI TCP Connection(38)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-09-26T11:29:38.260+09:00  INFO 8284 --- [RMI TCP Connection(38)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-09-26T11:31:14.319+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T11:31:14.320+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T11:31:14.346+09:00  INFO 13936 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-26T11:31:14.346+09:00  INFO 13936 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-26T11:31:14.710+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T11:31:14.751+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 7 JPA repository interfaces.
+2024-09-26T11:31:15.100+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T11:31:15.109+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T11:31:15.109+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T11:31:15.147+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T11:31:15.147+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 801 ms
+2024-09-26T11:31:15.226+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-26T11:31:15.463+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@681dd9a1
+2024-09-26T11:31:15.465+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-26T11:31:15.490+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T11:31:15.522+09:00  INFO 13936 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-26T11:31:15.543+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T11:31:15.728+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T11:31:15.972+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T11:31:15.972+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T11:31:16.376+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T11:31:16.379+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T11:31:16.857+09:00  INFO 13936 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-26T11:31:17.175+09:00  WARN 13936 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T11:31:17.301+09:00  WARN 13936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 3c472c21-a4bd-4066-a25d-1f5ad8024ccb
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T11:31:17.306+09:00  INFO 13936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T11:31:17.468+09:00  INFO 13936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T11:31:17.496+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T11:31:17.503+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 3.43 seconds (process running for 3.832)
+2024-09-26T11:31:20.732+09:00  INFO 13936 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-26T11:31:20.732+09:00  INFO 13936 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-26T11:31:20.733+09:00  INFO 13936 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-09-26T11:31:24.398+09:00  WARN 13936 --- [http-nio-80-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-5][main] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template main, line 122, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T11:31:25.932+09:00  WARN 13936 --- [http-nio-80-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-4][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 183, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:01:28.073+09:00  WARN 13936 --- [http-nio-80-exec-10] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-10][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 183, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:01:32.890+09:00  WARN 13936 --- [http-nio-80-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-2][main] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template main, line 122, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:01:34.463+09:00  WARN 13936 --- [http-nio-80-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-6][order/order] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template order/order, line 146, col 13. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:01:35.728+09:00  WARN 13936 --- [http-nio-80-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-2][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 183, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:02:08.312+09:00  WARN 13936 --- [http-nio-80-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-3][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 183, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:07:04.714+09:00  WARN 13936 --- [http-nio-80-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-3][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 183, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:08:49.560+09:00  WARN 13936 --- [http-nio-80-exec-10] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-10][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 183, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:10:11.691+09:00  WARN 13936 --- [http-nio-80-exec-10] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-10][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:10:34.007+09:00  WARN 13936 --- [http-nio-80-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-2][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:10:47.927+09:00  WARN 13936 --- [http-nio-80-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-1][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:17:07.907+09:00  INFO 13936 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:17:07.939+09:00  INFO 13936 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:17:07.942+09:00  INFO 13936 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-26T12:17:08.402+09:00  INFO 13936 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-09-26T12:17:08.464+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:17:08.464+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:17:08.589+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:17:08.600+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:17:08.688+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:17:08.689+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:17:08.689+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:17:08.703+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:17:08.703+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 238 ms
+2024-09-26T12:17:08.725+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-09-26T12:17:08.795+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ae5a3e5
+2024-09-26T12:17:08.795+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-09-26T12:17:08.796+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:17:08.799+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:17:08.806+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:17:08.834+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:17:08.834+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:17:08.883+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:17:08.883+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:17:08.991+09:00  WARN 13936 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:17:09.028+09:00  WARN 13936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 1c7fbb0e-d06b-4831-89d4-839eeaba906f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:17:09.029+09:00  INFO 13936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:17:09.078+09:00  INFO 13936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:17:09.088+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:17:09.091+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.648 seconds (process running for 2755.41)
+2024-09-26T12:17:09.092+09:00  INFO 13936 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:19:13.233+09:00  INFO 13936 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-26T12:19:13.233+09:00  INFO 13936 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-26T12:19:13.234+09:00  INFO 13936 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-09-26T12:19:13.337+09:00  WARN 13936 --- [http-nio-80-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-1][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:19:18.235+09:00  WARN 13936 --- [http-nio-80-exec-7] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-7][main] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template main, line 122, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:19:20.615+09:00  WARN 13936 --- [http-nio-80-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-5][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:20:03.074+09:00  WARN 13936 --- [http-nio-80-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-6][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:31:46.147+09:00  INFO 13936 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:31:46.174+09:00  INFO 13936 --- [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:31:46.175+09:00  INFO 13936 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-09-26T12:31:46.220+09:00  INFO 13936 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2024-09-26T12:31:46.277+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:31:46.277+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:31:46.381+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:31:46.391+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:31:46.471+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:31:46.472+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:31:46.472+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:31:46.485+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:31:46.485+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 206 ms
+2024-09-26T12:31:46.506+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2024-09-26T12:31:46.579+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@304cc81f
+2024-09-26T12:31:46.579+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2024-09-26T12:31:46.581+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:31:46.583+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:31:46.589+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:31:46.615+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:31:46.615+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:31:46.655+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:31:46.655+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:31:46.747+09:00  WARN 13936 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:31:46.778+09:00  WARN 13936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9d826743-2070-4606-bec7-ae1be0609e2a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:31:46.778+09:00  INFO 13936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:31:46.832+09:00  INFO 13936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:31:46.842+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:31:46.844+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.583 seconds (process running for 3633.162)
+2024-09-26T12:31:46.845+09:00  INFO 13936 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:32:20.912+09:00  INFO 13936 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:32:20.939+09:00  INFO 13936 --- [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:32:20.940+09:00  INFO 13936 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2024-09-26T12:32:20.985+09:00  INFO 13936 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2024-09-26T12:32:21.037+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:32:21.037+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:32:21.125+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:32:21.134+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:32:21.208+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:32:21.209+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:32:21.209+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:32:21.224+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:32:21.225+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 187 ms
+2024-09-26T12:32:21.243+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2024-09-26T12:32:21.316+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5fe08a00
+2024-09-26T12:32:21.316+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2024-09-26T12:32:21.317+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:32:21.320+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:32:21.325+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:32:21.360+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:32:21.360+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:32:21.419+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:32:21.419+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:32:21.518+09:00  WARN 13936 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:32:21.548+09:00  WARN 13936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c21e36c2-5e2f-46b3-a7c0-dabea04a3e1e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:32:21.548+09:00  INFO 13936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:32:21.598+09:00  INFO 13936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:32:21.608+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:32:21.612+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.591 seconds (process running for 3667.929)
+2024-09-26T12:32:21.613+09:00  INFO 13936 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:33:10.969+09:00  INFO 13936 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2024-09-26T12:33:10.997+09:00  INFO 13936 --- [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:33:10.997+09:00  INFO 13936 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2024-09-26T12:33:11.042+09:00  INFO 13936 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2024-09-26T12:33:11.092+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:33:11.092+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:33:11.177+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:33:11.186+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:33:11.250+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:33:11.250+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:33:11.251+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:33:11.266+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:33:11.266+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 173 ms
+2024-09-26T12:33:11.283+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2024-09-26T12:33:11.352+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8979e91
+2024-09-26T12:33:11.352+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2024-09-26T12:33:11.353+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:33:11.354+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:33:11.359+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:33:11.383+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:33:11.383+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:33:11.418+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:33:11.418+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:33:11.492+09:00  WARN 13936 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:33:11.516+09:00  WARN 13936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 53194fd6-05e9-4358-8cc7-a58a8a4e4f4a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:33:11.516+09:00  INFO 13936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:33:11.558+09:00  INFO 13936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:33:11.568+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:33:11.571+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.493 seconds (process running for 3717.888)
+2024-09-26T12:33:11.572+09:00  INFO 13936 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:34:27.439+09:00  INFO 13936 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
+2024-09-26T12:34:27.467+09:00  INFO 13936 --- [Thread-19] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:34:27.468+09:00  INFO 13936 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2024-09-26T12:34:27.511+09:00  INFO 13936 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2024-09-26T12:34:27.562+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:34:27.562+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:34:27.651+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:34:27.661+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:34:27.727+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:34:27.728+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:34:27.728+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:34:27.743+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:34:27.743+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 180 ms
+2024-09-26T12:34:27.761+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2024-09-26T12:34:27.835+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2025ffe6
+2024-09-26T12:34:27.835+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2024-09-26T12:34:27.837+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:34:27.840+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:34:27.845+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:34:27.868+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:34:27.869+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:34:27.905+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:34:27.906+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:34:27.974+09:00  WARN 13936 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'stockController' defined in file [D:\fullstack\workspace-final\eco_de_in\bin\main\com\project\ecodein\controller\StockController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'stockService' defined in file [D:\fullstack\workspace-final\eco_de_in\bin\main\com\project\ecodein\service\StockService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'stockRepository' defined in com.project.ecodein.repository.StockRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int); Reason: Using named parameters for method public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int) but parameter 'Optional[stock_no]' not found in annotated query 'UPDATE stock SET quantity = :quantity WHERE stock_no = stock_no'
+2024-09-26T12:34:27.974+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:34:27.974+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2024-09-26T12:34:28.046+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2024-09-26T12:34:28.047+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-09-26T12:34:28.051+09:00  INFO 13936 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-09-26T12:34:28.061+09:00 ERROR 13936 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'stockController' defined in file [D:\fullstack\workspace-final\eco_de_in\bin\main\com\project\ecodein\controller\StockController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'stockService' defined in file [D:\fullstack\workspace-final\eco_de_in\bin\main\com\project\ecodein\service\StockService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'stockRepository' defined in com.project.ecodein.repository.StockRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int); Reason: Using named parameters for method public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int) but parameter 'Optional[stock_no]' not found in annotated query 'UPDATE stock SET quantity = :quantity WHERE stock_no = stock_no'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:795) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:237) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1212) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971) ~[spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625) ~[spring-context-6.1.12.jar:6.1.12]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335) ~[spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-3.3.3.jar:3.3.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352) ~[spring-boot-3.3.3.jar:3.3.3]
+	at com.project.ecodein.EcoDeInApplication.main(EcoDeInApplication.java:13) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.3.3.jar:3.3.3]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'stockService' defined in file [D:\fullstack\workspace-final\eco_de_in\bin\main\com\project\ecodein\service\StockService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'stockRepository' defined in com.project.ecodein.repository.StockRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int); Reason: Using named parameters for method public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int) but parameter 'Optional[stock_no]' not found in annotated query 'UPDATE stock SET quantity = :quantity WHERE stock_no = stock_no'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:795) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:237) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1212) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:782) ~[spring-beans-6.1.12.jar:6.1.12]
+	... 24 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'stockRepository' defined in com.project.ecodein.repository.StockRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int); Reason: Using named parameters for method public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int) but parameter 'Optional[stock_no]' not found in annotated query 'UPDATE stock SET quantity = :quantity WHERE stock_no = stock_no'
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:782) ~[spring-beans-6.1.12.jar:6.1.12]
+	... 38 common frames omitted
+Caused by: org.springframework.data.repository.query.QueryCreationException: Could not create query for public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int); Reason: Using named parameters for method public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int) but parameter 'Optional[stock_no]' not found in annotated query 'UPDATE stock SET quantity = :quantity WHERE stock_no = stock_no'
+	at org.springframework.data.repository.query.QueryCreationException.create(QueryCreationException.java:101) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lookupQuery(QueryExecutorMethodInterceptor.java:119) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.mapMethodsToQuery(QueryExecutorMethodInterceptor.java:103) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lambda$new$0(QueryExecutorMethodInterceptor.java:92) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at java.base/java.util.Optional.map(Optional.java:260) ~[na:na]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.<init>(QueryExecutorMethodInterceptor.java:92) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:357) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:286) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:135) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.util.Lazy.get(Lazy.java:113) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:292) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:132) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853) ~[spring-beans-6.1.12.jar:6.1.12]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802) ~[spring-beans-6.1.12.jar:6.1.12]
+	... 49 common frames omitted
+Caused by: java.lang.IllegalStateException: Using named parameters for method public abstract void com.project.ecodein.repository.StockRepository.updateStock(int,int) but parameter 'Optional[stock_no]' not found in annotated query 'UPDATE stock SET quantity = :quantity WHERE stock_no = stock_no'
+	at org.springframework.data.jpa.repository.query.JpaQueryMethod.assertParameterNamesInAnnotatedQuery(JpaQueryMethod.java:181) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryMethod.<init>(JpaQueryMethod.java:149) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.DefaultJpaQueryMethodFactory.build(DefaultJpaQueryMethodFactory.java:44) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:94) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lookupQuery(QueryExecutorMethodInterceptor.java:115) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	... 61 common frames omitted
+
+2024-09-26T12:34:53.963+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:34:53.963+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:34:54.057+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:34:54.066+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:34:54.124+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:34:54.125+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:34:54.126+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:34:54.141+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:34:54.141+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 177 ms
+2024-09-26T12:34:54.159+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2024-09-26T12:34:54.222+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2eb8e541
+2024-09-26T12:34:54.223+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2024-09-26T12:34:54.223+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:34:54.225+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:34:54.229+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:34:54.251+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:34:54.251+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:34:54.286+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:34:54.286+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:34:54.371+09:00  WARN 13936 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:34:54.399+09:00  WARN 13936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 2b9d73d2-4408-4670-8888-b3f22938f7bb
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:34:54.399+09:00  INFO 13936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:34:54.441+09:00  INFO 13936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:34:54.452+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:34:54.455+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.508 seconds (process running for 3820.772)
+2024-09-26T12:34:54.456+09:00  INFO 13936 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:34:56.904+09:00  INFO 13936 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:34:56.930+09:00  INFO 13936 --- [Thread-23] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:34:56.930+09:00  INFO 13936 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2024-09-26T12:34:56.979+09:00  INFO 13936 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
+2024-09-26T12:34:57.033+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:34:57.033+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:34:57.118+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:34:57.128+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:34:57.185+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:34:57.185+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:34:57.185+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:34:57.201+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:34:57.201+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 167 ms
+2024-09-26T12:34:57.220+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2024-09-26T12:34:57.282+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-8 - Added connection com.mysql.cj.jdbc.ConnectionImpl@18724550
+2024-09-26T12:34:57.283+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2024-09-26T12:34:57.283+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:34:57.285+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:34:57.291+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:34:57.316+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:34:57.316+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:34:57.351+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:34:57.351+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:34:57.434+09:00  WARN 13936 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:34:57.459+09:00  WARN 13936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 34e4373e-cd49-4178-9635-c1326a505f6c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:34:57.459+09:00  INFO 13936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:34:57.509+09:00  INFO 13936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:34:57.520+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:34:57.524+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.507 seconds (process running for 3823.841)
+2024-09-26T12:34:57.526+09:00  INFO 13936 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:34:58.939+09:00  INFO 13936 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:34:58.966+09:00  INFO 13936 --- [Thread-30] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:34:58.967+09:00  INFO 13936 --- [Thread-30] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2024-09-26T12:34:59.014+09:00  INFO 13936 --- [Thread-30] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.
+2024-09-26T12:34:59.059+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 13936 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:34:59.059+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:34:59.140+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:34:59.148+09:00  INFO 13936 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:34:59.203+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:34:59.203+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:34:59.203+09:00  INFO 13936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:34:59.216+09:00  INFO 13936 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:34:59.216+09:00  INFO 13936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 157 ms
+2024-09-26T12:34:59.234+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Starting...
+2024-09-26T12:34:59.300+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-9 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3aab43e4
+2024-09-26T12:34:59.300+09:00  INFO 13936 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Start completed.
+2024-09-26T12:34:59.301+09:00  INFO 13936 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:34:59.302+09:00  INFO 13936 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:34:59.306+09:00  INFO 13936 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:34:59.327+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:34:59.327+09:00  WARN 13936 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:34:59.359+09:00  INFO 13936 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:34:59.359+09:00  INFO 13936 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:34:59.435+09:00  WARN 13936 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:34:59.458+09:00  WARN 13936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 88e9040d-d7f1-40cb-bfe0-c0efad1d48f9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:34:59.459+09:00  INFO 13936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:34:59.494+09:00  INFO 13936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:34:59.503+09:00  INFO 13936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:34:59.506+09:00  INFO 13936 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.459 seconds (process running for 3825.823)
+2024-09-26T12:34:59.507+09:00  INFO 13936 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:35:41.566+09:00  INFO 13936 --- [RMI TCP Connection(86)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-09-26T12:35:41.592+09:00  INFO 13936 --- [RMI TCP Connection(86)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:35:41.593+09:00  INFO 13936 --- [RMI TCP Connection(86)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown initiated...
+2024-09-26T12:35:41.637+09:00  INFO 13936 --- [RMI TCP Connection(86)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown completed.
+2024-09-26T12:35:42.912+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 2572 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:35:42.914+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:35:42.940+09:00  INFO 2572 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-26T12:35:42.940+09:00  INFO 2572 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-26T12:35:43.310+09:00  INFO 2572 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:35:43.352+09:00  INFO 2572 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:35:43.692+09:00  INFO 2572 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:35:43.700+09:00  INFO 2572 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:35:43.700+09:00  INFO 2572 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:35:43.737+09:00  INFO 2572 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:35:43.737+09:00  INFO 2572 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 797 ms
+2024-09-26T12:35:43.814+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-26T12:35:44.055+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@350ccebb
+2024-09-26T12:35:44.057+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-26T12:35:44.081+09:00  INFO 2572 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:35:44.113+09:00  INFO 2572 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-26T12:35:44.133+09:00  INFO 2572 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:35:44.317+09:00  INFO 2572 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:35:44.561+09:00  WARN 2572 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:35:44.561+09:00  WARN 2572 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:35:44.958+09:00  INFO 2572 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:35:44.960+09:00  INFO 2572 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:35:45.433+09:00  INFO 2572 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-26T12:35:45.751+09:00  WARN 2572 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:35:45.875+09:00  WARN 2572 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7f8deabe-1c0e-4e12-b50a-cb182171e9c9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:35:45.879+09:00  INFO 2572 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:35:46.045+09:00  INFO 2572 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:35:46.073+09:00  INFO 2572 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:35:46.079+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 3.412 seconds (process running for 3.813)
+2024-09-26T12:35:52.441+09:00  INFO 2572 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-26T12:35:52.441+09:00  INFO 2572 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-26T12:35:52.442+09:00  INFO 2572 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-09-26T12:35:52.740+09:00  WARN 2572 --- [http-nio-80-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-1][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:35:56.699+09:00  WARN 2572 --- [http-nio-80-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-6][main] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template main, line 122, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:35:57.960+09:00  WARN 2572 --- [http-nio-80-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-5][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:36:06.493+09:00  WARN 2572 --- [http-nio-80-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'editQunaitity' for method parameter type int is not present]
+2024-09-26T12:36:27.259+09:00  INFO 2572 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:36:27.288+09:00  INFO 2572 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:36:27.290+09:00  INFO 2572 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-26T12:36:27.338+09:00  INFO 2572 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-09-26T12:36:27.393+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 2572 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:36:27.394+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:36:27.505+09:00  INFO 2572 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:36:27.518+09:00  INFO 2572 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:36:27.586+09:00  INFO 2572 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:36:27.587+09:00  INFO 2572 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:36:27.587+09:00  INFO 2572 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:36:27.603+09:00  INFO 2572 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:36:27.604+09:00  INFO 2572 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 209 ms
+2024-09-26T12:36:27.623+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-09-26T12:36:27.694+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@331bb987
+2024-09-26T12:36:27.695+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-09-26T12:36:27.696+09:00  INFO 2572 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:36:27.698+09:00  INFO 2572 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:36:27.705+09:00  INFO 2572 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:36:27.736+09:00  WARN 2572 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:36:27.736+09:00  WARN 2572 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:36:27.790+09:00  INFO 2572 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:36:27.790+09:00  INFO 2572 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:36:27.895+09:00  WARN 2572 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:36:27.926+09:00  WARN 2572 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: bb97708e-c223-45e6-abd7-84f3d862477e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:36:27.926+09:00  INFO 2572 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:36:27.966+09:00  INFO 2572 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:36:27.975+09:00  INFO 2572 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:36:27.978+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.601 seconds (process running for 45.712)
+2024-09-26T12:36:27.979+09:00  INFO 2572 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:36:38.570+09:00  INFO 2572 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:36:38.597+09:00  INFO 2572 --- [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:36:38.598+09:00  INFO 2572 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-09-26T12:36:38.644+09:00  INFO 2572 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2024-09-26T12:36:38.698+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 2572 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:36:38.698+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:36:38.795+09:00  INFO 2572 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:36:38.805+09:00  INFO 2572 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:36:38.863+09:00  INFO 2572 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:36:38.864+09:00  INFO 2572 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:36:38.864+09:00  INFO 2572 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:36:38.878+09:00  INFO 2572 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:36:38.878+09:00  INFO 2572 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 179 ms
+2024-09-26T12:36:38.895+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2024-09-26T12:36:38.969+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@769f0584
+2024-09-26T12:36:38.969+09:00  INFO 2572 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2024-09-26T12:36:38.970+09:00  INFO 2572 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:36:38.972+09:00  INFO 2572 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:36:38.977+09:00  INFO 2572 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:36:39.004+09:00  WARN 2572 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:36:39.004+09:00  WARN 2572 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:36:39.046+09:00  INFO 2572 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:36:39.046+09:00  INFO 2572 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:36:39.121+09:00  WARN 2572 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:36:39.147+09:00  WARN 2572 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b15e2882-bcf4-440a-84a1-9bd27a5780f6
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:36:39.148+09:00  INFO 2572 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:36:39.188+09:00  INFO 2572 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:36:39.198+09:00  INFO 2572 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:36:39.200+09:00  INFO 2572 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.519 seconds (process running for 56.935)
+2024-09-26T12:36:39.202+09:00  INFO 2572 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:36:45.122+09:00  INFO 2572 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-26T12:36:45.123+09:00  INFO 2572 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-26T12:36:45.123+09:00  INFO 2572 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-09-26T12:36:45.312+09:00  WARN 2572 --- [http-nio-80-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-1][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:36:48.291+09:00  INFO 2572 --- [RMI TCP Connection(12)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-09-26T12:36:48.317+09:00  INFO 2572 --- [RMI TCP Connection(12)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:36:48.318+09:00  INFO 2572 --- [RMI TCP Connection(12)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2024-09-26T12:36:48.363+09:00  INFO 2572 --- [RMI TCP Connection(12)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2024-09-26T12:36:49.571+09:00  INFO 12804 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 12804 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:36:49.572+09:00  INFO 12804 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:36:49.597+09:00  INFO 12804 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-26T12:36:49.597+09:00  INFO 12804 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-26T12:36:49.954+09:00  INFO 12804 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:36:49.995+09:00  INFO 12804 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:36:50.335+09:00  INFO 12804 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:36:50.344+09:00  INFO 12804 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:36:50.344+09:00  INFO 12804 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:36:50.378+09:00  INFO 12804 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:36:50.379+09:00  INFO 12804 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 782 ms
+2024-09-26T12:36:50.451+09:00  INFO 12804 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-26T12:36:50.696+09:00  INFO 12804 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7bb4b9fe
+2024-09-26T12:36:50.698+09:00  INFO 12804 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-26T12:36:50.722+09:00  INFO 12804 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:36:50.754+09:00  INFO 12804 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-26T12:36:50.774+09:00  INFO 12804 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:36:50.958+09:00  INFO 12804 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:36:51.195+09:00  WARN 12804 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:36:51.196+09:00  WARN 12804 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:36:51.595+09:00  INFO 12804 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:36:51.597+09:00  INFO 12804 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:36:52.063+09:00  INFO 12804 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-26T12:36:52.386+09:00  WARN 12804 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:36:52.500+09:00  WARN 12804 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: e61be299-05d6-43e2-bce7-3a0259c843ff
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:36:52.504+09:00  INFO 12804 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:36:52.666+09:00  INFO 12804 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:36:52.694+09:00  INFO 12804 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:36:52.700+09:00  INFO 12804 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 3.367 seconds (process running for 3.753)
+2024-09-26T12:36:54.804+09:00  INFO 12804 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-26T12:36:54.804+09:00  INFO 12804 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-26T12:36:54.805+09:00  INFO 12804 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-09-26T12:36:55.119+09:00  WARN 12804 --- [http-nio-80-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-2][main] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template main, line 122, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:36:56.612+09:00  WARN 12804 --- [http-nio-80-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-1][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:37:05.332+09:00  WARN 12804 --- [http-nio-80-exec-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: S1009
+2024-09-26T12:37:05.333+09:00 ERROR 12804 --- [http-nio-80-exec-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : Statement.executeQuery() cannot issue statements that do not produce result sets.
+2024-09-26T12:37:05.338+09:00 ERROR 12804 --- [http-nio-80-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.orm.jpa.JpaSystemException: JDBC exception executing SQL [UPDATE stock SET quantity = ? WHERE stock_no = ?] [Statement.executeQuery() cannot issue statements that do not produce result sets.] [n/a]] with root cause
+
+java.sql.SQLException: Statement.executeQuery() cannot issue statements that do not produce result sets.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:130) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:98) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:90) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:64) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:924) ~[mysql-connector-j-8.3.0.jar:8.3.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java) ~[HikariCP-5.1.0.jar:na]
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:246) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:167) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.results.jdbc.internal.AbstractResultSetAccess.getMetaData(AbstractResultSetAccess.java:36) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.results.jdbc.internal.AbstractResultSetAccess.getColumnCount(AbstractResultSetAccess.java:52) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.results.ResultSetMappingImpl.resolve(ResultSetMappingImpl.java:193) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValuesSource(JdbcSelectExecutorStandardImpl.java:327) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:115) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:83) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:76) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:65) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sql.internal.NativeSelectQueryPlanImpl.performList(NativeSelectQueryPlanImpl.java:138) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.sql.internal.NativeQueryImpl.doList(NativeQueryImpl.java:628) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:423) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.spi.AbstractSelectionQuery.getSingleResult(AbstractSelectionQuery.java:555) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:223) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:92) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:152) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:140) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:169) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:148) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:136) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.1.12.jar:6.1.12]
+	at jdk.proxy4/jdk.proxy4.$Proxy143.updateStock(Unknown Source) ~[na:na]
+	at com.project.ecodein.service.StockService.editStock(StockService.java:56) ~[main/:na]
+	at com.project.ecodein.controller.StockController.stockEdit(StockController.java:56) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.28.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.28.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2024-09-26T12:38:56.306+09:00  INFO 12804 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:38:56.335+09:00  INFO 12804 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:38:56.337+09:00  INFO 12804 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-26T12:38:56.384+09:00  INFO 12804 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-09-26T12:38:56.433+09:00  INFO 12804 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 12804 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:38:56.433+09:00  INFO 12804 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:38:56.528+09:00  INFO 12804 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:38:56.537+09:00  INFO 12804 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:38:56.598+09:00  INFO 12804 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:38:56.599+09:00  INFO 12804 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:38:56.599+09:00  INFO 12804 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:38:56.615+09:00  INFO 12804 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:38:56.615+09:00  INFO 12804 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 181 ms
+2024-09-26T12:38:56.634+09:00  INFO 12804 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-09-26T12:38:56.708+09:00  INFO 12804 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@591c2a50
+2024-09-26T12:38:56.708+09:00  INFO 12804 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-09-26T12:38:56.709+09:00  INFO 12804 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:38:56.711+09:00  INFO 12804 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:38:56.717+09:00  INFO 12804 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:38:56.745+09:00  WARN 12804 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:38:56.745+09:00  WARN 12804 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:38:56.792+09:00  INFO 12804 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:38:56.793+09:00  INFO 12804 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:38:56.875+09:00  WARN 12804 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:38:56.903+09:00  WARN 12804 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 40804abe-6e03-4d08-ae23-25513312d3fa
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:38:56.904+09:00  INFO 12804 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:38:56.942+09:00  INFO 12804 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:38:56.952+09:00  INFO 12804 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:38:56.955+09:00  INFO 12804 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.539 seconds (process running for 128.008)
+2024-09-26T12:38:56.956+09:00  INFO 12804 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-09-26T12:38:58.724+09:00  INFO 12804 --- [RMI TCP Connection(14)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-09-26T12:38:58.751+09:00  INFO 12804 --- [RMI TCP Connection(14)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:38:58.752+09:00  INFO 12804 --- [RMI TCP Connection(14)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-09-26T12:38:58.799+09:00  INFO 12804 --- [RMI TCP Connection(14)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2024-09-26T12:39:00.008+09:00  INFO 7728 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 7728 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:39:00.010+09:00  INFO 7728 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:39:00.035+09:00  INFO 7728 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-26T12:39:00.036+09:00  INFO 7728 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-26T12:39:00.395+09:00  INFO 7728 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:39:00.435+09:00  INFO 7728 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:39:00.773+09:00  INFO 7728 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:39:00.782+09:00  INFO 7728 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:39:00.782+09:00  INFO 7728 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:39:00.821+09:00  INFO 7728 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:39:00.821+09:00  INFO 7728 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 785 ms
+2024-09-26T12:39:00.904+09:00  INFO 7728 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-26T12:39:01.145+09:00  INFO 7728 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62468fee
+2024-09-26T12:39:01.147+09:00  INFO 7728 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-26T12:39:01.173+09:00  INFO 7728 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:39:01.206+09:00  INFO 7728 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-26T12:39:01.226+09:00  INFO 7728 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:39:01.415+09:00  INFO 7728 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:39:01.660+09:00  WARN 7728 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:39:01.660+09:00  WARN 7728 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:39:02.083+09:00  INFO 7728 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:39:02.085+09:00  INFO 7728 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:39:02.568+09:00  INFO 7728 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-26T12:39:02.873+09:00  WARN 7728 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:39:02.985+09:00  WARN 7728 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: fe1ad3aa-835b-4ac1-a76a-1eb9075b1ea7
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:39:02.989+09:00  INFO 7728 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:39:03.146+09:00  INFO 7728 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:39:03.175+09:00  INFO 7728 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:39:03.181+09:00  INFO 7728 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 3.414 seconds (process running for 3.797)
+2024-09-26T12:39:05.737+09:00  INFO 7728 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-26T12:39:05.738+09:00  INFO 7728 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-26T12:39:05.738+09:00  INFO 7728 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-09-26T12:39:10.149+09:00  WARN 7728 --- [http-nio-80-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-5][main] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template main, line 122, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:39:11.490+09:00  WARN 7728 --- [http-nio-80-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-4][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:39:18.147+09:00 ERROR 7728 --- [http-nio-80-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.InvalidDataAccessApiUsageException: Executing an update/delete query] with root cause
+
+jakarta.persistence.TransactionRequiredException: Executing an update/delete query
+	at org.hibernate.internal.AbstractSharedSessionContract.checkTransactionNeededForUpdateOperation(AbstractSharedSessionContract.java:529) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.hibernate.query.spi.AbstractQuery.executeUpdate(AbstractQuery.java:647) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$ModifyingExecution.doExecute(JpaQueryExecution.java:266) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:92) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:152) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:140) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:169) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:148) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:136) ~[spring-data-jpa-3.3.3.jar:3.3.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.12.jar:6.1.12]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.1.12.jar:6.1.12]
+	at jdk.proxy4/jdk.proxy4.$Proxy143.updateStock(Unknown Source) ~[na:na]
+	at com.project.ecodein.service.StockService.editStock(StockService.java:56) ~[main/:na]
+	at com.project.ecodein.controller.StockController.stockEdit(StockController.java:56) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.28.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.28.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.12.jar:6.1.12]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.3.3.jar:6.3.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.12.jar:6.1.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.28.jar:10.1.28]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+
+2024-09-26T12:39:53.491+09:00  INFO 7728 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-26T12:39:53.521+09:00  INFO 7728 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:39:53.523+09:00  INFO 7728 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-26T12:39:53.570+09:00  INFO 7728 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-09-26T12:39:53.623+09:00  INFO 7728 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 7728 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:39:53.623+09:00  INFO 7728 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:39:53.721+09:00  INFO 7728 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:39:53.731+09:00  INFO 7728 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:39:53.796+09:00  INFO 7728 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:39:53.797+09:00  INFO 7728 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:39:53.797+09:00  INFO 7728 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:39:53.815+09:00  INFO 7728 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:39:53.815+09:00  INFO 7728 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 191 ms
+2024-09-26T12:39:53.833+09:00  INFO 7728 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-09-26T12:39:54.606+09:00  INFO 4316 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 4316 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:39:54.608+09:00  INFO 4316 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:39:54.632+09:00  INFO 4316 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-26T12:39:54.632+09:00  INFO 4316 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-26T12:39:55.000+09:00  INFO 4316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:39:55.040+09:00  INFO 4316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:39:55.376+09:00  INFO 4316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:39:55.384+09:00  INFO 4316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:39:55.385+09:00  INFO 4316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:39:55.421+09:00  INFO 4316 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:39:55.422+09:00  INFO 4316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 790 ms
+2024-09-26T12:39:55.494+09:00  INFO 4316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-26T12:39:55.723+09:00  INFO 4316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@17ccddf5
+2024-09-26T12:39:55.725+09:00  INFO 4316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-26T12:39:55.748+09:00  INFO 4316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:39:55.779+09:00  INFO 4316 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-26T12:39:55.799+09:00  INFO 4316 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:39:55.980+09:00  INFO 4316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:39:56.216+09:00  WARN 4316 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:39:56.216+09:00  WARN 4316 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:39:56.611+09:00  INFO 4316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:39:56.613+09:00  INFO 4316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:39:57.073+09:00  INFO 4316 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-26T12:39:57.388+09:00  WARN 4316 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:39:57.501+09:00  WARN 4316 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f94d4f4f-883a-453c-8118-a7e786a8e0f7
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:39:57.505+09:00  INFO 4316 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:39:57.659+09:00  INFO 4316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:39:57.686+09:00  INFO 4316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:39:57.692+09:00  INFO 4316 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 3.331 seconds (process running for 3.721)
+2024-09-26T12:40:17.571+09:00  INFO 4316 --- [RMI TCP Connection(8)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-09-26T12:40:17.605+09:00  INFO 4316 --- [RMI TCP Connection(8)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:40:17.607+09:00  INFO 4316 --- [RMI TCP Connection(8)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-26T12:40:17.654+09:00  INFO 4316 --- [RMI TCP Connection(8)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-09-26T12:40:18.862+09:00  INFO 8584 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.11 with PID 8584 (D:\fullstack\workspace-final\eco_de_in\bin\main started by hi in D:\fullstack\workspace-final\eco_de_in)
+2024-09-26T12:40:18.864+09:00  INFO 8584 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-09-26T12:40:18.889+09:00  INFO 8584 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-26T12:40:18.889+09:00  INFO 8584 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-26T12:40:19.247+09:00  INFO 8584 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-26T12:40:19.288+09:00  INFO 8584 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 7 JPA repository interfaces.
+2024-09-26T12:40:19.622+09:00  INFO 8584 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-09-26T12:40:19.630+09:00  INFO 8584 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-26T12:40:19.631+09:00  INFO 8584 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-26T12:40:19.666+09:00  INFO 8584 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-26T12:40:19.666+09:00  INFO 8584 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 777 ms
+2024-09-26T12:40:19.740+09:00  INFO 8584 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-26T12:40:19.974+09:00  INFO 8584 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@ee768f0
+2024-09-26T12:40:19.976+09:00  INFO 8584 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-26T12:40:20.001+09:00  INFO 8584 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-26T12:40:20.033+09:00  INFO 8584 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-26T12:40:20.054+09:00  INFO 8584 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-26T12:40:20.238+09:00  INFO 8584 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-26T12:40:20.474+09:00  WARN 8584 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:40:20.474+09:00  WARN 8584 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-09-26T12:40:20.865+09:00  INFO 8584 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-26T12:40:20.867+09:00  INFO 8584 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:40:21.336+09:00  INFO 8584 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-09-26T12:40:21.642+09:00  WARN 8584 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-26T12:40:21.755+09:00  WARN 8584 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 6c34f509-6fc5-4451-9b49-7619c06d411c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-09-26T12:40:21.759+09:00  INFO 8584 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-09-26T12:40:21.923+09:00  INFO 8584 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-26T12:40:21.951+09:00  INFO 8584 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-09-26T12:40:21.957+09:00  INFO 8584 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 3.335 seconds (process running for 3.717)
+2024-09-26T12:40:29.034+09:00  INFO 8584 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-26T12:40:29.034+09:00  INFO 8584 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-09-26T12:40:29.035+09:00  INFO 8584 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-09-26T12:40:32.786+09:00  WARN 8584 --- [http-nio-80-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-5][main] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template main, line 122, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:40:34.401+09:00  WARN 8584 --- [http-nio-80-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-4][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:40:40.430+09:00  WARN 8584 --- [http-nio-80-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-2][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:42:09.985+09:00  WARN 8584 --- [http-nio-80-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-5][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:43:01.439+09:00  WARN 8584 --- [http-nio-80-exec-8] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-8][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:43:02.278+09:00  WARN 8584 --- [http-nio-80-exec-10] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-10][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:43:02.793+09:00  WARN 8584 --- [http-nio-80-exec-7] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-7][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:44:09.296+09:00  WARN 8584 --- [http-nio-80-exec-8] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-8][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:44:09.847+09:00  WARN 8584 --- [http-nio-80-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-1][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:44:10.459+09:00  WARN 8584 --- [http-nio-80-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-2][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:45:23.546+09:00  WARN 8584 --- [http-nio-80-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-2][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:45:32.826+09:00  WARN 8584 --- [http-nio-80-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-4][stock/stock] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template stock/stock, line 195, col 14. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-09-26T12:45:38.398+09:00  INFO 8584 --- [RMI TCP Connection(13)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-09-26T12:45:38.431+09:00  INFO 8584 --- [RMI TCP Connection(13)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-26T12:45:38.433+09:00  INFO 8584 --- [RMI TCP Connection(13)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-26T12:45:38.480+09:00  INFO 8584 --- [RMI TCP Connection(13)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

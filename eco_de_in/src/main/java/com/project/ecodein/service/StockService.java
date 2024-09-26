@@ -50,4 +50,9 @@ public class StockService {
 
 		return STOCK_REPOSITORY.findByStockNO (stock_no);
 	}
+
+	public void editStock (int editStockNo, int editQunaitity) {
+		
+		STOCK_REPOSITORY.updateStock(editStockNo, editQunaitity);
+	}
 }
