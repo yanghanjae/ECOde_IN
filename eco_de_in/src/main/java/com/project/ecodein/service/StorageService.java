@@ -31,12 +31,8 @@ public class StorageService {
         
         if (keyword == null && storage_status == null) {
             return STORAGE_SERVICE.findAll(pageable);
-        } else if (storage_status != null && !storage_status.equals ("200")) {
-        	if (storage_status.equals ("정상")) {
-        		return STORAGE_SERVICE.findAllByStorageStatus (storage_status, pageable);
-         	} else {
-         		return STORAGE_SERVICE.findAllByStorageStatusNegative (pageable);
-         	}
+        } else if (!storage_status.equals ("200")) {
+            return STORAGE_SERVICE.findAllByStorageStatus (storage_status, pageable);
         }
         
     	return STORAGE_SERVICE.findAllByStorageNameOrStorageSite(keyword, pageable);
