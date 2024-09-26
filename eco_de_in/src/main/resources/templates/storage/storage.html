@@ -271,14 +271,14 @@
 				.then(data => {
 					for (let idx in data) {
 						data_line.innerHTML +=
-							`
-            <tr class="data overflow-scroll">
-              <td>${data[idx].item_no}</td>
-              <td><img src="${data[idx].item_image}" alt="" style="width: 150px; height: auto;"></td>
-              <td class="truncate md:text-clip">${data[idx].item_name}</td>
-              <td>${data[idx].quantity}</td>
-            </tr>
-          `;
+            `
+              <tr class="data overflow-scroll">
+                <td>${data[idx].item_no}</td>
+                <td><img src="${data[idx].item_image}" alt="" style="width: 150px; height: auto;"></td>
+                <td class="truncate md:text-clip"><a href="/stock?search=${data[idx].item_name}&storage_no=${data[idx].storage_no}">${data[idx].item_name}</a></td>
+                <td>${data[idx].quantity}</td>
+              </tr>
+            `;
 					}
 				})
 				.catch(err => {
