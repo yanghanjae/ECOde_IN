@@ -32,10 +32,10 @@ public class BoardController {
 	}
 
 	// 상세페이지
-	@GetMapping("/{board_no}")
-	public String findBoardByNo(@PathVariable int board_no, Model model) {
+	@GetMapping("/{boardNo}")
+	public String findBoardByNo(@PathVariable int boardNo, Model model) {
 		
-		BoardDTO board = boardService.findBoardByNo(board_no);
+		BoardDTO board = boardService.findBoardByNo(boardNo);
 		model.addAttribute("board", board);
 		return "board/boardDetail";
 	}
@@ -67,11 +67,13 @@ public class BoardController {
 	}
 	
 	// 수정
-	@GetMapping("/update")
-	public void updatePage() {
+	@GetMapping("/update/{boardNo}")
+	public String update(@PathVariable int boardNo, Model model) {
+		model.addAttribute ("board", boardService.findBoardByNo(boardNo));
+		return "board/update";
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/update/{boardNo}")
 	public String updateBoard(BoardDTO updateBoard) {
 		
 		boardService.updateBoard(updateBoard);
@@ -80,17 +82,11 @@ public class BoardController {
 	}
 	
 	// 삭제
-	@GetMapping("/delete")
-	public void deletePage() {}
-	
-	@PostMapping("/delete")
-	public String deleteBoard(@RequestParam Integer board_no) {
-		
-		boardService.deleteBoard(board_no);
+	@GetMapping("/delete/{boardNo}")
+	public String deleteBoard(@PathVariable int boardNo) {
+		boardService.deleteBoard(boardNo);
 		
 		return "redirect:/board/board";
 	}
-	
-	
 	
 }

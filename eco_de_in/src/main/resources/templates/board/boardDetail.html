@@ -1,10 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>상세페이지</title>
+<title>상세 페이지</title>
+<script
+	src="https://cdn.tiny.cloud/1/nd8grynjd8268gdl5ya7l9blew0p9nql98thf7fre8azeeg6/tinymce/6/tinymce.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+<style type="text/css">
+.board-list {
+	margin: 0 auto;
+	width: 1200px;
+}
+
+.board-list-content {
+	margin: 100px;
+}
+
+.board-form {
+	margin: 50px auto;
+	width: 800px;
+}
+
+.form-board-content {
+	width: 100%;
+	height: 200px;
+}
+</style>
 </head>
 <body>
+	<div class="h-full">
+		<div style="width: 310px; float: left;">
+			<th:block th:replace="fragments/sidebar :: sidebarFragment" />
+		</div>
+		<div id="content">
+			<div id="content_wrap">
+				<div class="board-list">
+					<div class="board-list-content">
+						<div>
+							<h3>게시판 상세</h3>
+						</div>
 
+						<div class="board-btn">
+							<div th:if="${ session.user.user_id eq board.user.user_id}">
+								<button type="button"
+									class="text-black bg-gradient-to-r from-green-200 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+									th:onclick="|location.href='@{/board/update/{boardNo}(boardNo=${board.boardNo})}'|">수정</button>
+								
+								<!-- Button trigger modal -->
+								<button type="button"
+									class="text-black bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+									data-modal-toggle="Modal"
+									data-modal-target="Modal">삭제</button>
+							</div>
+
+							<!-- Modal -->
+							<div id="Modal" tabindex="-1"
+								class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+								<div class="relative p-4 w-full max-w-md max-h-full">
+									<div
+										class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+										<button type="button"
+											class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+											data-modal-hide="Modal">
+											<svg class="w-3 h-3" aria-hidden="true"
+												xmlns="http://www.w3.org/2000/svg" fill="none"
+												viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round"
+													stroke-linejoin="round" stroke-width="2"
+													d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+											<span class="sr-only">Close modal</span>
+										</button>
+										<div class="p-4 md:p-5 text-center">
+											<svg
+												class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+												aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+												fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round"
+													stroke-linejoin="round" stroke-width="2"
+													d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+											<h3
+												class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">삭제하시겠습니까?</h3>
+											<button onclick="clickDel()" data-modal-hide="Modal" type="button"
+												class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+												삭제</button>
+											<button data-modal-hide="Modal" type="button"
+												class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+												취소</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="board-form">
+							<table class="table table-striped table-bordered">
+								<tr>
+									<th>글 번호</th>
+									<td class="boardNo" th:text="${board.boardNo}"></td>
+								</tr>
+								<tr>
+									<th>글 제목</th>
+									<td th:text="${board.boardTitle}"></td>
+								</tr>
+								<tr>
+									<th>작성자</th>
+									<td th:text="${board.user.user_name}"></td>
+								</tr>
+								<tr>
+									<th>등록일</th>
+									<td
+										th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								</tr>
+								<tr>
+									<th>내용</th>
+									<td th:utext="${board.boardContent}"></td>
+								</tr>
+							</table>
+						</div>
+						<div class="row mt-5">
+							<div class="col">
+								<button type="button"
+									class="text-black bg-gradient-to-r from-green-200 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+									onclick="location.href='/board/board'"
+									style="font-weight: bold">뒤로 가기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<script>
+function clickDel() {
+	location.replace("/board/delete/"+ document.querySelector(".boardNo").textContent);
+}
+</script>
 </html>
+

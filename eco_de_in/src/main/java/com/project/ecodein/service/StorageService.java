@@ -12,7 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StorageService {
@@ -29,12 +31,8 @@ public class StorageService {
         
         if (keyword == null && storage_status == null) {
             return STORAGE_SERVICE.findAll(pageable);
-        } else if (storage_status != null && !storage_status.equals ("200")) {
-        	if (storage_status.equals ("정상")) {
-        		return STORAGE_SERVICE.findAllByStorageStatus (storage_status, pageable);
-         	} else {
-         		return STORAGE_SERVICE.findAllByStorageStatusNegative (pageable);
-         	}
+        } else if (!storage_status.equals ("200")) {
+            return STORAGE_SERVICE.findAllByStorageStatus (storage_status, pageable);
         }
         
     	return STORAGE_SERVICE.findAllByStorageNameOrStorageSite(keyword, pageable);
@@ -63,7 +61,12 @@ public class StorageService {
 		STORAGE_SERVICE.deleteById (storage_no);
 		
 	}
-	
-	
-    
+
+    public void storageUpdate (Storage storage) {
+        STORAGE_SERVICE.save (storage);
+    }
+
+    public void storageStatusUpdate (Integer storage_no, String storage_status) {
+        STORAGE_SERVICE.statusUpdate(storage_no, storage_status);
+    }
 }
