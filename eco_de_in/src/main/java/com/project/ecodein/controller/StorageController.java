@@ -80,4 +80,12 @@ public class StorageController {
     	
     	return "redirect:/storage/1";
     }
+
+    @GetMapping("/status_modify/{storage_no}/{storage_status}")
+    public String storageStatusModify (@PathVariable Integer storage_no, @PathVariable String storage_status) {
+
+        STORAGE_SERVICE.storageStatusUpdate(storage_no, storage_status);
+
+        return "redirect:/storage/1";
+    }
 }

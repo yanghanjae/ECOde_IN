@@ -129,9 +129,9 @@ public class LoginService {
 		Pageable pageable = PageRequest.of (page -1 , pageSize, Sort.by (Sort.Order.desc ("buyerCode")));
 
 		if (name == null || name.isEmpty ()) {
-			return BUYER_REPOSITORY.findAll (pageable);
+			return BUYER_REPOSITORY.findAllAcitve (pageable);
 		} else {
-			return BUYER_REPOSITORY.findByBuyerName (name, pageable);
+			return BUYER_REPOSITORY.findByBuyerNameActive (name, pageable);
 		}
 	}
 }

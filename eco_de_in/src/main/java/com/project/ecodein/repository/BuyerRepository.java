@@ -7,10 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import com.project.ecodein.dto.Buyer;
 import jakarta.transaction.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 public interface BuyerRepository extends JpaRepository<Buyer, Long> {
@@ -29,9 +27,13 @@ public interface BuyerRepository extends JpaRepository<Buyer, Long> {
 	@Modifying @Transactional
 	public void updateBuyerStatusByBuyerCode (@Param ("buyer_code") Long buyer_code);
 
-	// 상호명으로 검색
-	@Query ("SELECT b FROM Buyer b WHERE b.buyer_name LIKE CONCAT('%',:buyer_name,'%')")
-	public Page<Buyer> findByBuyerName (@Param("buyer_name") String buyer_name, Pageable pageable);
+	// 전체 검색(폐업 제외)
+	@Query ("SELECT b FROM Buyer b WHERE b.buyer_status = true ")
+	public Page<Buyer> findAllAcitve (Pageable pageable);
+	
+	// 상호명으로 검색(폐업 제외)
+	@Query ("SELECT b FROM Buyer b WHERE (b.buyer_name LIKE CONCAT('%',:buyer_name,'%')) AND b.buyer_status = true ")
+	public Page<Buyer> findByBuyerNameActive (@Param("buyer_name") String buyer_name, Pageable pageable);
 
 	// 거래처 정보 수정
 	@Modifying
@@ -48,4 +50,5 @@ public interface BuyerRepository extends JpaRepository<Buyer, Long> {
 							 @Param("buyer_number") String buyer_number,
 							 @Param("buyer_tel") String buyer_tel,
 							 @Param("buyer_address") String buyer_address);
+
 }
