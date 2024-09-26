@@ -1,5 +1,6 @@
 package com.project.ecodein.repository;
 
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -78,6 +79,11 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
 	        + "AND s.storage_no = :storage_no " ,
 	        nativeQuery = true)
 	public Page<Stock> findAllStockByKeywordStorage (String search, Integer storage_no, Pageable pageable);
+
+	
+	// 재고 상세 정보
+	@Query(value = "SELECT * FROM stock WHERE stock_no = :stock_no", nativeQuery = true)
+	public Optional<Stock> findByStockNO (@Param(value = "stock_no") int stock_no);
 
 
 }

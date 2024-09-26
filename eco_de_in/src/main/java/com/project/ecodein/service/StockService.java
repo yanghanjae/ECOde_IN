@@ -1,6 +1,7 @@
 package com.project.ecodein.service;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -43,5 +44,10 @@ public class StockService {
 	
 	public List<Storage> findAllStorage () {
 		return STORAGE_REPOSITORY.findAllStorage ();
+	}
+
+	public Optional<Stock> findByStockNo (int stock_no) {
+
+		return STOCK_REPOSITORY.findByStockNO (stock_no);
 	}
 }

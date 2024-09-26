@@ -36,5 +36,4 @@ public interface StorageRepository extends JpaRepository<Storage, Integer> {
         "from Stock s left join s.item i where s.storage.storage_no = :storage_no")
     public List<ItemStockStorage> findByItemStockByStorageNo(@Param("storage_no") int storage_no);
 
-
 }
