@@ -16,12 +16,12 @@ import lombok.ToString;
 public class BoardDTO {
 	
 	private int boardNo;
-	private String board_title;
-	private String board_content;
-	private LocalDateTime board_date;
+	private String boardTitle;
+	private String boardContent;
+	private LocalDateTime boardDate;
 	private User user;
 	private Admin admin;
-	private String comment_content;
-	private LocalDateTime comment_date;
+	private String commentContent;
+	private LocalDateTime commentDate;
 
 }
