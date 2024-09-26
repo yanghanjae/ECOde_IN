@@ -4,8 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.ecodein.dto.Stock;
 import com.project.ecodein.service.StockService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,5 +41,11 @@ public class StockController {
 		model.addAttribute ("search", search);
 		
 		return "stock/stock";
+	}
+	
+	@ResponseBody
+	@GetMapping("/{stock_no}")
+	public Stock stockDetail (@PathVariable int stock_no) {
+		return STOCK_SERVICE.findByStockNo(stock_no).orElse (new Stock());
 	}
 }
