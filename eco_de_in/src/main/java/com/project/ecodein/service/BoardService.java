@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.project.ecodein.dto.BoardDTO;
+import com.project.ecodein.dto.User;
 import com.project.ecodein.entity.Board;
 import com.project.ecodein.repository.BoardRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,6 +46,7 @@ public class BoardService {
 	// save
 	@Transactional
 	public void addNewBoard(BoardDTO newBoard) {
+		newBoard.setBoardDate (LocalDateTime.now ());
 		boardRepository.save(modelMapper.map(newBoard, Board.class));
 	}
 	
@@ -51,15 +54,15 @@ public class BoardService {
 	public void updateBoard(BoardDTO updateBoard) {
 		
 		Board foundBoard = boardRepository.findById(updateBoard.getBoardNo()).orElseThrow(IllegalArgumentException::new);
-		foundBoard.setBoardTitle(updateBoard.getBoard_title());
-		foundBoard.setBoardContent(updateBoard.getBoard_content());
+		foundBoard.setBoardTitle(updateBoard.getBoardTitle());
+		foundBoard.setBoardContent(updateBoard.getBoardContent());
 		foundBoard.setBoardDate(LocalDateTime.now());
 	}
 	
 	@Transactional
-	public void deleteBoard(Integer board_no) {
+	public void deleteBoard(Integer boardNo) {
 		
-		boardRepository.deleteById(board_no);
+		boardRepository.deleteById(boardNo);
 	}
 	
 	

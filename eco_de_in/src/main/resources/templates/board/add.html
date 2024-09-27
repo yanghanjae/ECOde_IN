@@ -59,26 +59,26 @@
 									id="board_form">
 
 									<div class="user" style="display: none">
-										<input type="text" id="user_id" name="user_id"
-											value="${ sessionScope.user.user_id }">
+										<input type="text" id="user_id" name="user"
+											th:value="${ session.user.user_id }">
 									</div>
 									<div class="row my-2">
 										<div class="mb-3">
 											<label for="boardTitle">제목</label> <input type="text"
 												id="boardTitle"
 												class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-												name="board_title" placeholder="제목을 입력해 주세요" required />
+												name="boardTitle" placeholder="제목을 입력해 주세요" required />
 										</div>
 									</div>
 
 
 									<div class="row my-2">
 										<div class="col-2 fw-bolder">
-											<label for="board_content">내용</label>
+											<label for="boardContent">내용</label>
 										</div>
 										<div class="col">
-											<textarea cols="79" rows="10" id="board_content"
-												name="board_content" value="${ board_content}"></textarea>
+											<textarea cols="79" rows="10" id="boardContent"
+												name="boardContent" value="${ boardContent}"></textarea>
 										</div>
 									</div>
 
@@ -132,7 +132,7 @@
 <script>
 document.getElementById('board_form').addEventListener('submit',
 		function(e) {
-			const content = tinymce.get('board_content').getContent();
+			const content = tinymce.get('boardContent').getContent();
 			if (content === '') {
 				e.preventDefault();
 			}

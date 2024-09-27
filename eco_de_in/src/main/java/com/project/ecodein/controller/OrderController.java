@@ -35,7 +35,7 @@ public class OrderController {
         // 서비스에서 검색 결과를 가져옴
         List<Ordering> searchResults = orderService.searchOrders(query);
         model.addAttribute("orders", searchResults);
-        return "order/order";  // 검색 결과를 보여줄 order.html로 이동
+        return "order/order";
     }
 
 //    // 발주 목록 페이지
@@ -62,5 +62,6 @@ public class OrderController {
 
         return "order/orderDetail";
     }
+
 
 }

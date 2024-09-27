@@ -151,10 +151,10 @@ input#submit {
 					</thead>
 					<tbody>
 						<tr th:each="board : ${ boardList }">
-							<td th:text="${board.boardNo}" href="board/boardDetail"></td>
-							<td th:text="${board.boardTitle}" href="$board/boardDetail"></td>
-							<td th:text="${board.user}"></td>
-							<td th:text="${board.boardDate}"></td>
+							<td><a th:text="${board.boardNo}" th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}"></a></td>
+							<td><a th:text="${board.boardTitle}" th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}"></a></td>
+							<td th:text="${board.user.user_name}"></td>
+							<td th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 					</tbody>
 				</table>
 

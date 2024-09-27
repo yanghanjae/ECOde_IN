@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -173,60 +173,62 @@
           <th>발주날짜</th>
           <th>발주번호</th>
           <th>거래처</th>
-          <th>상품명</th>
           <th>납기일자</th>
           <th>출고 진행상태</th>
           <th>삭제</th>
         </tr>
         </thead>
         <tbody>
-<!--        <tr th:each="order : ${orders}">-->
-<!--          <td th:text="${order.order_date}"></td>-->
-<!--          <td th:text="${order.order_no}"></td>-->
-<!--          <td th:text="${order.buyer_name}"></td>-->
-<!--          <td th:text="${order.item_name}"></td>-->
-<!--          <td th:text="${order.due_date}"></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-          <td>1</td>
-          <td>2024-09-12</td>
-          <td><a href="/order/20240912123">20240912123</a></td>
-          <td>CU</td>
-          <td>라면, 김밥...</td>
-          <td>2024-09-20</td>
-          <td>진행중</td>
-          <td class="m-auto p-auto">
-            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
-            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
-            dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    data-modal-target="popup-modal-a"
-                    data-modal-toggle="popup-modal-a"
-                    type="button">
-              x
-            </button>
-          </td>
-        </tr>
-        <tr>
 
-          <td>2</td>
-          <td>2024-09-12</td>
-          <td>20240912456</td>
-          <td>CU</td>
-          <td>라면, 김치...</td>
-          <td>2024-09-20</td>
-          <td>완료</td>
+        <tr th:each="order, state : ${orders}">
+          <td th:text="${state.index + 1}"></td>
+          <td th:text="${order.order_date}"></td>
           <td>
-            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    data-modal-target="popup-modal"
-                    data-modal-toggle="popup-modal"
-                    type="button">
-              x
+            <a th:text="${order.order_no}" th:href="@{/order/{order_no}(order_no=${order.order_no})}"></a>
+          </td>
+          <td th:text="${order.buyer_code.buyer_name}"></td>
+          <td th:text="${order.due_date}"></td>
+          <td th:text="${order.is_delivery eq false ? '진행중':'완료'}"></td>
+          <td>
+            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
+           focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+            dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  data-modal-target="popup-modal-a"
+                  data-modal-toggle="popup-modal-a"
+                  type="button">
+                  x
             </button>
           </td>
         </tr>
+
+<!--        <tr>-->
+<!--          <td>1</td>-->
+<!--          <td>2024-09-12</td>-->
+<!--          <td><a href="/order/20240912123">20240912123</a></td>-->
+<!--          <td>CU</td>-->
+<!--          <td>2024-09-20</td>-->
+<!--          <td>진행중</td>-->
+<!--          <td class="m-auto p-auto">-->
+<!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none-->
+<!--            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600-->
+<!--            dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
+<!--                    data-modal-target="popup-modal-a"-->
+<!--                    data-modal-toggle="popup-modal-a"-->
+<!--                    type="button">-->
+<!--              x-->
+<!--            </button>-->
+<!--          </td>-->
+<!--        </tr>-->
+
+<!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
+<!--                    data-modal-target="popup-modal"-->
+<!--                    data-modal-toggle="popup-modal"-->
+<!--                    type="button">-->
+<!--              x-->
+<!--            </button>-->
+
         <tr>
           <td>3</td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -242,11 +244,9 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
         </tr>
         <tr>
           <td>5</td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -267,6 +267,22 @@
           <li><a class="page-link" href="#">></a></li>
         </ul>
       </nav>
+
+<!--      <nav aria-label="Page navigation example">-->
+<!--        <ul class="pagination">-->
+<!--          <li th:classappend="${!storages.hasPrevious} ? 'hidden'">-->
+<!--            <a class="page-link" th:href="@{{page}(page = ${page -1})}">&lt;</a>-->
+<!--          </li>-->
+<!--          <li th:each="page: ${#numbers.sequence(1, storages.totalPages)}"-->
+<!--              th:if="${page >= storages.number-5 and page <= storages.number+5}"-->
+<!--              th:classappend="${page - 1 == storages.number} ? 'active'">-->
+<!--            <a th:text="${page}" class="page-link" th:href="@{{page}(page = ${page})}"> </a>-->
+<!--          </li>-->
+<!--          <li th:classappend="${!storages.hasNext()} ? 'hidden'">-->
+<!--            <a class="page-link" th:href="@{{page}(page = ${page + 1})}">&gt;</a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </nav>-->
 
       <!-- modal 1 -->
       <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
