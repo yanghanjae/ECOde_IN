@@ -3,202 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>메인 페이지</title>
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const calendarEl = document.getElementById('calendar');
-      const calendar = new FullCalendar.Calendar(calendarEl, {
-        height: 'auto',
-        initialView: 'dayGridMonth',
-        locale: 'ko'
-      });
-      calendar.render();
-    });
-  </script>
+  <title>[Eco de_In] 메인</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    #content {
-      width: calc(100vw - 327px);
-      height: 100vh;
-      background-color: #e5e7eb;
-      float: right;
-    }
-    
-    #content_wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      width: 101%;
-      height: 100%;
-      padding: 50px;
-      box-sizing: border-box;
-      min-height: 920px;
-    }
-    
     .main-content {
       width: 100%;
       display: flex;
       justify-content: space-between;
       gap: 20px;
-      height: 78%;
+      height: 70%;
     }
     
     .content-0, .content-1 {
-      background-color: #fff;
+      background-color: #ffffff;
       width: 49%;
       height: 100%;
-      border-radius: 15px;
-      padding: 15px;
+      border-radius: 12px;
+      padding: 20px;
       box-sizing: border-box;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     
     #calendar {
-      padding: 15px;
-      line-height: 25px;
+      padding: 20px;
+      line-height: 1.6;
     }
     
     #calendar > .calendar-title {
       font-weight: bold;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       text-align: center;
-      position: relative;
-      top: -580px;
+      margin-bottom: 20px;
+      color: #4b5563;
     }
     
     .content-1 {
       text-align: center;
       font-weight: bold;
-      font-size: 1.7rem;
+      font-size: 1.6rem;
+      color: #374151;
     }
     
     .content-1 > table {
-      margin-top: 15px;
-      width: 95%;
-      margin-left: auto;
-      margin-right: auto;
+      margin-top: 20px;
+      width: 100%;
       border-collapse: collapse;
     }
     
     thead {
-      border-top: 1px solid black;
-      border-bottom: 1px solid black;
-      font-size: 1rem;
+      background-color: #f9fafb;
+      border-bottom: 2px solid #e5e7eb;
     }
     
     thead th {
-      padding: 10px 0;
+      padding: 12px 8px;
+      font-size: 0.875rem;
+      text-align: left;
+      color: #6b7280;
     }
     
     .content-1 tbody tr {
-      font-weight: normal;
-      font-size: 1rem;
-      line-height: 3rem;
+      font-size: 0.875rem;
+      line-height: 1.75rem;
     }
     
     .content-1 tbody tr:nth-of-type(even) {
-      background-color: #E6F5D4;
+      background-color: #f1f5f9;
     }
     
     .content-2 {
       width: 100%;
-      background-color: #fff;
+      background-color: #ffffff;
       padding: 20px;
       box-sizing: border-box;
       text-align: center;
-      border-radius: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     
     .content-2 > p {
       text-align: left;
       font-weight: bold;
-      letter-spacing: 5px;
+      letter-spacing: 2px;
+      color: #374151;
     }
   </style>
 </head>
-<body>
-	<div style="width: 310px; float: left;">
-	  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
-	</div>
-	<div id="content">
-	  <div id="content_wrap">
-	    <div class="main-content">
-	      <div class="content-0">
-	        <div id="calendar">
-	          <span class="calendar-title">일정관리</span>
-	        </div>
-	      </div>
-	      <div class="content-1">
-	        <p class="content-title">
-	          진행중인 발주
-	        </p>
-	        <table>
-	          <thead>
-		          <tr>
-		            <th>발주번호</th>
-		            <th>납기일자</th>
-		            <th>출고상태</th>
-		          </tr>
-	          </thead>
-	          <tbody>
-		          <tr th:if="${order != null}">
-		            <td>1</td>
-		            <td>2024-09-15</td>
-		            <td>진행중</td>
-		          </tr>
-							<div></div>
-							<tr th:if="${order == null}">
-								<td></td>
-								<td>&nbsp;</td>
-								<td></td>
-							</tr>
-							<tr th:if="${order == null}">
-								<td></td>
-								<td>&nbsp;</td>
-								<td></td>
-							</tr>
-							<tr th:if="${order == null}">
-								<td></td>
-								<td>&nbsp;</td>
-								<td></td>
-							</tr>
-							<tr th:if="${order == null}">
-								<td></td>
-								<td>&nbsp;</td>
-								<td></td>
-							</tr>
-							<tr th:if="${order == null}">
-								<td style="font-weight: bold;" colspan="3">진행중인 발주 내역이 존재하지 않습니다.</td>
-							</tr>
-							<tr th:if="${order == null}">
-								<td></td>
-								<td>&nbsp;</td>
-								<td></td>
-							</tr>
-							<tr th:if="${order == null}">
-								<td></td>
-								<td>&nbsp;</td>
-								<td></td>
-							</tr>
-							<tr th:if="${order == null}">
-								<td></td>
-								<td>&nbsp;</td>
-								<td></td>
-							</tr>
-							<tr th:if="${order == null}">
-								<td></td>
-								<td>&nbsp;</td>
-								<td></td>
-							</tr>
-	          </tbody>
-	        </table>
-	      </div>
-	    </div>
-	    <div class="content-2">
-	      <p>QnA</p>
-	    </div>
-	  </div>
-	</div>
+<body class="bg-gray-100">
+  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
+  <div id="content">
+    <div id="content_wrap">
+      <div class="main-content">
+        <div class="content-0">
+          <div id="calendar">
+            <span class="calendar-title">일정관리</span>
+          </div>
+        </div>
+        <div class="content-1">
+          <p class="content-title">진행중인 발주</p>
+          <table>
+            <thead>
+            <tr>
+              <th>발주번호</th>
+              <th>납기일자</th>
+              <th>출고상태</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>2024-09-15</td>
+              <td>진행중</td>
+            </tr>
+            <tr>
+              <td colspan="3">진행중인 발주 내역이 존재하지 않습니다.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="content-2">
+        <p>QnA</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

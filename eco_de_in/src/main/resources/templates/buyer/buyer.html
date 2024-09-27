@@ -44,25 +44,6 @@
 			};
 		</script>
   <style>
-    #content {
-      width: calc(100vw - 327px);
-      height: 100%;
-      background-color: #e5e7eb;
-      float: right;
-    }
-    
-    #content_wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      width: 101%;
-      height: 100%;
-      padding: 50px;
-      box-sizing: border-box;
-    }
-  
     .breadcrumb {
       width: 50%;
       height: 40px;
@@ -213,6 +194,7 @@
 			const input_secure_code = document.querySelector('input[name="buyer_secure_code"]')
    
 			target.classList.remove('hidden');
+   
 			const reFetch = () => {
 				fetch('/buyer/detail/' + buyer_code, {
 					method: 'get',
@@ -307,7 +289,6 @@
       }
 			
 		}
-		
 	</script>
 </head>
 <body>
@@ -316,10 +297,8 @@
 			alert('${message}');
 		</script>
 	</div>
-	
-	<div style="width: 310px; float: left;">
-	  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
-	</div>
+  
+  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
 	<div id="content">
 	  <div id="content_wrap">
 	    <div class="breadcrumb">
@@ -357,17 +336,17 @@
 						 class="relative z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
 	        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
 	          <li>
-	            <a th:href="@{/buyer/default/1?keyword=}" 
+	            <a th:href="|@{/buyer/default/1?keyword=}|"
 								 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">OFF</a>
 	          </li>
 	          <li>
-	            <a th:href="@{/buyer/all/1?keyword=}" 
+	            <a th:href="|@{/buyer/all/1?keyword=}|"
 								 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ON</a>
 	          </li>
 	        </ul>
 	      </div>
 	      
-	      <form th:action="@{/buyer/{buyer_status}/1(buyer_status = ${buyer_status})}", class="inline" method="get">
+	      <form th:action="@{/buyer/{buyer_status}/1(buyer_status = ${buyer_status})}" class="inline" method="get">
 	        <input type="text" name="keyword" placeholder="거래처명, 사업자번호를 입력하세요." class="search_input">
 	        <input type="submit" value="조 회" class="search_btn">
 	      </form>
@@ -397,20 +376,20 @@
 	      </table>
 	      <ul class="pagination justify-content-center inline">
 	        <li class="page-item inline" th:classappend="${!buyers.hasPrevious} ? 'hidden'">
-	          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page - 1}, keyword = ${param.keyword})}"> 
-							&lt;&lt; 
+	          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page - 1}, keyword = ${param.keyword})}">
+							&lt;&lt;
 						</a>
 	        </li>
 	        <li th:each="page: ${#numbers.sequence(1, buyers.totalPages)}"
 	            th:if="${page >= buyers.number-5 and page <= buyers.number+5}"
 	            th:classappend="${page - 1 == buyers.number} ? 'active'"
 	            class="page-item inline">
-	          <a th:text="${page}" class="page-link" 
-							 th:href="@{{page}?keyword={keyword}(page = ${page}, keyword = ${param.keyword})}"></a>
+	          <a th:text="${page}" class="page-link"
+							 th:href="@{{page}?keyword = {keyword}(page = ${page}, keyword = ${param.keyword})}"></a>
 	        </li>
 	        <li class="page-item inline" th:classappend="${!buyers.hasNext} ? 'hidden'">
-	          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page + 1}, keyword = ${param.keyword})}"> 
-							&gt;&gt; 
+	          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page + 1}, keyword = ${param.keyword})}">
+							&gt;&gt;
 						</a>
 	        </li>
 	      </ul>

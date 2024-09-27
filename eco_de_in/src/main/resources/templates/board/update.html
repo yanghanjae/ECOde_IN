@@ -41,19 +41,22 @@
 						</div>
 
 						<div class="board-form">
-							<form method="post" action="/board/update" id="board_form">
+							<form method="post" th:action="@{/board/update/{boardNo}(boardNo=${board.boardNo})}" id="board_form">
 
 								<div class="user" style="display: none">
-									<input type="text" id="user_id" name="user_id"
-										value="${ sessionScope.user.user_id }">
+									<input type="text" id="user_id" name="user"
+										th:value="${ session.user.user_id }">
 								</div>
 								<div class="row my-2">
 									<div class="mb-3">
-										<label for="boardTitle">제목</label> <input th:value="${board.boardTitle}" type="text"
-											id="boardTitle"
-											class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-											name="boardTitle" placeholder="제목을 입력해 주세요" required />
+										<label for="boardTitle">제목</label>
 									</div>
+									<div>
+										<input th:value="${board.boardTitle}" id="boardTitle"
+											class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+											name="boardTitle" required>
+									</div>
+
 								</div>
 
 
@@ -62,8 +65,8 @@
 										<label for="boardContent">내용</label>
 									</div>
 									<div class="col">
-										<textarea th:value="${board.boardContent}" cols="79" rows="10" id="boardContent"
-											name="boardContent" ></textarea>
+										<textarea th:text="${board.boardContent}" cols="79" rows="10"
+											id="boardContent" name="boardContent"></textarea>
 									</div>
 								</div>
 
@@ -78,8 +81,8 @@
 									</div>
 									<div class="col">
 										<button type="submit"
-												class="text-black bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-												style="font-weight: bold">수정 완료</button>
+											class="text-black bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+											style="font-weight: bold">수정 완료</button>
 									</div>
 								</div>
 							</form>

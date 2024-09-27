@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -9,25 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
   <style>
-    #content {
-      width: calc(100vw - 327px);
-      height: 100vh;
-      background-color: #e5e7eb;
-      float: right;
-    }
-
-    #content_wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      width: 101%;
-      height: 100%;
-      padding: 50px;
-      box-sizing: border-box;
-    }
-
     .main-content {
       background-color: #ffffff;
       border-radius: 10px;
@@ -142,9 +123,8 @@
 
 <body>
 <!-- 사이드바 -->
-<div style="width: 310px; float: left;">
-  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
-</div>
+<th:block th:replace="fragments/sidebar :: sidebarFragment"/>
+
 
 <!-- 메인 콘텐츠 -->
 <div id="content">
@@ -193,60 +173,62 @@
           <th>발주날짜</th>
           <th>발주번호</th>
           <th>거래처</th>
-          <th>상품명</th>
           <th>납기일자</th>
           <th>출고 진행상태</th>
           <th>삭제</th>
         </tr>
         </thead>
         <tbody>
-<!--        <tr th:each="order : ${orders}">-->
-<!--          <td th:text="${order.order_date}"></td>-->
-<!--          <td th:text="${order.order_no}"></td>-->
-<!--          <td th:text="${order.buyer_name}"></td>-->
-<!--          <td th:text="${order.item_name}"></td>-->
-<!--          <td th:text="${order.due_date}"></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-          <td>1</td>
-          <td>2024-09-12</td>
-          <td><a href="/order/20240912123">20240912123</a></td>
-          <td>CU</td>
-          <td>라면, 김밥...</td>
-          <td>2024-09-20</td>
-          <td>진행중</td>
-          <td class="m-auto p-auto">
-            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
-            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
-            dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    data-modal-target="popup-modal-a"
-                    data-modal-toggle="popup-modal-a"
-                    type="button">
-              x
-            </button>
-          </td>
-        </tr>
-        <tr>
 
-          <td>2</td>
-          <td>2024-09-12</td>
-          <td>20240912456</td>
-          <td>CU</td>
-          <td>라면, 김치...</td>
-          <td>2024-09-20</td>
-          <td>완료</td>
+        <tr th:each="order, state : ${orders}">
+          <td th:text="${state.index + 1}"></td>
+          <td th:text="${order.order_date}"></td>
           <td>
-            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    data-modal-target="popup-modal"
-                    data-modal-toggle="popup-modal"
-                    type="button">
-              x
+            <a th:text="${order.order_no}" th:href="@{/order/{order_no}(order_no=${order.order_no})}"></a>
+          </td>
+          <td th:text="${order.buyer_code.buyer_name}"></td>
+          <td th:text="${order.due_date}"></td>
+          <td th:text="${order.is_delivery eq false ? '진행중':'완료'}"></td>
+          <td>
+            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
+           focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+            dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  data-modal-target="popup-modal-a"
+                  data-modal-toggle="popup-modal-a"
+                  type="button">
+                  x
             </button>
           </td>
         </tr>
+
+<!--        <tr>-->
+<!--          <td>1</td>-->
+<!--          <td>2024-09-12</td>-->
+<!--          <td><a href="/order/20240912123">20240912123</a></td>-->
+<!--          <td>CU</td>-->
+<!--          <td>2024-09-20</td>-->
+<!--          <td>진행중</td>-->
+<!--          <td class="m-auto p-auto">-->
+<!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none-->
+<!--            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600-->
+<!--            dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
+<!--                    data-modal-target="popup-modal-a"-->
+<!--                    data-modal-toggle="popup-modal-a"-->
+<!--                    type="button">-->
+<!--              x-->
+<!--            </button>-->
+<!--          </td>-->
+<!--        </tr>-->
+
+<!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
+<!--                    data-modal-target="popup-modal"-->
+<!--                    data-modal-toggle="popup-modal"-->
+<!--                    type="button">-->
+<!--              x-->
+<!--            </button>-->
+
         <tr>
           <td>3</td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -262,11 +244,9 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
         </tr>
         <tr>
           <td>5</td>
-          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -287,6 +267,22 @@
           <li><a class="page-link" href="#">></a></li>
         </ul>
       </nav>
+
+<!--      <nav aria-label="Page navigation example">-->
+<!--        <ul class="pagination">-->
+<!--          <li th:classappend="${!storages.hasPrevious} ? 'hidden'">-->
+<!--            <a class="page-link" th:href="@{{page}(page = ${page -1})}">&lt;</a>-->
+<!--          </li>-->
+<!--          <li th:each="page: ${#numbers.sequence(1, storages.totalPages)}"-->
+<!--              th:if="${page >= storages.number-5 and page <= storages.number+5}"-->
+<!--              th:classappend="${page - 1 == storages.number} ? 'active'">-->
+<!--            <a th:text="${page}" class="page-link" th:href="@{{page}(page = ${page})}"> </a>-->
+<!--          </li>-->
+<!--          <li th:classappend="${!storages.hasNext()} ? 'hidden'">-->
+<!--            <a class="page-link" th:href="@{{page}(page = ${page + 1})}">&gt;</a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </nav>-->
 
       <!-- modal 1 -->
       <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
@@ -316,6 +312,8 @@
               <button class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
                       data-modal-hide="popup-modal-a"
                       type="button">
+<!--                      th:onclick="'deleteOrder(' + ${order.order_no} + ')'">-->
+
                 확인
               </button>
               <button class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -371,13 +369,39 @@
   </div>
 </div>
 
+
+
+
     <script>
-  function setActiveButton(clickedButton) {
+      // 삭제기능
+      function deleteOrder(order_no) {
+        fetch(`/order/delete/${order_no}`, {
+          method: 'DELETE'
+        })
+            .then(response => {
+              if (response.ok) {
+                alert("발주건이 삭제되었습니다.");
+                window.location.reload(); // 페이지 새로고침
+              } else {
+                alert("삭제 중 오류가 발생했습니다.");
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert("삭제 중 오류가 발생했습니다.");
+            });
+      }
+
+     // 조회 버튼
+      function setActiveButton(clickedButton) {
     const buttons = document.querySelectorAll('.button');
     buttons.forEach(button => button.classList.remove('active'));
 
     clickedButton.classList.add('active');
   }
+
+
+
 </script>
 </body>
 </html>
