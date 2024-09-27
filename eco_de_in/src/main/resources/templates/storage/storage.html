@@ -9,26 +9,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
-    #content {
-      width: calc(100vw - 315px) !important;
-      height: 100vh !important;
-      background-color: #e5e7eb;
-      float: right;
-    }
-    
-    #content_wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      width: 101%;
-      /*height: 100%;*/
-      padding: 50px;
-      box-sizing: border-box;
-    }
-    
-    
     .main-content {
       background-color: #ffffff;
       border-radius: 10px;
@@ -371,9 +351,7 @@
 		history.back();
 	</script>
 	<!-- 사이드바 -->
-	<div style="width: 310px; float: left;">
-	  <th:block th:replace="fragments/sidebar :: sidebarFragment" />
-	</div>
+  <th:block th:replace="fragments/sidebar :: sidebarFragment" />
 	
 	<!-- 메인 콘텐츠 -->
 	<div id="content">

@@ -14,21 +14,18 @@ ul, li {
 }
 
 #content {
-      width: calc(100vw - 327px);
-      height: 100%;
-      background-color: #e5e7eb;
-      float: right;
-    }
-    
+  width: auto;
+  height: 100vh;
+  background-color: #f3f4f6;
+}
+
 #content_wrap {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 20px;
-  width: 101%;
   height: 100%;
-  padding: 50px;
+  padding: 40px;
   box-sizing: border-box;
 }
-

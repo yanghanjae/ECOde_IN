@@ -9,25 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
   <style>
-    #content {
-      width: calc(100vw - 327px);
-      height: 100vh;
-      background-color: #e5e7eb;
-      float: right;
-    }
-
-    #content_wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      width: 101%;
-      height: 100%;
-      padding: 50px;
-      box-sizing: border-box;
-    }
-
     .main-content {
       background-color: #ffffff;
       border-radius: 10px;
@@ -142,9 +123,8 @@
 
 <body>
 <!-- 사이드바 -->
-<div style="width: 310px; float: left;">
-  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
-</div>
+<th:block th:replace="fragments/sidebar :: sidebarFragment"/>
+
 
 <!-- 메인 콘텐츠 -->
 <div id="content">
