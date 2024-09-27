@@ -1,6 +1,5 @@
 package com.project.ecodein.dto;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;

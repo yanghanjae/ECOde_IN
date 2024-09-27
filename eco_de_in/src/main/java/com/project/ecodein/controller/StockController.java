@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.project.ecodein.dto.Item;
 import com.project.ecodein.dto.Stock;
+import com.project.ecodein.dto.Storage;
 import com.project.ecodein.service.StockService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,4 +60,48 @@ public class StockController {
 		return "redirect:/stock";
 	}
 	
+	@GetMapping("/add")
+	public String addStock (Model model) {
+		
+		model.addAttribute ("itemPage", 1);
+		model.addAttribute ("itemtotalPages", 1);
+		model.addAttribute ("itemModalsearch", "");
+		model.addAttribute ("storagePage", 1);
+		model.addAttribute ("storagetotalPages", 1);
+		model.addAttribute ("storageModalsearch", "");
+		
+		return "stock/addStock";
+	}
+	
+	@GetMapping("/add/item")
+	public String itemModal (@RequestParam(value = "search", required = false) String search,
+		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
+		
+		Page<Item> items = STOCK_SERVICE.searchItems(search, page);
+		
+		model.addAttribute ("items", items);
+		model.addAttribute ("itemPage", page);
+		model.addAttribute ("itemTotalPages", items.getTotalPages ());
+		model.addAttribute ("itemModalSearch", search);
+		
+		return "stock/addStock :: itemModalContent";
+		
+	}
+	
+	@GetMapping("/add/storage")
+	public String storageModal (@RequestParam(value = "search", required = false) String search,
+		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
+		
+		Page<Storage> storages = STOCK_SERVICE.searchStorages(search, page);
+		
+		model.addAttribute ("storages", storages);
+		model.addAttribute ("storagePage", page);
+		model.addAttribute ("storageTotalPages", storages.getTotalPages ());
+		model.addAttribute ("storageModalSearch", search);
+		
+		return "stock/addStock :: storageModalContent";
+		
+	}
 }

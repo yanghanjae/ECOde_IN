@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>modal.html</title>
+  <style>
+    .modal-btn {
+      padding: 5px 16px;
+      background-color: #81CD28;
+      border-radius: 25px;
+      font-weight: bold;
+      color: #fff;
+      width: 180px;
+      text-align: center;
+    }
+    
+    .modal table {
+      width: 100%;
+    }
+    
+    .modal table tr, .modal table td, .modal table th {
+      text-align: center;
+    }
+    
+    .modal table tbody tr {
+      line-height: 40px;
+    }
+    
+    .modal table tbody a {
+      border: 2px solid #347928;
+      padding: 0 13px;
+      border-radius: 25px;
+      font-weight: bold;
+      color: #347928;
+    }
+  </style>
+  <script>
+    function request_adminList () {
+      fetch('/admin-manager', {
+        method: 'get',
+        headers: {'Content-Type': 'application.json'}
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        for (let idx in data) {
+          document.querySelector('.tbody').innerHTML +=
+            `
+              <tr>
+                <td>${data[idx].admin_id}</td>
+                <td>${data[idx].admin_name}</td>
+                <td>${data[idx].admin_date}</td>
+                <td style="line-height: 27px"><a th:href="@{/admin-manager/{admin_id}(damin_id=${data[idx].admin_id}">승 인</a></td>
+              </tr>
+            `
+        }
+      })
+    }
+  </script>
+</head>
+<body>
+  <div class="relative p-4 w-full max-w-2xl max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 modal-content">
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white" th:text="${menuName}">
+        </h3>
+        <button type="button" onclick="admin_management_modal_deactive ()"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="static-modal">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal p-4 md:p-5 space-y-4" th:if="${auth eq 'admin-management'}">
+        <div class="modal-btn">
+          <button onclick="request_adminList ()">관리자 요청 조회</button>
+        </div>
+        <table>
+          <thead>
+          <tr>
+            <th>요청 아이디</th>
+            <th>요청자</th>
+            <th>요청일자</th>
+            <th>승인</th>
+          </tr>
+          </thead>
+          <tbody class="tbody">
+          </tbody>
+        </table>
+      </div>
+      <!-- Modal footer -->
+<!--      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">-->
+<!--        <button data-modal-hide="static-modal" type="button"-->
+<!--                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>-->
+<!--        <button data-modal-hide="static-modal" type="button" onclick="admin_management_modal_deactive ()"-->
+<!--                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>-->
+<!--      </div>-->
+    </div>
+  </div>
+</body>
+</html>

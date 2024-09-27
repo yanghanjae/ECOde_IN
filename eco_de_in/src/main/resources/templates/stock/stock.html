@@ -211,7 +211,7 @@
 	    </div>
 	    <div class="menu-header">
 	    	<form method="get" action="/stock">
-		    	<button type="button" class="lime">재고 등록</button>
+		    	<button type="button" class="lime" onclick="location.href='/stock/add'">재고 등록</button>
 		    	<button type="button" class="green">생산품 등록</button>
 		    	&nbsp;
 		    	&nbsp;
@@ -316,7 +316,7 @@
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>수량 : </label>
-			    	<input id="modalEdit_quantity" class="input" name="editQuantity" type="number" min="0" autofocus="false">
+			    	<input id="modalEdit_quantity" class="input" name="editQuantity" type="number" min="0" >
 		    	</div>
 		    	<button class="lime modalButton" type="submit">재고 수정</button>	
 	    	</form>

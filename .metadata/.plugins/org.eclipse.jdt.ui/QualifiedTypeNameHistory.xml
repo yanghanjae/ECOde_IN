@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy/>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="com.project.ecodein.dto.Stock"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+<<<<<<< HEAD
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+=======
     <fullyQualifiedTypeName name="java.awt.print.Pageable"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Sort.Order"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
@@ -20,4 +17,5 @@
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
     <fullyQualifiedTypeName name="com.project.ecodein.dto.Buyer"/>
+>>>>>>> 1c76228a2b49b1542bdc692144e2724df64add55
 </qualifiedTypeNameHistroy>

@@ -57,7 +57,7 @@ public class LoginController {
 		model.addAttribute ("currentPage", 1);
 		model.addAttribute ("totalPages", 1);
 		model.addAttribute ("search", "");
-		
+	
 		return "login/signUp";
 	}
 	
