@@ -1,209 +1,20 @@
 <th:block th:fragment="sidebarFragment">
   <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  Tailwind CSS Init  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
-    <link rel="stylesheet" href="/css/default-style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Default CSS Init -->
+    <link rel="stylesheet" href="/css/default-style.css">
+    <!--  Header CSS Init  -->
+    <link rel="stylesheet" href="/css/header.css">
+    <!-- jQuery Init-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- Header Toggle Functions Init -->
     <script src="/js/header-visible-toggle.js"></script>
-    
-    <style>
-      .rotate-45 {
-        --transform-rotate: 45deg;
-        transform: rotate(45deg);
-      }
-      
-      .group:hover .group-hover\:flex {
-        display: flex;
-      }
-
-      #header {
-        width: 310px;
-        height: 100vh;
-        float: left;
-        position: sticky;
-        background-color: #ffffff;
-        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-        transition: width 0.4s;
-        top: 0;
-        left: 0;
-      }
-      
-      .header, .middle, footer {
-        position: fixed;
-      }
-      
-      .header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 300px;
-        padding: 20px;
-        width: 100%;
-        right: 800px;
-        position: fixed;
-      }
-      
-      .header {
-        background-image: url("/img/layout/logo_white.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 200px;
-        margin-top: -80px;
-        transition: background-size 0.7s;
-      }
-      
-      .hide-arrow {
-        width: 50px;
-        height: 50px;
-        border: 1px solid #d1d5db;
-        border-radius: 50%;
-        position: relative;
-        top: -10px;
-        left: 151px;
-        background-color: #f3f4f6;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .hide-arrow img {
-        width: 20px;
-        height: 20px;
-        transition: transform 0.7s;
-      }
-      
-      .not-visible .hide-arrow {
-        left: 59px;
-        transition: left 0.7s;
-      }
-      
-      .not-visible .hide-arrow img {
-        transform: rotate(180deg);
-      }
-      
-      .not-visible {
-        width: 120px !important;
-      }
-      
-      .active-header {
-        background-image: url("/img/layout/logo_white_toggle.png") !important;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 120px !important;
-        margin-top: -110px !important;
-        transition: background-size 0.7s;
-        left: -900px !important;
-      }
-      
-      .middle {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        top: 170px;
-      }
-      
-      .menu {
-        margin-bottom: 30px;
-      }
-      
-      .menu:hover {
-        background-color: lightgray !important;
-        padding: 10px 30px;
-        border-radius: 15px;
-        transition: background-color 0.5s, padding 0.8s;
-      }
-      
-      .menu > img {
-        width: 30px;
-        display: inline-block;
-      }
-      
-      .menu > .text {
-        vertical-align: middle;
-        font-size: 1.2rem;
-        margin-left: 25px;
-        letter-spacing: 6px;
-        font-weight: bold;
-      }
-      
-      .middle button {
-        width: 100%;
-        padding: 15px;
-        border-radius: 10px;
-        background-color: #3B82F6;
-        color: white;
-        font-size: 1.2rem;
-        transition: background-color 0.3s ease;
-      }
-      
-      .middle button:hover {
-        background-color: #2563EB;
-      }
-      
-      .deActive {
-        display: none !important;
-        transition: display 0.7s;
-      }
-      
-      .footer {
-        background-color: #000;
-        height: 100px;
-        bottom: -200px;
-      }
-      
-      .footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 310px;
-        background-color: #fff;
-        padding: 20px;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      
-      .footer img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-      }
-      
-      .footer img:nth-of-type(2) {
-        width: 45px;
-        height: 45px;
-      }
-      
-      .footer div {
-        margin-left: 30px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-      }
-      
-      .footer span {
-        text-align: center;
-        font-size: 1rem;
-        font-weight: bold;
-      }
-      
-      .footer span:nth-of-type(2) {
-        font-size: 1.5rem;
-        letter-spacing: 4px;
-      }
-      
-      .active-menu {
-        filter: invert(63%) sepia(4%) saturate(7494%) hue-rotate(45deg) brightness(105%) contrast(93%);
-      }
-      
-      .center-menu {
-        position: relative !important;
-        text-align: center;
-      }
-    </style>
+  
+  
   </head>
   <body>
     <th:block th:if="${session.user == null && session.admin == null}">
@@ -263,10 +74,23 @@
             </div>
           </a>
         </div>
+        <div class="hidden detail-menu">
+          <p>
+            <img class="img-password" src="/img/icon/icon-password.png" alt="">
+            <a>
+              비밀번호변경
+            </a>
+          </p>
+          <p onclick="admin_management_modal_active ()">
+            <img class="img-admin" src="/img/icon/icon-admin-manager.png" alt="">
+            <a>
+              관리자 메뉴
+            </a>
+          </p>
+        </div>
         <div class="footer">
-          <a href="">
-            <img src="/img/icon/icon-user-v2.png" alt="">
-          </a>
+          <img src="/img/icon/icon-user-v2.png" alt="" onclick="user_info_toggle()"
+               style="cursor: pointer;">
           <div class="user-info" th:if="${session.admin != null || session.user != null}">
           <span th:text="${session.user != null ? session.user.buyer_code.buyer_name : '관리자' }">거래처 & 관리자
             표시</span>
@@ -281,6 +105,24 @@
       </div>
     </div>
     
+    <!-- Main modal -->
+    <div id="manager-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+         class="hidden fixed justify-center items-center"
+         style="top: 25%; left: 40%;
+         box-shadow: rgba(0, 0, 0, 0.5) 0 14px 28px, rgba(0, 0, 0, 0.5) 0 10px 10px; width: 30%">
+      
+    </div>
+    
     <script src="/js/url-pathname-return.js"></script>
+    <script>
+      function admin_management_modal_active () {
+        $('#manager-modal').load('/admin-management');
+        $('#manager-modal').removeClass('hidden');
+      }
+      
+      function admin_management_modal_deactive () {
+        $('#manager-modal').addClass('hidden');
+      }
+    </script>
   </body>
 </th:block>

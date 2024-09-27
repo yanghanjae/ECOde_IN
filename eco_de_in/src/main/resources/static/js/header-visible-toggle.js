@@ -8,3 +8,8 @@ function sidebar_not_visible() {
   document.querySelector('img[alt="logout-btn"]').classList.toggle('deActive');
   document.querySelector('.footer').classList.toggle('not-visible');
 }
+
+function user_info_toggle () {
+  const detail_menu = document.querySelector('.detail-menu');
+  detail_menu.classList.toggle('hidden');
+}
