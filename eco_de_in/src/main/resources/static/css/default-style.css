@@ -14,9 +14,8 @@ ul, li {
 }
 
 #content {
-
   width: auto;
-  height: 100vh;
+  height: auto;
   background-color: #f3f4f6;
 }
 
