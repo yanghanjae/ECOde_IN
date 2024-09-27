@@ -58,4 +58,9 @@ public class StockController {
 		return "redirect:/stock";
 	}
 	
+	@GetMapping("/add")
+	public String addStock () {
+		
+		return "stock/addStock";
+	}
 }
