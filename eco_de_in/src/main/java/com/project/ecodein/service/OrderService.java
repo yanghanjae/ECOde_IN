@@ -56,4 +56,9 @@ public class OrderService {
 	public List<Ordering> searchOrders(String query) {
 		return ORDER_SERVICE.searchByQuery(query);
 	}
+
+	// 삭제기능
+	public void deleteOrder(int order_no) {
+		ORDER_SERVICE.deleteById(order_no);
+	}
 }

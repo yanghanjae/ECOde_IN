@@ -18,8 +18,11 @@ public interface OrderRepository extends JpaRepository<Ordering, Integer> {
 //	public Optional<Ordering> findByOrderNo(int order_no);
 
     // 2버전
-    @Query(value = "SELECT * FROM ordering o " + "JOIN buyer b ON o.buyer_code = b.buyer_code " + "WHERE o.order_no LIKE CONCAT('%', :query, '%') OR b.buyer_name LIKE CONCAT('%', :query, '%')", nativeQuery = true)
+    @Query(value = "SELECT * FROM ordering o "
+            + "JOIN buyer b ON o.buyer_code = b.buyer_code "
+            + "WHERE o.order_no LIKE CONCAT('%', :query, '%') " +
+            "OR b.buyer_name LIKE CONCAT('%', :query, '%')",
+            nativeQuery = true)
     List<Ordering> searchByQuery(@Param("query") String query);
-
 
 }
