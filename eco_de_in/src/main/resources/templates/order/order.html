@@ -125,7 +125,6 @@
 <!-- 사이드바 -->
 <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
 
-
 <!-- 메인 콘텐츠 -->
 <div id="content">
   <div id="content_wrap">
@@ -144,10 +143,11 @@
     <!-- 발주 조회 -->
     <div class="main-content">
       <h2 class="text-2xl font-bold mb-4">발주 조회</h2>
-      <form action="/order/search" method="get">
+      <form action="/order" method="get">
       <div class="flex mb-4">
         <input class="border border-gray-300 p-2 w-full rounded-input"
                name="query" placeholder="발주번호, 거래처를 입력하세요."
+               value="${query}"
                type="text">
         <button class="bg-green-81CD28 text-white px-4 ml-2 rounded-button search-button"
                 type="submit">조 회
@@ -258,15 +258,15 @@
       </table>
 
       <!-- 페이지네이션  -->
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li><a class="page-link" href="#"><</a></li>
-          <li><a class="page-link" href="#">1</a></li>
-          <li><a class="page-link" href="#">2</a></li>
-          <li><a class="page-link" href="#">3</a></li>
-          <li><a class="page-link" href="#">></a></li>
-        </ul>
-      </nav>
+<!--      <nav aria-label="Page navigation example">-->
+<!--        <ul class="pagination">-->
+<!--          <li><a class="page-link" href="#"><</a></li>-->
+<!--          <li><a class="page-link" href="#">1</a></li>-->
+<!--          <li><a class="page-link" href="#">2</a></li>-->
+<!--          <li><a class="page-link" href="#">3</a></li>-->
+<!--          <li><a class="page-link" href="#">></a></li>-->
+<!--        </ul>-->
+<!--      </nav>-->
 
 <!--      <nav aria-label="Page navigation example">-->
 <!--        <ul class="pagination">-->
@@ -283,6 +283,43 @@
 <!--          </li>-->
 <!--        </ul>-->
 <!--      </nav>-->
+
+<!--      <ul class="pagination justify-content-center inline">-->
+<!--        <li class="page-item inline" th:classappend="${!orders.hasPrevious} ? 'hidden'">-->
+<!--          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page - 1}, keyword = ${param.keyword})}">-->
+<!--            &lt;&lt;-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li th:each="page: ${#numbers.sequence(1, orders.totalPages)}"-->
+<!--            th:if="${page >= orders.number-5 and page <= orders.number+5}"-->
+<!--            th:classappend="${page - 1 == orders.number} ? 'active'"-->
+<!--            class="page-item inline">-->
+<!--          <a th:text="${page}" class="page-link"-->
+<!--             th:href="@{{page}?keyword = {keyword}(page = ${page}, keyword = ${param.keyword})}"></a>-->
+<!--        </li>-->
+<!--        <li class="page-item inline" th:classappend="${!orders.hasNext} ? 'hidden'">-->
+<!--          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page + 1}, keyword = ${param.keyword})}">-->
+<!--            &gt;&gt;-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+
+
+      <div class="pagination">
+        <ul>
+          <li th:classappend="${currentPage == 1} ? 'disabled'">
+            <a th:href="@{|/order?page=${currentPage - 1}&query=${query}|}">이전</a>
+          </li>
+          <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${i == currentPage} ? 'active'">
+            <a th:text="${i}" th:href="@{|/order?page=${i}&query=${query}|}"></a>
+          </li>
+          <li th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <a th:href="@{|/order?page=${currentPage + 1}&query=${query}|}">다음</a>
+          </li>
+        </ul>
+      </div>
+
+
 
       <!-- modal 1 -->
       <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
@@ -368,8 +405,6 @@
     </div>
   </div>
 </div>
-
-
 
 
     <script>
