@@ -14,15 +14,21 @@
       .group:hover .group-hover\:flex {
         display: flex;
       }
-      
+
       #header {
         width: 310px;
         height: 100vh;
         float: left;
-        position: relative;
+        position: sticky;
         background-color: #ffffff;
         box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
         transition: width 0.4s;
+        top: 0;
+        left: 0;
+      }
+      
+      .header, .middle, footer {
+        position: fixed;
       }
       
       .header {
@@ -32,6 +38,9 @@
         justify-content: center;
         height: 300px;
         padding: 20px;
+        width: 100%;
+        right: 800px;
+        position: fixed;
       }
       
       .header {
@@ -48,9 +57,9 @@
         height: 50px;
         border: 1px solid #d1d5db;
         border-radius: 50%;
-        position: absolute;
-        top: 30px;
-        right: -20px;
+        position: relative;
+        top: -10px;
+        left: 151px;
         background-color: #f3f4f6;
         cursor: pointer;
         display: flex;
@@ -62,6 +71,11 @@
         width: 20px;
         height: 20px;
         transition: transform 0.7s;
+      }
+      
+      .not-visible .hide-arrow {
+        left: 59px;
+        transition: left 0.7s;
       }
       
       .not-visible .hide-arrow img {
@@ -79,6 +93,7 @@
         background-size: 120px !important;
         margin-top: -110px !important;
         transition: background-size 0.7s;
+        left: -900px !important;
       }
       
       .middle {
@@ -86,6 +101,7 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+        top: 170px;
       }
       
       .menu {
@@ -182,6 +198,11 @@
       .active-menu {
         filter: invert(63%) sepia(4%) saturate(7494%) hue-rotate(45deg) brightness(105%) contrast(93%);
       }
+      
+      .center-menu {
+        position: relative !important;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -191,73 +212,75 @@
         location.href = '/';
       </script>
     </th:block>
-    
-    <div id="header" class="visible">
-      <div class="header">
-        <div class="hide-arrow" onclick="sidebar_not_visible()">
-          <img src="/img/icon/left-arrow.png" alt="Toggle Sidebar">
+    <div id="header-top">
+      <div id="header" class="visible">
+        <div class="header">
+          <div class="hide-arrow" onclick="sidebar_not_visible()">
+            <img src="/img/icon/left-arrow.png" alt="Toggle Sidebar">
+          </div>
         </div>
-      </div>
-      <div class="middle">
-        <a href="/main" data-page="main" class="menu-a">
-          <div class="menu">
-            <img src="/img/icon/icon-home-v2.png" alt="">
-            <span class="text">HOME</span>
-          </div>
-        </a>
-        <a href="/buyer/default/1?keyword=" data-page="buyer" class="menu-a">
-          <div class="menu">
-            <img src="/img/icon/icon-buyer-v2.png" alt="">
-            <span class="text">거래처 관리</span>
-          </div>
-        </a>
-        <a href="/stock" data-page="stock" class="menu-a">
-          <div class="menu">
-            <img src="/img/icon/icon-item-v2.png" alt="">
-            <span class="text">상품 관리</span>
-          </div>
-        </a>
-        <a href="/order" data-page="order" class="menu-a">
-          <div class="menu">
-            <img src="/img/icon/icon-order-v2.png" alt="">
-            <span class="text">발주 관리</span>
-          </div>
-        </a>
-        <a href="/storage/1" data-page="storage" class="menu-a">
-          <div class="menu">
-            <img src="/img/icon/icons-warehouse-v2.png" alt="">
-            <span class="text">창고관리</span>
-          </div>
-        </a>
-        <a href="/approval" data-page="approval" class="menu-a">
-          <div class="menu">
-            <img src="/img/icon/icon-approval-v2.png" alt="">
-            <span class="text">전자결재</span>
-          </div>
-        </a>
-        <a href="/board/board" data-page="board" class="menu-a">
-          <div class="menu">
-            <img src="/img/icon/icons-qna-v2.png" alt="">
-            <span class="text">Q&A</span>
-          </div>
-        </a>
-      </div>
-      <div class="footer">
-        <a href="">
-          <img src="/img/icon/icon-user-v2.png" alt="">
-        </a>
-        <div class="user-info" th:if="${session.admin != null || session.user != null}">
+        <div class="middle">
+          <a href="/main" data-page="main" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-home-v2.png" alt="">
+              <span class="text">HOME</span>
+            </div>
+          </a>
+          <a href="/buyer/default/1?keyword=" data-page="buyer" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-buyer-v2.png" alt="">
+              <span class="text">거래처 관리</span>
+            </div>
+          </a>
+          <a href="/stock" data-page="stock" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-item-v2.png" alt="">
+              <span class="text">상품 관리</span>
+            </div>
+          </a>
+          <a href="/order" data-page="order" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-order-v2.png" alt="">
+              <span class="text">발주 관리</span>
+            </div>
+          </a>
+          <a href="/storage/1" data-page="storage" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icons-warehouse-v2.png" alt="">
+              <span class="text">창고관리</span>
+            </div>
+          </a>
+          <a href="/approval" data-page="approval" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-approval-v2.png" alt="">
+              <span class="text">전자결재</span>
+            </div>
+          </a>
+          <a href="/board/board" data-page="board" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icons-qna-v2.png" alt="">
+              <span class="text">Q&A</span>
+            </div>
+          </a>
+        </div>
+        <div class="footer">
+          <a href="">
+            <img src="/img/icon/icon-user-v2.png" alt="">
+          </a>
+          <div class="user-info" th:if="${session.admin != null || session.user != null}">
           <span th:text="${session.user != null ? session.user.buyer_code.buyer_name : '관리자' }">거래처 & 관리자
             표시</span>
-          <span
-              th:text="${session.user != null ? session.user.user_name : session.admin.admin_name}">접속자 이름
+            <span
+                th:text="${session.user != null ? session.user.user_name : session.admin.admin_name}">접속자 이름
             표시</span>
+          </div>
+          <a href="/logout">
+            <img src="/img/icon/icon-logout.png" alt="logout-btn">
+          </a>
         </div>
-        <a href="/logout">
-          <img src="/img/icon/icon-logout.png" alt="logout-btn">
-        </a>
       </div>
     </div>
+    
     <script src="/js/url-pathname-return.js"></script>
   </body>
 </th:block>
