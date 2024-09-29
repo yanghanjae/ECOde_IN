@@ -92,4 +92,15 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
 	@Query(value = "UPDATE stock SET quantity = :quantity WHERE stock_no = :stock_no", nativeQuery = true)
 	public void updateStock (@Param(value = "stock_no") int stock_no, @Param(value = "quantity") int quantity);
 
+	
+	// 재고 등록 전, 확인 용
+	@Query(value = "SELECT * FROM stock WHERE item_no = :item_no AND storage_no = :storage_no", nativeQuery = true)
+	public Optional<Stock> findStock(@Param(value = "item_no") int item_no,@Param(value = "storage_no") int storage_no);
+
+	// 재고 추가
+	@Modifying
+	@Transactional
+	@Query(value = "INSERT INTO stock(item_no, storage_no, quantity) VALUES (:item_no, :storage_no, :quantity)", nativeQuery = true)
+	public void addStock(@Param(value = "item_no") int item_no,@Param(value ="storage_no") int storage_no,@Param(value = "quantity") int quantity);
+
 }

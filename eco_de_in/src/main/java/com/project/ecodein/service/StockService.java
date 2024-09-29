@@ -63,7 +63,7 @@ public class StockService {
 		STOCK_REPOSITORY.updateStock(editStockNo, editQunaitity);
 	}
 
-	public Page<Item> searchItems (String search, int page) {
+	public Page<Item> searchStocks (String search, int page) {
 		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("item_name").ascending ());
 		
 		if(search == null || search.isEmpty ()) {
@@ -83,5 +83,17 @@ public class StockService {
 		}
 		return STORAGE_REPOSITORY.findAllByStorageNameOrStorageSite (search, pageable);
 
+	}
+
+	public void addStock(int item_no, int storage_no, int quantity) {
+		
+		Optional<Stock> stock = STOCK_REPOSITORY.findStock(item_no, storage_no);
+		
+		// 등록하려는 재고가 창고에 있을시, 수량만 추가. 없을시 새 재고를 등록
+		if(stock.isPresent()) {
+			STOCK_REPOSITORY.updateStock(stock.get().getStockNo(), stock.get().getQuantity()+quantity);
+		} else {
+			STOCK_REPOSITORY.addStock(item_no, storage_no, quantity);
+		}
 	}
 }

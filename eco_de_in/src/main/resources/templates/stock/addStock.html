@@ -182,28 +182,16 @@
 	    		<button type="button" onclick="closeModal()" class="closeModal">
 		    		<img class="closeButton" alt="closeButton" src="/img/icon/closebutton.png">
 		    	</button>
-		    	<div class="modalContent" th:fragment="itemModalContent" id="itemModalContent">
-		    		<form id="itemSearchForm" method="get" onsubmit="itemSubmit(event)">
-		    			<input type="text" id="itemModalSearch" class="modalInput" name="itemModalSearch" th:value="${itemModalSearch}">
-		    			<button type="button" class="modalButton" onclick="itemSubmit(event)">검색</button>
-		    			<ul th:each="item : ${items}">
-		    				<li th:data-value="${item.item_no}" th:text="${item.item_name}" onclick="chooseItem(this)"></li>
-		    			</ul>
-		    		</form>
+		    	<div class="modalContent" id="itemModalContent">
+		    		
 		    	</div>
 		    </div>
 		    <div class="modal" id="storageModal">
 	    		<button type="button" onclick="closeModal()" class="closeModal">
 		    		<img class="closeButton" alt="closeButton" src="/img/icon/closebutton.png">
 		    	</button>
-		    	<div class="modalContent" th:fragment="storageModalContent" id="storageModalContent">
-		    		<form id="storageSearchForm" method="get" onsubmit="storageSubmit(event)">
-		    			<input type="text" id="storageModalSearch" class="modalInput" name="storageModalSearch" th:value="${storageModalSearch}">
-		    			<button type="button" class="modalButton" onclick="storageSubmit(event)">검색</button>
-		    			<ul th:each="storage : ${storages}">
-		    				<li th:data-value="${storage.storage_no}" th:text="${storage.storage_name}" onclick="chooseStorage(this)"></li>
-		    			</ul>
-		    		</form>
+		    	<div class="modalContent" id="storageModalContent">
+		    		
 		    	</div>
 		    </div>
 		    
@@ -313,6 +301,20 @@
 				document.getElementById('storage').value = storageName;
 				document.getElementById('storageHidden').value = storageNo;
 				closeModal();
+			}
+			
+			function changeItemPage(element) {
+				let search= document.getElementById('itemModalSearch').value;
+				let page = element.getAttribute('data-value');
+				
+				loadItem(search,page);
+			}
+			
+			function changeStoragePage(element) {
+				let search= document.getElementById('storageModalSearch').value;
+				let page = element.getAttribute('data-value');
+				
+				loadStorage(search,page);
 			}
 			
 			quantity.onkeyup = onlyNumber;
