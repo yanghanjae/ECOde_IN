@@ -2,6 +2,8 @@ package com.project.ecodein.service;
 
 import com.project.ecodein.dto.Admin;
 import com.project.ecodein.repository.AdminRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,4 +24,7 @@ public class UserService {
         return adminRepository.findByAdminRecognize();
     }
 
+    public void adminAuthPass (String adminId) {
+        adminRepository.updateAdminAuthByAdminId(adminId);
+    }
 }

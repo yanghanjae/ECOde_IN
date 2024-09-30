@@ -3,6 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- moment.js Init -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <title>modal.html</title>
   <style>
     .modal-btn {
@@ -33,6 +35,7 @@
       border-radius: 25px;
       font-weight: bold;
       color: #347928;
+      cursor: pointer;
     }
   </style>
   <script>
@@ -43,15 +46,16 @@
       })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         for (let idx in data) {
-          document.querySelector('.tbody').innerHTML +=
+          let date = new Date(data[idx].admin_date);
+          let formettedDate = date.getFullYear() + '년 ' + date.getMonth() + '월 ' + date.getDate() + '일';
+           document.querySelector('.tbody').innerHTML +=
             `
               <tr>
                 <td>${data[idx].admin_id}</td>
                 <td>${data[idx].admin_name}</td>
-                <td>${data[idx].admin_date}</td>
-                <td style="line-height: 27px"><a th:href="@{/admin-manager/{admin_id}(damin_id=${data[idx].admin_id}">승 인</a></td>
+                <td>${formettedDate}</td>
+                <td style="line-height: 27px"><a href="/admin-manager/${data[idx].admin_id}">승 인</a></td>
               </tr>
             `
         }
@@ -92,6 +96,10 @@
           <tbody class="tbody">
           </tbody>
         </table>
+      </div>
+      
+      <div class="modal p-4 md:p-5 space-y-4" th:if="${auth eq 'user-management'}">
+        onload
       </div>
       <!-- Modal footer -->
 <!--      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">-->

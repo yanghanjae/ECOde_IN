@@ -198,16 +198,17 @@
 
 /* user-menu */
 .detail-menu {
-  width: 100%;
+  width: 310px;
   height: 100px;
   border: 1px solid #d1d5db;
   border-radius: 15px 15px 0 0;
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
   bottom: 0;
-  position: absolute;
+  position: fixed;
   top: 79vh;
   z-index: 1;
   padding: 15px 86px;
+  background-color: white;
 }
 
 .detail-menu > p {
