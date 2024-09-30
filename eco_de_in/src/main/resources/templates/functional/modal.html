@@ -60,6 +60,7 @@
   </style>
   <script>
     function request_adminList () {
+      document.querySelector('.tbody').innerHTML = '';
       fetch('/admin-manager', {
         method: 'get',
         headers: {'Content-Type': 'application.json'}
