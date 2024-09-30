@@ -1,10 +1,8 @@
 package com.project.ecodein.controller;
 
 
-import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.dto.Ordering;
-import com.project.ecodein.dto.Search;
-import com.project.ecodein.service.OrderService;
+import com.project.ecodein.service.OrderingService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,28 +11,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.List;
-
-
 @Controller
 @RequestMapping("/order")
 public class OrderController {
 
 
-	private final OrderService ORDER_SERVICE;
+	private final OrderingService ORDER_SERVICE;
 
 
-	public OrderController(OrderService orderService) {
+	public OrderController(OrderingService orderService) {
 		this.ORDER_SERVICE = orderService;
 	}
 
 
 	// 발주 목록 페이지
-	@GetMapping("")
-	public String order(Model model) {
-		List<Ordering> orders = ORDER_SERVICE.getAllOrders();
+	@GetMapping("/{page}")
+	public String order(Model model, @PathVariable("page") Integer page, @RequestParam(required = false) String query) {
+
+		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query);
 		model.addAttribute("orders", orders);
 		return "order/order";
+
 	}
 
 
@@ -49,11 +46,11 @@ public class OrderController {
 
 
 	// 삭제 기능 구현
-//    @DeleteMapping("/delete/{order_no}")
-//    public ResponseEntity<Void> deleteOrder(@PathVariable int order_no) {
-//        ORDER_SERVICE.deleteOrder(order_no);
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+    @GetMapping("/delete/{order_no}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable int order_no) {
+        ORDER_SERVICE.deleteOrder(order_no);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 
 
@@ -92,11 +89,6 @@ public class OrderController {
 		return "order/orderAdd";
 	}
 
-	@GetMapping("/{order_no}")
-	public String orderDetail() {
-
-		return "order/orderDetail";
-	}
 }
 
 
