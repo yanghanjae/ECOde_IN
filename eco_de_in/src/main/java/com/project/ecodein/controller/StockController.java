@@ -4,11 +4,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.project.ecodein.common.Pagenation;
+import com.project.ecodein.common.PagingButtonInfo;
 import com.project.ecodein.dto.Item;
 import com.project.ecodein.dto.Stock;
 import com.project.ecodein.dto.Storage;
@@ -62,14 +66,7 @@ public class StockController {
 	
 	@GetMapping("/add")
 	public String addStock (Model model) {
-		
-		model.addAttribute ("itemPage", 1);
-		model.addAttribute ("itemtotalPages", 1);
-		model.addAttribute ("itemModalsearch", "");
-		model.addAttribute ("storagePage", 1);
-		model.addAttribute ("storagetotalPages", 1);
-		model.addAttribute ("storageModalsearch", "");
-		
+				
 		return "stock/addStock";
 	}
 	
@@ -78,14 +75,14 @@ public class StockController {
 		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
 		
-		Page<Item> items = STOCK_SERVICE.searchItems(search, page);
+		Page<Item> items = STOCK_SERVICE.searchStocks(search, page);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(items);
 		
 		model.addAttribute ("items", items);
-		model.addAttribute ("itemPage", page);
-		model.addAttribute ("itemTotalPages", items.getTotalPages ());
-		model.addAttribute ("itemModalSearch", search);
+		model.addAttribute("paging", paging);
+		model.addAttribute("itemModalSearch", search);
 		
-		return "stock/addStock :: itemModalContent";
+		return "stock/addStockModal :: itemModalContent";
 		
 	}
 	
@@ -95,13 +92,21 @@ public class StockController {
 		
 		
 		Page<Storage> storages = STOCK_SERVICE.searchStorages(search, page);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(storages);
 		
 		model.addAttribute ("storages", storages);
-		model.addAttribute ("storagePage", page);
-		model.addAttribute ("storageTotalPages", storages.getTotalPages ());
-		model.addAttribute ("storageModalSearch", search);
+		model.addAttribute("paging", paging);
+		model.addAttribute("storageModalSearch", search);
 		
-		return "stock/addStock :: storageModalContent";
+		return "stock/addStockModal :: storageModalContent";
 		
+	}
+	
+	@PostMapping("/add")
+	public String addStockPost (@RequestParam int storage_no, @RequestParam int item_no, @RequestParam int quantity) {
+		
+		STOCK_SERVICE.addStock (item_no, storage_no, quantity);
+		
+		return "redirect:/stock";
 	}
 }

@@ -11,8 +11,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 
 	@Query(value = "SELECT * "
 		+ "FROM item "
-		+ "WHERE is_material = false "
-		+ "AND (item_no like CONCAT('%', :search, '%') OR item_name like CONCAT('%', :search, '%'))", nativeQuery = true)
+		+ "WHERE (item_no like CONCAT('%', :search, '%') OR item_name like CONCAT('%', :search, '%'))", nativeQuery = true)
 	Page<Item> searchItem (@Param(value = "search") String search, Pageable pageable);
 
 }
