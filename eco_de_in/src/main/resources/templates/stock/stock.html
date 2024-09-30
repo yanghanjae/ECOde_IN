@@ -117,6 +117,14 @@
     	font-weight: bold !important;
     }
     
+    .stock {
+    	cursor: pointer;
+    }
+    
+    .stock:hover {
+    	font-weight: bold;
+    }
+    
     .modalBackground {
 			display: none;
 			position: fixed;
@@ -250,7 +258,7 @@
 	        <tbody>
 	        	<tr th:each="stock:${stocks}">
 	        		<td th:text="${stock.stockNo}"></td>
-	        		<td th:data-value="${stock.stockNo}"  th:text="${stock.item.item_name}" onclick="openModal(this)"></td>
+	        		<td th:data-value="${stock.stockNo}"  th:text="${stock.item.item_name}" onclick="openModal(this)" class="stock"></td>
 	        		<td th:text="${stock.storage.storage_name}"></td>
 	        		<td th:text="${stock.quantity}"	></td>
 	        	</tr>

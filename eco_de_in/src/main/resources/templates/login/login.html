@@ -38,9 +38,13 @@
 		<div class="modal-background" id="modalBackground"></div>
 		<div id="modal" class="modal">
         <div>
-            <button type="button"  onclick=closeModal() class="xButton">x</button>
-            <button type="button" onclick="location.href='/signup'" class="signUp user">회원가입</button>
-            <button type="button" onclick="location.href='/signup/admin'" class="signUp admin">관리자 회원가입</button>
+            <button type="button" onclick="closeModal()" class="closeModal">
+			    		<img class="closeButton" alt="closeButton" src="/img/icon/closebutton.png">
+			    	</button>
+			    	<div class="modalContent">
+		          <button type="button" onclick="location.href='/signup'" class="signUp user">회원가입</button>
+		          <button type="button" onclick="location.href='/signup/admin'" class="signUp admin">관리자 회원가입</button>
+			    	</div>
         </div>
     </div>
 		<div class="left">
