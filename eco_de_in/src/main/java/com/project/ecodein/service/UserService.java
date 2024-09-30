@@ -33,6 +33,8 @@ public class UserService {
         ADMIN_REPOSITORY.updateAdminAuthByAdminId(adminId);
     }
 
+    // [240930] 장유빈 기능 추가
+    // 기능 상세 : 비밀번호 변경 -> 비밀번호 확인 기능
     public Optional<User> userPasswordCheck (String user_id, String user_password) {
         User user = USER_REPOSITORY.findById(user_id).get();
 
@@ -45,6 +47,8 @@ public class UserService {
         }
     }
 
+    // [240930] 장유빈 기능 추가
+    // 기능 상세 : 비밀번호 변경 -> 비밀번호 변경 기능
     public Integer userPasswordModify (String user_id, String user_password) {
         String newPassword = PASSWORD_ENCODER.encode(user_password);
 
