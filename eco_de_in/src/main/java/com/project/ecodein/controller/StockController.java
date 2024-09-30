@@ -4,13 +4,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
 import com.project.ecodein.dto.Item;
@@ -34,15 +32,13 @@ public class StockController {
 	public String stock (Model model, @RequestParam(defaultValue = "") String search,
 		@RequestParam(defaultValue = "false") boolean is_item,
 		@RequestParam(defaultValue = "") Integer storage_no,
-		@RequestParam(defaultValue = "0") int page) {
+		@RequestParam(defaultValue = "1") int page) {
 		
 		Page<Stock> stocks = STOCK_SERVICE.findStock (page, is_item, search, storage_no);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo (stocks, 5);
+		
 		model.addAttribute ("stocks", stocks);
-		model.addAttribute ("storages", STOCK_SERVICE.findAllStorage ());
-		model.addAttribute ("currentPage", stocks.getNumber ());
-		model.addAttribute ("totalPages", stocks.getTotalPages ());
-		model.addAttribute ("hasNext", stocks.hasNext ());
-		model.addAttribute ("hasPrevious", stocks.hasPrevious ());
+		model.addAttribute ("paging", paging);
 		model.addAttribute ("is_item", is_item);
 		model.addAttribute ("selectedStorage", storage_no);
 		model.addAttribute ("search", search);

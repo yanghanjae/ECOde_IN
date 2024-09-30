@@ -45,20 +45,8 @@
 		<div id="modal" class="modal" >
         <div>
             <button type="button"  onclick=closeModal() class="xButton">x</button>
-            <div id="modalContent" th:fragment="modalContent">
-	            <form id="searchForm"  method ="get" onsubmit="submitSearchForm(event)">
-	            	<input type="text" id="searchInput" name="search" placeholder="검색어를 입력해주세요..." th:value="${search}" class="input searchBar" >
-	            	
-	            	<ul th:each="buyer : ${buyers}" class="list">
-	            		<li th:text = "${buyer.buyer_name}" th:data-value = "${buyer.buyerCode}"  onclick=chooseName(this)></li>
-	            	</ul>
-	            	
-	            	<div id="pagination">
-	            		<button type="button" onclick="changePage(this);" th:disabled	="${currentPage ==1 }" th:value ="${currentPage - 1}">이전</button>
-	            		<span th:text ="${currentPage}"></span>
-	            		<button type="button" onclick="changePage(this);" th:disabled = "${currentPage == totalPages}" th:value="${currentPage + 1}">다음</button>
-	            	</div>
-	            </form>
+            <div id="modalContent">
+	           
             </div>
         </div>
     	</div>
