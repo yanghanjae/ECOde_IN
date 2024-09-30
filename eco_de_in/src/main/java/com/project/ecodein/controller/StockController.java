@@ -38,6 +38,7 @@ public class StockController {
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo (stocks, 5);
 		
 		model.addAttribute ("stocks", stocks);
+		model.addAttribute ("storages", STOCK_SERVICE.findAllStorage ());
 		model.addAttribute ("paging", paging);
 		model.addAttribute ("is_item", is_item);
 		model.addAttribute ("selectedStorage", storage_no);
