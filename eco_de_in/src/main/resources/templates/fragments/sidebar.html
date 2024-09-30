@@ -49,7 +49,7 @@
               <span class="text">상품 관리</span>
             </div>
           </a>
-          <a href="/order" data-page="order" class="menu-a">
+          <a href="/order/1" data-page="order" class="menu-a">
             <div class="menu">
               <img src="/img/icon/icon-order-v2.png" alt="">
               <span class="text">발주 관리</span>
@@ -75,13 +75,13 @@
           </a>
         </div>
         <div class="hidden detail-menu">
-          <p>
+          <p onclick="user_management_modal_active ()" th:if="${session.user != null}">
             <img class="img-password" src="/img/icon/icon-password.png" alt="">
             <a>
               비밀번호변경
             </a>
           </p>
-          <p onclick="admin_management_modal_active ()">
+          <p onclick="admin_management_modal_active ()" th:if="${session.admin != null}">
             <img class="img-admin" src="/img/icon/icon-admin-manager.png" alt="">
             <a>
               관리자 메뉴
@@ -104,13 +104,14 @@
         </div>
       </div>
     </div>
-    
+    <div class="hidden sub-background"
+        style="width: calc(100vw - 326px); height: 1000px; background-color: lightgray; opacity: .7; position: absolute;
+              z-index: 1; top: 0; right: 0;"></div>
     <!-- Main modal -->
     <div id="manager-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-         class="hidden fixed justify-center items-center"
-         style="top: 25%; left: 40%;
+         class=" fixed justify-center items-center"
+         style="top: 25%; left: 40%; z-index: 1;
          box-shadow: rgba(0, 0, 0, 0.5) 0 14px 28px, rgba(0, 0, 0, 0.5) 0 10px 10px; width: 30%">
-      
     </div>
     
     <script src="/js/url-pathname-return.js"></script>
@@ -118,10 +119,19 @@
       function admin_management_modal_active () {
         $('#manager-modal').load('/admin-management');
         $('#manager-modal').removeClass('hidden');
+        $('.sub-background').removeClass('hidden');
+      }
+      
+      function user_management_modal_active () {
+        $('#manager-modal').load('/user-management');
+        $('#manager-modal').removeClass('hidden');
+        $('.sub-background').removeClass('hidden');
+        
       }
       
       function admin_management_modal_deactive () {
         $('#manager-modal').addClass('hidden');
+        $('.sub-background').addClass('hidden');
       }
     </script>
   </body>

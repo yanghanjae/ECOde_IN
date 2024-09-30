@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
@@ -18,3 +19,6 @@
     <fullyQualifiedTypeName name="com.project.ecodein.common.PagingButtonInfo"/>
     <fullyQualifiedTypeName name="com.project.ecodein.common.Pagenation"/>
 </qualifiedTypeNameHistroy>
+=======
+<qualifiedTypeNameHistroy/>
+>>>>>>> 9f5e91b8c7c9ef6f4952605795e78f0e929db135
