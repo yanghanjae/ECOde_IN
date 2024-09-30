@@ -31,7 +31,7 @@ public class StockService {
 	}
 	
 	public Page<Stock> findStock (int page, boolean is_item, String search, Integer storage_no) {
-		Pageable pageable = PageRequest.of (page, 10, Sort.by ("stock_no").descending ()); 
+		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("stock_no").descending ()); 
 		
 		if(storage_no == null) {
 			if(!is_item) {
