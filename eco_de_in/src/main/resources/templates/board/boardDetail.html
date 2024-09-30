@@ -47,12 +47,11 @@
 								<button type="button"
 									class="text-black bg-gradient-to-r from-green-200 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
 									th:onclick="|location.href='@{/board/update/{boardNo}(boardNo=${board.boardNo})}'|">수정</button>
-								
+
 								<!-- Button trigger modal -->
 								<button type="button"
 									class="text-black bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-									data-modal-toggle="Modal"
-									data-modal-target="Modal">삭제</button>
+									data-modal-toggle="Modal" data-modal-target="Modal">삭제</button>
 							</div>
 
 							<!-- Modal -->
@@ -84,7 +83,8 @@
                 </svg>
 											<h3
 												class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">삭제하시겠습니까?</h3>
-											<button onclick="clickDel()" data-modal-hide="Modal" type="button"
+											<button onclick="clickDel()" data-modal-hide="Modal"
+												type="button"
 												class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
 												삭제</button>
 											<button data-modal-hide="Modal" type="button"
@@ -97,31 +97,41 @@
 						</div>
 
 
-						<div class="board-form">
-							<table class="table table-striped table-bordered">
-								<tr>
-									<th>글 번호</th>
-									<td class="boardNo" th:text="${board.boardNo}"></td>
-								</tr>
-								<tr>
-									<th>글 제목</th>
-									<td th:text="${board.boardTitle}"></td>
-								</tr>
-								<tr>
-									<th>작성자</th>
-									<td th:text="${board.user.user_name}"></td>
-								</tr>
-								<tr>
-									<th>등록일</th>
-									<td
-										th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-								</tr>
-								<tr>
-									<th>내용</th>
-									<td th:utext="${board.boardContent}"></td>
-								</tr>
+
+						<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+							<table
+								class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+								<thead
+									class="text-xs text-gray-700 uppercase dark:text-gray-400">
+									<tr>
+										<th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+											글 제목</th>
+										<td th:text="${board.boardTitle}"></td>
+									</tr>
+									<tr class="border-b border-gray-200 dark:border-gray-700">
+										<th scope="row"
+											class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+											글 번호</th>
+										<td th:text="${board.boardNo}"></td>
+										<td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">작성자</td>
+										<td th:text="${board.user.user_name}"></td>
+										<td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">등록일</td>
+										<td
+											th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="border-b border-gray-200 dark:border-gray-700">
+										<td th:utext="${board.boardContent}"></td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
+<!-- 댓글 -->
+
+
+
+
 						<div class="row mt-5">
 							<div class="col">
 								<button type="button"
@@ -137,9 +147,10 @@
 	</div>
 </body>
 <script>
-function clickDel() {
-	location.replace("/board/delete/"+ document.querySelector(".boardNo").textContent);
-}
+	function clickDel() {
+		location.replace("/board/delete/"
+				+ document.querySelector(".boardNo").textContent);
+	}
 </script>
 </html>
 

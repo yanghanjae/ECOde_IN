@@ -20,8 +20,5 @@ public class BoardDTO {
 	private String boardContent;
 	private LocalDateTime boardDate;
 	private User user;
-	private Admin admin;
-	private String commentContent;
-	private LocalDateTime commentDate;
 
 }
