@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.project.ecodein.common.Pagenation;
-import com.project.ecodein.common.PagingButtonInfo;
 import com.project.ecodein.config.SecurityConfig;
 import com.project.ecodein.dto.Admin;
 import com.project.ecodein.dto.Buyer;
@@ -56,6 +54,10 @@ public class LoginController {
 	
 	@GetMapping("/signup")
 	public String signUp (Model model) {
+		model.addAttribute ("currentPage", 1);
+		model.addAttribute ("totalPages", 1);
+		model.addAttribute ("search", "");
+	
 		return "login/signUp";
 	}
 	
@@ -67,18 +69,19 @@ public class LoginController {
 	
 	@GetMapping("signup/modal")
 	public String signUpBuyers (@RequestParam(value = "search", required = false) String search,
-		@RequestParam(value = "page") int page,
+		@RequestParam(value = "page", defaultValue = "1") int page,
 		Model model) {
 		
-		Page<Buyer> buyers = LOGIN_SERVICE.searchBuyers (search, page, 10);
-		System.out.println ("totalpages," + buyers.getTotalPages ());
-		PagingButtonInfo paging = Pagenation.getPagingButtonInfo (buyers, 5);
+		int pageSize =10;
 		
-		model.addAttribute ("buyers", buyers);
-		model.addAttribute ("paging", paging);
+		Page<Buyer> buyers = LOGIN_SERVICE.searchBuyers (search, page, pageSize);
+		
+		model.addAttribute ("buyers", buyers.getContent ());
+		model.addAttribute ("currentPage", page);
+		model.addAttribute ("totalPages", buyers.getTotalPages ());
 		model.addAttribute ("search", search);
 		
-		return "login/signUpModal :: modalContent";
+		return "login/signUp :: modalContent";
 	}
 	
 	@GetMapping("/signup/admin")

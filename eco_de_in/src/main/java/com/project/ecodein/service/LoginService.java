@@ -126,7 +126,7 @@ public class LoginService {
 	}
 	
 	public Page<Buyer> searchBuyers (String name, int page, int pageSize) {
-		Pageable pageable = PageRequest.of (page -1 , pageSize, Sort.by (Sort.Order.asc ("buyer_name")));
+		Pageable pageable = PageRequest.of (page -1 , pageSize, Sort.by (Sort.Order.desc ("buyerCode")));
 
 		if (name == null || name.isEmpty ()) {
 			return BUYER_REPOSITORY.findAllAcitve (pageable);
