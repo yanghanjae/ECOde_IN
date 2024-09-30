@@ -6,6 +6,18 @@
   <title>[Eco de_In] 메인</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const calendarEl = document.getElementById('calendar');
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        height: '100%',
+        initialView: 'dayGridMonth',
+        locale: 'ko'
+      });
+      calendar.render();
+    });
+  </script>
   <style>
     .main-content {
       width: 100%;
@@ -18,7 +30,7 @@
     .content-0, .content-1 {
       background-color: #ffffff;
       width: 49%;
-      height: 100%;
+      height: 600px;
       border-radius: 12px;
       padding: 20px;
       box-sizing: border-box;
@@ -26,7 +38,8 @@
     }
     
     #calendar {
-      padding: 20px;
+      position: relative;
+      z-index: 0;
       line-height: 1.6;
     }
     
@@ -91,13 +104,17 @@
   </style>
 </head>
 <body class="bg-gray-100">
+  <th:block th:if="${auth_message != null}">
+    <script>
+      alert([[${auth_message}]]);
+    </script>
+  </th:block>
   <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
   <div id="content">
     <div id="content_wrap">
       <div class="main-content">
         <div class="content-0">
           <div id="calendar">
-            <span class="calendar-title">일정관리</span>
           </div>
         </div>
         <div class="content-1">
