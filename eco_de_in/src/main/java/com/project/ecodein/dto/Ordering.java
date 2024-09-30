@@ -25,7 +25,7 @@ public class Ordering {
 	@Id
 	@Column(name = "order_no", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int order_no;
+	private int orderNo;
 	
 	@ManyToOne
 	@JoinColumn(name = "buyer_code", referencedColumnName = "buyer_code", nullable = false)

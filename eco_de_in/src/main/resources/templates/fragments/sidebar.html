@@ -1,101 +1,138 @@
 <th:block th:fragment="sidebarFragment">
-	<head>
-	  <meta charset="UTF-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/css/default-style.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  Tailwind CSS Init  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-		<style>
-	    .rotate-45 {
-	      --transform-rotate: 45deg;
-	      transform: rotate(45deg);
-	    }
-
-	    .group:hover .group-hover\:flex {
-	      display: flex;
-	    }
-	  </style>
-	</head>
-	<body>
-		<th:block th:if="${session.user == null && session.admin == null}">
-			<script>
-				alert('인가된 권한이 없습니다. 로그인 후 다시 시도해주세요.');
-				location.href = '/';
-			</script>
-		</th:block>
-		
-	  <div class="flex flex-col items-center h-full overflow-hidden text-gray-700 bg-gray-100 text-center" 
-				 style="height: 100vh">
-	    <a class="flex items-center w-full px-3 mt-3 justify-center" href="/main">
-	      <img src="https://eco-de-in-bucket.s3.ap-northeast-2.amazonaws.com/primary/ecode_in_logo.png" alt="logo" 
-						 class="w-3/4">
-	    </a>
-	    <div class="w-full px-2 h-full">
-	      <div class="flex flex-col w-full mt-3 border-t border-gray-300">
-					<div>
-						<img src="/img/icon/user.png" alt="user_icon" class="w-1/5 ml-14 my-5">
-						<p class="float-right mr-14 my-5" style="margin-top: -70px;">
-							<span th:if="${session.user != null}"
-										th:text="${session.user.buyer_code.buyer_name}"
-										class="tracking-widest text-sm inline">고객사명
-							</span>	
-							<span th:if="${session.admin != null}"
-										class="tracking-widest text-sm inline">관 리 자
-							</span>
-							<br>
-							<span th:if="${session.user != null}"
-										th:text="${session.user.user_name}"
-										class="tracking-widest font-bold inline">홍길동 님
-							</span>
-							<span th:if="${session.admin != null}"
-										th:text="${session.admin.admin_name}"
-										class="tracking-widest font-bold inline">홍길동 님
-							</span>
-						</p>
-					</div>
-					<div>
-						<button type="button" class="tracking-widest font-bold" 
-						style="border: 0.5px solid lightgray; padding: 3px 15px; 
-						border-radius: 20px; background-color: lightgray;"
-						onclick="location.href='/logout'">
-							로그아웃
-						</button>
-					</div>
-	        
-	      </div>
-	      <div class="flex flex-col items-center w-full mt-2 border-t border-gray-300">
-	        <a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 mt-5" href="/main">
-	          <img src="/img/icon/home-2948025.png" class="w-1/12 mr-10">
-	          <span class="ml-2 text-base tracking-widest font-bold">HOME</span>
-	        </a>
-	        <a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" 
-						 href="/buyer/default/1?keyword=">
-	          <img src="/img/icon/buyer.png" class="w-1/12 mr-1">
-	          <span class="ml-2 text-base font-bold tracking-widest">거래처 관리</span>
-	        </a>
-
-	        <a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" href="/stock">
-
-	          <img src="/img/icon/stock-3639205.png" class="w-1/12 mr-5">
-	          <span class="ml-2 text-base font-bold tracking-widest">상품 관리</span>
-	        </a>
-					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" 
-						 href="/order">
-	          <img src="/img/icon/order-3624080.png" class="w-1/12 mr-5">
-	          <span class="ml-2 text-base font-bold tracking-widest">발주 관리</span>
-	        </a>
-					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" 
-						 href="/storage/1">
-	          <img src="/img/icon/warehouse-2066573.png" class="w-1/12 mr-5">
-	          <span class="ml-2 text-base font-bold tracking-widest">창고 관리</span>
-	        </a>
-					<a class="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 my-1" 
-						 href="/board/board">
-	          <img src="/img/icon/talking-15611672.png" class="w-1/12 mr-10">
-	          <span class="ml-2 text-base font-bold tracking-widest">Q n A</span>
-	        </a>
-	      </div>
-	    </div>
-	  </div>
-	</body>
+    <!-- Default CSS Init -->
+    <link rel="stylesheet" href="/css/default-style.css">
+    <!--  Header CSS Init  -->
+    <link rel="stylesheet" href="/css/header.css">
+    <!-- jQuery Init-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- Header Toggle Functions Init -->
+    <script src="/js/header-visible-toggle.js"></script>
+  
+  
+  </head>
+  <body>
+    <th:block th:if="${session.user == null && session.admin == null}">
+      <script>
+        alert('인가된 권한이 없습니다. 로그인 후 다시 시도해주세요.');
+        location.href = '/';
+      </script>
+    </th:block>
+    <div id="header-top">
+      <div id="header" class="visible">
+        <div class="header">
+          <div class="hide-arrow" onclick="sidebar_not_visible()">
+            <img src="/img/icon/left-arrow.png" alt="Toggle Sidebar">
+          </div>
+        </div>
+        <div class="middle">
+          <a href="/main" data-page="main" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-home-v2.png" alt="">
+              <span class="text">HOME</span>
+            </div>
+          </a>
+          <a href="/buyer/default/1?keyword=" data-page="buyer" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-buyer-v2.png" alt="">
+              <span class="text">거래처 관리</span>
+            </div>
+          </a>
+          <a href="/stock" data-page="stock" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-item-v2.png" alt="">
+              <span class="text">상품 관리</span>
+            </div>
+          </a>
+          <a href="/order/1" data-page="order" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-order-v2.png" alt="">
+              <span class="text">발주 관리</span>
+            </div>
+          </a>
+          <a href="/storage/1" data-page="storage" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icons-warehouse-v2.png" alt="">
+              <span class="text">창고관리</span>
+            </div>
+          </a>
+          <a href="/approval" data-page="approval" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-approval-v2.png" alt="">
+              <span class="text">전자결재</span>
+            </div>
+          </a>
+          <a href="/board/board" data-page="board" class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icons-qna-v2.png" alt="">
+              <span class="text">Q&A</span>
+            </div>
+          </a>
+        </div>
+        <div class="hidden detail-menu">
+          <p onclick="user_management_modal_active ()" th:if="${session.user != null}">
+            <img class="img-password" src="/img/icon/icon-password.png" alt="">
+            <a>
+              비밀번호변경
+            </a>
+          </p>
+          <p onclick="admin_management_modal_active ()" th:if="${session.admin != null}">
+            <img class="img-admin" src="/img/icon/icon-admin-manager.png" alt="">
+            <a>
+              관리자 메뉴
+            </a>
+          </p>
+        </div>
+        <div class="footer">
+          <img src="/img/icon/icon-user-v2.png" alt="" onclick="user_info_toggle()"
+               style="cursor: pointer;">
+          <div class="user-info" th:if="${session.admin != null || session.user != null}">
+          <span th:text="${session.user != null ? session.user.buyer_code.buyer_name : '관리자' }">거래처 & 관리자
+            표시</span>
+            <span
+                th:text="${session.user != null ? session.user.user_name : session.admin.admin_name}">접속자 이름
+            표시</span>
+          </div>
+          <a href="/logout">
+            <img src="/img/icon/icon-logout.png" alt="logout-btn">
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hidden sub-background"
+        style="width: calc(100vw - 326px); height: 1000px; background-color: lightgray; opacity: .7; position: absolute;
+              z-index: 1; top: 0; right: 0;"></div>
+    <!-- Main modal -->
+    <div id="manager-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+         class=" fixed justify-center items-center"
+         style="top: 25%; left: 40%; z-index: 1;
+         box-shadow: rgba(0, 0, 0, 0.5) 0 14px 28px, rgba(0, 0, 0, 0.5) 0 10px 10px; width: 30%">
+    </div>
+    
+    <script src="/js/url-pathname-return.js"></script>
+    <script>
+      function admin_management_modal_active () {
+        $('#manager-modal').load('/admin-management');
+        $('#manager-modal').removeClass('hidden');
+        $('.sub-background').removeClass('hidden');
+      }
+      
+      function user_management_modal_active () {
+        $('#manager-modal').load('/user-management');
+        $('#manager-modal').removeClass('hidden');
+        $('.sub-background').removeClass('hidden');
+        
+      }
+      
+      function admin_management_modal_deactive () {
+        $('#manager-modal').addClass('hidden');
+        $('.sub-background').addClass('hidden');
+      }
+    </script>
+  </body>
 </th:block>

@@ -1,34 +1,31 @@
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
   font-family: "Noto Sans CJK KR Regular", sans-serif;
 }
 
 a {
-	text-decoration: none;
-	color: #000;
+  text-decoration: none;
+  color: #000;
 }
 
 ul, li {
-	list-style: none;
+  list-style: none;
 }
 
 #content {
-      width: calc(100vw - 327px);
-      height: 100%;
-      background-color: #e5e7eb;
-      float: right;
-    }
-    
+  width: auto;
+  height: 100%;
+  background-color: #f3f4f6;
+}
+
 #content_wrap {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 20px;
-  width: 101%;
   height: 100%;
-  padding: 50px;
+  padding: 40px;
   box-sizing: border-box;
 }
-

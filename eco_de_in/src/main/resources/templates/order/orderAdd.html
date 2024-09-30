@@ -6,26 +6,9 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>[등록 페이지]발주 등록</title>
   <link href="/css/default-style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
   <style>
-    #content {
-      width: calc(100vw - 327px);
-      height: 100%;
-      background-color: #e5e7eb;
-      float: right;
-    }
-
-    #content_wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      width: 101%;
-      height: 100%;
-      padding: 50px;
-      box-sizing: border-box;
-    }
 
     .breadcrumb {
       width: 50%;
@@ -141,6 +124,18 @@
     .page-link:hover {
       background-color: #f1f1f1;
     }
+
+    body > div:nth-last-child(1) {
+      z-index: 0 !important;
+    }
+
+    .flex {
+      display: block !important;
+    }
+
+    input:active, input:focus {
+      border: 2px solid black !important;
+    }
   </style>
 </head>
 
@@ -162,7 +157,7 @@
       &nbsp;
       <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
       &nbsp;
-      <a href="/order">
+      <a href="/order/1">
         <span style="color: #ababab; font-weight: bold;">발주 관리</span>
       </a>
       &nbsp;
@@ -174,11 +169,15 @@
     <!-- 발주 조회 -->
     <div class="main-content">
       <h2 class="text-2xl font-bold mb-4">발주 조회</h2>
-      <div class="flex mb-4">
-        <input class="border border-gray-300 p-2 w-full rounded-input" placeholder="발주번호, 거래처명, 거래처코드를 입력하세요."
-               type="text">
-        <button class="bg-green-81CD28 text-white px-4 ml-2 rounded-button search-button">조 회</button>
-      </div>
+      <form action="/order/1" method="get">
+        <div class="flex mb-4">
+          <input class="border border-gray-300 p-2 w-4/5 rounded-input"
+                 name="query" placeholder="발주번호, 거래처를 입력하세요."
+                 type="text">
+          <button class="bg-green-81CD28 py-3 text-white px-4 ml-2 rounded-button search-button"
+                  type="submit">조 회
+          </button>
+        </div>
 
       <span>출고 진행상태</span>
       <div class="inline">
@@ -186,11 +185,12 @@
         <button class="button" onclick="setActiveButton(this)">진행중</button>
         <button class="button" onclick="setActiveButton(this)">완료</button>
       </div>
+      </form>
     </div>
 
     <!--발주 등록-->
     <div class="register-content">
-      <button class="button-register" onclick="location.href='/order'">등 록</button>
+      <button class="button-register" onclick="location.href='/order/1'">등 록</button>
       <form>
         <div class="grid grid-cols-2 gap-6 registeration">
           <div>
@@ -232,7 +232,16 @@
         </div>
       </form>
 
-      <!-- 발주 등록 테이블 -->
+        <!-- 발주 등록 테이블 -->
+      <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
+           focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+            dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              data-modal-target="popup-modal-3"
+              data-modal-toggle="popup-modal-3"
+                    type="button">
+              상 품 검 색
+            </button>
+
       <table>
         <thead>
         <tr>
@@ -245,42 +254,79 @@
         </thead>
         <tbody>
         <tr>
-          <td>1</td>
-          <td>202409120123456</td>
-          <td>진라면</td>
-          <td>3000원</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>202409120123456</td>
-          <td>너구리 라면</td>
-          <td>4000원</td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>202409120123456</td>
-          <td>카레라면</td>
-          <td>4000원</td>
-          <td>15</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td colspan="5">상품검색버튼을 클릭해서 주문하세요!</td>
         </tr>
         </tbody>
       </table>
+
+      <!-- modal (상품검색) -->
+      <div class="hidden fixed max-w-[720px] mx-auto bg-white shadow-lg p-5 rounded-lg"
+           id="popup-modal-3"
+           style="left: 40%; top: 20%; z-index: 1; flex: none !important;">
+        <div class="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]">
+          <a target='_blank' class='block w-full px-4 py-2 text-center text-slate-700 transition-all '>
+            <b>상품검색</b>
+          </a>
+        </div>
+        <div class="w-full flex justify-between items-center mb-3 mt-12 pl-3">
+
+          <div class="mx-3">
+            <div class="w-full max-w-sm min-w-[200px] relative">
+              <div class="relative">
+                <input
+                        class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400
+                        text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none
+                        focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                        placeholder="삼품코드/상품명 검색..."
+                />
+                <button
+                        class="absolute h-8 w-8 right-1 top-1 my-auto px-2 flex items-center bg-white rounded "
+                        type="button"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8 text-slate-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border ">
+          <table class="w-full text-left table-auto min-w-max">
+            <thead>
+            <tr class="border-b border-slate-300 bg-slate-50">
+              <th class="p-4 text-sm font-normal leading-none text-slate-500">이미지</th>
+              <th class="p-4 text-sm font-normal leading-none text-slate-500">상품코드</th>
+              <th class="p-4 text-sm font-normal leading-none text-slate-500">상품명</th>
+              <th class="p-4 text-sm font-normal leading-none text-slate-500">재고</th>
+              <th class="p-4 text-sm font-normal leading-none text-slate-500">단가</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="hover:bg-slate-50">
+              <td class="p-4 border-b border-slate-200 py-5">
+                <img src="https://demos.creative-tim.com/corporate-ui-dashboard-pro/assets/img/kam-idris-_HqHX3LBN18-unsplash.jpg" alt="Product 1" class="w-16 h-16 object-cover rounded" />
+              </td>
+              <td class="p-4 border-b border-slate-200 py-5">
+                <p class="block font-semibold text-sm text-slate-800">2</p>
+              </td>
+              <td class="p-4 border-b border-slate-200 py-5">
+                <p class="text-sm text-slate-500">김밥</p>
+              </td>
+              <td class="p-4 border-b border-slate-200 py-5">
+                <p class="text-sm text-slate-500">10</p>
+              </td>
+              <td class="p-4 border-b border-slate-200 py-5">
+                <p class="text-sm text-slate-500">10,000원</p>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
 
       <!-- 페이지네이션  -->
       <nav aria-label="Page navigation example">
@@ -299,6 +345,7 @@
 </div>
 
 <script>
+  // 조회 버튼
   function setActiveButton(clickedButton) {
     const buttons = document.querySelectorAll('.button');
     buttons.forEach(button => button.classList.remove('active'));
