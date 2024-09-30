@@ -385,7 +385,7 @@
 	            th:classappend="${page - 1 == buyers.number} ? 'active'"
 	            class="page-item inline">
 	          <a th:text="${page}" class="page-link"
-							 th:href="@{{page}?keyword = {keyword}(page = ${page}, keyword = ${param.keyword})}"></a>
+							 th:href="@{{page}?keyword={keyword}(page = ${page}, keyword = ${param.keyword})}"></a>
 	        </li>
 	        <li class="page-item inline" th:classappend="${!buyers.hasNext} ? 'hidden'">
 	          <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page + 1}, keyword = ${param.keyword})}">

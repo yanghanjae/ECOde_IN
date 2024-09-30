@@ -37,9 +37,30 @@
       color: #347928;
       cursor: pointer;
     }
+    
+    .password-check, .input {
+      border: 2px solid gray;
+      border-radius: 15px;
+      padding: 5px 12px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .modify-btn {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      padding: 5px 20px;
+      margin-top: 15px;
+      background-color: skyblue;
+      border-radius: 15px;
+      font-weight: bold;
+    }
   </style>
   <script>
     function request_adminList () {
+      document.querySelector('.tbody').innerHTML = '';
       fetch('/admin-manager', {
         method: 'get',
         headers: {'Content-Type': 'application.json'}
@@ -99,16 +120,138 @@
       </div>
       
       <div class="modal p-4 md:p-5 space-y-4" th:if="${auth eq 'user-management'}">
-        onload
+        
+        <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
+          <li
+              class="first-menu-color flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+            <span
+                class="first-menu flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+                <span class="me-2">1</span>
+                Check
+            </span>
+          </li>
+          <li
+              class="second-menu-color flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+            <span
+                class="second-menu flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+                <span class="me-2">2</span>
+                Modifying
+            </span>
+          </li>
+          <li
+              class="third-menu-color flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:b">
+            <span
+                class="third-menu flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+              <span class="me-2">3</span>
+            </span>
+            Success!
+          </li>
+        </ol>
+        <hr>
+        <div class="first-menu-content">
+          <input type="text" class="user_id hidden" th:value="${session.user.user_id}">
+          <input type="password" class="password-check" style="" autofocus>
+          <button type="button" class="modify-btn" onclick="request_user_passwordCheck ()"> 비밀번호 확인 </button>
+        </div>
+        <div class="second-menu-content hidden">
+          <input type="text" class="user_id_second hidden" th:value="${session.user.user_id}">
+          <input type="password" class="password-first input" style="margin-bottom: 10px;" placeholder="변경할 비밀번호 입력"
+                 required autofocus>
+          <input type="password" class="password-second input" style="" placeholder="한번 더 입력" required>
+          <button type="button" class="modify-btn" onclick="request_user_passwordModify ()"> 비밀번호 변경 </button>
+        </div>
+        <div class="third-menu-content hidden" style="text-align: center; font-weight: bold; font-size: 1.5rem">
+          <img src="/img/icon/icon-success.png" alt="" style="display: block; margin: 40px auto; width: 50px">
+          <p>비밀번호 변경이 완료되었습니다.</p>
+          <p>잠시 후, 로그인 페이지로 이동합니다.</p>
+        </div>
       </div>
-      <!-- Modal footer -->
-<!--      <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">-->
-<!--        <button data-modal-hide="static-modal" type="button"-->
-<!--                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>-->
-<!--        <button data-modal-hide="static-modal" type="button" onclick="admin_management_modal_deactive ()"-->
-<!--                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>-->
-<!--      </div>-->
     </div>
   </div>
+  <script>
+    function request_user_passwordCheck () {
+      const USER_ID = document.querySelector('.user_id').value;
+      const USER_PASSWORD = document.querySelector('.password-check').value;
+      
+      const FORM_DATA = new FormData();
+      
+      FORM_DATA.set('user_id', USER_ID);
+      FORM_DATA.set('user_password', USER_PASSWORD);
+      
+      fetch('/user_management', {
+        method: 'post',
+        body: FORM_DATA
+      })
+          .then(res => res.json())
+          .then(data => {
+            if (data != null) {
+              const FIRST_MENU = document.querySelector('.first-menu');
+              const CONTENT = FIRST_MENU.querySelector('span');
+              const FIRST_MENU_COLOR = document.querySelector('.first-menu-color');
+              const SECOND_MENU_COLOR = document.querySelector('.second-menu-color');
+              const FIRST_MENU_CONTENT = document.querySelector('.first-menu-content');
+              const SECOND_MENU_CONTENT = document.querySelector('.second-menu-content');
+              
+              FIRST_MENU_COLOR.classList.remove('text-blue-600');
+              FIRST_MENU_COLOR.classList.remove('dark:text-blue-500');
+              CONTENT.innerHTML = `
+                                  <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                  </svg>
+                                `;
+              SECOND_MENU_COLOR.classList.add('text-blue-600');
+              SECOND_MENU_COLOR.classList.add('dark:text-blue-500');
+              FIRST_MENU_CONTENT.classList.add('hidden');
+              SECOND_MENU_CONTENT.classList.remove('hidden');
+            }
+          })
+    }
+    
+    function request_user_passwordModify () {
+      const SECOND_USER_ID = document.querySelector('.user_id_second').value;
+      const FIRST_PASSWORD = document.querySelector('.password-first').value;
+      const SECOND_PASSWORD = document.querySelector('.password-second').value;
+      
+      if (FIRST_PASSWORD == SECOND_PASSWORD) {
+        const FORM_DATA = new FormData ();
+        
+        FORM_DATA.set('user_id', SECOND_USER_ID);
+        FORM_DATA.set('user_password', FIRST_PASSWORD);
+        
+        fetch('/user_password_modify', {
+          method: 'post',
+          body: FORM_DATA
+        })
+            .then(res => res.json())
+            .then(data => {
+              const SECOND_MENU = document.querySelector('.second-menu')
+              const CONTENT = SECOND_MENU.querySelector('span');
+              const SECOND_MENU_COLOR = document.querySelector('.second-menu-color');
+              const SECOND_MENU_CONTENT = document.querySelector('.second-menu-content');
+              const THIRD_MENU_COLOR = document.querySelector('.third-menu-color');
+              const THIRD_MENU_CONTENT = document.querySelector('.third-menu-content');
+              
+              CONTENT.innerHTML = `
+                                      <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                      </svg>
+                                      `;
+              
+              SECOND_MENU_COLOR.classList.remove('text-blue-600');
+              SECOND_MENU_COLOR.classList.remove('dark:text-blue-500');
+              THIRD_MENU_COLOR.classList.add('text-blue-600');
+              THIRD_MENU_COLOR.classList.add('dark:text-blue-500');
+              SECOND_MENU_CONTENT.classList.add('hidden');
+              THIRD_MENU_CONTENT.classList.remove('hidden');
+              
+              setTimeout(function () {
+                location.href = '/logout';
+              }, 3000);
+            })
+      } else {
+        alert('입력한 비밀번호가 일치하지 않습니다. 다시 입력해주세요.');
+      }
+    }
+  </script>
 </body>
 </html>

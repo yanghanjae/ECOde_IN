@@ -10,8 +10,13 @@ body {
 ul {
 	padding-left:0; margin-left:0;
 }
+
+button {
+		cursor: pointer;
+}
 .list {
 	list-style-type: none;	
+	cursor: pointer;
 }
 .content {
 		margin : 0 auto;
@@ -93,6 +98,7 @@ input {
 		font-size: 30px;
 		margin: 90px 0;
 		border: none;
+		font-weight: bold;
 }
 
 .user {
@@ -105,14 +111,35 @@ input {
 }
 
 .searchBar {
-		width: 400px;
+		width: 300px;
 		margin: 0 auto;
+		display: inline;
 }
 
 .searchBar:focus {
-		width: 400px;
+		width: 300px;
 		margin: 0 auto;
 		background-color: #fff;
+}
+
+.searchButton {
+		display: inline;
+		background-color: #81CD28;
+		width: 80px;
+		height: 32px;
+		font-weight: bold;
+		font-size: 18px;
+		border:none;
+		vertical-align: bottom;
+		margin: 0 10px;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination button {
+  border: none;
 }
 
 /* 모달창 효과 */
@@ -134,11 +161,47 @@ input {
 		left : 50%;
 		transform : translate(-50%, -50%);
 		width: 500px;
-		height: 500px;
+		height: 600px;
 		background-color: #FFF;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 		z-index: 1000;
 }
+
+.modalContent {
+		margin-top: 80px;
+}
+
+.pagination button {
+		font-size: 16px;
+}
+
+.bold {
+		font-weight: bold;
+}
+
+.disabled {
+    color: gray; 
+}
+
+.disabled:disabled {
+    font-weight: bold;
+    color: black; 
+}
+
+img.closeButton {
+	width: 40px;
+	height: 40px;
+	border: none;
+}
+		
+.closeModal {
+	position: absolute;
+	right : 20px;
+	top : 20px;
+	border : none;
+	background-color: #fff;
+}
+
 
 
 /* 이 아래론 토글 스위치 css 입니다. */
