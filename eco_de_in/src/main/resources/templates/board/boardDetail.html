@@ -127,8 +127,56 @@
 								</tbody>
 							</table>
 						</div>
-<!-- 댓글 -->
-
+						<!-- 댓글 섹션 시작 -->
+						<section id="comment-section" th:style="'margin-top: 20px;'">
+							<div id="comment-container">
+								<!-- 댓글 목록이 여기에 동적으로 추가될 것입니다. -->
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Comment</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- 각 댓글을 표 형식으로 표시 -->
+										<tr th:each="item : ${comment}"
+											th:id="'comment-' + ${item.id}">
+											<td>
+												<div class="comment-content" th:text="${item.comment}"></div>
+												<!-- 댓글 내용 -->
+												<div class="comment-info">
+													<span th:text="${item.admin}"></span>
+													<!-- 댓글 작성자 -->
+													<span class="text-muted"
+														th:text="${#temporals.format(item.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+													<!-- 댓글 작성일 -->
+												</div>
+											</td>
+											<!-- 수정 및 삭제 버튼 추가 -->
+											<td class="comment-buttons">
+												<button type="button"
+													class="btn btn-sm btn-outline-primary edit-comment-btn"
+													data-comment-id="${item.id}"
+													data-comment-content="${item.comment}">수정</button>
+												<button type="button"
+													th:onclick="'commentDelete(' + ${item.boardNo	} + ',' + ${item.id} + ',' + ${item.admin} + ',' + ${item.admin} + ')'"
+													class="btn btn-sm btn-outline-danger">삭제</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- 댓글 작성 폼 -->
+							<form id="comment-form">
+								<div class="form-group">
+									<label for="comment">댓글 추가:</label>
+									<textarea class="form-control" id="comment" rows="3"></textarea>
+								</div>
+								<button type="button" class="btn btn-primary"
+									id="create-comment-btn">댓글 작성</button>
+							</form>
+						</section>
+						<!-- 댓글 섹션 끝 -->
 
 
 
@@ -150,6 +198,141 @@
 	function clickDel() {
 		location.replace("/board/delete/"
 				+ document.querySelector(".boardNo").textContent);
+	}
+
+	const createCommentButton = document.getElementById('create-comment-btn');
+	var httpRequest = new XMLHttpRequest();
+	
+	if (createCommentButton) {
+		createCommentButton.addEventListener('click', function(event) {
+			event.preventDefault();
+
+			const data = {
+					comment : $('#comment').val()
+			};
+
+			if (!data.comment || data.comment.trim() === "") {
+				alert("공백 또는 입력하지 않은 부분이 있습니다.");
+				return false;
+			} else {
+				body = JSON.stringify({
+					comment : $('#comment').val()
+				});
+				function success() {
+					alert('등록 완료되었습니다.');
+					location.replace('/board/');
+				}
+				;
+				function fail() {
+					alert('등록 실패했습니다.');
+					location.replace('/board/');
+				}
+				;
+				httpRequest('POST', '/board/comment', body,
+						success, fail);
+			}
+		});
+	}
+	document.addEventListener('click', function(event) {
+		if (event.target.classList.contains('edit-comment-btn')) {
+			const id = event.target.dataset.id;
+			const commentContent = event.target.dataset.commentContent;
+
+			// Populate textarea with existing comment content
+			const textarea = document.createElement('textarea');
+			textarea.className = 'form-control';
+			textarea.rows = '3';
+			textarea.value = commentContent;
+
+			// Replace the comment text with the textarea
+			const commentContainer = event.target.closest('tr');
+			const commentContentElement = commentContainer
+					.querySelector('.comment-content');
+			commentContentElement.textContent = '';
+			commentContentElement.appendChild(textarea);
+
+			// Change button text to "Save"
+			event.target.textContent = 'Save';
+			event.target.classList.add('save-comment-btn');
+			event.target.classList.remove('edit-comment-btn');
+
+			if (event.target.classList.contains('save-comment-btn')) {
+				const id = event.target.dataset.id;
+				const boardNo = event.target.dataset.boardNo;
+				const textarea = event.target.closest('tr').querySelector(
+						'textarea');
+
+				const modifiedText = textarea.value.trim();
+				if (modifiedText !== '') {
+					const body = JSON.stringify({
+						content : modifiedText
+					});
+
+					function success() {
+						alert('Modification completed.');
+						location.reload(); // Reload the page or perform any other desired action
+					}
+
+					function fail() {
+						alert('Edit failed.');
+						location.reload(); // Reload the page or perform any other desired action
+					}
+
+					// Send HTTP request to update the comment content
+					httpRequest('PUT', `/board/${boardNo}/comment/${id}`, body,
+							success, fail);
+				} else {
+					alert('Please provide a valid comment.');
+				}
+			}
+			if (event.target.classList.contains('cancel-comment-btn')) {
+				const id = event.target.dataset.id;
+				const commentContent = event.target.dataset.commentContent;
+
+				// Restore the original comment content
+				const commentContainer = event.target.closest('tr');
+				const commentContentElement = commentContainer
+						.querySelector('.comment-content');
+				commentContentElement.textContent = commentContent;
+
+				// Change button text back to "Edit"
+				const editButton = document.createElement('button');
+				editButton.type = 'button';
+				editButton.textContent = 'Edit';
+				editButton.classList.add('btn', 'btn-sm',
+						'btn-outline-primary', 'edit-comment-btn');
+				editButton.dataset.id = id;
+				editButton.dataset.commentContent = commentContent;
+
+				const buttonContainer = commentContainer
+						.querySelector('.comment-buttons');
+				buttonContainer.replaceChild(editButton, event.target);
+			}
+		}
+	});
+
+	function commentDelete(boardNo, id, commentWriterId, sessionAdminId) {
+		// 본인이 작성한 글인지 확인
+		if (commentWriterId !== sessionAdminId) {
+			alert("본인이 작성한 댓글만 삭제 가능합니다.");
+		} else {
+			const con_check = confirm("삭제하시겠습니까?");
+
+			if (con_check) {
+				function success() {
+					alert('삭제가 완료되었습니다.');
+					location.replace('/board/' + boardNo);
+				}
+
+				function fail() {
+					alert('삭제 실패했습니다.');
+					location.replace('/board/' + boardNo);
+				}
+				// 적절한 요청을 보내는 함수 (예: httpRequest)를 호출하여 댓글 삭제 요청을 서버에 전송합니다.
+				httpRequest('DELETE', `/board/${boardNo}/comment/${id}`, null,
+						success, fail);
+			}
+		}
 	}
 </script>
 </html>

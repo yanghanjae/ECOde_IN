@@ -46,8 +46,8 @@ public class CommentService {
     public List<Comment> findAll(int id) {
         Board board = boardRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id: " + id));
-        List<Comment> comments = board.getComments();
-        return comments;
+        List<Comment> comment = board.getComment();
+        return comment;
     }
 
     //댓글 업데이트
