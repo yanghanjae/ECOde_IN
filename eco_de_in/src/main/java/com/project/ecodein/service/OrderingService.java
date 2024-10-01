@@ -25,23 +25,25 @@ public class OrderingService {
 	public Page<Ordering> getOrders(@Param("page") int page, @Param("query") String query,
                                     @Param("status") String status) {
 
-        Sort sort = Sort.by(Sort.Direction.ASC, "order_no");
-
-        if (query == null && status == null || status.equals("all")) {
-            sort = Sort.by(Sort.Order.desc("orderNo")); // 최신 발주 번호 순으로 정렬
-        }
-
-		Pageable pageable = PageRequest.of(page - 1, 10, sort); // 페이지당 10개씩 조회
-
         // (전체검색)검색어 없고, 상태 체크 안한 경우
-        if (query == null && status == null || status.equals("all")) {
+        if (query == null && status == null) { 
+            System.out.printf("검색어/상태값 없음 - query : %s%n, status : %s%n", query, status);
+            Sort sort = Sort.by(Sort.Order.desc("orderNo"));
+            Pageable pageable = PageRequest.of(page - 1, 10, sort); // 페이지당 10개씩 조회
             return ORDERING_REPOSITORY.findAll(pageable);
             // (키워드 검색) 검색어가 있는 경우
         } else if (query != null) {
+            System.out.printf("상태값 없음 - query : %s%n, status : %s%n", query, status);
+            Sort sort = Sort.by(Sort.Order.desc("order_no"));
+            Pageable pageable = PageRequest.of(page - 1, 10, sort); // 페이지당 10개씩 조회
             return ORDERING_REPOSITORY.searchByQuery(query, pageable);
             // (상태 검색) 상태코드가 있는 경우
         } else {
-            byte statusble = 99;
+            System.out.printf("검색어 없음 - query : %s%n, status : %s%n", query, status);
+            Sort sort = Sort.by(Sort.Order.desc("order_no"));
+            Pageable pageable = PageRequest.of(page - 1, 10, sort); // 페이지당 10개씩 조회
+
+            byte statusble = 2;
 
             if (status.equals("progress")) {
                 statusble = 1;
