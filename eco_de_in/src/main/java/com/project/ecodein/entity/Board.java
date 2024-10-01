@@ -49,6 +49,6 @@ public class Board {
 
     @OneToMany(mappedBy = "boardNo", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 댓글 정렬
-    private List<Comment> comments;
+    private List<Comment> comment;
 
 }

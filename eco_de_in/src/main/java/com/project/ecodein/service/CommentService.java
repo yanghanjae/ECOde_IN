@@ -46,14 +46,14 @@ public class CommentService {
     public List<Comment> findAll(int id) {
         Board board = boardRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id: " + id));
-        List<Comment> comments = board.getComments();
-        return comments;
+        List<Comment> comment = board.getComment();
+        return comment;
     }
 
     //댓글 업데이트
     @Transactional
-    public void update(int boardNo, Long id, UpdateCommentRequest dto) {
-        Comment comment = commentRepository.findByBoardIdAndId(boardNo, id).orElseThrow(() ->
+    public void update(Board boardNo, Long id, UpdateCommentRequest dto) {
+        Comment comment = commentRepository.findByBoardNoAndId(boardNo, id).orElseThrow(() ->
                 new IllegalArgumentException("해당 댓글이 존재하지 않습니다. " + id));
 
         comment.update(dto.getComment());
@@ -61,8 +61,8 @@ public class CommentService {
 
     //댓글 삭제
     @Transactional
-    public void delete(int boardNo, Long id) {
-        Comment comment = commentRepository.findByBoardIdAndId(boardNo, id).orElseThrow(() ->
+    public void delete(Board boardNo, Long id) {
+        Comment comment = commentRepository.findByBoardNoAndId(boardNo, id).orElseThrow(() ->
                 new IllegalArgumentException("해당 댓글이 존재하지 않습니다. id=" + id));
 
         commentRepository.delete(comment);
