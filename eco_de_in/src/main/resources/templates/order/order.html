@@ -24,6 +24,8 @@
       padding: 20px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       width: 100%;
+      min-height: 600px;
+      max-height: 900px;
     }
 
     table {
@@ -98,13 +100,13 @@
       padding-left: 0;
       list-style: none;
       margin-top: 50px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .page-link {
       border: 1px solid #ddd;
       padding: 8px 12px;
-      margin: 0 700px;
+      margin: 0 1px;
       text-decoration: none;
       color: #000;
       border-radius: 5px;
@@ -153,11 +155,19 @@
       </div>
 
     <span>출고 진행상태</span>
-      <div class="inline">
-        <button class="button" onclick="location.href='/order?status=all'; setActiveButton(this)">전체</button>
-        <button class="button" onclick="location.href='/order?status=in-progress'; setActiveButton(this)">진행중</button>
-        <button class="button" onclick="location.href='/order?status=completed'; setActiveButton(this)">완료</button>
-      </div>
+        <div class="inline">
+          <button class="button" onclick="location.href='/order?status=all'; setActiveButton(this)">전체</button>
+          <button class="button" onclick="location.href='/order?status=in-progress'; setActiveButton(this)">진행중</button>
+          <button class="button" onclick="location.href='/order?status=completed'; setActiveButton(this)">완료</button>
+        </div>
+
+        <!-- 필터 검색-->
+<!--        <div class="inline">-->
+<!--          <button class="button" onclick="location.href='/order?page=1&status=all&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">전체</button>-->
+<!--          <button class="button" onclick="location.href='/order?page=1&status=in-progress&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">진행중</button>-->
+<!--          <button class="button" onclick="location.href='/order?page=1&status=completed&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">완료</button>-->
+<!--        </div>-->
+
       </form>
     </div>
 
@@ -186,10 +196,10 @@
           </td>
           <td th:text="${order.buyer_code.buyer_name}"></td>
           <td th:text="${order.due_date}"></td>
-          <td th:text="${order.is_delivery eq false ? '진행중':'완료'}"></td>
+          <td th:text="${order.isDelivery eq false ? '진행중':'완료'}"></td>
           <td>
             <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
-           focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+           focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-1 text-center dark:bg-blue-600
             dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   data-modal-target="popup-modal-a"
                   data-modal-toggle="popup-modal-a"
@@ -199,25 +209,6 @@
             </button>
           </td>
         </tr>
-
-<!--        <tr>-->
-<!--          <td>1</td>-->
-<!--          <td>2024-09-12</td>-->
-<!--          <td><a href="/order/20240912123">20240912123</a></td>-->
-<!--          <td>CU</td>-->
-<!--          <td>2024-09-20</td>-->
-<!--          <td>진행중</td>-->
-<!--          <td class="m-auto p-auto">-->
-<!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none-->
-<!--            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600-->
-<!--            dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
-<!--                    data-modal-target="popup-modal-a"-->
-<!--                    data-modal-toggle="popup-modal-a"-->
-<!--                    type="button">-->
-<!--              x-->
-<!--            </button>-->
-<!--          </td>-->
-<!--        </tr>-->
 
 <!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
 <!--                    data-modal-target="popup-modal"-->
@@ -230,7 +221,8 @@
       </table>
 
       <!-- 페이지네이션  -->
-      <ul class="pagination justify-content-center inline">
+      <div class="pagination">
+      <ul class="justify-content-center inline">
         <li class="page-item inline" th:classappend="${!orders.hasPrevious} ? 'hidden'">
           <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page - 1}, keyword = ${param.keyword})}">
             &lt;&lt;
@@ -249,6 +241,7 @@
           </a>
         </li>
       </ul>
+      </div>
 
       <!-- modal 1 -->
       <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center

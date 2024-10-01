@@ -18,15 +18,16 @@ public class OrderController {
 
 	private final OrderingService ORDER_SERVICE;
 
-
 	public OrderController(OrderingService orderService) {
+
 		this.ORDER_SERVICE = orderService;
 	}
 
 
 	// 발주 목록 페이지
 	@GetMapping("/{page}")
-	public String order(Model model, @PathVariable("page") Integer page, @RequestParam(required = false) String query) {
+	public String order(Model model,
+	@PathVariable("page") Integer page, @RequestParam(required = false) String query) {
 
 		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query);
 		model.addAttribute("orders", orders);
@@ -35,31 +36,12 @@ public class OrderController {
 	}
 
 
-	// 검색 기능 구현
-//	@GetMapping("/search")
-//	public String searchOrders(@RequestParam("query") String query, Model model) {
-//		// 서비스에서 검색 결과를 가져옴
-//		List<Ordering> searchResults = (List<Ordering>) ORDER_SERVICE.searchOrders(query);
-//		model.addAttribute("orders", searchResults);
-//		return "order/order";
-//	}
-
-
 	// 삭제 기능 구현
     @GetMapping("/delete/{order_no}")
     public ResponseEntity<Void> deleteOrder(@PathVariable int order_no) {
         ORDER_SERVICE.deleteOrder(order_no);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
-//    // 발주 목록 페이지
-//    @GetMapping("")
-//    public String order() {
-//
-//        return "order/order";
-//    }
 
 
 	// 페이지네이션
@@ -77,6 +59,31 @@ public class OrderController {
 		return "order/order";
 	}
 
+
+	// (통합편)_발주 목록 페이지 및 페이지네이션 처리
+//	@GetMapping({"", "/{page}"})
+//	public String order(
+//			@PathVariable(value = "page", required = false) Integer page,
+//			@RequestParam(name = "query", required = false) String query,
+//			@RequestParam(name = "status", required = false) String status,
+//			Model model) {
+//
+//		// 기본 페이지 번호 설정
+//		if (page == null) {
+//			page = 1;
+//		}
+//
+//		// 발주 목록 조회
+//		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query, status);
+//		model.addAttribute("orders", orders);
+//		model.addAttribute("currentPage", page);
+//		model.addAttribute("totalPages", orders.getTotalPages());
+//		model.addAttribute("query", query);
+//		model.addAttribute("status", status); // 현재 상태 추가
+//		return "order/order"; // 뷰 이름
+//	}
+
+
 	@GetMapping("/add")
 	public String orderAdd() {
 
@@ -90,11 +97,3 @@ public class OrderController {
 	}
 
 }
-
-
-
-
-
-
-
-
