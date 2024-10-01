@@ -42,7 +42,7 @@ public class Comment {
     @JoinColumn(name = "admin_id", referencedColumnName = "admin_id", nullable = false)
     private Admin admin; // 작성자
 
-    
+
     //댓글 수정
     public void update(String comment) {
         this.comment = comment;

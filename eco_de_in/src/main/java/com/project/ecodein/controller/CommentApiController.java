@@ -15,13 +15,13 @@ import lombok.RequiredArgsConstructor;
 public class CommentApiController {
 
 	private final CommentService commentService;
-	
+
 	// 댓글 생성
-	
+
 	// 댓글 읽어오기
 	@GetMapping("/{id}/comments")
 	public List<Comment> read(@PathVariable int id) {
 		return commentService.findAll(id);
 	}
-	
+
 }
