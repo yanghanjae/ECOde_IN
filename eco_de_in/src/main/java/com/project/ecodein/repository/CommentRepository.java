@@ -7,6 +7,6 @@ import com.project.ecodein.entity.Board;
 import com.project.ecodein.entity.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    List<Comment> getCommentByArticleOrderById(Board board);
-    Optional<Comment> findByArticleIdAndId(int boardNo, Long id);
+    List<Comment> getCommentByBoardOrderById(Board board);
+    Optional<Comment> findByBoardIdAndId(int boardNo, Long id);
 }
