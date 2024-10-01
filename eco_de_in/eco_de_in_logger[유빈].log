@@ -10941,3 +10941,73 @@ This generated password is for development use only. Your security configuration
 2024-10-01T15:43:29.297+09:00  WARN 35492 --- [http-nio-80-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-2][order/order] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template order/order, line 127, col 11. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
 2024-10-01T15:43:29.360+09:00  WARN 35492 --- [http-nio-80-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-3][order/order] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template order/order, line 127, col 11. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
 2024-10-01T15:43:30.846+09:00  WARN 35492 --- [http-nio-80-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-80-exec-6][order/order] Deprecated unwrapped fragment expression "fragments/sidebar :: sidebarFragment" found in template order/order, line 127, col 11. Please use the complete syntax of fragment expressions instead ("~{fragments/sidebar :: sidebarFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-10-01T15:54:19.832+09:00  INFO 35492 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 3 class path changes (0 additions, 1 deletion, 2 modifications)
+2024-10-01T15:54:20.732+09:00  INFO 35492 --- [Thread-19] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-01T15:54:20.734+09:00  INFO 35492 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2024-10-01T15:54:20.807+09:00  INFO 35492 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2024-10-01T15:54:20.916+09:00  INFO 35492 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.10 with PID 35492 (E:\@team-project\@main-project\@source\ECOde_IN\eco_de_in\out\production\classes started by yubin in E:\@team-project\@main-project\@source\ECOde_IN\eco_de_in)
+2024-10-01T15:54:20.916+09:00  INFO 35492 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-01T15:54:21.196+09:00  INFO 35492 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-01T15:54:21.225+09:00  INFO 35492 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 9 JPA repository interfaces.
+2024-10-01T15:54:21.346+09:00  INFO 35492 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-10-01T15:54:21.346+09:00  INFO 35492 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-01T15:54:21.346+09:00  INFO 35492 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-10-01T15:54:21.369+09:00  INFO 35492 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-01T15:54:21.369+09:00  INFO 35492 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 450 ms
+2024-10-01T15:54:21.408+09:00  INFO 35492 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2024-10-01T15:54:21.547+09:00  INFO 35492 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@74058483
+2024-10-01T15:54:21.547+09:00  INFO 35492 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2024-10-01T15:54:21.548+09:00  INFO 35492 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-01T15:54:21.551+09:00  INFO 35492 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-01T15:54:21.557+09:00  INFO 35492 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-01T15:54:21.602+09:00  WARN 35492 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-10-01T15:54:21.602+09:00  WARN 35492 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-10-01T15:54:21.685+09:00  INFO 35492 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-01T15:54:21.686+09:00  INFO 35492 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-01T15:54:21.871+09:00  WARN 35492 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-01T15:54:21.927+09:00  WARN 35492 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9928d7f4-ac1a-4038-bfe1-6a55bb746fdb
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-10-01T15:54:21.928+09:00  INFO 35492 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-10-01T15:54:22.015+09:00  INFO 35492 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-10-01T15:54:22.031+09:00  INFO 35492 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-10-01T15:54:22.035+09:00  INFO 35492 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 1.154 seconds (process running for 814.37)
+2024-10-01T15:54:22.036+09:00  INFO 35492 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-10-01T15:54:23.444+09:00  INFO 35492 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2024-10-01T15:54:24.180+09:00  INFO 35492 --- [Thread-23] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-01T15:54:24.181+09:00  INFO 35492 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2024-10-01T15:54:24.247+09:00  INFO 35492 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2024-10-01T15:54:24.317+09:00  INFO 35492 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Starting EcoDeInApplication using Java 17.0.10 with PID 35492 (E:\@team-project\@main-project\@source\ECOde_IN\eco_de_in\out\production\classes started by yubin in E:\@team-project\@main-project\@source\ECOde_IN\eco_de_in)
+2024-10-01T15:54:24.318+09:00  INFO 35492 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : No active profile set, falling back to 1 default profile: "default"
+2024-10-01T15:54:24.460+09:00  INFO 35492 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-01T15:54:24.482+09:00  INFO 35492 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 9 JPA repository interfaces.
+2024-10-01T15:54:24.596+09:00  INFO 35492 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 80 (http)
+2024-10-01T15:54:24.597+09:00  INFO 35492 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-01T15:54:24.597+09:00  INFO 35492 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-10-01T15:54:24.631+09:00  INFO 35492 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-01T15:54:24.631+09:00  INFO 35492 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 312 ms
+2024-10-01T15:54:24.659+09:00  INFO 35492 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2024-10-01T15:54:24.774+09:00  INFO 35492 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection com.mysql.cj.jdbc.ConnectionImpl@32b56274
+2024-10-01T15:54:24.774+09:00  INFO 35492 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2024-10-01T15:54:24.775+09:00  INFO 35492 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-01T15:54:24.777+09:00  INFO 35492 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-01T15:54:24.784+09:00  INFO 35492 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-01T15:54:24.830+09:00  WARN 35492 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): com.project.ecodein.dto.OrderDetail
+2024-10-01T15:54:24.830+09:00  WARN 35492 --- [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): com.project.ecodein.dto.OrderDetail
+2024-10-01T15:54:24.895+09:00  INFO 35492 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-01T15:54:24.895+09:00  INFO 35492 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-01T15:54:25.057+09:00  WARN 35492 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-01T15:54:25.100+09:00  WARN 35492 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: e7206aef-0caa-4986-ad6c-c3d6a4763424
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-10-01T15:54:25.101+09:00  INFO 35492 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-10-01T15:54:25.172+09:00  INFO 35492 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-10-01T15:54:25.195+09:00  INFO 35492 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 80 (http) with context path '/'
+2024-10-01T15:54:25.201+09:00  INFO 35492 --- [restartedMain] com.project.ecodein.EcoDeInApplication   : Started EcoDeInApplication in 0.902 seconds (process running for 817.536)
+2024-10-01T15:54:25.202+09:00  INFO 35492 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
