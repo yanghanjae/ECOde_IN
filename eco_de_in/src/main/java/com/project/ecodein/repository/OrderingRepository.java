@@ -18,6 +18,11 @@ public interface OrderingRepository extends JpaRepository<Ordering, Integer> {
             "like concat('%', :query, '%')", nativeQuery = true)
     Page<Ordering> searchByQuery(@Param("query") String query, Pageable pageable_t);
 
+    @Query(value = "select o.*, b.buyer_name from ordering o " +
+                    "left join buyer b on o.buyer_code = b.buyer_code " +
+                    "where o.is_delivery = :statusble", nativeQuery = true)
+    Page<Ordering> findAllByIsDelivery (@Param("statusble") byte statusble, Pageable pageable);
+
 
     // (필터 검색)
 //    // 진행중인 발주 조회
