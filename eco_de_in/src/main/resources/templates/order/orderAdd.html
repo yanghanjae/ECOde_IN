@@ -30,6 +30,8 @@
       padding: 20px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       width: 100%;
+      min-height: 600px;
+      max-height: 900px;
     }
 
     table {
@@ -109,13 +111,13 @@
       padding-left: 0;
       list-style: none;
       margin-top: 50px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .page-link {
       border: 1px solid #ddd;
       padding: 8px 12px;
-      margin: 0 5px;
+      margin: 0 1px;
       text-decoration: none;
       color: #000;
       border-radius: 5px;
@@ -238,9 +240,9 @@
             dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               data-modal-target="popup-modal-3"
               data-modal-toggle="popup-modal-3"
-                    type="button">
-              상 품 검 색
-            </button>
+              type="button">
+        상 품 검 색
+      </button>
 
       <table>
         <thead>
@@ -260,9 +262,9 @@
       </table>
 
       <!-- modal (상품검색) -->
-      <div class="hidden fixed max-w-[720px] mx-auto bg-white shadow-lg p-5 rounded-lg"
+      <div class="hidden fixed max-w-[960px] mx-auto bg-white shadow-lg p-5 rounded-lg"
            id="popup-modal-3"
-           style="left: 40%; top: 20%; z-index: 1; flex: none !important;">
+           style="left: 50%; top: 20%; transform: translateX(-50%); z-index: 1; flex: none !important; width: 40%; max-width: 960px;">
         <div class="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]">
           <a target='_blank' class='block w-full px-4 py-2 text-center text-slate-700 transition-all '>
             <b>상품검색</b>
@@ -280,7 +282,7 @@
                         placeholder="삼품코드/상품명 검색..."
                 />
                 <button
-                        class="absolute h-8 w-8 right-1 top-1 my-auto px-2 flex items-center bg-white rounded "
+                        class="absolute h-8 w-8 right-3 top-1 my-auto px-2 flex items-center bg-white rounded "
                         type="button"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8 text-slate-600">
@@ -325,24 +327,20 @@
           </table>
         </div>
       </div>
-    </div>
-
 
       <!-- 페이지네이션  -->
-      <div aria-label="Page navigation example">
-        <ul class="pagination">
-          <li><a class="page-link" href="#"><</a></li>
-          <li><a class="page-link" href="#">1</a></li>
-          <li><a class="page-link" href="#">2</a></li>
-          <li><a class="page-link" href="#">3</a></li>
-          <li><a class="page-link" href="#">></a></li>
+    <div class="pagination">
+      <ul class="justify-content-center inline">
+          <li class="page-item inline"><a class="page-link" href="#"><</a></li>
+          <li class="page-item inline"><a class="page-link" href="#">1</a></li>
+          <li class="page-item inline"><a class="page-link" href="#">2</a></li>
+          <li class="page-item inline"><a class="page-link" href="#">3</a></li>
+          <li class="page-item inline"><a class="page-link" href="#">></a></li>
         </ul>
       </div>
     </div>
+    </div>
   </div>
-</div>
-</div>
-</div>
 
 <script>
   // 조회 버튼
