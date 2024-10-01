@@ -156,9 +156,13 @@
 
     <span>출고 진행상태</span>
         <div class="inline">
-          <button class="button" onclick="location.href='/order?status=all'; setActiveButton(this)">전체</button>
-          <button class="button" onclick="location.href='/order?status=in-progress'; setActiveButton(this)">진행중</button>
-          <button class="button" onclick="location.href='/order?status=completed'; setActiveButton(this)">완료</button>
+          <button class="button" type="button"
+                  onclick="location.href='/order/1/all'; setActiveButton(this)">전체
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/progress'; setActiveButton(this)">진행중
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/complete'; setActiveButton(this)">완료
+          </button>
         </div>
 
         <!-- 필터 검색-->

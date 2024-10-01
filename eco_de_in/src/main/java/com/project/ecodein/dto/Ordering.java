@@ -43,5 +43,5 @@ public class Ordering {
 	
 	@Column(name = "is_delivery", nullable = false)
 	//private Boolean is_delivery;
-	private Boolean isDelivery;
+	private byte isDelivery;
 }

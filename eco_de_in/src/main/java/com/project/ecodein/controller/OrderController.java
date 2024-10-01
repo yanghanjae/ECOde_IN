@@ -25,11 +25,12 @@ public class OrderController {
 
 
 	// 발주 목록 페이지
-	@GetMapping("/{page}")
+	@GetMapping({"/{page}", "/{page}/{status}"})
 	public String order(Model model,
-	@PathVariable("page") Integer page, @RequestParam(required = false) String query) {
+	@PathVariable("page") Integer page, @RequestParam(required = false) String query,
+                        @PathVariable(name = "status", required = false) String status) {
 
-		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query);
+		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query, status);
 		model.addAttribute("orders", orders);
 		return "order/order";
 
@@ -45,19 +46,19 @@ public class OrderController {
 
 
 	// 페이지네이션
-	@GetMapping("/list")
-	public String orderList(
-			@RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam(name = "query", required = false) String query,
-			Model model) {
-		// 페이지네이션 및 검색 결과 조회
-		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query);
-		model.addAttribute("orders", orders.getContent());
-		model.addAttribute("totalPages", orders.getTotalPages());
-		model.addAttribute("currentPage", page);
-		model.addAttribute("query", query);
-		return "order/order";
-	}
+//	@GetMapping("/list")
+//	public String orderList(
+//			@RequestParam(name = "page", defaultValue = "1") int page,
+//			@RequestParam(name = "query", required = false) String query,
+//			Model model) {
+//		// 페이지네이션 및 검색 결과 조회
+//		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query);
+//		model.addAttribute("orders", orders.getContent());
+//		model.addAttribute("totalPages", orders.getTotalPages());
+//		model.addAttribute("currentPage", page);
+//		model.addAttribute("query", query);
+//		return "order/order";
+//	}
 
 
 	// (통합편)_발주 목록 페이지 및 페이지네이션 처리
