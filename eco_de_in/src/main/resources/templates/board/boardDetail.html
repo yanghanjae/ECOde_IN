@@ -47,12 +47,11 @@
 								<button type="button"
 									class="text-black bg-gradient-to-r from-green-200 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
 									th:onclick="|location.href='@{/board/update/{boardNo}(boardNo=${board.boardNo})}'|">수정</button>
-								
+
 								<!-- Button trigger modal -->
 								<button type="button"
 									class="text-black bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-									data-modal-toggle="Modal"
-									data-modal-target="Modal">삭제</button>
+									data-modal-toggle="Modal" data-modal-target="Modal">삭제</button>
 							</div>
 
 							<!-- Modal -->
@@ -84,7 +83,8 @@
                 </svg>
 											<h3
 												class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">삭제하시겠습니까?</h3>
-											<button onclick="clickDel()" data-modal-hide="Modal" type="button"
+											<button onclick="clickDel()" data-modal-hide="Modal"
+												type="button"
 												class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
 												삭제</button>
 											<button data-modal-hide="Modal" type="button"
@@ -97,31 +97,89 @@
 						</div>
 
 
-						<div class="board-form">
-							<table class="table table-striped table-bordered">
-								<tr>
-									<th>글 번호</th>
-									<td class="boardNo" th:text="${board.boardNo}"></td>
-								</tr>
-								<tr>
-									<th>글 제목</th>
-									<td th:text="${board.boardTitle}"></td>
-								</tr>
-								<tr>
-									<th>작성자</th>
-									<td th:text="${board.user.user_name}"></td>
-								</tr>
-								<tr>
-									<th>등록일</th>
-									<td
-										th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-								</tr>
-								<tr>
-									<th>내용</th>
-									<td th:utext="${board.boardContent}"></td>
-								</tr>
+
+						<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+							<table
+								class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+								<thead
+									class="text-xs text-gray-700 uppercase dark:text-gray-400">
+									<tr>
+										<th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+											글 제목</th>
+										<td th:text="${board.boardTitle}"></td>
+									</tr>
+									<tr class="border-b border-gray-200 dark:border-gray-700">
+										<th scope="row"
+											class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+											글 번호</th>
+										<td th:text="${board.boardNo}"></td>
+										<td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">작성자</td>
+										<td th:text="${board.user.user_name}"></td>
+										<td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">등록일</td>
+										<td
+											th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="border-b border-gray-200 dark:border-gray-700">
+										<td th:utext="${board.boardContent}"></td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
+						<!-- 댓글 섹션 시작 -->
+						<section id="comment-section" th:style="'margin-top: 20px;'">
+							<div id="comment-container">
+								<!-- 댓글 목록이 여기에 동적으로 추가될 것입니다. -->
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Comment</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- 각 댓글을 표 형식으로 표시 -->
+										<tr th:each="item : ${comment}"
+											th:id="'comment-' + ${item.id}">
+											<td>
+												<div class="comment-content" th:text="${item.comment}"></div>
+												<!-- 댓글 내용 -->
+												<div class="comment-info">
+													<span th:text="${item.admin}"></span>
+													<!-- 댓글 작성자 -->
+													<span class="text-muted"
+														th:text="${#temporals.format(item.modifiedDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+													<!-- 댓글 작성일 -->
+												</div>
+											</td>
+											<!-- 수정 및 삭제 버튼 추가 -->
+											<td class="comment-buttons">
+												<button type="button"
+													class="btn btn-sm btn-outline-primary edit-comment-btn"
+													data-comment-id="${item.id}"
+													data-comment-content="${item.comment}">수정</button>
+												<button type="button"
+													th:onclick="'commentDelete(' + ${item.boardNo	} + ',' + ${item.id} + ',' + ${item.admin} + ',' + ${item.admin} + ')'"
+													class="btn btn-sm btn-outline-danger">삭제</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- 댓글 작성 폼 -->
+							<form id="comment-form">
+								<div class="form-group">
+									<label for="comment">댓글 추가:</label>
+									<textarea class="form-control" id="comment" rows="3"></textarea>
+								</div>
+								<button type="button" class="btn btn-primary"
+									id="create-comment-btn">댓글 작성</button>
+							</form>
+						</section>
+						<!-- 댓글 섹션 끝 -->
+
+
+
 						<div class="row mt-5">
 							<div class="col">
 								<button type="button"
@@ -137,9 +195,145 @@
 	</div>
 </body>
 <script>
-function clickDel() {
-	location.replace("/board/delete/"+ document.querySelector(".boardNo").textContent);
-}
+	function clickDel() {
+		location.replace("/board/delete/"
+				+ document.querySelector(".boardNo").textContent);
+	}
+
+	const createCommentButton = document.getElementById('create-comment-btn');
+	var httpRequest = new XMLHttpRequest();
+	
+	if (createCommentButton) {
+		createCommentButton.addEventListener('click', function(event) {
+			event.preventDefault();
+
+			const data = {
+					comment : $('#comment').val()
+			};
+
+			if (!data.comment || data.comment.trim() === "") {
+				alert("공백 또는 입력하지 않은 부분이 있습니다.");
+				return false;
+			} else {
+				body = JSON.stringify({
+					comment : $('#comment').val()
+				});
+				function success() {
+					alert('등록 완료되었습니다.');
+					location.replace('/board/');
+				}
+				;
+				function fail() {
+					alert('등록 실패했습니다.');
+					location.replace('/board/');
+				}
+				;
+				httpRequest('POST', '/board/comment', body,
+						success, fail);
+			}
+		});
+	}
+	document.addEventListener('click', function(event) {
+		if (event.target.classList.contains('edit-comment-btn')) {
+			const id = event.target.dataset.id;
+			const commentContent = event.target.dataset.commentContent;
+
+			// Populate textarea with existing comment content
+			const textarea = document.createElement('textarea');
+			textarea.className = 'form-control';
+			textarea.rows = '3';
+			textarea.value = commentContent;
+
+			// Replace the comment text with the textarea
+			const commentContainer = event.target.closest('tr');
+			const commentContentElement = commentContainer
+					.querySelector('.comment-content');
+			commentContentElement.textContent = '';
+			commentContentElement.appendChild(textarea);
+
+			// Change button text to "Save"
+			event.target.textContent = 'Save';
+			event.target.classList.add('save-comment-btn');
+			event.target.classList.remove('edit-comment-btn');
+
+			if (event.target.classList.contains('save-comment-btn')) {
+				const id = event.target.dataset.id;
+				const boardNo = event.target.dataset.boardNo;
+				const textarea = event.target.closest('tr').querySelector(
+						'textarea');
+
+				const modifiedText = textarea.value.trim();
+				if (modifiedText !== '') {
+					const body = JSON.stringify({
+						content : modifiedText
+					});
+
+					function success() {
+						alert('Modification completed.');
+						location.reload(); // Reload the page or perform any other desired action
+					}
+
+					function fail() {
+						alert('Edit failed.');
+						location.reload(); // Reload the page or perform any other desired action
+					}
+
+					// Send HTTP request to update the comment content
+					httpRequest('PUT', `/board/${boardNo}/comment/${id}`, body,
+							success, fail);
+				} else {
+					alert('Please provide a valid comment.');
+				}
+			}
+			if (event.target.classList.contains('cancel-comment-btn')) {
+				const id = event.target.dataset.id;
+				const commentContent = event.target.dataset.commentContent;
+
+				// Restore the original comment content
+				const commentContainer = event.target.closest('tr');
+				const commentContentElement = commentContainer
+						.querySelector('.comment-content');
+				commentContentElement.textContent = commentContent;
+
+				// Change button text back to "Edit"
+				const editButton = document.createElement('button');
+				editButton.type = 'button';
+				editButton.textContent = 'Edit';
+				editButton.classList.add('btn', 'btn-sm',
+						'btn-outline-primary', 'edit-comment-btn');
+				editButton.dataset.id = id;
+				editButton.dataset.commentContent = commentContent;
+
+				const buttonContainer = commentContainer
+						.querySelector('.comment-buttons');
+				buttonContainer.replaceChild(editButton, event.target);
+			}
+		}
+	});
+
+	function commentDelete(boardNo, id, commentWriterId, sessionAdminId) {
+		// 본인이 작성한 글인지 확인
+		if (commentWriterId !== sessionAdminId) {
+			alert("본인이 작성한 댓글만 삭제 가능합니다.");
+		} else {
+			const con_check = confirm("삭제하시겠습니까?");
+
+			if (con_check) {
+				function success() {
+					alert('삭제가 완료되었습니다.');
+					location.replace('/board/' + boardNo);
+				}
+
+				function fail() {
+					alert('삭제 실패했습니다.');
+					location.replace('/board/' + boardNo);
+				}
+				// 적절한 요청을 보내는 함수 (예: httpRequest)를 호출하여 댓글 삭제 요청을 서버에 전송합니다.
+				httpRequest('DELETE', `/board/${boardNo}/comment/${id}`, null,
+						success, fail);
+			}
+		}
+	}
 </script>
 </html>
 

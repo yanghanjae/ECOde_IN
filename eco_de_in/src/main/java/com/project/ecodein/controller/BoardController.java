@@ -20,73 +20,87 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/board")
+@RequestMapping ("/board")
 public class BoardController {
-	
-	private Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
+	private Logger log = LoggerFactory.getLogger (this.getClass ());
+
 	private final BoardService boardService;
-	
-	public BoardController(BoardService boardService) {
+
+	public BoardController (BoardService boardService) {
+
 		this.boardService = boardService;
+
 	}
 
 	// 상세페이지
-	@GetMapping("/{boardNo}")
-	public String findBoardByNo(@PathVariable int boardNo, Model model) {
-		
-		BoardDTO board = boardService.findBoardByNo(boardNo);
-		model.addAttribute("board", board);
+	@GetMapping ("/{boardNo}")
+	public String findBoardByNo (@PathVariable int boardNo, Model model) {
+
+		BoardDTO board = boardService.findBoardByNo (boardNo);
+		model.addAttribute ("board", board);
+
 		return "board/boardDetail";
+
 	}
 
 	// 목록
-	@GetMapping("/board")
-	public String findBoardList(@PageableDefault Pageable pageable,Model model) {
-		
-		Page<BoardDTO> boardList = boardService.findBoardList(pageable);
-		
-		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(boardList);
-		
-		model.addAttribute("paging", paging);
-		model.addAttribute("boardList", boardList);
-		
+	@GetMapping ("/board")
+	public String findBoardList (@PageableDefault Pageable pageable, Model model, String search) {
+
+		Page<BoardDTO> boardList = boardService.findBoardList (pageable, search);
+
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo (boardList);
+
+		model.addAttribute ("paging", paging);
+		model.addAttribute ("boardList", boardList);
+		model.addAttribute ("search", search);
+
 		return "board/board";
+
 	}
-	
+
 	// 등록
-	@GetMapping("/add")
-	public void addPage() {}
-	
-	@PostMapping("/add")
-	public String addNewBoard(BoardDTO newBoard) {
-		
-		boardService.addNewBoard(newBoard);
-		
-		return "redirect:/board/board";
+	@GetMapping ("/add")
+	public void addPage () {
+
 	}
-	
+
+	@PostMapping ("/add")
+	public String addNewBoard (BoardDTO newBoard) {
+
+		boardService.addNewBoard (newBoard);
+
+		return "redirect:/board/board";
+
+	}
+
 	// 수정
-	@GetMapping("/update/{boardNo}")
-	public String update(@PathVariable int boardNo, Model model) {
-		model.addAttribute ("board", boardService.findBoardByNo(boardNo));
+	@GetMapping ("/update/{boardNo}")
+	public String update (@PathVariable int boardNo, Model model) {
+
+		model.addAttribute ("board", boardService.findBoardByNo (boardNo));
 		return "board/update";
+
 	}
-	
-	@PostMapping("/update/{boardNo}")
-	public String updateBoard(BoardDTO updateBoard) {
-		
-		boardService.updateBoard(updateBoard);
-		
-		return "redirect:/board/" + updateBoard.getBoardNo();
+
+	@PostMapping ("/update/{boardNo}")
+	public String updateBoard (BoardDTO updateBoard) {
+
+		boardService.updateBoard (updateBoard);
+
+		return "redirect:/board/" + updateBoard.getBoardNo ();
+
 	}
-	
+
 	// 삭제
-	@GetMapping("/delete/{boardNo}")
-	public String deleteBoard(@PathVariable int boardNo) {
-		boardService.deleteBoard(boardNo);
-		
+	@GetMapping ("/delete/{boardNo}")
+	public String deleteBoard (@PathVariable int boardNo) {
+
+		boardService.deleteBoard (boardNo);
+
 		return "redirect:/board/board";
+
 	}
-	
+
 }

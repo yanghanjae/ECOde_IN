@@ -17,6 +17,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -45,14 +47,8 @@ public class Board {
 	@JoinColumn (name = "user_id", referencedColumnName = "user_id", nullable = false)
 	private User user;
 
-	@ManyToOne
-	@JoinColumn (name = "admin_id",  referencedColumnName = "admin_id", nullable = true)
-	private Admin admin;
-
-	@Column (name = "comment_content", nullable = true)
-	private String commentContent;
-
-	@Column (name = "comment_date", nullable = true)
-	private LocalDateTime commentDate;
+    @OneToMany(mappedBy = "boardNo", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc") // 댓글 정렬
+    private List<Comment> comment;
 
 }
