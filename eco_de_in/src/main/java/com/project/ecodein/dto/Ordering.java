@@ -42,5 +42,6 @@ public class Ordering {
 	private Date due_date;
 	
 	@Column(name = "is_delivery", nullable = false)
-	private Boolean is_delivery;
+	//private Boolean is_delivery;
+	private byte isDelivery;
 }
