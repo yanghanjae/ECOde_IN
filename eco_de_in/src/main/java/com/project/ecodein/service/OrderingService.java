@@ -26,7 +26,7 @@ public class OrderingService {
                                     @Param("status") String status) {
 
         // (전체검색)검색어 없고, 상태 체크 안한 경우
-        if (query == null && status == null) { 
+        if (query == null && status == null) {
             System.out.printf("검색어/상태값 없음 - query : %s%n, status : %s%n", query, status);
             Sort sort = Sort.by(Sort.Order.desc("orderNo"));
             Pageable pageable = PageRequest.of(page - 1, 10, sort); // 페이지당 10개씩 조회

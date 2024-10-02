@@ -196,7 +196,8 @@
           <td th:text="${state.index + 1}"></td>
           <td th:text="${order.order_date}"></td>
           <td>
-            <a class="order_no" th:text="${order.orderNo}" th:href="@{/order/{orderNo}(orderNo=${order.orderNo})}"></a>
+            <a class="order_no" th:text="${order.orderNo}"
+               th:href="@{/order/detail/{orderNo}(orderNo=${order.orderNo})}"></a>
           </td>
           <td th:text="${order.buyer_code.buyer_name}"></td>
           <td th:text="${order.due_date}"></td>
