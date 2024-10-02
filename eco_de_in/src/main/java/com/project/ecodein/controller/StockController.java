@@ -79,7 +79,7 @@ public class StockController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("itemModalSearch", search);
 		
-		return "stock/addStockModal :: itemModalContent";
+		return "stock/stockModal :: itemModalContent";
 		
 	}
 	
@@ -95,7 +95,7 @@ public class StockController {
 		model.addAttribute("paging", paging);
 		model.addAttribute("storageModalSearch", search);
 		
-		return "stock/addStockModal :: storageModalContent";
+		return "stock/stockModal :: storageModalContent";
 		
 	}
 	
@@ -106,4 +106,26 @@ public class StockController {
 		
 		return "redirect:/stock";
 	}
+	
+	@GetMapping("/addItem")
+	public String addItem () {
+		return "stock/addItem";
+	}
+	
+	@GetMapping("/addItem/item")
+	public String onlyItemModal (@RequestParam(value = "search", required = false) String search,
+		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
+		
+		Page<Item> items = STOCK_SERVICE.searchItems(search, page);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(items);
+		
+		model.addAttribute ("items", items);
+		model.addAttribute("paging", paging);
+		model.addAttribute("itemModalSearch", search);
+		
+		return "stock/stockModal :: itemModalContent";
+		
+	}
+	
 }

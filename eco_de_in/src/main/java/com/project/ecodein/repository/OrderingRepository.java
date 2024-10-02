@@ -24,13 +24,11 @@ public interface OrderingRepository extends JpaRepository<Ordering, Integer> {
     Page<Ordering> findAllByIsDelivery (@Param("statusble") byte statusble, Pageable pageable);
 
 
-    // (필터 검색)
-//    // 진행중인 발주 조회
-//    Page<Ordering> findByIsDeliveryFalse(Pageable pageable); // 진행중
-//
-//    // 완료된 발주 조회
-//    Page<Ordering> findByIsDeliveryTrue(Pageable pageable); // 완료
-//
-//    // 전체 발주 조회
-//    Page<Ordering> findAll(Pageable pageable); // 전체
+    // 상품 등록 검색 기능 추가()
+    @Query(value = "SELECT o.*, i.item_name, s.quantity FROM ordering o " +
+            "LEFT JOIN item i ON o.item_no = i.item_no " +  // item_no가 있을 경우
+            "LEFT JOIN stock s ON o.stock_no = s.stock_no " + // stock_no가 있을 경우
+            "WHERE i.item_name LIKE CONCAT('%', :itemName, '%')", nativeQuery = true)
+    Page<Ordering> searchOrdersByItemName(@Param("itemName") String itemName, Pageable pageable);
+
 }

@@ -61,40 +61,25 @@ public class OrderController {
 //	}
 
 
-	// (통합편)_발주 목록 페이지 및 페이지네이션 처리
-//	@GetMapping({"", "/{page}"})
-//	public String order(
-//			@PathVariable(value = "page", required = false) Integer page,
-//			@RequestParam(name = "query", required = false) String query,
-//			@RequestParam(name = "status", required = false) String status,
-//			Model model) {
-//
-//		// 기본 페이지 번호 설정
-//		if (page == null) {
-//			page = 1;
-//		}
-//
-//		// 발주 목록 조회
-//		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query, status);
-//		model.addAttribute("orders", orders);
-//		model.addAttribute("currentPage", page);
-//		model.addAttribute("totalPages", orders.getTotalPages());
-//		model.addAttribute("query", query);
-//		model.addAttribute("status", status); // 현재 상태 추가
-//		return "order/order"; // 뷰 이름
-//	}
 
-
+	// 발주 등록 페이지
 	@GetMapping("/add")
-	public String orderAdd() {
+	public String orderAdd(Model model) {
 
 		return "order/orderAdd";
 	}
 
+	// 발주 등록 처리
 	@PostMapping("/add")
 	public String orderAddPost() {
 
 		return "order/orderAdd";
 	}
+
+//	@PostMapping("/add")
+//	public String orderAddPost(@ModelAttribute Ordering ordering, @ModelAttribute StockDTO stock) {
+//		ORDER_SERVICE.registerOrder(ordering, stock); // 수정
+//		return "redirect:/order"; // 수정
+//	}
 
 }
