@@ -196,19 +196,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <a href="/approval/detail/{1}" onclick="window.open(this.href, '_blank', 'width=1200, height=800')
-              return false;">
-                240409120123456
-              </a>
-            </td>
-            <td>CU 홍대입구역점</td>
-            <td>홍길동</td>
-            <td>2024-09-12</td>
-            <td>진행중</td>
-          </tr>
-          <tr>
+<!--          <tr th:if="${!approvals.isEmpty()}" th:each="app, status : ${approvals}">-->
+<!--            <td>-->
+<!--              <a th:href="@{/approval/detail/{order_no}(order_no = ${app.order_no})}" th:text="${app.order_no}"-->
+<!--                 onclick="window.open(this.href,-->
+<!--              '_blank',-->
+<!--              'width=1200, height=800')-->
+<!--              return false;">-->
+<!--                240409120123456-->
+<!--              </a>-->
+<!--            </td>-->
+<!--            <td th:text="${app.buyer.buyer_name}">CU 홍대입구역점</td>-->
+<!--            <td th:text="${app.buyer.buyer_name}">홍길동</td>-->
+<!--            <td th:text="${app.ordering.order_date}">2024-09-12</td>-->
+<!--            <td th:text="">진행중</td>-->
+<!--          </tr>-->
+          <tr th:if="${approvals.isEmpty()}">
             <td colspan="5" class="font-bold">등록된 결재정보가 존재하지 않습니다.</td>
           </tr>
         </tbody>
