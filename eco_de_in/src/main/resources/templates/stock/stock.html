@@ -72,6 +72,7 @@
       text-align: center;
       font-weight: bold;
       font-size: 1.7rem;
+      position: relative;
     }
     
     .content-1 > table {
@@ -157,6 +158,13 @@
 			top: 40px;
 		}
 		
+		.pagination {
+			position: absolute;
+			bottom: 50px;
+			left: 50%;
+	  	transform: translateX(-50%);
+		}
+		
 		.modal img {
 			width:400px;
 			height: 400px;
@@ -220,7 +228,7 @@
 	    <div class="menu-header">
 	    	<form method="get" action="/stock">
 		    	<button type="button" class="lime" onclick="location.href='/stock/add'">재고 등록</button>
-		    	<button type="button" class="green">생산품 등록</button>
+		    	<button type="button" class="green" onclick="location.href='/stock/addItem'">생산품 등록</button>
 		    	&nbsp;
 		    	&nbsp;
 		    	&nbsp;

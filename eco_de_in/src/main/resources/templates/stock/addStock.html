@@ -86,7 +86,7 @@
 				left : 50%;
 				transform : translate(-50%, -50%);
 				width: 600px;
-				height: 800px;
+				height: 600px;
 				background-color: #FFF;
 				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 				z-index: 1000;
@@ -94,6 +94,7 @@
 			
 			.modalContent {
 				margin: 20px;
+				min-height : 520px;
 				position: relative;
 				top: 40px;
 				text-align: center;
@@ -133,6 +134,17 @@
 	      font-weight: bold;
 	      margin: .7% .5%;
 	    }
+	    
+	    .pagination {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+	  	transform: translateX(-50%);
+		}
+		
+		.bold {
+    	font-weight: bold !important;
+    }
 			
 	</style>
 	</head>

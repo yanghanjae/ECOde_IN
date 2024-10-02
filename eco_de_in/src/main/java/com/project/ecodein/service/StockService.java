@@ -73,6 +73,17 @@ public class StockService {
 		return ITEM_REPOSITORY.searchItem(search, pageable);
 
 	}
+	
+	public Page<Item> searchItems (String search, int page) {
+		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("item_name").ascending ());
+		
+		if(search == null || search.isEmpty ()) {
+			search = "";
+		}
+		
+		return ITEM_REPOSITORY.searchItemOnly(search, pageable);
+
+	}
 
 	public Page<Storage> searchStorages (String search, int page) {
 
