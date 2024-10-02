@@ -17,6 +17,25 @@
 		<button th:data-value="${paging.endPage}" onclick="changeItemPage(this)">>></button>
 	</div>
 </div>
+<div th:fragment="stockModalContent">
+	<form id="stockSearchForm" method="get" onsubmit="stockSubmit(event)">
+		<input type="text" id="stockModalSearch" class="modalInput" name="stockModalSearch" th:value="${stockModalSearch}">
+		<button type="button" class="modalButton" onclick="stockSubmit(event)">검색</button>
+		<ul th:each="item : ${items}">
+			<li th:data-value="${item.item_no}" th:text="${item.item_name}" onclick="chooseStock(this)"></li>
+		</ul>
+	</form>
+	<div class="pagination">
+		<button th:data-value="${paging.startPage}" onclick="changeStockPage(this)"><<</button>
+		<button th:data-value="${paging.CurrentPage - 1}" th:disabled="${items.first}" onclick="changeStockPage(this)">이전</button>
+		<span th:each="page : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+			<button th:data-value="${page}" th:text="${page}" th:disabled="${paging.currentPage eq page}"  
+			th:classappend="${paging.currentPage eq page} ? 'bold disabled' : ''" onclick="changeStockPage(this)"></button>
+		</span>
+		<button th:data-value="${paging.CurrentPage + 1}" th:disabled="${items.Last}" onclick="changeStockPage(this)">다음</button>
+		<button th:data-value="${paging.endPage}" onclick="changeStockPage(this)">>></button>
+	</div>
+</div>
 <div th:fragment="storageModalContent">
 	<form id="storageSearchForm" method="get" onsubmit="storageSubmit(event)">
 		<input type="text" id="storageModalSearch" class="modalInput" name="storageModalSearch" th:value="${storageModalSearch}">
