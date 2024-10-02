@@ -159,7 +159,7 @@
       &nbsp;
       <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
       &nbsp;
-      <a href="/order/1">
+      <a href="/order/1/all">
         <span style="color: #ababab; font-weight: bold;">발주 관리</span>
       </a>
       &nbsp;
@@ -181,12 +181,17 @@
           </button>
         </div>
 
-      <span>출고 진행상태</span>
-      <div class="inline">
-        <button class="button" onclick="setActiveButton(this)">전체</button>
-        <button class="button" onclick="setActiveButton(this)">진행중</button>
-        <button class="button" onclick="setActiveButton(this)">완료</button>
-      </div>
+        <span>출고 진행상태</span>
+        <div class="inline">
+          <button class="button" type="button"
+                  onclick="location.href='/order/1/all'; setActiveButton(this)">전체
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/progress'; setActiveButton(this)">진행중
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/complete'; setActiveButton(this)">완료
+          </button>
+        </div>
+
       </form>
     </div>
 
@@ -199,7 +204,9 @@
             <label class="block text-sm font-medium leading-6 text-gray-900" for="manager">담당자</label>
             <div class="mt-2">
               <input autocomplete="given-name"
-                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+                     ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
+                     sm:text-sm sm:leading-6"
                      id="manager" name="manager"
                      type="text">
             </div>
@@ -208,7 +215,9 @@
             <label class="block text-sm font-medium leading-6 text-gray-900" for="client">거래처</label>
             <div class="mt-2">
               <input autocomplete="given-name"
-                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+                     ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
+                     sm:text-sm sm:leading-6"
                      id="client" name="client"
                      type="text">
             </div>
@@ -217,7 +226,9 @@
             <label class="block text-sm font-medium leading-6 text-gray-900" for="due-date">납기일자</label>
             <div class="mt-2">
               <input autocomplete="given-name"
-                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+                     ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
+                     sm:text-sm sm:leading-6"
                      id="due-date" name="due-date"
                      type="text">
             </div>
@@ -226,7 +237,9 @@
             <label class="block text-sm font-medium leading-6 text-gray-900" for="client-code">거래처 코드</label>
             <div class="mt-2">
               <input autocomplete="given-name"
-                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+                     ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
+                     sm:text-sm sm:leading-6"
                      id="client-code" name="client-code"
                      type="text">
             </div>
@@ -254,7 +267,7 @@
           <th>수량</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="productTableBody">
         <tr>
           <td colspan="5">상품검색버튼을 클릭해서 주문하세요!</td>
         </tr>
@@ -270,7 +283,8 @@
 
       <div class="hidden fixed max-w-[960px] mx-auto bg-white shadow-lg p-5 rounded-lg"
            id="popup-modal-3"
-           style="left: 50%; top: 20%; transform: translateX(-50%); z-index: 1; flex: none !important; width: 40%; max-width: 960px;">
+           style="left: 50%; top: 20%; transform: translateX(-50%); z-index: 1;
+                  flex: none !important; width: 40%; max-width: 960px;">
         <div class="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]">
           <a target='_blank' class='block w-full px-4 py-2 text-center text-slate-700 transition-all '>
             <b>상품검색</b>
@@ -282,8 +296,8 @@
               <div class="relative">
                 <input
                         class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400
-                        text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none
-                        focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                        text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease
+                        focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
                         placeholder="삼품코드/상품명 검색..."
                         id="searchInput"
                 />
@@ -292,8 +306,10 @@
                         type="button"
                         onclick="searchProducts()"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8 text-slate-600">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                       stroke="currentColor" class="w-8 h-8 text-slate-600">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                   </svg>
                 </button>
               </div>
@@ -301,7 +317,8 @@
           </div>
         </div>
 
-        <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border ">
+        <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md
+                    rounded-lg bg-clip-border ">
           <table class="w-full text-left table-auto min-w-max" id="productTable">
             <thead>
             <tr class="border-b border-slate-300 bg-slate-50">
@@ -310,6 +327,7 @@
               <th class="p-4 text-sm font-normal leading-none text-slate-500">상품명</th>
               <th class="p-4 text-sm font-normal leading-none text-slate-500">재고</th>
               <th class="p-4 text-sm font-normal leading-none text-slate-500">단가</th>
+              <th class="p-4 text-sm font-normal leading-none text-slate-500">선택</th>
             </tr>
             </thead>
             <tbody>
@@ -335,6 +353,13 @@
                     <td th:text="${stock.itemName}"></td>
                     <td th:text="${stock.storageName}"></td>
                     <td th:text="${stock.quantity}"></td>
+                    <td>
+                      <button class="bg-blue-500 text-white px-4 py-2 rounded"
+                              type="button"
+                              onclick="addProduct(${stock.stockNo}, '${stock.itemName}', ${stock.price})"
+                      >선택
+                      </button>
+                    </td>
                   </tr>
             </tbody>
           </table>
@@ -363,9 +388,50 @@
     clickedButton.classList.add('active');
   }
 
+  // 발주 등록 테이블에 추가
+  function addProduct(stockNo, itemName, price) {
+    const tableBody = document.getElementById('productTableBody');
 
+    const newRow = `
+        <tr>
+            <td>${stockNo}</td>
+            <td>${itemName}</td>
+            <td>${price}</td>
+            <td><input type="number" name="quantity" value="1" /></td>
+        </tr>
+    `;
 
+    tableBody.innerHTML += newRow;
+  }
 
+  // 발주등록 검색 결과를 화면에 표시
+  function searchProducts() {
+    const query = document.getElementById('searchInput').value;
+
+    // Ajax 요청으로 서버에서 검색
+    fetch(`/order/search?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+          const tableBody = document.getElementById('productTableBody');
+          tableBody.innerHTML = ''; // 기존 내용을 삭제
+
+          // 검색 결과를 테이블에 추가
+          data.forEach(product => {
+            tableBody.innerHTML += `
+                    <tr>
+                        <td>${product.stockNo}</td>
+                        <td>${product.itemName}</td>
+                        <td>${product.price}</td>
+                        <td>${product.quantity}</td>
+                        <td>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded" type="button"
+                            onclick="addProduct(${product.stockNo}, '${product.itemName}', ${product.price})">선택</button>
+                        </td>
+                    </tr>
+                `;
+          });
+        });
+  }
 </script>
 </body>
 </html>
