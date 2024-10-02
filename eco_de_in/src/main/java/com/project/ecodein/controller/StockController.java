@@ -128,4 +128,20 @@ public class StockController {
 		
 	}
 	
+	@GetMapping("/addItem/stock")
+	public String onlyStockModal (@RequestParam(value = "search", required = false) String search,
+		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
+		
+		Page<Item> items = STOCK_SERVICE.searchMaterials(search, page);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(items);
+		
+		model.addAttribute ("items", items);
+		model.addAttribute("paging", paging);
+		model.addAttribute("stockModalSearch", search);
+		
+		return "stock/stockModal :: stockModalContent";
+		
+	}
+	
 }
