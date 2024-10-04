@@ -53,7 +53,7 @@ public class BoardService {
 			/* page 파라미터가 Pageable의 number 값으로 넘어오는데 해당 값이 조회시에는 인덱스 기준이 되어야 해서 -1 처리가 필요하다. */
 			pageable = PageRequest.of (pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber () - 1,
 				pageable.getPageSize (),
-				Sort.by ("board_no").descending ());
+				Sort.by ("boardNo").descending ());
 			Page<Board> boardList = boardRepository.findBoardByKeyword (search, pageable);
 			return boardList.map (board -> modelMapper.map (board, BoardDTO.class));
 
