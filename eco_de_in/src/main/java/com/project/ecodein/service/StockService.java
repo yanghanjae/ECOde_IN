@@ -64,7 +64,7 @@ public class StockService {
 	}
 
 	public Page<Item> searchStocks (String search, int page) {
-		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("item_name").ascending ());
+		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("itemName").ascending ());
 		
 		if(search == null || search.isEmpty ()) {
 			search = "";
@@ -75,7 +75,7 @@ public class StockService {
 	}
 	
 	public Page<Item> searchItems (String search, int page) {
-		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("item_name").ascending ());
+		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("itemName").ascending ());
 		
 		if(search == null || search.isEmpty ()) {
 			search = "";
@@ -86,7 +86,7 @@ public class StockService {
 	}
 	
 	public Page<Item> searchMaterials (String search, int page) {
-		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("item_name").ascending ());
+		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("itemName").ascending ());
 		
 		if(search == null || search.isEmpty ()) {
 			search = "";

@@ -21,18 +21,18 @@ public class Item {
 	@Id
 	@Column(name = "item_no", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int item_no;
+	private int itemNo;
 	
 	@Column(name = "item_name", nullable = false)
-	private String item_name;
+	private String itemName;
 	
 	@Column(name = "item_price", nullable = true)
-	private Integer item_price;
+	private Integer itemPrice;
 	
 	@Column(name = "is_material", nullable = false)
-	private Boolean is_material;
+	private Boolean isMaterial;
 	
 	@Column(name = "item_image", nullable = false)
-	private String item_image;
+	private String itemImage;
 	
 }

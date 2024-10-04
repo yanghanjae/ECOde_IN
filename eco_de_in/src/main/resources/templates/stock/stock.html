@@ -271,7 +271,7 @@
 	        <tbody>
 	        	<tr th:each="stock:${stocks}">
 	        		<td th:text="${stock.stockNo}"></td>
-	        		<td th:data-value="${stock.stockNo}"  th:text="${stock.item.item_name}" onclick="openModal(this)" class="stock"></td>
+	        		<td th:data-value="${stock.stockNo}"  th:text="${stock.item.itemName}" onclick="openModal(this)" class="stock"></td>
 	        		<td th:text="${stock.storage.storage_name}"></td>
 	        		<td th:text="${stock.quantity}"	></td>
 	        	</tr>
@@ -301,7 +301,7 @@
 	    	</div>
 	    	<div class="modalContent">
 		    	<label>재고명 : </label>
-		    	<input id="modal_item_name" readonly="readonly" class="noFocus" >
+		    	<input id="modal_itemName" readonly="readonly" class="noFocus" >
 	    	</div>
 	    	<div class="modalContent">
 		    	<label>창고 : </label>
@@ -309,7 +309,7 @@
 	    	</div>
 	    	<div class="modalContent">
 		    	<label>사진 : </label>
-		    	<img alt="stock_image" src="" id="modal_item_image">
+		    	<img alt="stock_image" src="" id="modal_itemImage">
 	    	</div>
 	    	<div class="modalContent">
 		    	<label>수량 : </label>
@@ -329,7 +329,7 @@
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>재고명 : </label>
-			    	<input id="modalEdit_item_name" readonly="readonly" class="noFocus" >
+			    	<input id="modalEdit_itemName" readonly="readonly" class="noFocus" >
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>창고 : </label>
@@ -337,7 +337,7 @@
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>사진 : </label>
-			    	<img alt="stock_image" src="" id="modalEdit_item_image">
+			    	<img alt="stock_image" src="" id="modalEdit_itemImage">
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>수량 : </label>
@@ -372,9 +372,9 @@
 			.then(response => response.json())
 			.then(data => {
 				document.getElementById('modal_stock_no').value = data.stockNo;
-				document.getElementById('modal_item_name').value = data.item.item_name;
+				document.getElementById('modal_itemName').value = data.item.itemName;
 				document.getElementById('modal_storage_no').value = data.storage.storage_name;
-				document.getElementById('modal_item_image').src = data.item.item_image;
+				document.getElementById('modal_itemImage').src = data.item.itemImage;
 				document.getElementById('modal_quantity').value = data.quantity;
 			})
 		
@@ -385,9 +385,9 @@
 	
 	function openModalEdit() {
 		document.getElementById('modalEdit_stock_no').value = document.getElementById('modal_stock_no').value;
-		document.getElementById('modalEdit_item_name').value = document.getElementById('modal_item_name').value;
+		document.getElementById('modalEdit_itemName').value = document.getElementById('modal_itemName').value;
 		document.getElementById('modalEdit_storage_no').value = document.getElementById('modal_storage_no').value;
-		document.getElementById('modalEdit_item_image').src = document.getElementById('modal_item_image').src;
+		document.getElementById('modalEdit_itemImage').src = document.getElementById('modal_itemImage').src;
 		document.getElementById('modalEdit_quantity').value = document.getElementById('modal_quantity').value;
 		modal.style.display = 'none';
 		modalBackground.style.display = 'block';
