@@ -4,7 +4,7 @@
 		<input type="text" id="itemModalSearch" class="modalInput" name="itemModalSearch" th:value="${itemModalSearch}">
 		<button type="button" class="modalButton" onclick="itemSubmit(event)">검색</button>
 		<ul th:each="item : ${items}">
-			<li th:data-value="${item.item_no}" th:text="${item.item_name}" onclick="chooseItem(this)"></li>
+			<li th:data-value="${item.itemNo}" th:text="${item.itemName}" onclick="chooseItem(this)"></li>
 		</ul>
 	</form>
 	<div class="pagination">
@@ -22,7 +22,7 @@
 		<input type="text" id="stockModalSearch" class="modalInput" name="stockModalSearch" th:value="${stockModalSearch}">
 		<button type="button" class="modalButton" onclick="stockSubmit(event)">검색</button>
 		<ul th:each="item : ${items}">
-			<li th:data-value="${item.item_no}" th:text="${item.item_name}" onclick="chooseStock(this)"></li>
+			<li th:data-value="${item.itemNo}" th:text="${item.itemName}" onclick="chooseStock(this)"></li>
 		</ul>
 	</form>
 	<div class="pagination">

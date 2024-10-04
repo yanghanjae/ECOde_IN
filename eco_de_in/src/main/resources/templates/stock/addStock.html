@@ -170,11 +170,11 @@
 		      <span style="font-weight: bold;">재고 등록</span>
 		    </div>
 		    <div class="content-1">
-		    	<form action="/stock/add" method="post">
+		    	<form action="/stock/add" method="post" autocomplete="off">
 		    		<div class="left">
 		    			<label>상품명</label>
 							<input type="text" class="input" placeholder="목록에서 골라주세요..." 
-							required="required" onclick="openItemModal()" readonly="readonly" id="item">
+							required="required" onclick="openItemModal()"  id="item">
 							<input name="itemNo" hidden="" id="itemHidden">	    			
 		    		</div>
 		    		<div class="left">
@@ -229,6 +229,7 @@
 				storageModal.style.display = 'none';
 				modalBackground.style.display = 'block';
 				loadItem('',1);
+				document.activeElement.blur()
 			}
 			
 			function openStorageModal() {
@@ -236,6 +237,7 @@
 				storageModal.style.display = 'block';
 				modalBackground.style.display = 'block';
 				loadStorage('', 1);
+				document.activeElement.blur()
 			}
 			
 			function closeModal() {
