@@ -4,10 +4,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
+import com.project.ecodein.dto.BoardDTO;
 import com.project.ecodein.dto.Item;
 import com.project.ecodein.dto.Stock;
 import com.project.ecodein.service.ItemService;
@@ -42,7 +46,35 @@ public class ItemController {
 		return "item/item";
 	}
 	
-//	@GetMapping("/add")
-//	public String addItem
+	@ResponseBody
+	@GetMapping("/{itemNo}")
+	public Item itemDetail (@PathVariable int itemNo) {
+		return ITEM_SERVICE.findByItemNo(itemNo).orElse(new Item());
+	}
+	
+	@GetMapping("/add")
+	public String addItem (Model model) {
+		
+		return "item/addItem";
+	}
+	
+	@PostMapping ("/add")
+	public String addNewBoard (Item item) {
+
+		ITEM_SERVICE.addItem(item);
+
+		return "redirect:/item";
+
+	}
+	
+	// 삭제
+	@GetMapping ("/delete/{itemNo}")
+	public String deleteItem (@PathVariable int itemNo) {
+
+		ITEM_SERVICE.deleteItem(itemNo);
+
+		return "redirect:/item";
+
+	}
 
 }
