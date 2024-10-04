@@ -1,5 +1,6 @@
 package com.project.ecodein.controller;
 
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -142,6 +143,15 @@ public class StockController {
 		
 		return "stock/stockModal :: stockModalContent";
 		
+	}
+	
+	@PostMapping("/addItem")
+	public String addItemPost(@RequestParam Integer itemNo, @RequestParam Integer storage_no, @RequestParam Integer quantity 
+		,@RequestParam List<Integer> ingredient, @RequestParam List<Integer> ingredient_quantity) {
+		
+		STOCK_SERVICE.addItem (itemNo, storage_no, quantity, ingredient, ingredient_quantity);
+		
+		return "redirect:/stock";
 	}
 	
 }

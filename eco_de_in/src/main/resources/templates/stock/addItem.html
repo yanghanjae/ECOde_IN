@@ -213,30 +213,30 @@
 	      <span style="font-weight: bold;">생산품 등록</span>
 	    </div>
 	    <div class="content-1">
-	    	<form action="" method="post">
+	    	<form action="/stock/addItem" method="post" autocomplete="off">
 	    		<div class="left">
 	    			<label>상품명</label>
-	    			<input required="required" onclick="openItemModal()" class="input" id="item" readonly="readonly">
+	    			<input required="required" onclick="openItemModal()" class="input" id="item" >
 	    			<input hidden="" name="itemNo" id="itemHidden">
 	    		</div>
 	    		<div class="left">
 	    			<label>창고</label>
-	    			<input required="required" onclick="openStorageModal()" class="input" id="storage" readonly="readonly">
+	    			<input required="required" onclick="openStorageModal()" class="input" id="storage" >
 	    			<input hidden="" name="storage_no" id="storageHidden">
 	    		</div>
 	    		<div class="left">
 	    			<label>상품 수량</label>
-	    			<input type="number" name="quantity" id="quantity" class="input" onkeyup="onlyNumber(this)">
+	    			<input type="number" name="quantity" id="quantity" class="input" onkeyup="onlyNumber(this)" required="required">
 	    		</div>
 	    		<div class="ingredient">
 	    			<div id="itemInput" class="half">
 		    			<label>재료</label>
-		    			<input type="text" name="" class="halfInput stock" onclick="openStockModal(this)" data-value="0" id="stock-0" readonly="readonly">
+		    			<input type="text" name="" class="halfInput stock" onclick="openStockModal(this)" data-value="0" id="stock-0"  required="required">
 		    			<input hidden="" name="ingredient" data-value="0" id="stockHidden-0" >
 	    			</div>
 	    			<div id="quantityInput" class="half">
 		    			<label>재료 수량</label>
-		    			<input type="number" name="igredient_quantity" class="halfInput" onkeyup="onlyNumber(this)" data-value="0" >
+		    			<input type="number" name="ingredient_quantity" class="halfInput" onkeyup="onlyNumber(this)" data-value="0" required="required">
 	    			</div>
 	    			<div id="button" class="ingredientButton">
 		    			<button onclick="addInput()" type="button">
@@ -286,6 +286,7 @@
 			storageModal.style.display = 'none';
 			modalBackground.style.display = 'block';
 			loadItem('',1);
+			document.activeElement.blur()
 		}
 		
 		function openStockModal(element) {
@@ -294,6 +295,7 @@
 			modalBackground.style.display = 'block';
 			loadStock('',1);
 			selectedInputCount = element.getAttribute('data-value');
+			document.activeElement.blur()
 		}
 		
 		function openStorageModal() {
@@ -301,6 +303,7 @@
 			storageModal.style.display = 'block';
 			modalBackground.style.display = 'block';
 			loadStorage('', 1);
+			document.activeElement.blur()
 		}
 		
 		function closeModal() {
@@ -448,7 +451,7 @@
 			newInput.setAttribute('class','halfInput stock');
 			newInput.setAttribute('onclick','openStockModal(this)');
 			newInput.setAttribute('data-value',count);
-			newInput.setAttribute('readonly','readonly');
+			newInput.setAttribute('required','required');
 			
 			let newInputHidden = document.createElement('input');
 			newInputHidden.setAttribute('hidden','');
@@ -462,6 +465,7 @@
 			newQuantity.setAttribute('onkeyup','onlyNumber(this)');
 			newQuantity.setAttribute('data-value',count);
 			newQuantity.setAttribute('type','number');
+			newQuantity.setAttribute('required','required');
 			
 			let newButton = document.createElement('button');
 			newButton.setAttribute('type','button');
@@ -506,6 +510,7 @@
 				element.value = '';
 			}
 		}
+		
 	</script> 
 </body>
 </html>
