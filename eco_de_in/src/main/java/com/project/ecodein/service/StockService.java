@@ -59,8 +59,11 @@ public class StockService {
 	}
 
 	public void editStock (int editStockNo, int editQunaitity) {
-		
-		STOCK_REPOSITORY.updateStock(editStockNo, editQunaitity);
+		if (editQunaitity == 0) {
+			STOCK_REPOSITORY.delete (STOCK_REPOSITORY.findByStockNO (editStockNo).get ());
+		} else {
+			STOCK_REPOSITORY.updateStock(editStockNo, editQunaitity);
+		}
 	}
 
 	public Page<Item> searchStocks (String search, int page) {
