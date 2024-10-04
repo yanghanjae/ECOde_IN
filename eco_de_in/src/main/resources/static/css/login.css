@@ -161,7 +161,7 @@ input {
 		left : 50%;
 		transform : translate(-50%, -50%);
 		width: 500px;
-		height: 600px;
+		height: 550px;
 		background-color: #FFF;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 		z-index: 1000;
@@ -169,6 +169,13 @@ input {
 
 .modalContent {
 		margin-top: 80px;
+}
+
+.pagination {
+		position: absolute;
+		bottom: 15px;
+		left: 50%;
+  	transform: translateX(-50%);
 }
 
 .pagination button {

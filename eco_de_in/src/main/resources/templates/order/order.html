@@ -24,6 +24,8 @@
       padding: 20px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       width: 100%;
+      min-height: 600px;
+      max-height: 900px;
     }
 
     table {
@@ -98,13 +100,13 @@
       padding-left: 0;
       list-style: none;
       margin-top: 50px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .page-link {
       border: 1px solid #ddd;
       padding: 8px 12px;
-      margin: 0 700px;
+      margin: 0 1px;
       text-decoration: none;
       color: #000;
       border-radius: 5px;
@@ -142,7 +144,7 @@
     <!-- 발주 조회 -->
     <div class="main-content">
       <h2 class="text-2xl font-bold mb-4">발주 조회</h2>
-      <form action="/order/1" method="get">
+      <form action="/order/1/all" method="get">
       <div class="flex mb-4">
         <input class="border border-gray-300 p-2 w-full rounded-input"
                name="query" placeholder="발주번호, 거래처를 입력하세요."
@@ -153,11 +155,23 @@
       </div>
 
     <span>출고 진행상태</span>
-      <div class="inline">
-        <button class="button" onclick="location.href='/order?status=all'; setActiveButton(this)">전체</button>
-        <button class="button" onclick="location.href='/order?status=in-progress'; setActiveButton(this)">진행중</button>
-        <button class="button" onclick="location.href='/order?status=completed'; setActiveButton(this)">완료</button>
-      </div>
+        <div class="inline">
+          <button class="button" type="button"
+                  onclick="location.href='/order/1/all'; setActiveButton(this)">전체
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/progress'; setActiveButton(this)">진행중
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/complete'; setActiveButton(this)">완료
+          </button>
+        </div>
+
+        <!-- 필터 검색-->
+<!--        <div class="inline">-->
+<!--          <button class="button" onclick="location.href='/order?page=1&status=all&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">전체</button>-->
+<!--          <button class="button" onclick="location.href='/order?page=1&status=in-progress&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">진행중</button>-->
+<!--          <button class="button" onclick="location.href='/order?page=1&status=completed&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">완료</button>-->
+<!--        </div>-->
+
       </form>
     </div>
 
@@ -182,14 +196,15 @@
           <td th:text="${state.index + 1}"></td>
           <td th:text="${order.order_date}"></td>
           <td>
-            <a class="order_no" th:text="${order.orderNo}" th:href="@{/order/{orderNo}(orderNo=${order.orderNo})}"></a>
+            <a class="order_no" th:text="${order.orderNo}"
+               th:href="@{/order/detail/{orderNo}(orderNo=${order.orderNo})}"></a>
           </td>
           <td th:text="${order.buyer_code.buyer_name}"></td>
           <td th:text="${order.due_date}"></td>
-          <td th:text="${order.is_delivery eq false ? '진행중':'완료'}"></td>
+          <td th:text="${order.isDelivery eq 0 ? '진행중':'완료'}"></td>
           <td>
             <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
-           focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+           focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-1 text-center dark:bg-blue-600
             dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   data-modal-target="popup-modal-a"
                   data-modal-toggle="popup-modal-a"
@@ -199,25 +214,6 @@
             </button>
           </td>
         </tr>
-
-<!--        <tr>-->
-<!--          <td>1</td>-->
-<!--          <td>2024-09-12</td>-->
-<!--          <td><a href="/order/20240912123">20240912123</a></td>-->
-<!--          <td>CU</td>-->
-<!--          <td>2024-09-20</td>-->
-<!--          <td>진행중</td>-->
-<!--          <td class="m-auto p-auto">-->
-<!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none-->
-<!--            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600-->
-<!--            dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
-<!--                    data-modal-target="popup-modal-a"-->
-<!--                    data-modal-toggle="popup-modal-a"-->
-<!--                    type="button">-->
-<!--              x-->
-<!--            </button>-->
-<!--          </td>-->
-<!--        </tr>-->
 
 <!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
 <!--                    data-modal-target="popup-modal"-->
@@ -230,7 +226,8 @@
       </table>
 
       <!-- 페이지네이션  -->
-      <ul class="pagination justify-content-center inline">
+      <div class="pagination">
+      <ul class="justify-content-center inline">
         <li class="page-item inline" th:classappend="${!orders.hasPrevious} ? 'hidden'">
           <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page - 1}, keyword = ${param.keyword})}">
             &lt;&lt;
@@ -241,7 +238,7 @@
             th:classappend="${page - 1 == orders.number} ? 'active'"
             class="page-item inline">
           <a th:text="${page}" class="page-link"
-             th:href="@{{page}?keyword = {keyword}(page = ${page}, keyword = ${param.keyword})}"></a>
+             th:href="@{/order/{page}/all?keyword = {keyword}(page = ${page}, keyword = ${param.keyword})}"></a>
         </li>
         <li class="page-item inline" th:classappend="${!orders.hasNext} ? 'hidden'">
           <a class="page-link" th:href="@{{page}?keyword={keyword}(page = ${page + 1}, keyword = ${param.keyword})}">
@@ -249,6 +246,7 @@
           </a>
         </li>
       </ul>
+      </div>
 
       <!-- modal 1 -->
       <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center
@@ -284,7 +282,6 @@
                       data-modal-hide="popup-modal-a"
                       type="button"
                       >
-
                 확인
               </button>
               <button class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white
@@ -341,8 +338,6 @@
       </div>
     </div>
   </div>
-</div>
-
 
     <script>
       // 삭제기능
@@ -355,7 +350,7 @@
             .then(response => {
               if (response.ok) {
                 alert("발주건이 삭제되었습니다.");
-                window.location.reload(); // 페이지 새로고침
+                window.location.reload();
               } else {
                 alert("삭제 중 오류가 발생했습니다.");
               }
@@ -368,16 +363,13 @@
 
      // 조회 버튼
       function setActiveButton(clickedButton) {
-    const buttons = document.querySelectorAll('.button');
-    buttons.forEach(button => button.classList.remove('active'));
-
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => button.classList.remove('active'));
     clickedButton.classList.add('active');
   }
 
-
-  function order_no_handler (orderNo) {
-    const delete_btn = document.querySelector('.delete-btn');
-
+    function order_no_handler (orderNo) {
+      const delete_btn = document.querySelector('.delete-btn');
     delete_btn.setAttribute('onclick', `deleteOrder(${orderNo})`);
   }
 </script>

@@ -27,44 +27,11 @@ public class CommentApiController {
 	private final CommentService commentService;
 
 	// 댓글 생성
-	@PostMapping ("/comment")
-	public ResponseEntity<Comment> save (@PathVariable int id,
-		@RequestBody AddCommentRequest request,
-		Principal principal) {
-
-		Comment savedComment = commentService.save (id, request, principal.getName ());
-
-		return ResponseEntity.status (HttpStatus.CREATED)
-			.body (savedComment);
-
-	}
 
 	// 댓글 읽어오기
-	@GetMapping ("/{id}/comment")
-	public List<Comment> read (@PathVariable int id) {
-
-		return commentService.findAll (id);
-
-	}
-
-	// 댓글 업데이트
-	@PutMapping ({ "/{boardNo}/comment/{id}" })
-	public ResponseEntity<Long> update (@PathVariable Board boardNo,
-		@PathVariable Long id,
-		@RequestBody UpdateCommentRequest dto) {
-
-		commentService.update (boardNo, id, dto);
-		return ResponseEntity.ok (id);
-
-	}
-
-	// 댓글 삭제
-	@DeleteMapping ("/{boardNo}/comment/{id}")
-	public ResponseEntity<Long> delete (@PathVariable Board boardNo, @PathVariable Long id) {
-
-		commentService.delete (boardNo, id);
-		return ResponseEntity.ok (id);
-
+	@GetMapping("/{id}/comments")
+	public List<Comment> read(@PathVariable int id) {
+		return commentService.findAll(id);
 	}
 
 }

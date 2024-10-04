@@ -4,11 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import com.project.ecodein.entity.Board;
 import com.project.ecodein.entity.Comment;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +19,7 @@ public class AddCommentRequest {
 	private LocalDateTime modifiedDate;
 	private Admin admin;
 	private Board boardNo;
-	
+
 	public Comment toEntity() {//생성자를 사용해 객체 생성
         return Comment.builder()
                 .comment(comment)

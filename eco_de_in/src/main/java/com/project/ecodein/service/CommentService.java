@@ -40,7 +40,7 @@ public class CommentService {
 
         return commentRepository.save(request.toEntity());
     }
-    
+
     //댓글을 읽어온다.
     @Transactional(readOnly = true)
     public List<Comment> findAll(int id) {
@@ -67,5 +67,5 @@ public class CommentService {
 
         commentRepository.delete(comment);
     }
-    
+
 }
