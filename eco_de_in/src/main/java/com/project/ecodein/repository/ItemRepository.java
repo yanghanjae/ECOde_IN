@@ -9,32 +9,20 @@ import com.project.ecodein.dto.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
-<<<<<<< HEAD
-	// 전부 조회
-=======
 	//검색어로 전체 검색
->>>>>>> 2786fcff24f3dfe8490c7a8dfc75fc76c5899cff
 	@Query(value = "SELECT * "
 		+ "FROM item "
 		+ "WHERE (item_no like CONCAT('%', :search, '%') OR item_name like CONCAT('%', :search, '%'))", nativeQuery = true)
 	Page<Item> searchItem (@Param(value = "search") String search, Pageable pageable);
 	
-<<<<<<< HEAD
-	// 상품만 조회
-=======
 	//검색어로 상품만 검색
->>>>>>> 2786fcff24f3dfe8490c7a8dfc75fc76c5899cff
 	@Query(value = "SELECT * "
 		+ "FROM item "
 		+ "WHERE (item_no like CONCAT('%', :search, '%') OR item_name like CONCAT('%', :search, '%')) "
 		+ "AND is_material = false", nativeQuery = true)
 	Page<Item> searchItemOnly (@Param(value = "search") String search, Pageable pageable);
 	
-<<<<<<< HEAD
-	// 재료만 조회
-=======
 	//검색어로 재료만 검색
->>>>>>> 2786fcff24f3dfe8490c7a8dfc75fc76c5899cff
 	@Query(value = "SELECT * "
 		+ "FROM item "
 		+ "WHERE (item_no like CONCAT('%', :search, '%') OR item_name like CONCAT('%', :search, '%')) "

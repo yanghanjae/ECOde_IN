@@ -263,9 +263,9 @@
 	        <tbody>
 	        	<tr th:each="item:${items}">
 	        		<td th:text="${item.itemNo}"></td>
-	        		<td th:data-value="${item.itemNo}"  th:text="${item.item.itemName}" onclick="openModal(this)" class="item"></td>
+	        		<td th:data-value="${item.itemNo}"  th:text="${item.itemName}" onclick="openModal(this)" class="item"></td>
 	        		<td th:text="${item.itemPrice}"></td>
-	        		<td th:text="${item.isMaterial}"	></td>
+	        		<td th:text="${item.isMaterial}?'재료':'상품'"></td>
 	        	</tr>
 	        </tbody>
 	      </table>
@@ -324,18 +324,18 @@
 			    	<input id="modalEdit_itemName" readonly="readonly" class="noFocus" >
 		    	</div>
 		    	<div class="modalContent">
-			    	<label>창고 : </label>
-			    	<input id="modalEdit_storage_no" readonly="readonly" class="noFocus" >
+			    	<label>단가 : </label>
+			    	<input id="modalEdit_itemPrice" readonly="readonly" class="noFocus" >
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>사진 : </label>
 			    	<img alt="stock_image" src="" id="modalEdit_itemImage">
 		    	</div>
 		    	<div class="modalContent">
-			    	<label>수량 : </label>
-			    	<input id="modalEdit_quantity" class="input" name="editQuantity" type="number" min="0" >
+			    	<label>분류 : </label>
+			    	<input id="modalEdit_isMaterial" class="input" name="editIsMaterial" type="number" min="0" >
 		    	</div>
-		    	<button class="lime modalButton" type="submit">재고 수정</button>	
+		    	<button class="lime modalButton" type="submit">상품 수정</button>	
 	    	</form>
 	    </div>
 	    
@@ -357,16 +357,16 @@
 	}
 	
 	function openModal(element) {
-		let stock_no = element.getAttribute('data-value');
+		let itemNo = element.getAttribute('data-value');
 		
-		fetch(`/stock/${stock_no}`)
+		fetch(`/item/${itemNo}`)
 			.then(response => response.json())
 			.then(data => {
-				document.getElementById('modal_stock_no').value = data.stockNo;
-				document.getElementById('modal_itemName').value = data.item.itemName;
-				document.getElementById('modal_storage_no').value = data.storage.storage_name;
-				document.getElementById('modal_itemImage').src = data.item.itemImage;
-				document.getElementById('modal_quantity').value = data.quantity;
+				document.getElementById('modal_itemNo').value = data.itemNo;
+				document.getElementById('modal_itemName').value = data.itemName;
+				document.getElementById('modal_itemPrice').value = data.itemPrice;
+				document.getElementById('modal_itemImage').src = data.itemImage;
+				document.getElementById('modal_isMaterial').value = data.isMaterial;
 			})
 		
 		modal.style.display = 'block';
@@ -375,15 +375,15 @@
 	}
 	
 	function openModalEdit() {
-		document.getElementById('modalEdit_stock_no').value = document.getElementById('modal_stock_no').value;
+		document.getElementById('modalEdit_itemNo').value = document.getElementById('modal_itemNo').value;
 		document.getElementById('modalEdit_itemName').value = document.getElementById('modal_itemName').value;
-		document.getElementById('modalEdit_storage_no').value = document.getElementById('modal_storage_no').value;
+		document.getElementById('modalEdit_itemPrice').value = document.getElementById('modal_itemPrice').value;
 		document.getElementById('modalEdit_itemImage').src = document.getElementById('modal_itemImage').src;
-		document.getElementById('modalEdit_quantity').value = document.getElementById('modal_quantity').value;
+		document.getElementById('modalEdit_isMaterial').value = document.getElementById('modal_isMaterial').value;
 		modal.style.display = 'none';
 		modalBackground.style.display = 'block';
 		modalEdit.style.display = 'block';
-		document.getElementById('modalEdit_quantity').focus();
+		document.getElementById('modalEdit_isMaterial').focus();
 	}
 	
 	function closeModal() {
