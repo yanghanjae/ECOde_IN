@@ -1,5 +1,6 @@
 package com.project.ecodein.controller;
 
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -126,6 +127,31 @@ public class StockController {
 		
 		return "stock/stockModal :: itemModalContent";
 		
+	}
+	
+	@GetMapping("/addItem/stock")
+	public String onlyStockModal (@RequestParam(value = "search", required = false) String search,
+		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
+		
+		Page<Item> items = STOCK_SERVICE.searchMaterials(search, page);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(items);
+		
+		model.addAttribute ("items", items);
+		model.addAttribute("paging", paging);
+		model.addAttribute("stockModalSearch", search);
+		
+		return "stock/stockModal :: stockModalContent";
+		
+	}
+	
+	@PostMapping("/addItem")
+	public String addItemPost(@RequestParam Integer itemNo, @RequestParam Integer storage_no, @RequestParam Integer quantity 
+		,@RequestParam List<Integer> ingredient, @RequestParam List<Integer> ingredient_quantity) {
+		
+		STOCK_SERVICE.addItem (itemNo, storage_no, quantity, ingredient, ingredient_quantity);
+		
+		return "redirect:/stock";
 	}
 	
 }

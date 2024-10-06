@@ -16,7 +16,8 @@ public interface OrderingRepository extends JpaRepository<Ordering, Integer> {
             "left join buyer b on o.buyer_code = b.buyer_code " +
             "where o.order_no = :query or b.buyer_name " +
             "like concat('%', :query, '%')", nativeQuery = true)
-    Page<Ordering> searchByQuery(@Param("query") String query, Pageable pageable_t);
+    Page<Ordering> searchByQuery(@Param("query") String query, Pageable pageable);
+
 
     @Query(value = "select o.*, b.buyer_name from ordering o " +
                     "left join buyer b on o.buyer_code = b.buyer_code " +

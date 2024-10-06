@@ -26,7 +26,7 @@
       margin: .7% .5%
     }
     
-    .menu-header .green {
+    .green {
       background-color: #26973C;
       width: 100px;
       height: 45px;
@@ -204,6 +204,11 @@
 			height: 30px;
 			background-color: #FFF;
 		}
+		
+		.right {
+			position: relative;
+			left: 1350px;
+		}
 </style>
 </head>
 <body>
@@ -218,7 +223,7 @@
 	      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
 	      &nbsp;
 				<a href="/stock">
-					<span style="color: #ababab; font-weight: bold;">상품 관리</span>
+					<span style="color: #ababab; font-weight: bold;">재고 관리</span>
 				</a>
 	      &nbsp;
 	      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
@@ -266,7 +271,7 @@
 	        <tbody>
 	        	<tr th:each="stock:${stocks}">
 	        		<td th:text="${stock.stockNo}"></td>
-	        		<td th:data-value="${stock.stockNo}"  th:text="${stock.item.item_name}" onclick="openModal(this)" class="stock"></td>
+	        		<td th:data-value="${stock.stockNo}"  th:text="${stock.item.itemName}" onclick="openModal(this)" class="stock"></td>
 	        		<td th:text="${stock.storage.storage_name}"></td>
 	        		<td th:text="${stock.quantity}"	></td>
 	        	</tr>
@@ -284,6 +289,7 @@
 	
 	    		<button th:if="${hasNext}" th:value="${currentPage+1}" onclick="changePage(this)" >다음</button>
 				</div>
+	    	<button type="button" class="green right" onclick="location.href='/item'">상품 목록</button>
 	    </div>
 	    <div class="modal" id="modal">
 	    	<button type="button" onclick="closeModal()" class="closeModal">
@@ -295,7 +301,7 @@
 	    	</div>
 	    	<div class="modalContent">
 		    	<label>재고명 : </label>
-		    	<input id="modal_item_name" readonly="readonly" class="noFocus" >
+		    	<input id="modal_itemName" readonly="readonly" class="noFocus" >
 	    	</div>
 	    	<div class="modalContent">
 		    	<label>창고 : </label>
@@ -303,7 +309,7 @@
 	    	</div>
 	    	<div class="modalContent">
 		    	<label>사진 : </label>
-		    	<img alt="stock_image" src="" id="modal_item_image">
+		    	<img alt="stock_image" src="" id="modal_itemImage">
 	    	</div>
 	    	<div class="modalContent">
 		    	<label>수량 : </label>
@@ -323,7 +329,7 @@
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>재고명 : </label>
-			    	<input id="modalEdit_item_name" readonly="readonly" class="noFocus" >
+			    	<input id="modalEdit_itemName" readonly="readonly" class="noFocus" >
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>창고 : </label>
@@ -331,7 +337,7 @@
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>사진 : </label>
-			    	<img alt="stock_image" src="" id="modalEdit_item_image">
+			    	<img alt="stock_image" src="" id="modalEdit_itemImage">
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>수량 : </label>
@@ -339,13 +345,11 @@
 		    	</div>
 		    	<button class="lime modalButton" type="submit">재고 수정</button>	
 	    	</form>
-	    	
 	    </div>
 	    
 	    <div class="modalBackground" id="modalBackground">
 	    </div>
 	  </div>
-	</div>
 	<script type="text/javascript">
 	
 	let modal = document.getElementById('modal');
@@ -368,9 +372,9 @@
 			.then(response => response.json())
 			.then(data => {
 				document.getElementById('modal_stock_no').value = data.stockNo;
-				document.getElementById('modal_item_name').value = data.item.item_name;
+				document.getElementById('modal_itemName').value = data.item.itemName;
 				document.getElementById('modal_storage_no').value = data.storage.storage_name;
-				document.getElementById('modal_item_image').src = data.item.item_image;
+				document.getElementById('modal_itemImage').src = data.item.itemImage;
 				document.getElementById('modal_quantity').value = data.quantity;
 			})
 		
@@ -381,9 +385,9 @@
 	
 	function openModalEdit() {
 		document.getElementById('modalEdit_stock_no').value = document.getElementById('modal_stock_no').value;
-		document.getElementById('modalEdit_item_name').value = document.getElementById('modal_item_name').value;
+		document.getElementById('modalEdit_itemName').value = document.getElementById('modal_itemName').value;
 		document.getElementById('modalEdit_storage_no').value = document.getElementById('modal_storage_no').value;
-		document.getElementById('modalEdit_item_image').src = document.getElementById('modal_item_image').src;
+		document.getElementById('modalEdit_itemImage').src = document.getElementById('modal_itemImage').src;
 		document.getElementById('modalEdit_quantity').value = document.getElementById('modal_quantity').value;
 		modal.style.display = 'none';
 		modalBackground.style.display = 'block';

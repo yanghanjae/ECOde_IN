@@ -59,8 +59,11 @@ public class StockService {
 	}
 
 	public void editStock (int editStockNo, int editQunaitity) {
-		
-		STOCK_REPOSITORY.updateStock(editStockNo, editQunaitity);
+		if (editQunaitity == 0) {
+			STOCK_REPOSITORY.delete (STOCK_REPOSITORY.findByStockNO (editStockNo).get ());
+		} else {
+			STOCK_REPOSITORY.updateStock(editStockNo, editQunaitity);
+		}
 	}
 
 	public Page<Item> searchStocks (String search, int page) {
@@ -84,6 +87,17 @@ public class StockService {
 		return ITEM_REPOSITORY.searchItemOnly(search, pageable);
 
 	}
+	
+	public Page<Item> searchMaterials (String search, int page) {
+		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("item_name").ascending ());
+		
+		if(search == null || search.isEmpty ()) {
+			search = "";
+		}
+		
+		return ITEM_REPOSITORY.searchMaterialOnly(search, pageable);
+		
+	}
 
 	public Page<Storage> searchStorages (String search, int page) {
 
@@ -106,5 +120,36 @@ public class StockService {
 		} else {
 			STOCK_REPOSITORY.addStock(item_no, storage_no, quantity);
 		}
+	}
+
+	
+	// 생산품 추가 (재료들의 수량을 확인 후, 해당 창고의 재고보다 수량이 클 시 재고 삭제, 작을 시 수량 감소)
+	public void addItem (Integer itemNo,
+		Integer storage_no, Integer quantity,
+		List<Integer> ingredient,
+		List<Integer> ingredient_quantity) {
+		
+		for (int i=0; i<ingredient.size (); i++) {
+			
+			Optional<Stock> stock = STOCK_REPOSITORY.findStock(ingredient.get (i),storage_no);
+			
+			if (stock.isPresent()) {
+				if(stock.get ().getQuantity () > ingredient_quantity.get (i)) {
+					STOCK_REPOSITORY.updateStock(stock.get().getStockNo(), stock.get().getQuantity()-ingredient_quantity.get (i));
+				} else {
+					STOCK_REPOSITORY.delete (stock.get ());
+				}
+			}
+			
+		}
+
+		Optional<Stock> stock = STOCK_REPOSITORY.findStock(itemNo,storage_no);
+		
+		if (stock.isPresent ()) {
+			STOCK_REPOSITORY.updateStock(stock.get().getStockNo(), stock.get().getQuantity()+quantity);
+		} else {
+			STOCK_REPOSITORY.addStock(itemNo, storage_no, quantity);
+		}
+		
 	}
 }

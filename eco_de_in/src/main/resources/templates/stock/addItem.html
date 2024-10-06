@@ -124,22 +124,71 @@
     }
     
     .ingredient {
+    	text-align: left;
     	display: flex;
+    	margin-left: 40px;
     }
     
     .half {
-    	width: 40%;
+    	width: 35%;
+    	margin: 0 30px;
     }
     
-    .halftInput {
+    .halfInput {
 			display: block;
 			margin-top : 10px;
 			margin-bottom: 30px;
 			border: none;
-			width: 180px;
+			width: 300px;
 			height: 50px;
-				
 		}
+		
+		.ingredientButton {
+			position: relative;
+			margin-top : 45px;
+		}
+		
+		.ingredientButton button {
+			height:50px;
+			margin-top : 10px;
+			margin-bottom: 30px;	
+			display: block;	
+			border: none;
+		}
+		
+		.ingredientButton button:focus {
+			border: none;
+			outline:none;
+		}
+		
+		.ingredientButton img {
+			height: 50px;
+			width: 50px;
+		}
+		
+		.button {
+	    	background-color: #81CD28;
+	      width: 150px;
+	      height: 45px;
+	      border-radius: 10px;
+	      color: #fff;
+	      font-size : 22px;
+	      font-weight: bold;
+	      margin: 50px .5%;
+	    }
+	    
+	    .lime {
+	    	background-color: #81CD28;
+	    	position: relative;
+	    	left: 250px;
+	    }
+	    
+	    .gray {
+	    	background-color: #D9D9D9;
+	    	color:#000;
+	    	position: relative;
+	    	right: 250px;
+	    }
 </style>
 </head>
 <body>
@@ -156,7 +205,7 @@
 	      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
 	      &nbsp;
 				<a href="/stock">
-					<span style="color: #ababab; font-weight: bold;">상품 관리</span>
+					<span style="color: #ababab; font-weight: bold;">재고 관리</span>
 				</a>
 	      &nbsp;
 	      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
@@ -164,32 +213,35 @@
 	      <span style="font-weight: bold;">생산품 등록</span>
 	    </div>
 	    <div class="content-1">
-	    	<form action="" method="post">
+	    	<form action="/stock/addItem" method="post" autocomplete="off">
 	    		<div class="left">
 	    			<label>상품명</label>
-	    			<input required="required" onclick="openItemModal()" class="input" id="item">
-	    			<input hidden="" name="item_no" id="itemHidden">
+	    			<input required="required" onclick="openItemModal()" class="input" id="item" >
+	    			<input hidden="" name="itemNo" id="itemHidden">
 	    		</div>
 	    		<div class="left">
 	    			<label>창고</label>
-	    			<input required="required" onclick="openStorageModal()" class="input" id="storage">
+	    			<input required="required" onclick="openStorageModal()" class="input" id="storage" >
 	    			<input hidden="" name="storage_no" id="storageHidden">
 	    		</div>
 	    		<div class="left">
-	    			<label>수량</label>
-	    			<input type="number" name="quantity" id="quantity" class="input">
+	    			<label>상품 수량</label>
+	    			<input type="number" name="quantity" id="quantity" class="input" onkeyup="onlyNumber(this)" required="required">
 	    		</div>
 	    		<div class="ingredient">
 	    			<div id="itemInput" class="half">
 		    			<label>재료</label>
-		    			<input type="text" name="" class="halfInput">
+		    			<input type="text" name="" class="halfInput stock" onclick="openStockModal(this)" data-value="0" id="stock-0"  required="required">
+		    			<input hidden="" name="ingredient" data-value="0" id="stockHidden-0" >
 	    			</div>
-	    			<div id="itemInput" class="half">
-		    			<label>수량</label>
-		    			<input type="text" name="" class="halfInput">
+	    			<div id="quantityInput" class="half">
+		    			<label>재료 수량</label>
+		    			<input type="number" name="ingredient_quantity" class="halfInput" onkeyup="onlyNumber(this)" data-value="0" required="required">
 	    			</div>
-	    			<div>
-		    			<button onclick="" type="button" style="display:block; position: relative; top: 40px;">+</button>
+	    			<div id="button" class="ingredientButton">
+		    			<button onclick="addInput()" type="button">
+		    				<img alt="+" src="/img/icon/plus-button.png">
+		    			</button>
 	    			</div>
 	    		</div>
 	    		<button type="button" class="button gray" onclick="location.href='/stock'">취소</button>
@@ -215,16 +267,17 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		let quantity = document.getElementById('quantity');
 		let itemModal = document.getElementById('itemModal');
 		let storageModal = document.getElementById('storageModal');
 		let modalBackground = document.getElementById('modalBackground');
+		let count = 0;
+		let selectedInputCount;
 		
-		function onlyNumber() {
-			if(quantity.value.indexOf('.') > 0) {
-				quantity.setCustomValidity('정수만 입력해주세요');
+		function onlyNumber(element) {
+			if(element.value.indexOf('.') > 0) {
+				element.setCustomValidity('정수만 입력해주세요');
 			} else {
-				quantity.setCustomValidity('');
+				element.setCustomValidity('');
 			}
 		}
 		
@@ -233,6 +286,16 @@
 			storageModal.style.display = 'none';
 			modalBackground.style.display = 'block';
 			loadItem('',1);
+			document.activeElement.blur()
+		}
+		
+		function openStockModal(element) {
+			itemModal.style.display = 'block';
+			storageModal.style.display = 'none';
+			modalBackground.style.display = 'block';
+			loadStock('',1);
+			selectedInputCount = element.getAttribute('data-value');
+			document.activeElement.blur()
 		}
 		
 		function openStorageModal() {
@@ -240,6 +303,7 @@
 			storageModal.style.display = 'block';
 			modalBackground.style.display = 'block';
 			loadStorage('', 1);
+			document.activeElement.blur()
 		}
 		
 		function closeModal() {
@@ -251,6 +315,22 @@
 		function loadItem(search, page) {
 			
 			fetch(`/stock/addItem/item?search=${search}&page=${page}`)
+				.then(response => response.text())
+				.then(html => {
+					document.getElementById('itemModalContent').innerHTML = html;	
+			})
+				.catch(error => {
+					console.error('Error', error);
+				})
+			
+			itemModal.style.display = 'block';
+			modalBackground.style.display = 'block';
+			storageModal.style.display = 'none';
+		}
+		
+		function loadStock(search, page) {
+			
+			fetch(`/stock/addItem/stock?search=${search}&page=${page}`)
 				.then(response => response.text())
 				.then(html => {
 					document.getElementById('itemModalContent').innerHTML = html;	
@@ -291,6 +371,16 @@
 			loadItem(itemModalSearch,page);
 		}
 		
+		function stockSubmit(event) {
+			
+			event.preventDefault();
+			
+			let itemModalSearch = document.getElementById('itemModalSearch').value;
+			let page= 1;
+			
+			loadStock(itemModalSearch,page);
+		}
+		
 		function storageSubmit(event) {
 			
 			event.preventDefault();
@@ -310,6 +400,18 @@
 			closeModal();
 		}
 		
+		function chooseStock(element) {
+			let itemName = element.textContent;
+			let itemNo = element.getAttribute('data-value');
+			
+			document.getElementById(`stock-${selectedInputCount}`).value = itemName;
+			document.getElementById(`stockHidden-${selectedInputCount}`).value = itemNo;
+			
+			noRepetition(document.getElementById(`stock-${selectedInputCount}`));
+			
+			closeModal();
+		}
+		
 		function chooseStorage(element) {
 			let storageName = element.textContent;
 			let storageNo = element.getAttribute('data-value');
@@ -326,6 +428,13 @@
 			loadItem(search,page);
 		}
 		
+		function changeStockPage(element) {
+			let search= document.getElementById('itemModalSearch').value;
+			let page = element.getAttribute('data-value');
+			
+			loadStock(search,page);
+		}
+		
 		function changeStoragePage(element) {
 			let search= document.getElementById('storageModalSearch').value;
 			let page = element.getAttribute('data-value');
@@ -333,10 +442,75 @@
 			loadStorage(search,page);
 		}
 		
+		function addInput () {
+			count++;
+			console.log(count);
+			
+			let newInput = document.createElement('input');
+			newInput.setAttribute('id',`stock-${count}`);
+			newInput.setAttribute('class','halfInput stock');
+			newInput.setAttribute('onclick','openStockModal(this)');
+			newInput.setAttribute('data-value',count);
+			newInput.setAttribute('required','required');
+			
+			let newInputHidden = document.createElement('input');
+			newInputHidden.setAttribute('hidden','');
+			newInputHidden.setAttribute('name','ingredient');
+			newInputHidden.setAttribute('data-value',count);
+			newInputHidden.setAttribute('id',`stockHidden-${count}`);
+			
+			let newQuantity = document.createElement('input');
+			newQuantity.setAttribute('name','ingredient_quantity');
+			newQuantity.setAttribute('class','halfInput');
+			newQuantity.setAttribute('onkeyup','onlyNumber(this)');
+			newQuantity.setAttribute('data-value',count);
+			newQuantity.setAttribute('type','number');
+			newQuantity.setAttribute('required','required');
+			
+			let newButton = document.createElement('button');
+			newButton.setAttribute('type','button');
+			newButton.setAttribute('data-value',count);
+			newButton.setAttribute('onclick','removeInput(this)');
+			newButton.innerHTML = '<img alt="x" src="/img/icon/closebutton.png">';
+			
+			document.getElementById('itemInput').append(newInput,newInputHidden);
+			document.getElementById('quantityInput').append(newQuantity);
+			document.getElementById('button').append(newButton);
+			
+		}
 		
+		function removeInput(element) {
+			selectedInputCount = element.getAttribute('data-value');
+			
+			let remove = document.querySelectorAll(`[data-value="${selectedInputCount}"]`);
+			
+			remove.forEach( e => {
+				e.remove();
+			});
+			
+		}
 		
-		quantity.onkeyup = onlyNumber;
-		quantity.onchage = onlyNumber;
+		function noRepetition (element) {
+			let thisValue = element.value;
+			let ingredients = document.querySelectorAll('.stock');
+			let repetitionCount = 0;
+			
+			
+			ingredients.forEach ( i => {
+				console.log(i.value);
+				if (i.value == thisValue && i != element) {
+					repetitionCount++;
+				}
+			});
+			
+			console.log(repetitionCount);
+			
+			if(repetitionCount >= 1 ) {
+				window.alert('재료에 중복된 항목이 있습니다.');
+				element.value = '';
+			}
+		}
+		
 	</script> 
 </body>
 </html>

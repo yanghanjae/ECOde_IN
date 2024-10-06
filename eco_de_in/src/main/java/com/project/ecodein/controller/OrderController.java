@@ -10,19 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
 
+	private final OrderingService ORDERING_SERVICE;
 
-	private final OrderingService ORDER_SERVICE;
+	public OrderController(OrderingService orderingService) {
 
-	public OrderController(OrderingService orderService) {
-
-		this.ORDER_SERVICE = orderService;
+		this.ORDERING_SERVICE = orderingService;
 	}
-
 
 	// 발주 목록 페이지
 	@GetMapping({"/{page}", "/{page}/{status}"})
@@ -30,20 +30,17 @@ public class OrderController {
 	@PathVariable("page") Integer page, @RequestParam(required = false) String query,
                         @PathVariable(name = "status", required = false) String status) {
 
-		Page<Ordering> orders = ORDER_SERVICE.getOrders(page, query, status);
+		Page<Ordering> orders = ORDERING_SERVICE.getOrders(page, query, status);
 		model.addAttribute("orders", orders);
 		return "order/order";
-
 	}
-
 
 	// 삭제 기능 구현
     @GetMapping("/delete/{order_no}")
     public ResponseEntity<Void> deleteOrder(@PathVariable int order_no) {
-        ORDER_SERVICE.deleteOrder(order_no);
+		ORDERING_SERVICE.deleteOrder(order_no);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
 	// 페이지네이션
 //	@GetMapping("/list")
@@ -60,8 +57,6 @@ public class OrderController {
 //		return "order/order";
 //	}
 
-
-
 	// 발주 등록 페이지
 	@GetMapping("/add")
 	public String orderAdd(Model model) {
@@ -76,10 +71,21 @@ public class OrderController {
 		return "order/orderAdd";
 	}
 
+	// 등록된 상품처리1
 //	@PostMapping("/add")
 //	public String orderAddPost(@ModelAttribute Ordering ordering, @ModelAttribute StockDTO stock) {
 //		ORDER_SERVICE.registerOrder(ordering, stock); // 수정
 //		return "redirect:/order"; // 수정
+//	}
+
+	// 등록된 상품처리2
+//	@PostMapping("/add")
+//	public String orderAddPost(@RequestParam("productIds") List<Integer> productIds,
+//							   @RequestParam("quantities") List<Integer> quantities, Model model) {
+//		// 상품 정보를 처리
+//		// 상품 ID와 수량을 받아서 주문 처리 로직 작성
+//		ORDERING_SERVICE.registerOrder(productIds, quantities);
+//		return "redirect:/order";
 //	}
 
 }
