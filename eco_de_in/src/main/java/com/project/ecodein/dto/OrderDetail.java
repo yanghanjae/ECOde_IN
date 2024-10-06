@@ -15,14 +15,17 @@ import lombok.ToString;
 public class OrderDetail {
 
     @Id
-	@ManyToOne
-	@JoinColumn(referencedColumnName = "item_no", nullable = false)
-	private Item item_no;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "detail_no", nullable = false)
+    private int detail_no;
 
-    @Id
 	@ManyToOne
-	@JoinColumn(referencedColumnName = "order_no", nullable = false)
-	private Ordering order_no;
+	@JoinColumn(name = "item_no", referencedColumnName = "item_no", nullable = false)
+	private Item item;
+
+	@ManyToOne
+	@JoinColumn(name = "order_no", referencedColumnName = "order_no", nullable = false)
+	private Ordering order;
 	
 	@Column(name = "quantity", nullable = false)
 	private int quantity;

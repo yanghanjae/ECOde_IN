@@ -72,13 +72,13 @@
     thead th {
       padding: 12px 8px;
       font-size: 0.875rem;
-      text-align: left;
+      text-align: center;
       color: #6b7280;
     }
     
     .content-1 tbody tr {
       font-size: 0.875rem;
-      line-height: 1.75rem;
+      line-height: 2.75rem;
     }
     
     .content-1 tbody tr:nth-of-type(even) {
@@ -121,19 +121,19 @@
           <p class="content-title">진행중인 발주</p>
           <table>
             <thead>
-            <tr>
-              <th>발주번호</th>
-              <th>납기일자</th>
-              <th>출고상태</th>
-            </tr>
+              <tr>
+                <th>발주번호</th>
+                <th>납기일자</th>
+                <th>출고상태</th>
+              </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>1</td>
-              <td>2024-09-15</td>
-              <td>진행중</td>
-            </tr>
-            <tr>
+              <tr th:if="${state.count <= 10}" th:each="order, state: ${orders}">
+                <td th:text="${order.orderNo}">1</td>
+                <td th:text="${order.order_date}">2024-09-15</td>
+                <td th:text="${order.isDelivery == 0 ? '진행중':'완료'}">진행중</td>
+              </tr>
+            <tr th:if="${orders.isEmpty()}">
               <td colspan="3">진행중인 발주 내역이 존재하지 않습니다.</td>
             </tr>
             </tbody>

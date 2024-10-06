@@ -74,6 +74,7 @@
       background-size: 70%;
       position: relative;
       isolation: isolate;
+      min-height: 400px;
     }
     
     table.item_table::after {
@@ -96,10 +97,6 @@
     }
     
     .total > span:nth-child(1) {
-      float: left;
-    }
-    
-    .total > span:nth-child(2) {
       float: right;
     }
     
@@ -108,8 +105,8 @@
 <body>
   <div id="title">발주 상세 내역서</div>
   <div id="detail">
-    <span class="order-date">발주 일자 : 2024-09-30 11:24</span>
-    <span class="out-sorting">출고상태 : 출고준비중</span>
+    <span class="order-date">발주 일자 : <span th:text="${approval.ordering.order_date}">2024-09-30 11:24</span></span>
+    <span class="out-sorting" >출고상태 : <span th:text="${approval.ordering.isDelivery == 0 ? '접수':approval.ordering.isDelivery == 1 ? '출고진행중':'출고완료'}">출고준비중</span></span>
     <table class="detail-table-top">
       <colgroup>
         <col style="width: 8%">
@@ -121,11 +118,11 @@
       </colgroup>
       <tr>
         <td>발주 번호</td>
-        <td>2024093001212</td>
+        <td th:text="${approval.ordering.orderNo}">2024093001212</td>
         <td>발주처</td>
-        <td>CU 홍대입구역점</td>
+        <td th:text="${approval.buyer.buyer_name}">CU 홍대입구역점</td>
         <td>전화번호</td>
-        <td>02-1234-1234</td>
+        <td th:text="${approval.buyer.buyer_tel}">02-1234-1234</td>
       </tr>
     </table>
     <table class="detail-table-bottom">
@@ -141,13 +138,15 @@
       </colgroup>
       <tr>
         <td>결재 번호</td>
-        <td>202409034212</td>
+        <td th:text="${approval.approvalNo}">202409034212</td>
         <td>결재여부</td>
-        <td>결재완료</td>
+        <td
+            th:text="${statuslable.status == 0 ? '반려':statuslable.status == 1 ? '결재대기':statuslable.status == 2 ? '결재중':'결재완료'}">
+          결재완료</td>
         <td>결재일자</td>
-        <td>2024-09-30 16:43</td>
+        <td th:text="${#temporals.format(statuslable.updateLableDate, 'yyyy-MM-dd HH:mm:ss')}">2024-09-30 16:43</td>
         <td>담당자</td>
-        <td>장유빈</td>
+        <td th:text="${statuslable.admin.admin_name}">장유빈</td>
       </tr>
     </table>
   </div>
@@ -183,47 +182,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>100</td>
-          <td>참치마요 삼각김밥(2개입)</td>
-          <td>120</td>
-          <td>144,000</td>
-        </tr>
-        <tr>
-          <td>100</td>
-          <td>참치마요 삼각김밥(2개입)</td>
-          <td>120</td>
-          <td>144,000</td>
-        </tr>
-        <tr>
-          <td>100</td>
-          <td>참치마요 삼각김밥(2개입)</td>
-          <td>120</td>
-          <td>144,000</td>
-        </tr>
-        <tr>
-          <td>100</td>
-          <td>참치마요 삼각김밥(2개입)</td>
-          <td>120</td>
-          <td>144,000</td>
-        </tr>
-        <tr>
-          <td>100</td>
-          <td>참치마요 삼각김밥(2개입)</td>
-          <td>120</td>
-          <td>144,000</td>
-        </tr>
-        <tr>
-          <td>100</td>
-          <td>참치마요 삼각김밥(2개입)</td>
-          <td>120</td>
-          <td>144,000</td>
+        <tr th:each="order, status: ${orderDetails}">
+          <td th:text="${order.item.item_no}">100</td>
+          <td th:text="${order.item.item_name}">참치마요 삼각김밥(2개입)</td>
+          <td th:text="${order.quantity}">120</td>
+          <td th:text="${#numbers.formatInteger(order.item.item_price * order.quantity, 3, 'COMMA') + '원'}">144,000</td>
         </tr>
       </tbody>
     </table>
     <div class="total">
-      <span>항목 수 : 5개</span>
-      <span>총 발주 금액 : 254,000</span>
+      <span>항목 수 : <span th:text="${count}">5</span>개</span>
     </div>
   </div>
 </body>
