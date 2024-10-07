@@ -44,25 +44,6 @@
 		};
 	</script>
   <style>
-    #content {
-      width: calc(100% - 310px);
-      height: 100%;
-      background-color: #e5e7eb;
-      float: right;
-    }
-    
-    #content_wrap {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      width: 100%;
-      height: 100%;
-      padding: 50px;
-      box-sizing: border-box;
-    }
-  
     .breadcrumb {
       width: 50%;
       height: 40px;
@@ -202,7 +183,7 @@
 			alert('거래처 등록 권한이 없습니다. 관리자에게 문의하세요.');
 			history.back();
 	</script>
-	<div style="width: 310px; float: left;">
+  <div id="header-controller" style="width: 310px; float: left;">
 	  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
 	</div>
 	<div id="content">
