@@ -1,11 +1,13 @@
 package com.project.ecodein.service;
 
+import com.project.ecodein.dto.Admin;
 import com.project.ecodein.dto.Approval;
 import com.project.ecodein.dto.ApprovalStatusLable;
 import com.project.ecodein.dto.OrderDetail;
 import com.project.ecodein.repository.ApprovalRepository;
 import com.project.ecodein.repository.ApprovalStatusLableRepository;
 import com.project.ecodein.repository.OrderDetailRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,7 +41,12 @@ public class ApprovalService {
     }
 
     // 상세 정보
-    public Approval getApproval(int approval_no) {
+    public Approval getApproval(int approval_no, HttpSession session) {
+
+        if (APPROVAL_STATUS_LABLE.findApprovalStatusLableById(approval_no).getStatus() == 1) {
+            APPROVAL_STATUS_LABLE.updateApprovalStatus((byte) 2, ((Admin) session.getAttribute("admin")).getAdmin_id(), approval_no);
+        }
+
         return APPROVAL_REPOSITORY.findById(approval_no).orElse(null);
     }
 
@@ -57,5 +64,12 @@ public class ApprovalService {
     // 발주 상품 수량
     public int getOrderDetailCount(int approval_no) {
         return ORDER_DETAIL_REPOSITORY.getOrderDetailCountByOrderNo(approval_no);
+    }
+
+    // 결재 상태 업데이트
+    public void approvalStatusUpdate (Integer approval_no, byte status, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
+        String admin_id = admin.getAdmin_id();
+        APPROVAL_STATUS_LABLE.updateApprovalStatus(status, admin_id, approval_no);
     }
 }
