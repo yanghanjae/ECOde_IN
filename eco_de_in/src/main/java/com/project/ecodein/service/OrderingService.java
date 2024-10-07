@@ -1,12 +1,9 @@
 package com.project.ecodein.service;
 
-import com.project.ecodein.dto.Item;
+
 import com.project.ecodein.dto.Stock;
-import com.project.ecodein.dto.Storage;
-import com.project.ecodein.repository.ItemRepository;
 import com.project.ecodein.repository.OrderingRepository;
 import com.project.ecodein.repository.StockRepository;
-import com.project.ecodein.repository.StorageRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.project.ecodein.dto.Ordering;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class OrderingService {
@@ -45,19 +42,19 @@ public class OrderingService {
         if (query == null && status.equals("all")) {
             System.out.printf("검색어/상태값 없음 - query : %s%n, status : %s%n", query, status);
             Sort sort = Sort.by(Sort.Order.desc("orderNo"));
-            Pageable pageable = PageRequest.of(page - 1, 10, sort); // 페이지당 10개씩 조회
+            Pageable pageable = PageRequest.of(page - 1, 10, sort);
             return ORDERING_REPOSITORY.findAll(pageable);
             // (키워드 검색) 검색어가 있는 경우
         } else if (query != null) {
             System.out.printf("상태값 없음 - query : %s%n, status : %s%n", query, status);
             Sort sort = Sort.by(Sort.Order.desc("order_no"));
-            Pageable pageable = PageRequest.of(page - 1, 10, sort); // 페이지당 10개씩 조회
+            Pageable pageable = PageRequest.of(page - 1, 10, sort);
             return ORDERING_REPOSITORY.searchByQuery(query, pageable);
             // (상태 검색) 상태코드가 있는 경우
         } else {
             System.out.printf("검색어 없음 - query : %s%n, status : %s%n", query, status);
             Sort sort = Sort.by(Sort.Order.desc("order_no"));
-            Pageable pageable = PageRequest.of(page - 1, 10, sort); // 페이지당 10개씩 조회
+            Pageable pageable = PageRequest.of(page - 1, 10, sort);
 
             byte statusble = 2;
 
@@ -75,5 +72,16 @@ public class OrderingService {
 	public void deleteOrder(int orderNo) {
 		ORDERING_REPOSITORY.deleteById(orderNo);
 	}
+
+    // 상품등록
+    public void registerOrder(List<Integer> productIds, List<Integer> quantities) {
+
+        for (int i = 0; i < productIds.size(); i++) {
+            int productId = productIds.get(i);
+            int quantity = quantities.get(i);
+
+            Stock stock = STOCK_REPOSITORY.findById(productId).orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다."));
+        }
+    }
 
 }

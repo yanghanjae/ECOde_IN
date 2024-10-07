@@ -157,13 +157,15 @@ img.closeButton {
 							id="itemPrice" name="itemPrice">
 					</div>
 					<div class="left">
+						<label>사진</label> <input type="text" id="test" hidden="" name="itemImage"><input type="file" accept="/image/*" id="itemImage" onchange="addImage()">
+					</div>
+					<div class="left">
 						<label>분류</label> <input type="radio" name="isMaterial" value="0">상품
 						<input type="radio" name="isMaterial" value="1">재료
 					</div>
 					<button type="button" class="button gray"
 						onclick="location.href='/item'">취소</button>
 					<button type="submit" class="button lime">상품 등록</button>
-					<input type="text" name="itemImage" hidden="" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQTMU811AMmCncQCjcECa9UzIUZiVtflgilw&s">
 				</form>
 			</div>
 
@@ -179,6 +181,20 @@ img.closeButton {
 			} else {
 				itemPrice.setCustomValidity('');
 			}
+		}
+		
+		function addImage() {
+			const test = document.getElementById('test');
+			const image = document.getElementById('itemImage').files[0];
+			const formData = new FormData();
+			formData.append("image", image);
+			fetch("/amazon/uploader", {
+				method :"post",
+				body : formData,
+				headers : {Accept:"application/json"}
+			}).then(res=>res.text()).then(data=>{
+				test.value=data;
+			})
 		}
 
 		itemPrice.onkeyup = onlyNumber;
