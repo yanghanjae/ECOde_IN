@@ -1,5 +1,6 @@
 package com.project.ecodein.controller;
 
+import com.project.ecodein.service.OrderingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainContoller {
 
-	@RequestMapping ("/main")
-	public String index () {
+    private final OrderingService ORDERING_SERVICE;
 
+    public MainContoller(OrderingService orderingService) {
+        this.ORDERING_SERVICE = orderingService;
+    }
+
+	@RequestMapping ("/main")
+	public String index (Model model) {
+        model.addAttribute("orders", ORDERING_SERVICE.getOrderings());
 		return "main";
 
 	}

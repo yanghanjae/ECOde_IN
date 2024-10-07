@@ -7,6 +7,7 @@ function sidebar_not_visible() {
   document.querySelector('.user-info').classList.toggle('deActive');
   document.querySelector('img[alt="logout-btn"]').classList.toggle('deActive');
   document.querySelector('.footer').classList.toggle('not-visible');
+  document.querySelector('#header-controller').classList.toggle('header-visible');
 }
 
 function user_info_toggle () {
