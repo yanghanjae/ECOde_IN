@@ -35,7 +35,7 @@ public interface StorageRepository extends JpaRepository<Storage, Integer> {
                                                             Pageable pageable);
 
     // 창고별 재고 조회
-    @Query(value = "select new com.project.ecodein.dto.ItemStockStorage(i.item_no, i.item_name, i.item_price, i.is_material, i.item_image, s.quantity, s.storage.storage_no) " +
+    @Query(value = "select new com.project.ecodein.dto.ItemStockStorage(i.itemNo, i.itemName, i.itemPrice, i.isMaterial, i.itemImage, s.quantity, s.storage.storage_no) " +
         "from Stock s left join s.item i where s.storage.storage_no = :storage_no")
     public List<ItemStockStorage> findByItemStockByStorageNo(@Param("storage_no") int storage_no);
 

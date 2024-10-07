@@ -1,46 +1,42 @@
-package com.project.ecodein.entity;
+package com.project.ecodein.dto;
 
-import com.project.ecodein.dto.Admin;
-import com.project.ecodein.dto.Buyer;
-import com.project.ecodein.dto.Ordering;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Setter @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "approval")
-@Getter @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class Approval {
 
     @Id
+    @Column(name = "approval_no", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_no")
-    private Integer orderNo;
+    private int approvalNo;
 
     @ManyToOne
     @JoinColumn(name = "buyer_code", referencedColumnName = "buyer_code", nullable = false)
     private Buyer buyer;
 
-    @Column(name = "approval_update_date")
+    @Column(name = "approval_update_date", nullable = true)
     private LocalDateTime approvalUpdateDate;
 
     @Column(name = "approval_regist_date", nullable = false)
     private LocalDateTime approvalRegistDate;
 
     @ManyToOne
-    @JoinColumn(name = "admin_id", referencedColumnName = "admin_id", nullable = true)
+    @JoinColumn(name = "approval_admin", referencedColumnName = "admin_id")
     private Admin admin;
 
-    @Column
+    @Column(name = "subject", nullable = true)
     private String subject;
 
     @OneToOne
     @PrimaryKeyJoinColumn
-    @JoinColumn(name = "order_no", referencedColumnName = "order_no")
+    @JoinColumn(name = "approval_no", referencedColumnName = "order_no")
     private Ordering ordering;
-
 }

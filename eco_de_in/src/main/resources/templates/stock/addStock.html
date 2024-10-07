@@ -149,7 +149,7 @@
 	</style>
 	</head>
 	<body>
-		<div style="width: 310px; float: left;">
+    <div id="header-controller" style="width: 310px; float: left;">
 		  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
 		</div>
 		<div id="content">
@@ -162,7 +162,7 @@
 		      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
 		      &nbsp;
 					<a href="/stock">
-						<span style="color: #ababab; font-weight: bold;">상품 관리</span>
+						<span style="color: #ababab; font-weight: bold;">재고 관리</span>
 					</a>
 		      &nbsp;
 		      <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
@@ -170,12 +170,12 @@
 		      <span style="font-weight: bold;">재고 등록</span>
 		    </div>
 		    <div class="content-1">
-		    	<form action="/stock/add" method="post">
+		    	<form action="/stock/add" method="post" autocomplete="off">
 		    		<div class="left">
 		    			<label>상품명</label>
 							<input type="text" class="input" placeholder="목록에서 골라주세요..." 
-							required="required" onclick="openItemModal()" readonly="readonly" id="item">
-							<input name="item_no" hidden="" id="itemHidden">	    			
+							required="required" onclick="openItemModal()"  id="item">
+							<input name="itemNo" hidden="" id="itemHidden">	    			
 		    		</div>
 		    		<div class="left">
 		    			<label>창고명</label>
@@ -229,6 +229,7 @@
 				storageModal.style.display = 'none';
 				modalBackground.style.display = 'block';
 				loadItem('',1);
+				document.activeElement.blur()
 			}
 			
 			function openStorageModal() {
@@ -236,6 +237,7 @@
 				storageModal.style.display = 'block';
 				modalBackground.style.display = 'block';
 				loadStorage('', 1);
+				document.activeElement.blur()
 			}
 			
 			function closeModal() {

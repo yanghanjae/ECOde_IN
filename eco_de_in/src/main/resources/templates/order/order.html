@@ -124,8 +124,9 @@
 
 <body>
 <!-- 사이드바 -->
-<th:block th:replace="fragments/sidebar :: sidebarFragment"/>
-
+<div id="header-controller" style="width: 310px; float: left;">
+  <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
+</div>
 <!-- 메인 콘텐츠 -->
 <div id="content">
   <div id="content_wrap">

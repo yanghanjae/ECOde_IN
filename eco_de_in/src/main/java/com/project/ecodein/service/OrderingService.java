@@ -28,6 +28,12 @@ public class OrderingService {
         this.STOCK_REPOSITORY = stockRepository;
     }
 
+    // mainPage에서 사용할 메서드
+    public List<Ordering> getOrderings() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "orderNo");
+        return ORDERING_REPOSITORY.findAll(sort);
+    }
+
 	// 페이지네이션 및 검색 기능 구현
 	public Page<Ordering> getOrders(@Param("page") int page, @Param("query") String query,
                                     @Param("status") String status) {
