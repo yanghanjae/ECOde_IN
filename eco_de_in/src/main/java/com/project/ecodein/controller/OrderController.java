@@ -2,6 +2,7 @@ package com.project.ecodein.controller;
 
 
 import com.project.ecodein.dto.Ordering;
+import com.project.ecodein.dto.Stock;
 import com.project.ecodein.service.OrderingService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -65,27 +66,25 @@ public class OrderController {
 	}
 
 	// 발주 등록 처리
-	@PostMapping("/add")
-	public String orderAddPost() {
-
-		return "order/orderAdd";
-	}
+//	@PostMapping("/add")
+//	public String orderAddPost() {
+//
+//		return "order/orderAdd";
+//	}
 
 	// 등록된 상품처리1
 //	@PostMapping("/add")
-//	public String orderAddPost(@ModelAttribute Ordering ordering, @ModelAttribute StockDTO stock) {
-//		ORDER_SERVICE.registerOrder(ordering, stock); // 수정
+//	public String orderAddPost(@ModelAttribute Ordering ordering, @ModelAttribute Stock stock) {
+//		ORDERING_REPOSITORY.registerOrder(ordering, stock); // 수정
 //		return "redirect:/order"; // 수정
 //	}
 
 	// 등록된 상품처리2
-//	@PostMapping("/add")
-//	public String orderAddPost(@RequestParam("productIds") List<Integer> productIds,
-//							   @RequestParam("quantities") List<Integer> quantities, Model model) {
-//		// 상품 정보를 처리
-//		// 상품 ID와 수량을 받아서 주문 처리 로직 작성
-//		ORDERING_SERVICE.registerOrder(productIds, quantities);
-//		return "redirect:/order";
-//	}
-
+	@PostMapping("/add/search")
+	public String orderAddPost(@RequestParam("productIds") List<Integer> productIds,
+							   @RequestParam("quantities") List<Integer> quantities, Model model) {
+		// 각 상품 ID와 수량을 바탕으로 발주 등록 처리
+		ORDERING_SERVICE.registerOrder(productIds, quantities);
+		return "redirect:/order";
+	}
 }
