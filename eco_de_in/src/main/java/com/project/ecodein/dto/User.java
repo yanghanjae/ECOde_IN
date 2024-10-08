@@ -40,5 +40,8 @@ public class User {
 	@Column(name = "user_email", nullable = false)
 	private String user_email;
 
+    public User(String userId) {
+		this.user_id = userId;
+    }
 }
 

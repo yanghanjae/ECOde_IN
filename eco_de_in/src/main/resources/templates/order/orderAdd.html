@@ -195,7 +195,7 @@
       </form>
     </div>
 
-    <!--발주 등록-->
+    <!--발주 등록 폼-->
     <div class="register-content">
 <!--      <form action="#" onsubmit="submit_control (this)">-->
         <button class="button-register" onclick="submit_control()">등 록</button>
@@ -247,8 +247,8 @@
             </div>
           </div>
         </div>
-<!--      </form>-->
-      <!-- 발주 등록 테이블 -->
+
+      <!-- modal (상품검색) -->
       <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
             dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -257,7 +257,6 @@
               type="button">
         상 품 검 색
       </button>
-
       <table id="parant-table">
         <thead>
         <tr>
@@ -273,15 +272,6 @@
         </tr>
         </tbody>
       </table>
-
-
-      <!-- modal (상품검색) -->
-<!--      <form action="/order/add" method="post">-->
-<!--        <label for="stock-search">상품 검색</label>-->
-<!--        <input type="text" id="stock-search" name="stockSearch" placeholder="상품명 검색...">-->
-<!--        <button type="submit">검색</button>-->
-<!--      </form>-->
-
       <div class="hidden fixed max-w-[960px] mx-auto bg-white shadow-lg p-5 rounded-lg"
            id="popup-modal-3"
            style="left: 50%; top: 20%; transform: translateX(-50%); z-index: 1;
@@ -291,7 +281,6 @@
            <b>상품검색</b>
           </p>
         </div>
-
         <div class="w-full flex justify-between items-center mb-3 mt-12 pl-3">
           <div class="mx-3">
             <div class="w-full max-w-sm min-w-[200px] relative">
@@ -318,7 +307,6 @@
             </div>
           </div>
         </div>
-
         <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md
                     rounded-lg bg-clip-border ">
           <table class="w-full text-left table-auto min-w-max" id="productTable">
@@ -340,15 +328,6 @@
 <!--              <td class="p-4 border-b border-slate-200 py-5">-->
 <!--                <p class="block font-semibold text-sm text-slate-800"></p>-->
 <!--              </td>-->
-<!--              <td class="p-4 border-b border-slate-200 py-5">-->
-<!--                <p class="text-sm text-slate-500"></p>-->
-<!--              </td>-->
-<!--              <td class="p-4 border-b border-slate-200 py-5">-->
-<!--                <p class="text-sm text-slate-500"></p>-->
-<!--              </td>-->
-<!--              <td class="p-4 border-b border-slate-200 py-5">-->
-<!--                <p class="text-sm text-slate-500"></p>-->
-<!--              </td>-->
 <!--            </tr>-->
                   <tr th:each="stock : ${stocks}">
                     <td th:text="${stock.stockNo}"></td>
@@ -366,17 +345,6 @@
           </table>
         </div>
       </div>
-
-      <!-- 페이지네이션  -->
-    <div class="pagination">
-      <ul class="justify-content-center inline">
-          <li class="page-item inline"><a class="page-link" href="#"><</a></li>
-          <li class="page-item inline"><a class="page-link" href="#">1</a></li>
-          <li class="page-item inline"><a class="page-link" href="#">2</a></li>
-          <li class="page-item inline"><a class="page-link" href="#">3</a></li>
-          <li class="page-item inline"><a class="page-link" href="#">></a></li>
-        </ul>
-      </div>
     </div>
     </div>
   </div>
@@ -388,6 +356,7 @@
   for (let idx = 0; idx <= 10; idx++) {
     items[idx] = new Array(2);
   }
+
   // 조회 버튼
   function setActiveButton(clickedButton) {
     const buttons = document.querySelectorAll('.button');
@@ -426,32 +395,20 @@
       input.name = "quantities";
       input.value = (stock === 0 && stock !== undefined) ? stock : 0;
       input.onchange = function() { quantity_modify(itemNo, this); };
-      
+
       td_4.appendChild(input);
       tr.appendChild(td_1);
       tr.appendChild(td_2);
       tr.appendChild(td_3);
       tr.appendChild(td_4);
       tableBody.appendChild(tr);
-      
-    //   tableBody += `
-    //     <tr>
-    //         <td>${itemNo}</td>
-    //         <td>${itemName}</td>
-    //         <td>${price}</td>
-    //         <td><input type="number" name="quantities" value="${stock === 0 && stock !== undefined ? stock:0
-    //              }" onchange="quantity_modify(${itemNo}, this)"/></td>
-    //     </tr>
-    //     <input type="hidden" name="productIds" value="${itemNo}" />
-    // `;
-      // tableBody.innerHTML += newRow;
+
       items[point++][0] = itemNo;
 
-      
+    } else {
+      alert('이미 추가된 상품입니다.');
     }
-    
     console.log('items : ', items);
-
   }
 
   // items 배열에 itemNo가 일치하는 상품 재고 업데이트
@@ -465,16 +422,16 @@
   }
 
   // Front -> back 데이터 처리
-  function submit_control(e) {
+  function submit_control() {
     const formData = new FormData();
     console.log(items);
-    
+
     const user_id = document.querySelector('input[name="user_id"]').value;
     const buyer_code = document.querySelector('input[name="buyerCode"]').value;
     const due_date = document.querySelector('input[name="due_date"]').value;
     const orderNos = [];
     const quantities = [];
-    
+
     for (let idx = 0; idx < items.length; idx++) {
       if (items[idx][0] !== undefined) {
         console.log('items[idx]', items[idx][0])
@@ -482,28 +439,24 @@
         quantities.push(items[idx][1]);
       }
     }
-    
+
     formData.append('user_id', user_id);
     formData.append('buyer_code', buyer_code);
     formData.append('due_date', due_date);
-    
+
     for (let idx = 0; idx < orderNos.length; idx++) {
       console.log('item - ', items[idx])
       formData.append('order_nos['+idx+']', orderNos[idx]);
       formData.append('quantities['+idx+']', quantities[idx]);
     }
-    
+
     fetch('/order/add', {
       method: 'post',
       body: formData
     })
-    
-    
+        .then(data => location.href = `${data.url}`)
+
   }
-
-
-
-
 
   // 발주등록 검색 결과를 화면에 표시
   function searchProducts() {
@@ -513,33 +466,6 @@
       alert("검색어를 입력하세요.");
       return;
     }
-
-    // fetch(`/order/search?query=${query}`, {
-    //   method: 'GET'
-    // })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       const tableBody = document.getElementById('productTableBody');
-    //       tableBody.innerHTML = '';
-    //
-    //       if (data.length > 0) {
-    //         data.forEach(product => {
-    //           tableBody.innerHTML += `
-    //                 <tr>
-    //                     <td><img src="${product.imageUrl}" alt="상품 이미지" width="50"></td>
-    //                     <td>${product.stockNo}</td>
-    //                     <td>${product.itemName}</td>
-    //                     <td>${product.quantity}</td>
-    //                     <td>${product.price}</td>
-    //                     <td><button class="bg-blue-500 text-white px-4 py-2 rounded" type="button" onclick="addProduct(${product.stockNo}, '${product.itemName}', ${product.price})">선택</button></td>
-    //                 </tr>`;
-    //         });
-    //       } else {
-    //         tableBody.innerHTML = '<tr><td colspan="6">검색 결과가 없습니다.</td></tr>';
-    //       }
-    //     })
-    //     .catch(error => console.error('Error:', error));
-
 
     fetch(`/order/search?query=${query}`)
         .then(response => response.json())
@@ -562,7 +488,6 @@
                                onclick="addProduct(${product.item.itemNo}, '${product.item.itemName}', ${product.item.itemPrice}),
                                         item_array.push(${product.item.itemNo})">선택</button></td>
                     </tr>`;
-
               }
             });
           } else {
@@ -571,53 +496,6 @@
         })
         .catch(error => console.error('Error:', error));
   }
-
-
-
-
-  // function searchProducts() {
-  //   const query = document.getElementById('searchInput').value.trim();  // 입력값 트림
-  //   if (query === "") {
-  //     alert("검색어를 입력하세요.");
-  //     return;
-  //   }
-  //
-  //   fetch(`/order/search?query=${encodeURIComponent(query)}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Accept': 'application/json',  // 서버에 JSON 응답을 요청합니다.
-  //       'Content-Type': 'application/json'  // JSON 형식으로 전송
-  //     }
-  //   })
-  //       .then(response => {
-  //         if (!response.ok) {
-  //           throw new Error('Network response was not ok');
-  //         }
-  //         return response.json();
-  //       })
-  //       .then(data => {
-  //         const tableBody = document.getElementById('productTableBody');
-  //         tableBody.innerHTML = '';
-  //
-  //         if (data.length > 0) {
-  //           data.forEach(product => {
-  //             tableBody.innerHTML += `
-  //           <tr>
-  //               <td><img src="${product.imageUrl}" alt="상품 이미지" width="50"></td>
-  //               <td>${product.stockNo}</td>
-  //               <td>${product.itemName}</td>
-  //               <td>${product.quantity}</td>
-  //               <td>${product.price}</td>
-  //               <td><button class="bg-blue-500 text-white px-4 py-2 rounded" type="button" onclick="addProduct(${product.stockNo}, '${product.itemName}', ${product.price})">선택</button></td>
-  //           </tr>`;
-  //           });
-  //         } else {
-  //           tableBody.innerHTML = '<tr><td colspan="6">검색 결과가 없습니다.</td></tr>';
-  //         }
-  //       })
-  //       .catch(error => console.error('Error:', error));
-  // }
-
 
 </script>
 </body>

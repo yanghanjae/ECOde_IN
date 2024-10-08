@@ -53,4 +53,7 @@ public class Buyer {
 	@Column (name = "buyer_secure_code", nullable = false)
 	private String buyer_secure_code;
 
+    public Buyer(Long buyerCode) {
+		this.buyerCode = buyerCode;
+    }
 }
