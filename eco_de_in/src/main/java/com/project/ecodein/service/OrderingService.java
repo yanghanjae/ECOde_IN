@@ -1,7 +1,6 @@
 package com.project.ecodein.service;
 
 
-import com.project.ecodein.dto.OrderDetailArrays;
 import com.project.ecodein.dto.Stock;
 import com.project.ecodein.repository.OrderingRepository;
 import com.project.ecodein.repository.StockRepository;
@@ -74,7 +73,6 @@ public class OrderingService {
 		ORDERING_REPOSITORY.deleteById(orderNo);
 	}
 
-
     // Stock을 이름으로 검색하는 메서드 추가
     public List<Stock> searchStocksByName(String name) {
         // StockRepository의 이미 구현된 메서드를 사용하여 검색
@@ -82,11 +80,14 @@ public class OrderingService {
     }
 
     // 상품등록
-    public void registerOrder(Ordering ordering, List<OrderDetailArrays> orderDetail){
-        System.out.println("ordering: " + ordering);
-        System.out.println("orderDetail: " + orderDetail);
+    public void registerOrder(List<Integer> productIds, List<Integer> quantities) {
 
+        for (int i = 0; i < productIds.size(); i++) {
+            int productId = productIds.get(i);
+            int quantity = quantities.get(i);
 
+            Stock stock = STOCK_REPOSITORY.findById(productId).orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다."));
+        }
     }
 
 }

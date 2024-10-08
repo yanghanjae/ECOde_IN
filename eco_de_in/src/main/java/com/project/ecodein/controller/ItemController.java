@@ -20,58 +20,75 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/item")
+@RequestMapping ("/item")
 public class ItemController {
+
 	private final ItemService ITEM_SERVICE;
-	
+
 	public ItemController (ItemService ITEM_SERVICE) {
+
 		this.ITEM_SERVICE = ITEM_SERVICE;
+
 	}
-	
-	@GetMapping("")
-	public String item (Model model, @RequestParam(defaultValue = "") String search,
-		@RequestParam(defaultValue = "false") boolean is_item,
-		@RequestParam(defaultValue = "") Integer itemNo,
-		@RequestParam(defaultValue = "1") int page) {
-		
+
+	@GetMapping ("")
+	public String item (Model model,
+		@RequestParam (defaultValue = "") String search,
+		@RequestParam (defaultValue = "false") boolean is_item,
+		@RequestParam (defaultValue = "") Integer itemNo,
+		@RequestParam (defaultValue = "1") int page) {
+
 		Page<Item> items = ITEM_SERVICE.findItem (page, is_item, search, itemNo);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo (items, 5);
-		
+
 		model.addAttribute ("items", items);
 		model.addAttribute ("paging", paging);
 		model.addAttribute ("is_item", is_item);
 		model.addAttribute ("itemNo", itemNo);
 		model.addAttribute ("search", search);
-		
+
 		return "item/item";
+
 	}
-	
+
 	@ResponseBody
-	@GetMapping("/{itemNo}")
+	@GetMapping ("/{itemNo}")
 	public Item itemDetail (@PathVariable int itemNo) {
-		return ITEM_SERVICE.findByItemNo(itemNo).orElse(new Item());
+
+		return ITEM_SERVICE.findByItemNo (itemNo).orElse (new Item ());
+
 	}
-	
-	@GetMapping("/add")
+
+	@GetMapping ("/add")
 	public String addItem (Model model) {
-		
+
 		return "item/addItem";
+
 	}
-	
+
 	@PostMapping ("/add")
 	public String addNewBoard (Item item) {
 
-		ITEM_SERVICE.addItem(item);
+		ITEM_SERVICE.addItem (item);
 
 		return "redirect:/item";
 
 	}
-	
+
+	// 수정
+	@PostMapping ("/edit")
+	public String itemEdit (Item editItem) {
+
+		ITEM_SERVICE.updateItem (editItem);
+		return "redirect:/item";
+
+	}
+
 	// 삭제
 	@GetMapping ("/delete/{itemNo}")
 	public String deleteItem (@PathVariable int itemNo) {
 
-		ITEM_SERVICE.deleteItem(itemNo);
+		ITEM_SERVICE.deleteItem (itemNo);
 
 		return "redirect:/item";
 

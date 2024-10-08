@@ -58,6 +58,17 @@ public class ItemService {
 	}
 	
 	@Transactional
+	public void updateItem (Item updateItem) {
+		System.out.println (updateItem);
+
+		Item foundItem = ITEM_REPOSITORY.findById (updateItem.getItemNo())
+			.orElseThrow (IllegalArgumentException::new);
+		foundItem.setItemName (updateItem.getItemName ());
+		foundItem.setItemPrice (updateItem.getItemPrice ());
+
+	}
+	
+	@Transactional
 	public void deleteItem (Integer itemNo) {
 
 		ITEM_REPOSITORY.deleteById (itemNo);
