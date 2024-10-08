@@ -1,16 +1,20 @@
 package com.project.ecodein.controller;
 
 
+import com.project.ecodein.dto.OrderDetail;
+import com.project.ecodein.dto.OrderDetailArrays;
 import com.project.ecodein.dto.Ordering;
 import com.project.ecodein.dto.Stock;
 import com.project.ecodein.service.OrderingService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,15 +30,49 @@ public class OrderController {
 	}
 
 	// 발주 목록 페이지
-	@GetMapping({"/{page}", "/{page}/{status}"})
-	public String order(Model model,
-	@PathVariable("page") Integer page, @RequestParam(required = false) String query,
-                        @PathVariable(name = "status", required = false) String status) {
+//	@GetMapping({"/{page}", "/{page}/{status}"})
+//	public String order(Model model,
+//						@PathVariable("page") Integer page,
+//						@RequestParam(required = false) String query,
+//                        @PathVariable(name = "status", required = false) String status) {
+//
+//		Page<Ordering> orders = ORDERING_SERVICE.getOrders(page, query, status);
+//		model.addAttribute("orders", orders);
+//		return "order/order";
+//	}
+
+
+	// 발주 목록 페이지
+// 발주 목록 페이지 - status가 없는 경우
+	@GetMapping("/{page}")
+	public String orderWithoutStatus(Model model,
+									 @PathVariable("page") Integer page,
+									 @RequestParam(required = false) String query) {
+		Page<Ordering> orders = ORDERING_SERVICE.getOrders(page, query, "all");  // 기본값으로 "all" 전달
+		model.addAttribute("orders", orders);
+		return "order/order";
+	}
+
+	// 발주 목록 페이지 - status가 있는 경우
+	@GetMapping("/{page}/{status}")
+	public String orderWithStatus(Model model,
+								  @PathVariable("page") Integer page,
+								  @RequestParam(required = false) String query,
+								  @PathVariable(name = "status") String status) {
 
 		Page<Ordering> orders = ORDERING_SERVICE.getOrders(page, query, status);
 		model.addAttribute("orders", orders);
 		return "order/order";
 	}
+
+
+	// 발주 상세 페이지
+	@GetMapping ("/detail/{order_no}")
+	public String detail (Model model){
+
+		return "order/detail";
+	}
+
 
 	// 삭제 기능 구현
     @GetMapping("/delete/{order_no}")
@@ -65,12 +103,53 @@ public class OrderController {
 		return "order/orderAdd";
 	}
 
-	// 발주 등록 처리
-//	@PostMapping("/add")
-//	public String orderAddPost() {
+
+
+
+	// 상품 검색 기능 구현1
+	@GetMapping("/search")
+	@ResponseBody
+	public List<Stock> searchProducts(@RequestParam(name = "query", required = false) String query, Model model) {
+		// 빈 검색어가 전달될 경우 기본 처리를 하거나 검색 결과 없음 처리
+//		if (query == null || query.isEmpty()) {
+//			model.addAttribute("message", "검색 결과가 없습니다.");
+//			return "order/orderAdd";
+//		}
+
+		// 검색 로직 수행 (Stock 검색)
+		List<Stock> stocks = ORDERING_SERVICE.searchStocksByName(query);
+//		model.addAttribute("stocks", stocks);
+		return stocks;
+	}
+
+
+	// 상품 검색 기능 구현2
+//	@GetMapping("/search")
+//	@ResponseBody  // 이 부분이 중요합니다. 이 어노테이션이 있어야 JSON 형식으로 반환됩니다.
+//	public List<Stock> searchProducts(@RequestParam(name = "query", required = false) String query) {
+//		if (query == null || query.isEmpty()) {
+//			return Collections.emptyList();  // 빈 리스트를 반환
+//		}
 //
-//		return "order/orderAdd";
+//		// 검색 로직 수행
+//		List<Stock> stocks = ORDERING_SERVICE.searchStocksByName(query);  // Stock 검색
+//		return stocks;  // JSON으로 변환되어 반환
 //	}
+
+
+
+
+
+
+	// 발주 등록 처리
+	@PostMapping(value = "/add")
+	@ResponseBody
+	public String orderAddPost(@ModelAttribute Ordering ordering, OrderDetailArrays orderDetail) {
+		System.out.println("[con]ordering : " + ordering);
+		System.out.println("[con]orderDetail : " + orderDetail);
+//		ORDERING_SERVICE.registerOrder(ordering, orderDetail);
+		return "redirect:/order";
+	}
 
 	// 등록된 상품처리1
 //	@PostMapping("/add")
@@ -79,12 +158,12 @@ public class OrderController {
 //		return "redirect:/order"; // 수정
 //	}
 
-	// 등록된 상품처리2
-	@PostMapping("/add/search")
-	public String orderAddPost(@RequestParam("productIds") List<Integer> productIds,
-							   @RequestParam("quantities") List<Integer> quantities, Model model) {
-		// 각 상품 ID와 수량을 바탕으로 발주 등록 처리
-		ORDERING_SERVICE.registerOrder(productIds, quantities);
-		return "redirect:/order";
-	}
+	// 발주등록된 상품처리2
+//	@PostMapping("/add/search")
+//	public String orderAddPost(@RequestParam("productIds") List<Integer> productIds,
+//							   @RequestParam("quantities") List<Integer> quantities, Model model) {
+//		// 각 상품 ID와 수량을 바탕으로 발주 등록 처리
+//		ORDERING_SERVICE.registerOrder(productIds, quantities);
+//		return "redirect:/order";
+//	}
 }

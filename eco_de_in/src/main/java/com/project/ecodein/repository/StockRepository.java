@@ -1,5 +1,6 @@
 package com.project.ecodein.repository;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -103,4 +104,7 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
 	@Query(value = "INSERT INTO stock(item_no, storage_no, quantity) VALUES (:item_no, :storage_no, :quantity)", nativeQuery = true)
 	public void addStock(@Param(value = "item_no") int item_no,@Param(value ="storage_no") int storage_no,@Param(value = "quantity") int quantity);
 
+	@Query(value = "select i.*, sum(s.quantity) as quantity, s.stock_no, s.storage_no from item i inner join (select * from stock) s on i.item_no = s.item_no " +
+			"where i.item_name = :name group by s.item_no", nativeQuery = true)
+	List<Stock> orderFindAllStock(String name);
 }

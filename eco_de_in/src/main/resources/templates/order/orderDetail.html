@@ -158,18 +158,28 @@
     <!-- 발주 조회 -->
     <div class="main-content">
       <h2 class="text-2xl font-bold mb-4">발주 조회</h2>
-      <div class="flex mb-4">
-        <input class="border border-gray-300 p-2 w-full rounded-input" placeholder="발주번호, 거래처명, 거래처코드를 입력하세요."
-               type="text">
-        <button class="bg-green-81CD28 text-white px-4 ml-2 rounded-button search-button">조 회</button>
-      </div>
+      <form action="/order/1" method="get">
+        <div class="flex mb-4">
+          <input class="border border-gray-300 p-2 w-4/5 rounded-input"
+                 name="query" placeholder="발주번호, 거래처를 입력하세요."
+                 type="text">
+          <button class="bg-green-81CD28 py-3 text-white px-4 ml-2 rounded-button search-button"
+                  type="submit">조 회
+          </button>
+        </div>
 
-      <span>출고 진행상태</span>
-      <div class="inline">
-        <button class="button" onclick="setActiveButton(this)">전체</button>
-        <button class="button" onclick="setActiveButton(this)">진행중</button>
-        <button class="button" onclick="setActiveButton(this)">완료</button>
-      </div>
+        <span>출고 진행상태</span>
+        <div class="inline">
+          <button class="button" type="button"
+                  onclick="location.href='/order/1/all'; setActiveButton(this)">전체
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/progress'; setActiveButton(this)">진행중
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/complete'; setActiveButton(this)">완료
+          </button>
+        </div>
+
+      </form>
     </div>
 
     <div class="float-right w-full mt-5">

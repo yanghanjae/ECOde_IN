@@ -1,5 +1,6 @@
 package com.project.ecodein.repository;
 
+import com.project.ecodein.dto.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.project.ecodein.dto.Ordering;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public interface OrderingRepository extends JpaRepository<Ordering, Integer> {
@@ -31,5 +35,11 @@ public interface OrderingRepository extends JpaRepository<Ordering, Integer> {
             "LEFT JOIN stock s ON o.stock_no = s.stock_no " + // stock_no가 있을 경우
             "WHERE i.item_name LIKE CONCAT('%', :itemName, '%')", nativeQuery = true)
     Page<Ordering> searchOrdersByItemName(@Param("itemName") String itemName, Pageable pageable);
+
+    // 발주 등록
+    @Transactional
+    @Query(value = "insert into ordering (buyer_code, user_id, due_date) " +
+            "values (:ordering.buyerCode, :ordering.user_id, :ordering.due_date)", nativeQuery = true)
+    int addsave(Ordering ordering);
 
 }
