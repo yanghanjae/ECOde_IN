@@ -73,6 +73,12 @@ public class OrderingService {
 		ORDERING_REPOSITORY.deleteById(orderNo);
 	}
 
+    // Stock을 이름으로 검색하는 메서드 추가
+    public List<Stock> searchStocksByName(String name) {
+        // StockRepository의 이미 구현된 메서드를 사용하여 검색
+        return STOCK_REPOSITORY.orderFindAllStock(name);
+    }
+
     // 상품등록
     public void registerOrder(List<Integer> productIds, List<Integer> quantities) {
 

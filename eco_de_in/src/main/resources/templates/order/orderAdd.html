@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -197,8 +197,8 @@
 
     <!--발주 등록-->
     <div class="register-content">
-      <button class="button-register" onclick="location.href='/order/1'">등 록</button>
-      <form>
+<!--      <form action="#" onsubmit="submit_control (this)">-->
+        <button class="button-register" onclick="submit_control()">등 록</button>
         <div class="grid grid-cols-2 gap-6 registeration">
           <div>
             <label class="block text-sm font-medium leading-6 text-gray-900" for="manager">담당자</label>
@@ -207,8 +207,9 @@
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
                      ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
                      sm:text-sm sm:leading-6"
-                     id="manager" name="manager"
-                     type="text">
+                     id="manager" name="user_id"
+                     th:value="${session.user.user_id}"
+                     type="text" readonly>
             </div>
           </div>
           <div>
@@ -218,8 +219,9 @@
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
                      ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
                      sm:text-sm sm:leading-6"
-                     id="client" name="client"
-                     type="text">
+                     id="client"
+                     th:value="${session.user.buyer_code.buyer_name}"
+                     type="text" readonly>
             </div>
           </div>
           <div>
@@ -229,25 +231,24 @@
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
                      ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
                      sm:text-sm sm:leading-6"
-                     id="due-date" name="due-date"
-                     type="text">
+                     id="due-date" name="due_date"
+                     type="date">
             </div>
           </div>
           <div>
             <label class="block text-sm font-medium leading-6 text-gray-900" for="client-code">거래처 코드</label>
             <div class="mt-2">
-              <input autocomplete="given-name"
+              <input autocomplete="given-name" th:value="${session.user.buyer_code.buyerCode}"
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
                      ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
                      sm:text-sm sm:leading-6"
-                     id="client-code" name="client-code"
-                     type="text">
+                     id="client-code" name="buyerCode"
+                     type="text" readonly>
             </div>
           </div>
         </div>
-      </form>
-
-        <!-- 발주 등록 테이블 -->
+<!--      </form>-->
+      <!-- 발주 등록 테이블 -->
       <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
             dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -257,10 +258,9 @@
         상 품 검 색
       </button>
 
-      <table>
+      <table id="parant-table">
         <thead>
         <tr>
-          <th>No</th>
           <th>상품번호</th>
           <th>상품명</th>
           <th>단가</th>
@@ -268,11 +268,12 @@
         </tr>
         </thead>
         <tbody id="productTableBody">
-        <tr>
+        <tr class="default">
           <td colspan="5">상품검색버튼을 클릭해서 주문하세요!</td>
         </tr>
         </tbody>
       </table>
+
 
       <!-- modal (상품검색) -->
 <!--      <form action="/order/add" method="post">-->
@@ -331,7 +332,7 @@
               <th class="p-4 text-sm font-normal leading-none text-slate-500">선택</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="item-body">
 <!--            <tr class="hover:bg-slate-50">-->
 <!--              <td class="p-4 border-b border-slate-200 py-5">-->
 <!--                <img src="https://demos.creative-tim.com/corporate-ui-dashboard-pro/assets/img/kam-idris-_HqHX3LBN18-unsplash.jpg" alt="Product 1" class="w-16 h-16 object-cover rounded" />-->
@@ -357,7 +358,6 @@
                     <td>
                       <button class="bg-blue-500 text-white px-4 py-2 rounded"
                               type="button"
-                              onclick="addProduct(${stock.stockNo}, '${stock.itemName}', ${stock.price})"
                       >선택
                       </button>
                     </td>
@@ -382,6 +382,12 @@
   </div>
 
 <script>
+  var item_array = [];
+  var items = new Array(10);
+  var point = 0;
+  for (let idx = 0; idx <= 10; idx++) {
+    items[idx] = new Array(2);
+  }
   // 조회 버튼
   function setActiveButton(clickedButton) {
     const buttons = document.querySelectorAll('.button');
@@ -390,50 +396,228 @@
   }
 
   // 발주 등록 테이블에 추가
-  function addProduct(stockNo, itemName, price) {
-    const tableBody = document.getElementById('productTableBody');
+  function addProduct(itemNo, itemName, price) {
+    document.querySelector('.default').classList.add('hidden');
+    
+    let stock = findIndex(items, itemNo);
+    
+    function findIndex(array, itemNo) {
+      for (let i = 0; i < array.length; i++) {
+          if (array[i][0] === itemNo) {
+            return items[i][1];
+          }
+      }
+      return undefined;
+    }
+    
+    if (!item_array.includes(itemNo)){
+      const tableBody = document.getElementById('productTableBody');
+      const table = document.getElementById('parant-table');
+      const tr = document.createElement('tr');
+      const td_1 = document.createElement('td');
+      td_1.textContent = itemNo;
+      const td_2 = document.createElement('td');
+      td_2.textContent = itemName;
+      const td_3 = document.createElement('td');
+      td_3.textContent = price;
+      const td_4 = document.createElement('td');
+      const input = document.createElement('input');
+      input.type = "number";
+      input.name = "quantities";
+      input.value = (stock === 0 && stock !== undefined) ? stock : 0;
+      input.onchange = function() { quantity_modify(itemNo, this); };
+      
+      td_4.appendChild(input);
+      tr.appendChild(td_1);
+      tr.appendChild(td_2);
+      tr.appendChild(td_3);
+      tr.appendChild(td_4);
+      tableBody.appendChild(tr);
+      
+    //   tableBody += `
+    //     <tr>
+    //         <td>${itemNo}</td>
+    //         <td>${itemName}</td>
+    //         <td>${price}</td>
+    //         <td><input type="number" name="quantities" value="${stock === 0 && stock !== undefined ? stock:0
+    //              }" onchange="quantity_modify(${itemNo}, this)"/></td>
+    //     </tr>
+    //     <input type="hidden" name="productIds" value="${itemNo}" />
+    // `;
+      // tableBody.innerHTML += newRow;
+      items[point++][0] = itemNo;
 
-    const newRow = `
-        <tr>
-            <td>${stockNo}</td>
-            <td>${itemName}</td>
-            <td>${price}</td>
-            <td><input type="number" name="quantities" value="1" /></td>
-        </tr>
-        <input type="hidden" name="productIds" value="${stockNo}" />
-    `;
+      
+    }
+    
+    console.log('items : ', items);
 
-    tableBody.innerHTML += newRow;
   }
+
+  // items 배열에 itemNo가 일치하는 상품 재고 업데이트
+  function quantity_modify (itemNo, e) {
+    
+    for (let idx = 0; idx < point; idx++) {
+      if (items[idx][0] === itemNo) {
+        items[idx][1] = e.value;
+      }
+    }
+  }
+
+  // Front -> back 데이터 처리
+  function submit_control(e) {
+    const formData = new FormData();
+    console.log(items);
+    
+    const user_id = document.querySelector('input[name="user_id"]').value;
+    const buyer_code = document.querySelector('input[name="buyerCode"]').value;
+    const due_date = document.querySelector('input[name="due_date"]').value;
+    const orderNos = [];
+    const quantities = [];
+    
+    for (let idx = 0; idx < items.length; idx++) {
+      if (items[idx][0] !== undefined) {
+        console.log('items[idx]', items[idx][0])
+        orderNos.push(items[idx][0]);
+        quantities.push(items[idx][1]);
+      }
+    }
+    
+    formData.append('user_id', user_id);
+    formData.append('buyer_code', buyer_code);
+    formData.append('due_date', due_date);
+    
+    for (let idx = 0; idx < orderNos.length; idx++) {
+      console.log('item - ', items[idx])
+      formData.append('order_nos['+idx+']', orderNos[idx]);
+      formData.append('quantities['+idx+']', quantities[idx]);
+    }
+    
+    fetch('/order/add', {
+      method: 'post',
+      body: formData
+    })
+    
+    
+  }
+
+
+
+
 
   // 발주등록 검색 결과를 화면에 표시
   function searchProducts() {
-    const query = document.getElementById('searchInput').value;
+    const query = document.getElementById('searchInput').value.trim();  // 입력값 트림
+    const item_body = document.querySelector('.item-body');
+    if (query === "") {
+      alert("검색어를 입력하세요.");
+      return;
+    }
 
-    // Ajax 요청으로 서버에서 검색
+    // fetch(`/order/search?query=${query}`, {
+    //   method: 'GET'
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       const tableBody = document.getElementById('productTableBody');
+    //       tableBody.innerHTML = '';
+    //
+    //       if (data.length > 0) {
+    //         data.forEach(product => {
+    //           tableBody.innerHTML += `
+    //                 <tr>
+    //                     <td><img src="${product.imageUrl}" alt="상품 이미지" width="50"></td>
+    //                     <td>${product.stockNo}</td>
+    //                     <td>${product.itemName}</td>
+    //                     <td>${product.quantity}</td>
+    //                     <td>${product.price}</td>
+    //                     <td><button class="bg-blue-500 text-white px-4 py-2 rounded" type="button" onclick="addProduct(${product.stockNo}, '${product.itemName}', ${product.price})">선택</button></td>
+    //                 </tr>`;
+    //         });
+    //       } else {
+    //         tableBody.innerHTML = '<tr><td colspan="6">검색 결과가 없습니다.</td></tr>';
+    //       }
+    //     })
+    //     .catch(error => console.error('Error:', error));
+
+
     fetch(`/order/search?query=${query}`)
         .then(response => response.json())
         .then(data => {
-          const tableBody = document.getElementById('productTableBody');
-          tableBody.innerHTML = ''; // 기존 내용을 삭제
+          console.log(data); // 서버에서 응답한 데이터 출력
+          item_body.innerHTML = '';
 
-          // 검색 결과를 테이블에 추가
-          data.forEach(product => {
-            tableBody.innerHTML += `
+          if (data.length > 0) {
+            data.forEach(product => {
+              console.log(product)
+              if (!product.item.isMaterial) {
+                item_body.innerHTML += `
                     <tr>
-                        <td>${product.stockNo}</td>
-                        <td>${product.itemName}</td>
-                        <td>${product.price}</td>
+                        <td><img src="${product.item.itemImage}" alt="상품 이미지" width="50"></td>
+                        <td>${product.item.itemNo}</td>
+                        <td>${product.item.itemName}</td>
                         <td>${product.quantity}</td>
-                        <td>
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded" type="button"
-                            onclick="addProduct(${product.stockNo}, '${product.itemName}', ${product.price})">선택</button>
-                        </td>
-                    </tr>
-                `;
-          });
-        });
+                        <td>${product.item.itemPrice}</td>
+                        <td><button class="bg-blue-500 text-white px-4 py-2 rounded" type="button"
+                               onclick="addProduct(${product.item.itemNo}, '${product.item.itemName}', ${product.item.itemPrice}),
+                                        item_array.push(${product.item.itemNo})">선택</button></td>
+                    </tr>`;
+
+              }
+            });
+          } else {
+            item_body.innerHTML = '<tr><td colspan="6">검색 결과가 없습니다.</td></tr>';
+          }
+        })
+        .catch(error => console.error('Error:', error));
   }
+
+
+
+
+  // function searchProducts() {
+  //   const query = document.getElementById('searchInput').value.trim();  // 입력값 트림
+  //   if (query === "") {
+  //     alert("검색어를 입력하세요.");
+  //     return;
+  //   }
+  //
+  //   fetch(`/order/search?query=${encodeURIComponent(query)}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Accept': 'application/json',  // 서버에 JSON 응답을 요청합니다.
+  //       'Content-Type': 'application/json'  // JSON 형식으로 전송
+  //     }
+  //   })
+  //       .then(response => {
+  //         if (!response.ok) {
+  //           throw new Error('Network response was not ok');
+  //         }
+  //         return response.json();
+  //       })
+  //       .then(data => {
+  //         const tableBody = document.getElementById('productTableBody');
+  //         tableBody.innerHTML = '';
+  //
+  //         if (data.length > 0) {
+  //           data.forEach(product => {
+  //             tableBody.innerHTML += `
+  //           <tr>
+  //               <td><img src="${product.imageUrl}" alt="상품 이미지" width="50"></td>
+  //               <td>${product.stockNo}</td>
+  //               <td>${product.itemName}</td>
+  //               <td>${product.quantity}</td>
+  //               <td>${product.price}</td>
+  //               <td><button class="bg-blue-500 text-white px-4 py-2 rounded" type="button" onclick="addProduct(${product.stockNo}, '${product.itemName}', ${product.price})">선택</button></td>
+  //           </tr>`;
+  //           });
+  //         } else {
+  //           tableBody.innerHTML = '<tr><td colspan="6">검색 결과가 없습니다.</td></tr>';
+  //         }
+  //       })
+  //       .catch(error => console.error('Error:', error));
+  // }
+
 
 </script>
 </body>
