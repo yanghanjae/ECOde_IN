@@ -26,7 +26,6 @@ public class AmazonS3Controller {
 	public ResponseEntity<String> uploadImage (@RequestPart("image") MultipartFile file) throws InvalidTypeMismatchException,
         IOException {
         String image = AMAZONS3_SERVICE.uploadThumbnail(file);
-        log.info(image);
         return ResponseEntity.ok (image);
 	}
 
