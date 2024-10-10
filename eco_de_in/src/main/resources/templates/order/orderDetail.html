@@ -37,6 +37,7 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
+      margin-bottom: 50px;
     }
 
     th,
@@ -146,7 +147,7 @@
       &nbsp;
       <span style="font-weight: bold; font-size: 1.2rem; color: #ababab; line-height: 40px;">&gt;</span>
       &nbsp;
-      <a href="/order">
+      <a href="/order/1/all">
         <span style="color: #ababab; font-weight: bold;">발주 관리</span>
       </a>
       &nbsp;
@@ -183,9 +184,10 @@
     </div>
 
     <div class="float-right w-full mt-5">
-      <button th:if="${session.user != null}" class="inline button-register mr-4" onclick="location.href='/order'">수 정
+      <button th:if="${session.user != null}" class="inline button-register mr-4" onclick="href='/order/detail/{order_no}'">수 정
       </button>
-      <button class="inline button-register mr-4" onclick="location.href='history.back()'">뒤로가기</button>
+<!--      <button class="inline button-register mr-4" onclick="location.href='history.back()'">뒤로가기</button>-->
+      <button class="inline button-register mr-4" onclick="history.back()">뒤로가기</button>
       <button th:if="${session.admin != null}" class="inline button-register mr-4" type="button"
               onclick="location.href='/order'">출고등록
       </button>
@@ -238,14 +240,15 @@
       </div>
 
       <form class="bg-gray-200 mt-5 h-96 grid">
-        <div class="grid grid-cols-2 gap-6 registeration ">
+        <div class="grid grid-cols-2 gap-6 registeration">
           <div>
             <label class="block text-sm font-medium leading-6 text-gray-900" for="orderno">발주번호</label>
             <div class="mt-2">
               <input autocomplete="given-name"
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
-                     id="orderno" name="manager"
-                     type="text">
+                     id="orderno" name="orderno"
+                     th:value="${order.orderNo}"
+                     type="text" readonly>
             </div>
           </div>
           <div>
@@ -253,8 +256,9 @@
             <div class="mt-2">
               <input autocomplete="given-name"
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
-                     id="manager" name="manager"
-                     type="text">
+                     id="manager" name="user_id"
+                     th:value="${session.user.user_id}"
+                     type="text" readonly>
             </div>
           </div>
           <div>
@@ -262,8 +266,9 @@
             <div class="mt-2">
               <input autocomplete="given-name"
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
-                     id="client" name="client"
-                     type="text">
+                     id="client"
+                     th:value="${session.user.buyer_code.buyer_name}"
+                     type="text" readonly>
             </div>
           </div>
           <div>
@@ -272,7 +277,8 @@
               <input autocomplete="given-name"
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
                      id="due-date" name="due-date"
-                     type="text">
+                     th:value="${order.due_date}"
+                     type="text" readonly>
             </div>
           </div>
           <div>
@@ -281,7 +287,8 @@
               <input autocomplete="given-name"
                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
                      id="client-code" name="client-code"
-                     type="text">
+                     th:value="${order.buyer_code.buyerCode}"
+                     type="text" readonly>
             </div>
           </div>
         </div>
@@ -299,54 +306,27 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>1</td>
-          <td>202409120123456</td>
-          <td>진라면</td>
-          <td>3000원</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>202409120123456</td>
-          <td>너구리 라면</td>
-          <td>4000원</td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>202409120123456</td>
-          <td>카레라면</td>
-          <td>4000원</td>
-          <td>15</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+
+        <tr th:each="detail, stat : ${orderDetails}">
+          <td th:text="${stat.index + 1}"></td>
+          <td th:text="${detail.item.itemNo}"></td>
+          <td th:text="${detail.item.itemName}"></td>
+          <td th:text="${detail.item.itemPrice}"></td>
+          <td th:text="${detail.quantity}"></td>
         </tr>
         </tbody>
       </table>
 
       <!-- 페이지네이션  -->
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li><a class="page-link" href="#"><</a></li>
-          <li><a class="page-link" href="#">1</a></li>
-          <li><a class="page-link" href="#">2</a></li>
-          <li><a class="page-link" href="#">3</a></li>
-          <li><a class="page-link" href="#">></a></li>
-        </ul>
-      </nav>
+<!--      <nav aria-label="Page navigation example">-->
+<!--        <ul class="pagination">-->
+<!--          <li><a class="page-link" href="#"><</a></li>-->
+<!--          <li><a class="page-link" href="#">1</a></li>-->
+<!--          <li><a class="page-link" href="#">2</a></li>-->
+<!--          <li><a class="page-link" href="#">3</a></li>-->
+<!--          <li><a class="page-link" href="#">></a></li>-->
+<!--        </ul>-->
+<!--      </nav>-->
 
       <!-- modal 1 -->
       <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
@@ -389,8 +369,6 @@
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
 
 <script>
