@@ -5,9 +5,16 @@
 	  	<input type="text" id="searchInput" name="search" placeholder="검색어를 입력해주세요..." th:value="${search}" class="input searchBar" >
 	  	<button type="submit" class="searchButton">검색</button>
   	</div>
-  	<ul th:each="buyer : ${buyers}" class="list">
-  		<li th:text = "${buyer.buyer_name}" th:data-value = "${buyer.buyerCode}"  onclick=chooseName(this)></li>
-  	</ul>
+		<table>
+			<tr>
+				<th>거래처 코드</th>
+				<th>상호</th>
+			</tr>
+			<tr th:each="buyer : ${buyers}" class="list">
+				<td th:text = "${buyer.buyerCode}"></td>
+				<td th:text = "${buyer.buyer_name}" th:data-value = "${buyer.buyerCode}"  onclick=chooseName(this)></td>
+			</tr>
+		</table>
   	
   </form>
 	<div id="pagination" class="pagination">
