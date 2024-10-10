@@ -3,9 +3,16 @@
 	<form id="itemSearchForm" method="get" onsubmit="itemSubmit(event)">
 		<input type="text" id="itemModalSearch" class="modalInput" name="itemModalSearch" th:value="${itemModalSearch}">
 		<button type="button" class="modalButton" onclick="itemSubmit(event)">검색</button>
-		<ul th:each="item : ${items}">
-			<li th:data-value="${item.itemNo}" th:text="${item.itemName}" onclick="chooseItem(this)"></li>
-		</ul>
+		<table>
+			<tr>
+				<th>상품 번호</th>
+				<th>상품명</th>
+			</tr>
+			<tr th:each="item : ${items}">
+				<td th:text="${item.itemNo}"></td>
+				<td th:data-value="${item.itemNo}" th:text="${item.itemName}" onclick="chooseItem(this)" class="tableHover"></td>
+			</tr>
+		</table>
 	</form>
 	<div class="pagination">
 		<button th:data-value="${paging.startPage}" onclick="changeItemPage(this)"><<</button>
@@ -21,9 +28,16 @@
 	<form id="stockSearchForm" method="get" onsubmit="stockSubmit(event)">
 		<input type="text" id="stockModalSearch" class="modalInput" name="stockModalSearch" th:value="${stockModalSearch}">
 		<button type="button" class="modalButton" onclick="stockSubmit(event)">검색</button>
-		<ul th:each="item : ${items}">
-			<li th:data-value="${item.itemNo}" th:text="${item.itemName}" onclick="chooseStock(this)"></li>
-		</ul>
+		<table>
+			<tr>
+				<th>상품 번호</th>
+				<th>상품명</th>
+			</tr>
+			<tr th:each="item : ${items}">
+				<td th:text="${item.itemNo}"></td>
+				<td th:data-value="${item.itemNo}" th:text="${item.itemName}" onclick="chooseStock(this)" class="tableHover"></td>
+			</tr>
+		</table>
 	</form>
 	<div class="pagination">
 		<button th:data-value="${paging.startPage}" onclick="changeStockPage(this)"><<</button>
@@ -40,9 +54,16 @@
 	<form id="storageSearchForm" method="get" onsubmit="storageSubmit(event)">
 		<input type="text" id="storageModalSearch" class="modalInput" name="storageModalSearch" th:value="${storageModalSearch}">
 		<button type="button" class="modalButton" onclick="storageSubmit(event)">검색</button>
-		<ul th:each="storage : ${storages}">
-			<li th:data-value="${storage.storage_no}" th:text="${storage.storage_name}" onclick="chooseStorage(this)"></li>
-		</ul>
+		<table>
+			<tr>
+				<th>창고 번호</th>
+				<th>창고명</th>
+			</tr>
+			<tr th:each="storage : ${storages}">
+				<td th:text="${storage.storage_no}"></td>
+				<td th:data-value="${storage.storage_no}" th:text="${storage.storage_name}" onclick="chooseStorage(this)" class="tableHover"></td>
+			</tr>
+		</table>
 	</form>
 	<div class="pagination">
 		<button th:data-value="${paging.startPage}" onclick="changeStoragePage(this)"><<</button>
