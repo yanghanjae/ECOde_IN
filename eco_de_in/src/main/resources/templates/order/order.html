@@ -127,6 +127,7 @@
 <div id="header-controller" style="width: 310px; float: left;">
   <th:block th:replace="fragments/sidebar :: sidebarFragment"/>
 </div>
+
 <!-- 메인 콘텐츠 -->
 <div id="content">
   <div id="content_wrap">
@@ -166,13 +167,6 @@
           </button>
         </div>
 
-        <!-- 필터 검색-->
-<!--        <div class="inline">-->
-<!--          <button class="button" onclick="location.href='/order?page=1&status=all&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">전체</button>-->
-<!--          <button class="button" onclick="location.href='/order?page=1&status=in-progress&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">진행중</button>-->
-<!--          <button class="button" onclick="location.href='/order?page=1&status=completed&query=' + document.querySelector('input[name=query]').value; setActiveButton(this)">완료</button>-->
-<!--        </div>-->
-
       </form>
     </div>
 
@@ -182,7 +176,6 @@
       <table>
         <thead>
         <tr>
-<!--          <th>No</th>-->
           <th>발주번호</th>
           <th>발주날짜</th>
           <th>거래처</th>
@@ -194,7 +187,7 @@
         <tbody>
 
         <tr th:each="order, state : ${orders}">
-<!--          <td th:text="${state.index + 1}"></td>-->
+        <!-- <td th:text="${state.index + 1}"></td> -->
           <td>
             <a class="order_no" th:text="${order.orderNo}"
                th:href="@{/order/detail/{orderNo}(orderNo=${order.orderNo})}"></a>
@@ -215,14 +208,6 @@
             </button>
           </td>
         </tr>
-
-<!--            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"-->
-<!--                    data-modal-target="popup-modal"-->
-<!--                    data-modal-toggle="popup-modal"-->
-<!--                    type="button">-->
-<!--              x-->
-<!--            </button>-->
-
         </tbody>
       </table>
 
