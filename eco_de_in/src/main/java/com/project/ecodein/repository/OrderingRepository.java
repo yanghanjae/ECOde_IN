@@ -31,5 +31,4 @@ public interface OrderingRepository extends JpaRepository<Ordering, Integer> {
             "LEFT JOIN stock s ON o.stock_no = s.stock_no " +
             "WHERE i.item_name LIKE CONCAT('%', :itemName, '%')", nativeQuery = true)
     Page<Ordering> searchOrdersByItemName(@Param("itemName") String itemName, Pageable pageable);
-
 }
