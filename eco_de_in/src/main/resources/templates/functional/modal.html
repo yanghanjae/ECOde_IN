@@ -68,15 +68,15 @@
       .then(res => res.json())
       .then(data => {
         for (let idx in data) {
-          let date = new Date(data[idx].admin_date);
+          let date = new Date(data[idx].adminDate);
           let formettedDate = date.getFullYear() + '년 ' + date.getMonth() + '월 ' + date.getDate() + '일';
            document.querySelector('.tbody').innerHTML +=
             `
               <tr>
-                <td>${data[idx].admin_id}</td>
-                <td>${data[idx].admin_name}</td>
+                <td>${data[idx].adminId}</td>
+                <td>${data[idx].adminName}</td>
                 <td>${formettedDate}</td>
-                <td style="line-height: 27px"><a href="/admin-manager/${data[idx].admin_id}">승 인</a></td>
+                <td style="line-height: 27px"><a href="/admin-manager/${data[idx].adminId}">승 인</a></td>
               </tr>
             `
         }

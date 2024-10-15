@@ -2,21 +2,24 @@ package com.project.ecodein.dto;
 
 import java.sql.Date;
 import com.project.ecodein.entity.Buyer;
-import com.project.ecodein.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReturnDTO {
+public class UserDTO {
 
-    private String returnId;
-    private Buyer buyer;
-    private User user;
-    private String returnReason;
-    private Date returnRegistDate;
-
+private String userId;
+	
+	private Buyer buyerCode;
+	private String userPassword;
+	private String userName;
+	private Date userDate;
+	private String userEmail;
 }

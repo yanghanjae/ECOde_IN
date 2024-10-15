@@ -6,19 +6,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import com.project.ecodein.dto.User;
 import org.springframework.transaction.annotation.Transactional;
+import com.project.ecodein.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String>{
 
-	@Query("SELECT u "
-		+ "FROM User u "
-		+ "WHERE u.user_id LIKE :user_id")
+	@Query(value = "SELECT * "
+		+ "FROM user  "
+		+ "WHERE user_id LIKE :user_id", nativeQuery = true)
 	Optional<User> findByUserId (@Param("user_id") String user_id);
 	
-	@Query("SELECT u "
-		+ "FROM User u "
-		+ "WHERE u.user_email LIKE :user_email")
+	@Query(value = "SELECT * "
+		+ "FROM user "
+		+ "WHERE user_email LIKE :user_email", nativeQuery = true)
 	Optional<User> findByUserEmail (@Param("user_email") String user_email);
 
     @Modifying
