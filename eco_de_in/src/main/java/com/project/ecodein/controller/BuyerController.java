@@ -1,6 +1,9 @@
 package com.project.ecodein.controller;
 
 import java.util.Optional;
+
+import com.project.ecodein.dto.BuyerDTO;
+import com.project.ecodein.entity.Buyer;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.project.ecodein.dto.Admin;
-import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.dto.Search;
 import com.project.ecodein.service.BuyerService;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -50,7 +50,7 @@ public class  BuyerController {
 
 		log.info ("search - address-{}, keyword - {}", search, keyword);
 
-		Page<Buyer> list = BUYER_SERVICE.buyers ((int) page, keyword, buyer_status);
+		Page<BuyerDTO> list = BUYER_SERVICE.buyers ((int) page, keyword, buyer_status);
 
 		model.addAttribute ("buyers", list);
 
@@ -66,7 +66,7 @@ public class  BuyerController {
 	}
 
 	@PostMapping ("/add")
-	public String buyerAdd (@ModelAttribute Buyer buyer, Model model) {
+	public String buyerAdd (@ModelAttribute BuyerDTO buyer, Model model) {
 
 		Buyer _buyer = BUYER_SERVICE.buyerInsert (buyer);
 
@@ -76,7 +76,6 @@ public class  BuyerController {
 
 		}
 
-		log.info ("save buyer - {}", _buyer);
 		return "redirect:/buyer/default/1?keyword=";
 
 	}
@@ -93,17 +92,16 @@ public class  BuyerController {
 
 	}
 	
-	@GetMapping ("/status-update/{buyer_code}")
+	@PostMapping ("/status-update")
 	@ResponseBody
-	public int statusUpdate (@PathVariable("buyer_code") Long buyer_code) {
-		log.info ("test");
-		BUYER_SERVICE.updateStatus (buyer_code);
+	public int statusUpdate (@ModelAttribute BuyerDTO buyer) {
+		BUYER_SERVICE.updateStatus (buyer);
 		return 1;
 	}
 	
 	@PostMapping ("/modify")
 	@ResponseBody
-	public String modify(@ModelAttribute Buyer buyer) {
+	public String modify(@ModelAttribute BuyerDTO buyer) {
 		System.out.println ("buyer init : " + buyer);
 		
 		BUYER_SERVICE.updateBuyer (buyer);

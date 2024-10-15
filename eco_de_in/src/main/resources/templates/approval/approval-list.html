@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[Eco de_In] 메인</title>
+  <title>[Eco de_In] 전자결재</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
@@ -206,8 +206,8 @@
                   240409120123456
                 </a>
               </td>
-              <td th:text="${app.buyer.buyer_name}">CU 홍대입구역점</td>
-              <td th:text="${app.buyer.buyer_agent}">홍길동</td>
+              <td th:text="${app.buyer.buyerName}">CU 홍대입구역점</td>
+              <td th:text="${app.buyer.buyerAgent}">홍길동</td>
               <td th:text="${app.ordering.order_date}">2024-09-12</td>
             </tr>
             <tr th:if="${approvals.isEmpty()}">

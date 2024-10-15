@@ -34,6 +34,12 @@ public class OrderingService {
         return ORDERING_REPOSITORY.findAll(sort);
     }
 
+    // To: ReturnController
+    public List<Ordering> getOrderings(int buyer_code) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "orderNo");
+        return ORDERING_REPOSITORY.findAllByBuyerCode(buyer_code);
+    }
+
 	// 페이지네이션 및 검색 기능 구현
 	public Page<Ordering> getOrders(@Param("page") int page, @Param("query") String query,
                                     @Param("status") String status) {

@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.project.ecodein.dto.Ordering;
 
+import java.util.List;
+
 @Repository
 public interface OrderingRepository extends JpaRepository<Ordering, Integer> {
 
@@ -32,4 +34,6 @@ public interface OrderingRepository extends JpaRepository<Ordering, Integer> {
             "WHERE i.item_name LIKE CONCAT('%', :itemName, '%')", nativeQuery = true)
     Page<Ordering> searchOrdersByItemName(@Param("itemName") String itemName, Pageable pageable);
 
+    @Query(value = "select * from ordering where buyer_code = :buyer_code", nativeQuery = true)
+    List<Ordering> findAllByBuyerCode (@Param("buyer_code") int buyer_code);
 }

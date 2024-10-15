@@ -1,5 +1,6 @@
 package com.project.ecodein.dto;
 
+import com.project.ecodein.entity.Buyer;
 import jakarta.persistence.*;
 import lombok.*;
 

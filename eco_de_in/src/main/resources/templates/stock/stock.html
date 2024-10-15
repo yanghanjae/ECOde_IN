@@ -249,8 +249,8 @@
 		    	&nbsp;
 		    	<select class="select" name="storage_no" onchange="this.form.submit()" id="storage_no">
 		    		<option value="">전체</option>
-		    		<option th:each="storage:${storages}" th:value="${storage.storage_no}" 
-		    		th:text="${storage.storage_name}" th:selected="${storage.storage_no == selectedStorage}" />
+		    		<option th:each="storage:${storages}" th:value="${storage.storageNo}"
+		    		th:text="${storage.storageName}" th:selected="${storage.storageNo == selectedStorage}" />
 		    	</select>
 		      &nbsp;
 		      &nbsp;
@@ -278,7 +278,7 @@
 	        	<tr th:each="stock:${stocks}">
 	        		<td th:text="${stock.stockNo}"></td>
 	        		<td th:data-value="${stock.stockNo}"  th:text="${stock.item.itemName}" onclick="openModal(this)" class="stock"></td>
-	        		<td th:text="${stock.storage.storage_name}"></td>
+	        		<td th:text="${stock.storage.storageName}"></td>
 	        		<td th:text="${stock.quantity}"	></td>
 	        	</tr>
 	        </tbody>
@@ -368,7 +368,8 @@
 		let is_item = document.getElementById('is_item').checked ? 'true' : 'false';
 		let page = element.value
 	
-		window.location.href = `?page=${page}&search=${encodeURIComponent(search)}&storage_no=${storage_no}&is_item=${is_item}`
+		window.location.href =
+        `?page=${page}&search=${encodeURIComponent(search)}&storage_no=${storageNo}&is_item=${is_item}`
 	}
 	
 	function openModal(element) {
@@ -379,7 +380,7 @@
 			.then(data => {
 				document.getElementById('modal_stock_no').value = data.stockNo;
 				document.getElementById('modal_itemName').value = data.item.itemName;
-				document.getElementById('modal_storage_no').value = data.storage.storage_name;
+				document.getElementById('modal_storage_no').value = data.storage.storageName;
 				document.getElementById('modal_itemImage').src = data.item.itemImage;
 				document.getElementById('modal_quantity').value = data.quantity;
 			})

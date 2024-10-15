@@ -232,7 +232,7 @@
 	        </ul>
 	      </div>
 	      
-	      <form th:action="@{/buyer/{buyer_status}/1(buyer_status = ${buyer_status})}", class="inline" method="get">
+	      <form th:action="@{/buyer/{buyer_status}/1(buyer_status = ${buyerStatus})}", class="inline" method="get">
 	        <input type="text" name="keyword" placeholder="거래처명, 사업자번호를 입력하세요." class="search_input">
 	        <input type="submit" value="조 회" class="search_btn">
 	      </form>
@@ -252,7 +252,7 @@
 								</label>
 							</td>
 							<td class="input">
-								<input type="text" name="buyer_name" id="buyer_name">	
+								<input type="text" name="buyerName" id="buyer_name">
 							</td>
 							<td>
 								<label for="buyer_agent">
@@ -260,7 +260,7 @@
 								</label>
 							</td>
 							<td class="input">
-								<input type="text" name="buyer_agent" id="buyer_agent">	
+								<input type="text" name="buyerAgent" id="buyer_agent">
 							</td>
 						</tr>
 						<tr>
@@ -270,7 +270,7 @@
 								</label>
 							</td>
 							<td class="input">
-								<input type="text" name="buyer_number" id="buyer_number">	
+								<input type="text" name="buyerNumber" id="buyer_number">
 							</td>
 							<td>
 								<label for="buyer_tel">
@@ -278,7 +278,7 @@
 								</label>
 							</td>
 							<td class="input">
-								<input type="text" name="buyer_tel" id="buyer_tel">	
+								<input type="text" name="buyerTel" id="buyer_tel">
 							</td>
 						</tr>
 						<!-- 주소 검색 API-->
@@ -295,7 +295,7 @@
 						<tr>
 							<td colspan="4">
 								<input style="width: 840px; position: relative; left: -95px;" id="sample4_roadAddress" 
-											 name="buyer_address">
+											 name="buyerAddress">
 							</td>
 						</tr>
 						<tr style="position: relative; top: 50px; left: -115px;">

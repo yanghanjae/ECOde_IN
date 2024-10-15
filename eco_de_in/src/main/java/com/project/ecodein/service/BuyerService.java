@@ -1,76 +1,70 @@
 package com.project.ecodein.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
+
+import com.project.ecodein.dto.BuyerDTO;
+import com.project.ecodein.entity.Buyer;
+import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.repository.BuyerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Service
+@Slf4j
 public class BuyerService {
 
 	private final BuyerRepository BUYER_REPOSITORY;
+    private final ModelMapper MODEL_MAPPER;
 
-	public BuyerService (BuyerRepository buyerRepository) {
-
+    public BuyerService (BuyerRepository buyerRepository, ModelMapper modelMapper) {
 		this.BUYER_REPOSITORY = buyerRepository;
+        this.MODEL_MAPPER = modelMapper;
+    }
 
-	}
-
-	public Page<Buyer> buyers (int page, String keyword, String buyer_status) {
+	public Page<BuyerDTO> buyers (int page, String keyword, String buyer_status) {
 		
-		int status;
+		boolean status = false;
+
+        Sort sort = Sort.by (Sort.Order.desc ("buyerCode"));
+
+        Pageable pageable = PageRequest.of (page - 1, 10, sort);
 		
 		if (keyword == "") {
-			if (buyer_status.equals ("default")) {
-				status = 1;
-			} else {
-				status = 0;
-			}
-			
-			Sort sort = Sort.by (Sort.Order.desc ("buyer_code"));
-			
-			Pageable pageable = PageRequest.of (page - 1, 10, sort);
-			
-			return BUYER_REPOSITORY.findByBuyerStatus (pageable, status);
+            if (buyer_status.equals("default")) {
+                status = true;
+            }
+
+            Page<Buyer> buyers = BUYER_REPOSITORY.findByBuyerStatus (pageable, status);
+
+            return buyers.map(buyer -> MODEL_MAPPER.map(buyer, BuyerDTO.class));
 		}
 
 		if (buyer_status.equals ("default")) {
-			
-			status = 1;
-			
-			Sort sort = Sort.by (Sort.Order.desc ("buyer_code"));
+            Page<Buyer> buyers = BUYER_REPOSITORY.findByBuyerStatusAndBuyerName(true, keyword, pageable);
 
-			Pageable pageable = PageRequest.of (page - 1, 10, sort);
-
-			return BUYER_REPOSITORY.findByBuyerStatusAndBuyerNameOrBuyerNumber (keyword, status, pageable);
-
+			return buyers.map(buyer -> MODEL_MAPPER.map(buyer, BuyerDTO.class));
 		} else {
-			
-			status = 0;
-
-			Sort sort = Sort.by (Sort.Order.desc ("buyer_code"));
-
-			Pageable pageable = PageRequest.of (page - 1, 10, sort);
-
-			return BUYER_REPOSITORY.findByBuyerStatusAndBuyerNameOrBuyerNumber (keyword, status, pageable);
-
+            Page<Buyer> buyers = BUYER_REPOSITORY.findByBuyerStatusAndBuyerName(false, keyword, pageable);
+			return buyers.map(buyer -> MODEL_MAPPER.map(buyer, BuyerDTO.class));
 		}
 		
 	}
 
-	public Buyer buyerInsert (Buyer buyer) {
+	public Buyer buyerInsert (BuyerDTO buyer) {
 
-		buyer.setBuyer_secure_code (seruceCodeCreate ());
-		buyer.setBuyer_status (true);
+		buyer.setBuyerSecureCode (seruceCodeCreate ());
+		buyer.setBuyerStatus (true);
+        buyer.setBuyerResistDate(LocalDateTime.now());
 
-		return BUYER_REPOSITORY.save (buyer);
+		return BUYER_REPOSITORY.save (MODEL_MAPPER.map(buyer, Buyer.class));
 
 	}
 
@@ -80,26 +74,23 @@ public class BuyerService {
 
 	}
 	
-	public void updateStatus (Long buyer_code) {
-		
-		BUYER_REPOSITORY.updateBuyerStatusByBuyerCode (buyer_code);
-		
+	public void updateStatus (BuyerDTO buyer) {
+        Optional<Buyer> oldBuyer = Optional.of(buyerDetail(buyer.getBuyerCode()).get());
+
+        buyer.setBuyerStatus (false);
+        buyer.setBuyerResistDate(oldBuyer.get().getBuyerResistDate());
+
+		BUYER_REPOSITORY.save (MODEL_MAPPER.map(buyer, Buyer.class));
 	}
 	
 	@Transactional
-	public void updateBuyer (@ModelAttribute Buyer buyer) {
-		
-//		기존 오류 발생 파악 후 수정될 코드 조각 - START
-		Long buyer_code = buyer.getBuyerCode ();
-		String buyer_name = buyer.getBuyer_name ();
-		String buyer_agent = buyer.getBuyer_agent ();
-		String buyer_number = buyer.getBuyer_number ();
-		String buyer_tel = buyer.getBuyer_tel ();
-		String buyer_address = buyer.getBuyer_address ();
-//		기존 오류 발생 파악 후 수정될 코드 조각 - END
+	public void updateBuyer (@ModelAttribute BuyerDTO buyer) {
+        Optional<Buyer> oldBuyer = Optional.of(buyerDetail(buyer.getBuyerCode()).get());
+        buyer.setBuyerResistDate(oldBuyer.get().getBuyerResistDate());
+        buyer.setBuyerSecureCode (oldBuyer.get().getBuyerSecureCode());
+        buyer.setBuyerStatus(true);
 
-		BUYER_REPOSITORY.updateBuyer (buyer_code, buyer_name, buyer_agent, buyer_number, buyer_tel, buyer_address);
-		
+        BUYER_REPOSITORY.save(MODEL_MAPPER.map(buyer, Buyer.class));
 	}
 	
 
@@ -109,12 +100,8 @@ public class BuyerService {
 		Random rd = new Random ();
 
 		for (int i = 0; i < 5; i++) {
-
 			sb.append ((char) (rd.nextInt (26) + 65));
-
 		}
-
-		System.out.println (sb.toString ());
 
 		return sb.toString ();
 

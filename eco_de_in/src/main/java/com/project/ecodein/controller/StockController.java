@@ -1,6 +1,9 @@
 package com.project.ecodein.controller;
 
 import java.util.List;
+
+import com.project.ecodein.dto.StorageDTO;
+import com.project.ecodein.entity.Storage;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +17,6 @@ import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
 import com.project.ecodein.dto.Item;
 import com.project.ecodein.dto.Stock;
-import com.project.ecodein.dto.Storage;
 import com.project.ecodein.service.StockService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -89,7 +91,7 @@ public class StockController {
 		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
 		
-		Page<Storage> storages = STOCK_SERVICE.searchStorages(search, page);
+		Page<StorageDTO> storages = STOCK_SERVICE.searchStorages(search, page);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(storages);
 		
 		model.addAttribute ("storages", storages);

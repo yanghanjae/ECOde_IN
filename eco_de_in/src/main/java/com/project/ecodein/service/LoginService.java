@@ -1,5 +1,6 @@
 package com.project.ecodein.service;
 
+import com.project.ecodein.entity.Buyer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import com.project.ecodein.config.SecurityConfig;
 import com.project.ecodein.dto.Admin;
-import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.dto.User;
 import com.project.ecodein.repository.AdminRepository;
 import com.project.ecodein.repository.BuyerRepository;
@@ -43,7 +43,7 @@ public class LoginService {
 	
 	//보안코드 검사후 회원가입.
 	public String signUp (User user, String buyer_secure_code, Model model) {
-		log.info (user.getBuyer_code ().toString ());
+		log.info (user.getBuyer_code().toString());
 		if (USER_REPOSITORY.findByUserId (user.getUser_id ()).isPresent ()) {
 			model.addAttribute ("message", "이미 가입된 아이디입니다.");
 			model.addAttribute ("url", "/signup");
@@ -56,7 +56,7 @@ public class LoginService {
 		}
 		
 		
-		if (user.getBuyer_code ().getBuyer_secure_code ().equals (buyer_secure_code)) {
+		if (user.getBuyer_code ().getBuyerSecureCode ().equals (buyer_secure_code)) {
 			user.setUser_password (SECURITY_CONFIG.passwordEncoder ().encode (user.getUser_password ()));
 			USER_REPOSITORY.save (user);
 			return "redirect:/";
@@ -126,10 +126,11 @@ public class LoginService {
 	}
 	
 	public Page<Buyer> searchBuyers (String name, int page, int pageSize) {
-		Pageable pageable = PageRequest.of (page -1 , pageSize, Sort.by (Sort.Order.asc ("buyer_name")));
+		Pageable pageable = PageRequest.of (page -1 , pageSize, Sort.by (Sort.Order.asc ("buyerName")));
 
 		if (name == null || name.isEmpty ()) {
-			return BUYER_REPOSITORY.findAllAcitve (pageable);
+			// return BUYER_REPOSITORY.findAllAcitve (pageable);
+            return BUYER_REPOSITORY.findByBuyerStatus(pageable, true);
 		} else {
 			return BUYER_REPOSITORY.findByBuyerNameActive (name, pageable);
 		}

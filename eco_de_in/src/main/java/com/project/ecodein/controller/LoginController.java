@@ -1,5 +1,7 @@
 package com.project.ecodein.controller;
 
+import com.project.ecodein.dto.BuyerDTO;
+import com.project.ecodein.entity.Buyer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
 import com.project.ecodein.config.SecurityConfig;
 import com.project.ecodein.dto.Admin;
-import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.dto.User;
 import com.project.ecodein.repository.BuyerRepository;
 import com.project.ecodein.service.LoginService;

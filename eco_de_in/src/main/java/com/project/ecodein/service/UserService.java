@@ -54,4 +54,10 @@ public class UserService {
 
         return USER_REPOSITORY.updatePassword(user_id, newPassword);
     }
+
+    // [241013] 장유빈 기능 추가
+    // 기능 상세 : 반품 관리 페이지에 해당 거래처 담당자 리스트
+    public List<User> findAllByBuyerCode(int buyer_code) {
+        return USER_REPOSITORY.findAllByBuyerCode(buyer_code);
+    }
 }

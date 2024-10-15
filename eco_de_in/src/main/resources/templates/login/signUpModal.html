@@ -6,7 +6,7 @@
 	  	<button type="submit" class="searchButton">검색</button>
   	</div>
   	<ul th:each="buyer : ${buyers}" class="list">
-  		<li th:text = "${buyer.buyer_name}" th:data-value = "${buyer.buyerCode}"  onclick=chooseName(this)></li>
+  		<li th:text = "${buyer.buyerName}" th:data-value = "${buyer.buyerCode}"  onclick=chooseName(this)></li>
   	</ul>
   	
   </form>

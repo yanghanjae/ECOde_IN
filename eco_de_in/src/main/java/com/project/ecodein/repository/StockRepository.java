@@ -2,6 +2,8 @@ package com.project.ecodein.repository;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.project.ecodein.entity.Storage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -107,4 +109,8 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
     @Query(value = "select i.*, sum(s.quantity) as quantity, s.stock_no, s.storage_no from item i inner join (select * from stock) s on i.item_no = s.item_no " +
         "where i.item_name like concat('%', :name, '%') group by s.item_no", nativeQuery = true)
     List<Stock> orderFindAllStock(String name);
+
+    // [241014] 장유빈 기능 추가
+    // 기능 상세 : 창고별 재고조회 기능
+    List<Stock> findByStorage(Storage storage);
 }

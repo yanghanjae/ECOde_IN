@@ -1,7 +1,13 @@
 package com.project.ecodein.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.project.ecodein.dto.StorageDTO;
+import com.project.ecodein.entity.Storage;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.project.ecodein.dto.Item;
 import com.project.ecodein.dto.Stock;
-import com.project.ecodein.dto.Storage;
 import com.project.ecodein.repository.ItemRepository;
 import com.project.ecodein.repository.StockRepository;
 import com.project.ecodein.repository.StorageRepository;
@@ -22,13 +27,15 @@ public class StockService {
 	private final StockRepository STOCK_REPOSITORY;
 	private final StorageRepository STORAGE_REPOSITORY;
 	private final ItemRepository ITEM_REPOSITORY;
+    private final ModelMapper MODEL_MAPPER;
 
-	public StockService (StockRepository STOCK_REPOSITORY, StorageRepository STORAGE_REPOSITORY,
-		ItemRepository ITEM_REPOSITORY) {
+    public StockService (StockRepository STOCK_REPOSITORY, StorageRepository STORAGE_REPOSITORY,
+                         ItemRepository ITEM_REPOSITORY, ModelMapper modelMapper) {
 		this.STOCK_REPOSITORY = STOCK_REPOSITORY;
 		this.STORAGE_REPOSITORY = STORAGE_REPOSITORY;
 		this.ITEM_REPOSITORY = ITEM_REPOSITORY;
-	}
+        this.MODEL_MAPPER = modelMapper;
+    }
 	
 	public Page<Stock> findStock (int page, boolean is_item, String search, Integer storage_no) {
 		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("stock_no").descending ()); 
@@ -49,8 +56,10 @@ public class StockService {
 		
 	}
 	
-	public List<Storage> findAllStorage () {
-		return STORAGE_REPOSITORY.findAllStorage ();
+	public List<StorageDTO> findAllStorage () {
+        List<Storage> storages = STORAGE_REPOSITORY.findAll ();
+
+		return storages.stream().map(storage -> MODEL_MAPPER.map(storage, StorageDTO.class)).collect(Collectors.toList());
 	}
 
 	public Optional<Stock> findByStockNo (int stock_no) {
@@ -99,14 +108,17 @@ public class StockService {
 		
 	}
 
-	public Page<Storage> searchStorages (String search, int page) {
+	public Page<StorageDTO> searchStorages (String search, int page) {
 
 		Pageable pageable = PageRequest.of (page-1, 10, Sort.by ("storage_name").ascending ());
 		
 		if(search == null || search.isEmpty ()) {
 			search = "";
 		}
-		return STORAGE_REPOSITORY.findAllByStorageNameOrStorageSite (search, pageable);
+
+        Page<Storage> storages = STORAGE_REPOSITORY.findAllByStorageNameOrStorageSite (search, pageable);
+
+		return storages.map(storage -> MODEL_MAPPER.map(storage, StorageDTO.class));
 
 	}
 

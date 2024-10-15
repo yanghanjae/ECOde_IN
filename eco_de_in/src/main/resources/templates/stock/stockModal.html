@@ -41,7 +41,7 @@
 		<input type="text" id="storageModalSearch" class="modalInput" name="storageModalSearch" th:value="${storageModalSearch}">
 		<button type="button" class="modalButton" onclick="storageSubmit(event)">검색</button>
 		<ul th:each="storage : ${storages}">
-			<li th:data-value="${storage.storage_no}" th:text="${storage.storage_name}" onclick="chooseStorage(this)"></li>
+			<li th:data-value="${storage.storageNo}" th:text="${storage.storageName}" onclick="chooseStorage(this)"></li>
 		</ul>
 	</form>
 	<div class="pagination">

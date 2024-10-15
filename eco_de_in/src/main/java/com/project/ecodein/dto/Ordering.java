@@ -1,6 +1,8 @@
 package com.project.ecodein.dto;
 
 import java.sql.Date;
+
+import com.project.ecodein.entity.Buyer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
