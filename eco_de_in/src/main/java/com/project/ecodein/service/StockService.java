@@ -164,4 +164,25 @@ public class StockService {
 		}
 		
 	}
+
+	
+	// 재고 이동 기능 (옮길 창고에 해당 상품이 있을시, 수량만 업데이트)
+	public void moveStock (Integer moveStockNo, Integer storage_no, Integer moveQuantity) {
+
+		Optional<Stock> stock = STOCK_REPOSITORY.findById(moveStockNo);
+		Optional<Stock> moveStock = STOCK_REPOSITORY.findStock (stock.get ().getItem ().getItemNo (), storage_no);
+		
+		if(stock.get ().getQuantity () == moveQuantity) {
+			STOCK_REPOSITORY.delete (stock.get ());
+		} else {
+			STOCK_REPOSITORY.updateStock (stock.get ().getStockNo (), stock.get ().getQuantity () - moveQuantity);
+		}	
+		
+		if(moveStock.isPresent ()) {
+			STOCK_REPOSITORY.updateStock (moveStock.get ().getStockNo (), moveStock.get ().getQuantity () + moveQuantity);
+		} else {
+			STOCK_REPOSITORY.addStock (stock.get ().getItem ().getItemNo (), storage_no, moveQuantity);
+		}
+
+	}
 }

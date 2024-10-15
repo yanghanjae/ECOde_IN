@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import com.project.ecodein.dto.Item;
 
+import java.util.List;
+
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
 	//검색어로 전체 검색

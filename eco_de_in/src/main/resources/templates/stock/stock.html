@@ -107,7 +107,9 @@
       position: relative;
       bottom: 0;
       left: 0;
+      text-align: center;
     }
+    
     
     .pagination button {
       font-weight: normal;
@@ -152,17 +154,25 @@
 				font-weight: bolder;
 		}
 		
+		.modalSmall {
+				display: none;
+				position : fixed;
+				top : 50%;
+				left : 50%;
+				transform : translate(-50%, -50%);
+				width: 600px;
+				height: 550px;
+				background-color: #FFF;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				z-index: 1000;
+				font-size: 20px;
+				font-weight: bolder;
+		}
+		
 		.modalContent {
 			margin: 20px;
 			position: relative;
 			top: 40px;
-		}
-		
-		.pagination {
-			position: absolute;
-			bottom: 50px;
-			left: 50%;
-	  	transform: translateX(-50%);
 		}
 		
 		.modal img {
@@ -188,9 +198,32 @@
 		}
 		
 		.modalButton {
+	    	background-color: #81CD28;
+	      width: 100px;
+	      height: 40px;
+	      border-radius: 10px;
+	      color: #fff;
+	      font-size : 15px;
+	      font-weight: bold;
+	      margin: .7% .5%;
+	    }
+		
+		.modalButtonRight {
 			position: absolute;
 			right: 20px;
 			bottom: 20px;
+		}
+		
+		.modalButtonLeft {
+			position: absolute;
+			right: 160px;
+			bottom: 20px;
+		}
+		
+		.modalInput {
+			width: 400px;
+			height: 40px;
+			background-color: #D9D9D9;
 		}
 		
 		.input {
@@ -208,6 +241,29 @@
 		.right {
 			position: relative;
 			left: 1350px;
+		}
+		
+		table {
+			margin : 0 auto;
+			font-size : 20px;
+		}
+		
+		.modalContent table {
+				margin : 10px auto;
+				font-size: 22px;
+				font-weight: normal;
+			}
+			
+		.modalContent table td,th {
+			padding : 0 20px;
+		}
+		
+		.modalContent .tableHover {
+			cursor: pointer;
+		}
+		
+		.modalContent .tableHover:hover {
+			font-weight: bold;
 		}
 </style>
 </head>
@@ -321,7 +377,8 @@
 		    	<label>수량 : </label>
 		    	<input id="modal_quantity" readonly="readonly" class="noFocus" >
 	    	</div>
-	    	<button class="lime modalButton" type="button" onclick="openModalEdit()">재고 수정</button>
+	    	<button class="lime modalButtonLeft" type="button" onclick="openModalMove()">재고 이동</button>
+	    	<button class="lime modalButtonRight" type="button" onclick="openModalEdit()">재고 수정</button>
 	    </div>
 	    
 	    <div class="modal" id="modalEdit">
@@ -349,18 +406,56 @@
 			    	<label>수량 : </label>
 			    	<input id="modalEdit_quantity" class="input" name="editQuantity" type="number" min="0" >
 		    	</div>
-		    	<button class="lime modalButton" type="submit">재고 수정</button>	
+		    	<button class="lime modalButtonRight" type="submit">재고 수정</button>	
+	    	</form>
+	    </div>
+	    
+	    <div class="modal" id="modalMove">
+	    	<form action="/stock/move" method="post">
+		    	<button type="button" onclick="closeModal()" class="closeModal">
+		    		<img class="closeButton" alt="closeButton" src="/img/icon/closebutton.png">
+		    	</button>
+		    	<div class="modalContent">
+			    	<label>재고번호 : </label>
+			    	<input id="modalMove_stock_no" readonly="readonly" class="noFocus" name="moveStockNo">
+		    	</div>
+		    	<div class="modalContent">
+			    	<label>재고명 : </label>
+			    	<input id="modalMove_itemName" readonly="readonly" class="noFocus" >
+		    	</div>
+		    	<div class="modalContent">
+			    	<label>옮길 창고 : </label>
+			    	<input id="modalMove_storage_no" readonly="readonly" class="input" required="required" onclick="openStorageModal()">
+			    	<input hidden="" id="storageHidden" name="storage_no">
+		    	</div>
+		    	<div class="modalContent">
+			    	<label>사진 : </label>
+			    	<img alt="stock_image" src="" id="modalMove_itemImage">
+		    	</div>
+		    	<div class="modalContent">
+			    	<label>옮길 수량 : </label>
+			    	<input id="modalMove_quantity" class="input" name="moveQuantity" type="number" min="0" >
+		    	</div>
+		    	<button class="lime modalButtonRight" type="submit">재고 수정</button>	
 	    	</form>
 	    </div>
 	    
 	    <div class="modalBackground" id="modalBackground">
 	    </div>
+	    <div class="modalSmall" id="storageModal">
+		  	<button type="button" onclick="closeStorageModal()" class="closeModal">
+	    		<img class="closeButton" alt="closeButton" src="/img/icon/closebutton.png">
+	    	</button>
+	    	<div class="modalContent" id="storageModalContent">
+	    	</div>
+	  	</div>
 	  </div>
 	<script type="text/javascript">
 	
 	let modal = document.getElementById('modal');
 	let modalBackground = document.getElementById('modalBackground');
 	let modalEdit = document.getElementById('modalEdit');
+	let modalMove = document.getElementById('modalMove');
 	
 	function changePage(element) {
 		let search = document.getElementById('search').value || '';
@@ -388,6 +483,7 @@
 		modal.style.display = 'block';
 		modalBackground.style.display = 'block';
 		modalEdit.style.display = 'none';
+		modalMove.style.display = 'none';
 	}
 	
 	function openModalEdit() {
@@ -399,13 +495,79 @@
 		modal.style.display = 'none';
 		modalBackground.style.display = 'block';
 		modalEdit.style.display = 'block';
+		modalMove.style.display = 'none';
 		document.getElementById('modalEdit_quantity').focus();
+	}
+	
+	function openModalMove() {
+		document.getElementById('modalMove_stock_no').value = document.getElementById('modal_stock_no').value;
+		document.getElementById('modalMove_itemName').value = document.getElementById('modal_itemName').value;
+		document.getElementById('modalMove_itemImage').src = document.getElementById('modal_itemImage').src;
+		document.getElementById('modalMove_quantity').setAttribute('max',document.getElementById('modal_quantity').value) ;
+		console.log(document.getElementById('modal_quantity').value);
+		modal.style.display = 'none';
+		modalBackground.style.display = 'block';
+		modalEdit.style.display = 'none';
+		modalMove.style.display = 'block';
 	}
 	
 	function closeModal() {
 		modal.style.display = 'none';
 		modalBackground.style.display = 'none';
 		modalEdit.style.display = 'none';
+		modalMove.style.display = 'none';
+	}
+	
+	function openStorageModal() {
+		storageModal.style.display = 'block';
+		loadStorage('', 1);
+		document.activeElement.blur()
+	}
+	
+	function closeStorageModal() {
+		storageModal.style.display = 'none';
+	}
+	
+	function loadStorage(search, page) {
+		
+		fetch(`/stock/add/storage?search=${search}&page=${page}`)
+			.then(response => response.text())
+			.then(html => {
+				document.getElementById('storageModalContent').innerHTML = html;	
+		})
+			.catch(error => {
+				console.error('Error', error);
+			})
+		
+		itemModal.style.display = 'none';
+		modalBackground.style.display = 'block';
+		storageModal.style.display = 'block';
+	}
+	
+	function storageSubmit(event) {
+		
+		event.preventDefault();
+		
+		let storageModalSearch = document.getElementById('storageModalSearch').value;
+		let page= 1;
+		
+		loadStorage(storageModalSearch,page);
+	}
+	
+	function chooseStorage(element) {
+		let storageName = element.textContent;
+		let storageNo = element.getAttribute('data-value');
+		
+		document.getElementById('modalMove_storage_no').value = storageName;
+		document.getElementById('storageHidden').value = storageNo;
+		closeStorageModal();
+	}
+	
+	function changeStoragePage(element) {
+		let search= document.getElementById('storageModalSearch').value;
+		let page = element.getAttribute('data-value');
+		
+		loadStorage(search,page);
 	}
 	</script>
 </body>

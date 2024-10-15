@@ -1,7 +1,9 @@
 package com.project.ecodein.service;
 
 
-import com.project.ecodein.dto.Stock;
+import com.project.ecodein.dto.*;
+import com.project.ecodein.entity.Buyer;
+import com.project.ecodein.repository.OrderDetailRepository;
 import com.project.ecodein.repository.OrderingRepository;
 import com.project.ecodein.repository.StockRepository;
 import org.springframework.data.domain.Page;
@@ -11,8 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import com.project.ecodein.dto.Ordering;
-
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -22,10 +24,14 @@ public class OrderingService {
 
 	private final OrderingRepository ORDERING_REPOSITORY;
     private final StockRepository STOCK_REPOSITORY;
+    private final OrderDetailRepository ORDER_DETAIL_REPOSITORY;
 
-    public OrderingService(OrderingRepository orderingRepository, StockRepository stockRepository) {
+    public OrderingService(OrderingRepository orderingRepository,
+                           StockRepository stockRepository,
+                           OrderDetailRepository orderDetailRepository) {
         this.ORDERING_REPOSITORY = orderingRepository;
         this.STOCK_REPOSITORY = stockRepository;
+        this.ORDER_DETAIL_REPOSITORY = orderDetailRepository;
     }
 
     // mainPage에서 사용할 메서드
@@ -76,16 +82,41 @@ public class OrderingService {
 
 	// 삭제 기능
 	public void deleteOrder(int orderNo) {
-		ORDERING_REPOSITORY.deleteById(orderNo);
+
+        ORDERING_REPOSITORY.deleteById(orderNo);
 	}
 
-    // Stock을 이름으로 검색하는 메서드 추가
+    // 발주등록
+    public void addOrder(OrderPoolDTO orderPool) {
+        //Ordering ordering = ORDERING_REPOSITORY.addsave(orderPool.getBuyer_code(), orderPool.getUser_id(), orderPool.getDue_date());
+        Ordering ordering = new Ordering();
+        Buyer buyer = new Buyer();
+        buyer.setBuyerCode((long) orderPool.getBuyer_code());
+
+        ordering.setBuyer_code(buyer);
+        ordering.setUser_id(new User(orderPool.getUser_id()));
+        ordering.setDue_date(orderPool.getDue_date());
+        ordering.setOrder_date(Date.valueOf(LocalDate.now()));
+
+        Ordering order = ORDERING_REPOSITORY.save(ordering);
+
+        for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrder(order);
+            orderDetail.setItem(new Item(orderPool.getOrder_nos().get(idx)));
+            orderDetail.setQuantity(orderPool.getQuantities().get(idx));
+            ORDER_DETAIL_REPOSITORY.save(orderDetail);
+        }
+        System.out.println("order" + order);
+    }
+
+    // 발주등록_Stock을 이름으로 검색하는 메서드 추가
     public List<Stock> searchStocksByName(String name) {
-        // StockRepository의 이미 구현된 메서드를 사용하여 검색
+
         return STOCK_REPOSITORY.orderFindAllStock(name);
     }
 
-    // 상품등록
+    // 발주등록_상품등록
     public void registerOrder(List<Integer> productIds, List<Integer> quantities) {
 
         for (int i = 0; i < productIds.size(); i++) {
@@ -96,4 +127,17 @@ public class OrderingService {
         }
     }
 
+    // 발주상세(마지막 삭제)
+//    public void findById(int orderNo) {
+//    }
+
+    // 발주 정보 조회
+    public Ordering findById(int id) {
+        return ORDERING_REPOSITORY.findById(id).orElse(null);
+    }
+
+    // 발주 상세 정보 조회
+    public List<OrderDetail> findOrderDetails(int orderNo) {
+        return ORDER_DETAIL_REPOSITORY.findAllByOrderId(orderNo);
+    }
 }

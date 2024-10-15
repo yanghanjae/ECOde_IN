@@ -156,4 +156,13 @@ public class StockController {
 		return "redirect:/stock";
 	}
 	
+	@PostMapping("/move")
+	public String Move (@RequestParam Integer moveStockNo, @RequestParam Integer storage_no,
+		@RequestParam Integer moveQuantity) {
+		
+		STOCK_SERVICE.moveStock (moveStockNo, storage_no, moveQuantity);
+		
+		
+		return "redirect:/stock";
+	}
 }

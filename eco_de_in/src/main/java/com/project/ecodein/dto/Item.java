@@ -34,5 +34,8 @@ public class Item {
 	
 	@Column(name = "item_image", nullable = false)
 	private String itemImage;
-	
+
+	public Item(int itemNo) {
+		this.itemNo = itemNo;
+	}
 }
