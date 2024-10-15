@@ -239,7 +239,7 @@
 	    		<div class="left">
 	    			<label>창고</label>
 	    			<input required="required" onclick="openStorageModal()" class="input" id="storage" >
-	    			<input hidden="" name="storage_no" id="storageHidden">
+	    			<input hidden="" name="storageNo" id="storageHidden">
 	    		</div>
 	    		<div class="left">
 	    			<label>상품 수량</label>
@@ -253,7 +253,7 @@
 	    			</div>
 	    			<div id="quantityInput" class="half">
 		    			<label>재료 수량</label>
-		    			<input type="number" name="ingredient_quantity" class="halfInput" onkeyup="onlyNumber(this)" data-value="0" required="required">
+		    			<input type="number" name="ingredientQuantity" class="halfInput" onkeyup="onlyNumber(this)" data-value="0" required="required">
 	    			</div>
 	    			<div id="button" class="ingredientButton">
 		    			<button onclick="addInput()" type="button">
@@ -477,7 +477,7 @@
 			newInputHidden.setAttribute('id',`stockHidden-${count}`);
 			
 			let newQuantity = document.createElement('input');
-			newQuantity.setAttribute('name','ingredient_quantity');
+			newQuantity.setAttribute('name','ingredientQuantity');
 			newQuantity.setAttribute('class','halfInput');
 			newQuantity.setAttribute('onkeyup','onlyNumber(this)');
 			newQuantity.setAttribute('data-value',count);

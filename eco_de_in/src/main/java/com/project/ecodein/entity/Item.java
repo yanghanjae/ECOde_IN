@@ -1,4 +1,4 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

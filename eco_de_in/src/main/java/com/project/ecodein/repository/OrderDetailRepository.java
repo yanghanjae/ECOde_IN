@@ -1,15 +1,11 @@
 package com.project.ecodein.repository;
 
-import com.project.ecodein.dto.Item;
-import com.project.ecodein.dto.OrderDetail;
-import com.project.ecodein.dto.Ordering;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.sql.Date;
-import java.util.List;
+import com.project.ecodein.dto.OrderDetail;
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer> {

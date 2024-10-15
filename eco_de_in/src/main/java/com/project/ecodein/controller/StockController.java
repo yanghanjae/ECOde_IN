@@ -1,9 +1,6 @@
 package com.project.ecodein.controller;
 
 import java.util.List;
-
-import com.project.ecodein.dto.StorageDTO;
-import com.project.ecodein.entity.Storage;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
-import com.project.ecodein.dto.Item;
-import com.project.ecodein.dto.Stock;
+import com.project.ecodein.dto.ItemDTO;
+import com.project.ecodein.dto.StockDTO;
+import com.project.ecodein.dto.StorageDTO;
 import com.project.ecodein.service.StockService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,18 +31,18 @@ public class StockController {
 
 	@GetMapping("")
 	public String stock (Model model, @RequestParam(defaultValue = "") String search,
-		@RequestParam(defaultValue = "false") boolean is_item,
-		@RequestParam(defaultValue = "") Integer storage_no,
+		@RequestParam(defaultValue = "false") boolean isItem,
+		@RequestParam(defaultValue = "") Integer storageNo,
 		@RequestParam(defaultValue = "1") int page) {
 		
-		Page<Stock> stocks = STOCK_SERVICE.findStock (page, is_item, search, storage_no);
+		Page<StockDTO> stocks = STOCK_SERVICE.findStock (page, isItem, search, storageNo);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo (stocks, 5);
 		
 		model.addAttribute ("stocks", stocks);
 		model.addAttribute ("storages", STOCK_SERVICE.findAllStorage ());
 		model.addAttribute ("paging", paging);
-		model.addAttribute ("is_item", is_item);
-		model.addAttribute ("selectedStorage", storage_no);
+		model.addAttribute ("isItem", isItem);
+		model.addAttribute ("selectedStorage", storageNo);
 		model.addAttribute ("search", search);
 		
 		return "stock/stock";
@@ -52,8 +50,8 @@ public class StockController {
 	
 	@ResponseBody
 	@GetMapping("/{stock_no}")
-	public Stock stockDetail (@PathVariable int stock_no) {
-		return STOCK_SERVICE.findByStockNo(stock_no).orElse (new Stock());
+	public StockDTO stockDetail (@PathVariable int stock_no) {
+		return STOCK_SERVICE.findByStockNo(stock_no).orElse (new StockDTO());
 	}
 	
 	@PostMapping("/edit")
@@ -65,7 +63,7 @@ public class StockController {
 	}
 	
 	@GetMapping("/add")
-	public String addStock (Model model) {
+	public String addStock () {
 				
 		return "stock/addStock";
 	}
@@ -75,7 +73,7 @@ public class StockController {
 		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
 		
-		Page<Item> items = STOCK_SERVICE.searchStocks(search, page);
+		Page<ItemDTO> items = STOCK_SERVICE.searchStocks(search, page);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(items);
 		
 		model.addAttribute ("items", items);
@@ -103,9 +101,9 @@ public class StockController {
 	}
 	
 	@PostMapping("/add")
-	public String addStockPost (@RequestParam int storage_no, @RequestParam int item_no, @RequestParam int quantity) {
+	public String addStockPost (@RequestParam int storageNo, @RequestParam int itemNo, @RequestParam int quantity) {
 		
-		STOCK_SERVICE.addStock (item_no, storage_no, quantity);
+		STOCK_SERVICE.addStock (itemNo, storageNo, quantity);
 		
 		return "redirect:/stock";
 	}
@@ -120,7 +118,7 @@ public class StockController {
 		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
 		
-		Page<Item> items = STOCK_SERVICE.searchItems(search, page);
+		Page<ItemDTO> items = STOCK_SERVICE.searchItems(search, page);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(items);
 		
 		model.addAttribute ("items", items);
@@ -136,7 +134,7 @@ public class StockController {
 		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
 		
-		Page<Item> items = STOCK_SERVICE.searchMaterials(search, page);
+		Page<ItemDTO> items = STOCK_SERVICE.searchMaterials(search, page);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(items);
 		
 		model.addAttribute ("items", items);
@@ -148,19 +146,19 @@ public class StockController {
 	}
 	
 	@PostMapping("/addItem")
-	public String addItemPost(@RequestParam Integer itemNo, @RequestParam Integer storage_no, @RequestParam Integer quantity 
-		,@RequestParam List<Integer> ingredient, @RequestParam List<Integer> ingredient_quantity) {
+	public String addItemPost(@RequestParam Integer itemNo, @RequestParam Integer storageNo, @RequestParam Integer quantity 
+		,@RequestParam List<Integer> ingredient, @RequestParam List<Integer> ingredientQuantity) {
 		
-		STOCK_SERVICE.addItem (itemNo, storage_no, quantity, ingredient, ingredient_quantity);
+		STOCK_SERVICE.addItem (itemNo, storageNo, quantity, ingredient, ingredientQuantity);
 		
 		return "redirect:/stock";
 	}
 	
 	@PostMapping("/move")
-	public String Move (@RequestParam Integer moveStockNo, @RequestParam Integer storage_no,
+	public String Move (@RequestParam Integer moveStockNo, @RequestParam Integer storageNo,
 		@RequestParam Integer moveQuantity) {
 		
-		STOCK_SERVICE.moveStock (moveStockNo, storage_no, moveQuantity);
+		STOCK_SERVICE.moveStock (moveStockNo, storageNo, moveQuantity);
 		
 		
 		return "redirect:/stock";
