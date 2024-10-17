@@ -66,7 +66,7 @@
             </div>
           </a>
           <a
-              th:href="@{/return/1/{buyerCode}/all(buyerCode = ${session.user != null} ? ${session.user.buyer_code.buyerCode} : 0)}" data-page="return"
+              th:href="@{/return/1/{buyerCode}/all(buyerCode = ${session.user != null} ? ${session.user.buyerCode.buyerCode} : 0)}" data-page="return"
              class="menu-a">
             <div class="menu">
               <img src="/img/icon/icon-return.png" alt="">

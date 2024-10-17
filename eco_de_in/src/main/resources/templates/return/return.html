@@ -407,7 +407,7 @@
     let fetch_count = 0;
     let item_list = [];
     let return_item_list = [];
-    const buyer_code = [[${session.user.buyer_code.buyerCode}]];
+    const buyer_code = [[${session.user.buyerCode.buyerCode}]];
     
     function fetch_orderList() {
       document.querySelector('.modal-item-table').innerHTML = null;
@@ -608,7 +608,7 @@
     <div id="bubble-menu">
       <div class="bubble-large">
         <a
-            th:href="@{/return/{page}/{buyerCode}/previous(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+            th:href="@{/return/{page}/{buyerCode}/previous(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyerCode.buyerCode})}"
            class="title_bubble">
           지난달 반품 내역
         </a>
@@ -621,7 +621,7 @@
       </div>
       <div class="bubble-large">
         <a
-            th:href="@{/return/{page}/{buyerCode}/current(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+            th:href="@{/return/{page}/{buyerCode}/current(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyerCode.buyerCode})}"
             class="title_bubble">
           이번달 반품 내역
         </a>
@@ -635,7 +635,7 @@
       <div class="sub-bubble">
         <div class="bubble-small">
           <a
-              th:href="@{/return/{page}/{buyerCode}/accepted(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+              th:href="@{/return/{page}/{buyerCode}/accepted(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyerCode.buyerCode})}"
              class="regist-bubble">
             접 수
           </a>
@@ -648,7 +648,7 @@
         </div>
         <div class="bubble-small">
           <a
-              th:href="@{/return/{page}/{buyerCode}/rejected(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+              th:href="@{/return/{page}/{buyerCode}/rejected(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyerCode.buyerCode})}"
              class="process-bubble">
             진행중
           </a>
@@ -661,7 +661,7 @@
         </div>
         <div class="bubble-small">
           <a
-              th:href="@{/return/{page}/{buyerCode}/completed(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+              th:href="@{/return/{page}/{buyerCode}/completed(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyerCode.buyerCode})}"
              class="complete-bubble">
             완 료
           </a>
@@ -680,7 +680,7 @@
                 th:if="${session.user != null}">반품
           접수</button>
         <a class="button btn-return-regist float-start" style="text-align: center; line-height: 33px;"
-                th:href="@{/return/{page}/{buyerCode}/all(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}">전체
+                th:href="@{/return/{page}/{buyerCode}/all(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyerCode.buyerCode})}">전체
           보기</a>
       </div>
       <!-- 테이블 -->
@@ -734,18 +734,19 @@
                   <ul class="pagination">
                     <li th:classappend="${!returns.hasPrevious} ? 'hidden'">
                       <a class="page-link"
-                         th:href="@{/return/{page}/{buyerCode}(page = ${page -1}, buyerCode = ${session.user != null ? session.user.buyer_code.buyerCode : 0})}">
+                         th:href="@{/return/{page}/{buyerCode}(page = ${page -1}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0})}">
                         &lt;</a>
                     </li>
                     <li th:each="page: ${#numbers.sequence(1, returns.totalPages)}"
                         th:if="${page >= returns.number-5 and page <= returns.number+5}"
                         th:classappend="${page - 1 == returns.number} ? 'active'">
-                      <a th:text="${page}" class="page-link" th:href="@{/return/{page}/{buyerCode}(page = ${page}, buyerCode = ${session.user != null ? session.user.buyer_code.buyerCode : 0})}">
+                      <a th:text="${page}" class="page-link"
+                         th:href="@{/return/{page}/{buyerCode}(page = ${page}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0})}">
                       </a>
                     </li>
                     <li th:classappend="${!returns.hasNext()} ? 'hidden'">
                       <a class="page-link"
-                         th:href="@{/return/{page}/{buyerCode}(page = ${page + 1}, buyerCode = ${session.user != null ? session.user.buyer_code.buyerCode : 0})}">&gt;</a>
+                         th:href="@{/return/{page}/{buyerCode}(page = ${page + 1}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0})}">&gt;</a>
                     </li>
                   </ul>
                 </nav>

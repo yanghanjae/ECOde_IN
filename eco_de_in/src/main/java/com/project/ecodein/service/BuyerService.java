@@ -59,14 +59,13 @@ public class BuyerService {
 	}
 
 	public BuyerDTO buyerInsert (BuyerDTO buyerDTO) {
-
         buyerDTO.setBuyerSecureCode (seruceCodeCreate ());
         buyerDTO.setBuyerStatus (true);
         buyerDTO.setBuyerResistDate(LocalDateTime.now());
 
-        Buyer buyer = MODEL_MAPPER.map(buyerDTO, Buyer.class);
+        Buyer buyer = BUYER_REPOSITORY.save(MODEL_MAPPER.map(buyerDTO, Buyer.class));
 
-		return MODEL_MAPPER.map(buyer, BuyerDTO.class);
+        return MODEL_MAPPER.map(buyer, BuyerDTO.class);
 	}
 
 	public Optional<BuyerDTO> buyerDetail (Long buyer_code) {
