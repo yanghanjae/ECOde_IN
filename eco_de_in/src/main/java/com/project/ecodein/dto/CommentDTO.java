@@ -21,6 +21,6 @@ public class CommentDTO {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     private Board boardNo;
-    private Admin admin; // 작성자
+    private Admin admin;
 
 }

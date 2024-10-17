@@ -131,16 +131,14 @@ th {
 							</div>
 						</div>
 
-
-
 						<div class="register-content">
 							<table>
 								<thead
 									class="text-xs text-gray-700 uppercase dark:text-gray-400">
 									<tr>
-										<th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
-											글 제목</th>
-										<td scope="colgroup" th:text="${board.boardTitle}"></td>
+										<td scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+											글 제목</td>
+										<td colspan="5" th:text="${board.boardTitle}" ></td>
 									</tr>
 									<tr class="border-b border-gray-200 dark:border-gray-700">
 										<th scope="row"
@@ -154,12 +152,13 @@ th {
 											th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 									</tr>
 								</thead>
-								<tbody>
-									<tr class="border-b border-gray-200 dark:border-gray-700">
-										<td th:utext="${board.boardContent}"></td>
-									</tr>
-								</tbody>
 							</table>
+							
+							  <hr class="section-divider">
+                <section class="mb-5">
+                    <p class="fs-5 mb-4" th:utext="${board.boardContent}"></p>
+                </section>
+                
 						</div>
 
 						<div th:if="${session.admin != null}">
@@ -186,14 +185,12 @@ th {
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Comments</th>
+									<th>답변</th>
 									<th>작성자</th>
 									<th>작성일</th>
 								</tr>
 							</thead>
 							<tbody>
-
-
 
 								<tr th:each="comment:${commentList}">
 									<input type="hidden" th:value="${comment.id}" name="id">
@@ -213,11 +210,8 @@ th {
 											th:onclick="|location.href='@{/board/{boardNo}/delete/{id}(boardNo=${board.boardNo}, id=${comment.id})}'|" class="text-black bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">삭제</button>
 									</td>
 								</tr>
-
-
 							</tbody>
 						</table>
-
 
 						<div class="row mt-5">
 							<div class="col">

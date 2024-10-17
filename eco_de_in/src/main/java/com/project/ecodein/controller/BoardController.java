@@ -44,7 +44,6 @@ public class BoardController {
 		List<Comment> commentList=commentService.findByBoardNo(boardNo);
 		model.addAttribute ("board", board);
 		model.addAttribute ("commentList", commentList);
-
 		
 		return "board/boardDetail";
 
