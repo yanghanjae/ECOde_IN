@@ -1,4 +1,4 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
 import java.sql.Date;
 import jakarta.persistence.Column;
@@ -22,18 +22,18 @@ public class Admin {
 
 	@Id
 	@Column (name = "admin_id", nullable = false)
-	private String admin_id;
+	private String adminId;
 
 	@Column (name = "admin_password", nullable = false)
-	private String admin_password;
+	private String adminPassword;
 
 	@Column (name = "admin_name", nullable = false)
-	private String admin_name;
+	private String adminName;
 
 	@Column (name = "admin_date", nullable = false, insertable = false, updatable = false)
-	private Date admin_date;
+	private Date adminDate;
 
 	@Column (name = "admin_recognize", nullable = false, insertable = false)
-	private boolean admin_recognize;
+	private boolean adminRecognize;
 
 }

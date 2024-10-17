@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
-import com.project.ecodein.dto.Item;
+import com.project.ecodein.dto.ItemDTO;
+import com.project.ecodein.entity.Item;
 import com.project.ecodein.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +36,7 @@ public class ItemController {
 		@RequestParam (defaultValue = "") Integer itemNo,
 		@RequestParam (defaultValue = "1") int page) {
 
-		Page<Item> items = ITEM_SERVICE.findItem (page, is_item, search, itemNo);
+		Page<ItemDTO> items = ITEM_SERVICE.findItem (page, is_item, search, itemNo);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo (items, 5);
 
 		model.addAttribute ("items", items);
@@ -50,9 +51,9 @@ public class ItemController {
 
 	@ResponseBody
 	@GetMapping ("/{itemNo}")
-	public Item itemDetail (@PathVariable int itemNo) {
+	public ItemDTO itemDetail (@PathVariable int itemNo) {
 
-		return ITEM_SERVICE.findByItemNo (itemNo).orElse (new Item ());
+		return ITEM_SERVICE.findByItemNo (itemNo).orElse (new ItemDTO ());
 
 	}
 
@@ -64,7 +65,7 @@ public class ItemController {
 	}
 
 	@PostMapping ("/add")
-	public String addNewItem (Item item) {
+	public String addNewBoard (ItemDTO item) {
 
 		ITEM_SERVICE.addItem (item);
 

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
 import com.project.ecodein.config.SecurityConfig;
-import com.project.ecodein.dto.Admin;
-import com.project.ecodein.dto.Buyer;
-import com.project.ecodein.dto.User;
+import com.project.ecodein.dto.AdminDTO;
+import com.project.ecodein.dto.BuyerDTO;
+import com.project.ecodein.dto.UserDTO;
 import com.project.ecodein.repository.BuyerRepository;
 import com.project.ecodein.service.LoginService;
 import jakarta.servlet.http.HttpSession;
@@ -44,13 +44,13 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String loginPost (@RequestParam(name = "admin", required = false) boolean admin, @RequestParam("user_id") String user_id,
-		@RequestParam("user_password") String user_password, Model model) {
+	public String loginPost (@RequestParam(name = "admin", required = false) boolean admin, @RequestParam("userId") String userId,
+		@RequestParam("userPassword") String userPassword, Model model) {
 		if (admin) {
 			log.info ("admin");
-			return LOGIN_SERVICE.adminLogin (user_id, user_password, model);
+			return LOGIN_SERVICE.adminLogin (userId, userPassword, model);
 		} else {
-			return LOGIN_SERVICE.login (user_id, user_password, model);
+			return LOGIN_SERVICE.login (userId, userPassword, model);
 		}
 	}
 	
@@ -60,9 +60,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/signup")
-	public String singUpPost (@ModelAttribute User user, @RequestParam("buyer_secure_code") String buyer_secure_code,
+	public String singUpPost (@ModelAttribute UserDTO userDTO, @RequestParam("buyer_secure_code") String buyer_secure_code,
 		Model model) {
-		return LOGIN_SERVICE.signUp (user, buyer_secure_code, model);
+		return LOGIN_SERVICE.signUp (userDTO, buyer_secure_code, model);
 	}
 	
 	@GetMapping("signup/modal")
@@ -70,7 +70,7 @@ public class LoginController {
 		@RequestParam(value = "page") int page,
 		Model model) {
 		
-		Page<Buyer> buyers = LOGIN_SERVICE.searchBuyers (search, page, 10);
+		Page<BuyerDTO> buyers = LOGIN_SERVICE.searchBuyers (search, page, 10);
 		System.out.println ("totalpages," + buyers.getTotalPages ());
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo (buyers, 5);
 		
@@ -87,7 +87,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/signup/admin")
-	public String AdminSignUpPost (@ModelAttribute Admin admin, Model model) {
+	public String AdminSignUpPost (@ModelAttribute AdminDTO admin, Model model) {
 		return LOGIN_SERVICE.adminSignUp (admin, model);
 	}
 	

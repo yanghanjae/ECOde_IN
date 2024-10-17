@@ -13,8 +13,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <!-- Header Toggle Functions Init -->
     <script src="/js/header-visible-toggle.js"></script>
-  
-  
   </head>
   <body>
     <th:block th:if="${session.user == null && session.admin == null}">
@@ -67,6 +65,14 @@
               <span class="text">전자결재</span>
             </div>
           </a>
+          <a
+              th:href="@{/return/1/{buyerCode}/all(buyerCode = ${session.user != null} ? ${session.user.buyer_code.buyerCode} : 0)}" data-page="return"
+             class="menu-a">
+            <div class="menu">
+              <img src="/img/icon/icon-return.png" alt="">
+              <span class="text">반품관리</span>
+            </div>
+          </a>
           <a href="/board/board" data-page="board" class="menu-a">
             <div class="menu">
               <img src="/img/icon/icons-qna-v2.png" alt="">
@@ -92,10 +98,10 @@
           <img src="/img/icon/icon-user-v2.png" alt="" onclick="user_info_toggle()"
                style="cursor: pointer;">
           <div class="user-info" th:if="${session.admin != null || session.user != null}">
-          <span th:text="${session.user != null ? session.user.buyer_code.buyer_name : '관리자' }">거래처 & 관리자
+          <span th:text="${session.user != null ? session.user.buyerCode.buyerName : '관리자' }">거래처 & 관리자
             표시</span>
             <span
-                th:text="${session.user != null ? session.user.user_name : session.admin.admin_name}">접속자 이름
+                th:text="${session.user != null ? session.user.userName : session.admin.adminName}">접속자 이름
             표시</span>
           </div>
           <a href="/logout">

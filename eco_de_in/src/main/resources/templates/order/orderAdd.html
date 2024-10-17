@@ -9,7 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
   <style>
-
     .breadcrumb {
       width: 50%;
       height: 40px;
@@ -220,7 +219,7 @@
                      ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400
                      sm:text-sm sm:leading-6"
                      id="client"
-                     th:value="${session.user.buyer_code.buyer_name}"
+                     th:value="${session.user.buyer_code.buyerName}"
                      type="text" readonly>
             </div>
           </div>
@@ -247,8 +246,6 @@
             </div>
           </div>
         </div>
-
-      <!-- modal (상품검색) -->
       <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
             dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -272,6 +269,8 @@
         </tr>
         </tbody>
       </table>
+
+      <!-- modal (상품검색) -->
       <div class="hidden fixed max-w-[960px] mx-auto bg-white shadow-lg p-5 rounded-lg"
            id="popup-modal-3"
            style="left: 50%; top: 20%; transform: translateX(-50%); z-index: 1;
@@ -289,7 +288,7 @@
                         class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400
                         text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease
                         focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
-                        placeholder="삼품코드/상품명 검색..."
+                        placeholder="상품코드/상품명 검색..."
                         id="searchInput"
                 />
                 <button
@@ -329,18 +328,18 @@
 <!--                <p class="block font-semibold text-sm text-slate-800"></p>-->
 <!--              </td>-->
 <!--            </tr>-->
-                  <tr th:each="stock : ${stocks}">
-                    <td th:text="${stock.stockNo}"></td>
-                    <td th:text="${stock.itemName}"></td>
-                    <td th:text="${stock.storageName}"></td>
-                    <td th:text="${stock.quantity}"></td>
-                    <td>
-                      <button class="bg-blue-500 text-white px-4 py-2 rounded"
-                              type="button"
-                      >선택
-                      </button>
-                    </td>
-                  </tr>
+<!--                  <tr th:each="stock : ${stocks}">-->
+<!--                    <td th:text="${stock.stockNo}"></td>-->
+<!--                    <td th:text="${stock.itemName}"></td>-->
+<!--                    <td th:text="${stock.storageName}"></td>-->
+<!--                    <td th:text="${stock.quantity}"></td>-->
+<!--                    <td>-->
+<!--                      <button class="bg-blue-500 text-white px-4 py-2 rounded"-->
+<!--                              type="button"-->
+<!--                      >선택-->
+<!--                      </button>-->
+<!--                    </td>-->
+<!--                  </tr>-->
             </tbody>
           </table>
         </div>
@@ -455,7 +454,6 @@
       body: formData
     })
         .then(data => location.href = `${data.url}`)
-
   }
 
   // 발주등록 검색 결과를 화면에 표시

@@ -1,21 +1,25 @@
 package com.project.ecodein.service;
 
 
-import com.project.ecodein.dto.*;
-import com.project.ecodein.repository.OrderDetailRepository;
-import com.project.ecodein.repository.OrderingRepository;
-import com.project.ecodein.repository.StockRepository;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import com.project.ecodein.dto.OrderDetail;
+import com.project.ecodein.dto.OrderPoolDTO;
+import com.project.ecodein.dto.Ordering;
+import com.project.ecodein.entity.Buyer;
+import com.project.ecodein.entity.Item;
+import com.project.ecodein.entity.Stock;
+import com.project.ecodein.entity.User;
+import com.project.ecodein.repository.OrderDetailRepository;
+import com.project.ecodein.repository.OrderingRepository;
+import com.project.ecodein.repository.StockRepository;
 
 
 @Service
@@ -38,6 +42,12 @@ public class OrderingService {
     public List<Ordering> getOrderings() {
         Sort sort = Sort.by(Sort.Direction.DESC, "orderNo");
         return ORDERING_REPOSITORY.findAll(sort);
+    }
+
+    // To: ReturnController
+    public List<Ordering> getOrderings(int buyer_code) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "orderNo");
+        return ORDERING_REPOSITORY.findAllByBuyerCode(buyer_code);
     }
 
 	// 페이지네이션 및 검색 기능 구현
@@ -76,28 +86,41 @@ public class OrderingService {
 
 	// 삭제 기능
 	public void deleteOrder(int orderNo) {
-		ORDERING_REPOSITORY.deleteById(orderNo);
+
+        ORDERING_REPOSITORY.deleteById(orderNo);
 	}
 
     // 발주등록
     public void addOrder(OrderPoolDTO orderPool) {
         //Ordering ordering = ORDERING_REPOSITORY.addsave(orderPool.getBuyer_code(), orderPool.getUser_id(), orderPool.getDue_date());
         Ordering ordering = new Ordering();
-        ordering.setBuyer_code(new Buyer((long) orderPool.getBuyer_code()));
+        Buyer buyer = new Buyer();
+        buyer.setBuyerCode((long) orderPool.getBuyer_code());
+
+        ordering.setBuyer_code(buyer);
         ordering.setUser_id(new User(orderPool.getUser_id()));
         ordering.setDue_date(orderPool.getDue_date());
         ordering.setOrder_date(Date.valueOf(LocalDate.now()));
+
         Ordering order = ORDERING_REPOSITORY.save(ordering);
+
+        for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrder(order);
+            orderDetail.setItem(new Item(orderPool.getOrder_nos().get(idx)));
+            orderDetail.setQuantity(orderPool.getQuantities().get(idx));
+            ORDER_DETAIL_REPOSITORY.save(orderDetail);
+        }
         System.out.println("order" + order);
     }
 
-    // 발주등록_Stock을 이름으로 검색하는 메서드 추가 ???
+    // 발주등록_Stock을 이름으로 검색하는 메서드 추가
     public List<Stock> searchStocksByName(String name) {
 
         return STOCK_REPOSITORY.orderFindAllStock(name);
     }
 
-    // 발주등록_상품등록 ???
+    // 발주등록_상품등록
     public void registerOrder(List<Integer> productIds, List<Integer> quantities) {
 
         for (int i = 0; i < productIds.size(); i++) {
@@ -108,8 +131,17 @@ public class OrderingService {
         }
     }
 
-    // 발주상세
-    public void findById(int orderNo) {
+    // 발주상세(마지막 삭제)
+//    public void findById(int orderNo) {
+//    }
 
+    // 발주 정보 조회
+    public Ordering findById(int id) {
+        return ORDERING_REPOSITORY.findById(id).orElse(null);
+    }
+
+    // 발주 상세 정보 조회
+    public List<OrderDetail> findOrderDetails(int orderNo) {
+        return ORDER_DETAIL_REPOSITORY.findAllByOrderId(orderNo);
     }
 }

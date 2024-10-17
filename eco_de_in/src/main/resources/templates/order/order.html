@@ -193,7 +193,7 @@
                th:href="@{/order/detail/{orderNo}(orderNo=${order.orderNo})}"></a>
           </td>
           <td th:text="${order.order_date}"></td>
-          <td th:text="${order.buyer_code.buyer_name}"></td>
+          <td th:text="${order.buyer_code.buyerName}"></td>
           <td th:text="${order.due_date}"></td>
           <td th:text="${order.isDelivery eq 0 ? '진행중':'완료'}"></td>
           <td>

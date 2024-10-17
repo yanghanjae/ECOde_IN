@@ -1,4 +1,4 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
 import java.sql.Date;
 import jakarta.persistence.Column;
@@ -22,26 +22,26 @@ public class User {
 	
 	@Id
 	@Column(name="user_id", nullable=false)
-	private String user_id;
+	private String userId;
 	
 	@ManyToOne
 	@JoinColumn(name = "buyer_code", referencedColumnName="buyer_code", nullable = false)
-	private Buyer buyer_code;
+	private Buyer buyerCode;
 
 	@Column(name="user_password", nullable = false)
-	private String user_password;
+	private String userPassword;
 	
 	@Column(name="user_name", nullable = false)
-	private String user_name;
+	private String userName;
 
 	@Column(name="user_date", nullable = false, insertable = false, updatable = false)
-	private Date user_date;
+	private Date userDate;
 
 	@Column(name = "user_email", nullable = false)
-	private String user_email;
+	private String userEmail;
 
     public User(String userId) {
-		this.user_id = userId;
+		this.userId = userId;
     }
 }
 

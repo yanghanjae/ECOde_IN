@@ -7,7 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.project.ecodein.dto.Item;
+import com.project.ecodein.dto.ItemDTO;
+import com.project.ecodein.entity.Item;
 import com.project.ecodein.repository.ItemRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -26,26 +27,26 @@ public class ItemService {
 
 	}
 
-	public Page<Item> findItem (int page, boolean is_item, String search, Integer itemNo) {
+	public Page<ItemDTO> findItem (int page, boolean is_item, String search, Integer itemNo) {
 
 		Pageable pageable = PageRequest.of (page - 1, 10, Sort.by ("item_no").descending ());
 
 		if (is_item) {
-			return ITEM_REPOSITORY.searchItemOnly (search, pageable);
+			return ITEM_REPOSITORY.searchItemOnly (search, pageable).map (i -> modelMapper.map (i, ItemDTO.class));
 		} else {
-			return ITEM_REPOSITORY.searchItem (search, pageable);
+			return ITEM_REPOSITORY.searchItem (search, pageable).map (i -> modelMapper.map (i, ItemDTO.class));
 		}
 
 	}
 	
-	public Optional<Item> findByItemNo (int itemNo) {
+	public Optional<ItemDTO> findByItemNo (int itemNo) {
 
-		return ITEM_REPOSITORY.findById(itemNo);
+		return ITEM_REPOSITORY.findById(itemNo).map (i -> modelMapper.map (i, ItemDTO.class));
 	}
 	
 	// save
 	@Transactional
-	public void addItem (Item item) {
+	public void addItem (ItemDTO item) {
 
 		ITEM_REPOSITORY.save(modelMapper.map (item, Item.class));
 
