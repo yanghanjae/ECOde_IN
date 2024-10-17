@@ -77,7 +77,7 @@ th {
 
 						<div class="board-btn">
 							<div th:if="${session.user != null}">
-								<div th:if="${ session.user.user_id eq board.user.user_id}">
+								<div th:if="${ session.user.userId eq board.user.userId}">
 									<button type="button"
 										class="text-black bg-gradient-to-r from-green-200 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
 										th:onclick="|location.href='@{/board/update/{boardNo}(boardNo=${board.boardNo})}'|">수정</button>
@@ -146,13 +146,12 @@ th {
 										<th scope="row"
 											class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
 											글 번호</th>
-										<td th:text="${board.boardNo}"></td>
+										<td th:text="${board.boardNo}" class="boardNo"></td>
 										<td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">작성자</td>
-										<td th:text="${board.user.user_name}"></td>
+										<td th:text="${board.user.userName}"></td>
 										<td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">등록일</td>
 										<td
 											th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-
 									</tr>
 								</thead>
 								<tbody>
@@ -173,9 +172,11 @@ th {
 										<div class="form-group" style="margin-bottom: 10px;">
 											<input type="hidden" name="boardNo"
 												th:value="${board.boardNo}">
-											<textarea name="comment" class="form-control" rows="3"></textarea>
+											<textarea name="comment" class="form-control" rows="3"
+												placeholder="댓글을 입력해 주세요" required></textarea>
 										</div>
-										<button type="submit" class="btn btn-primary">Submit</button>
+										<button type="submit"
+											class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">Submit</button>
 									</form>
 								</div>
 							</div>
@@ -186,6 +187,8 @@ th {
 							<thead>
 								<tr>
 									<th>Comments</th>
+									<th>작성자</th>
+									<th>작성일</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -193,22 +196,21 @@ th {
 
 
 								<tr th:each="comment:${commentList}">
-	<!-- 								<td th:text="${comment.id}"></td> -->
 									<input type="hidden" th:value="${comment.id}" name="id">
 									<td><span th:text="${comment.comment}" class="commentspan"></span>
 										<textarea th:id="${comment.id}" class="commenttext hidden"
 											name="comment">[[${comment.comment}]]</textarea></td>
-									<td th:text="${comment.admin.admin_name}"></td>
+									<td th:text="${comment.admin.adminName}"></td>
 									<td th:if="${comment.modifiedDate != null}"
 										th:text="${#temporals.format(comment.modifiedDate, 'yyyy-MM-dd HH:mm')}"></td>
 									<td th:if="${comment.modifiedDate == null}"
 										th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
 									<td
-										th:if="${ session.admin.admin_id eq comment.admin.admin_id}">
+										th:if="${session.admin != null} and ${ session.admin.adminId eq comment.admin.adminId}">
 										<button onclick="editComment(this)"
-											th:attr="data-id=${comment.getId()}">수정</button>
+											th:attr="data-id=${comment.getId()}" class="text-black bg-gradient-to-r from-green-200 via-green-400 to-green-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">수정</button>
 										<button type="button"
-											th:onclick="|location.href='@{/board/{boardNo}/delete/{id}(boardNo=${board.boardNo}, id=${comment.id})}'|">삭제</button>
+											th:onclick="|location.href='@{/board/{boardNo}/delete/{id}(boardNo=${board.boardNo}, id=${comment.id})}'|" class="text-black bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">삭제</button>
 									</td>
 								</tr>
 
@@ -233,6 +235,11 @@ th {
 </body>
 
 <script th:inline="javascript">
+	function clickDel() {
+		location.replace("/board/delete/"
+				+ document.querySelector(".boardNo").textContent);
+	}
+
 	function submitHandler(e, commentId) {
 		e.preventDefault();
 		const thiscommentElement = document.getElementById(commentId);
@@ -242,11 +249,6 @@ th {
 			return true;
 		})
 		return true;
-	}
-
-	function clickDel() {
-		location.replace("/board/delete/"
-				+ document.querySelector(".boardNo").textContent);
 	}
 
 	function editComment(button) {
