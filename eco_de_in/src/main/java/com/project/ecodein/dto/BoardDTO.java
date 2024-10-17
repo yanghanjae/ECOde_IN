@@ -22,6 +22,5 @@ public class BoardDTO {
 	private LocalDateTime boardDate;
 	private User user;
 
-	private List<CommentResponse> comment;
 
 }

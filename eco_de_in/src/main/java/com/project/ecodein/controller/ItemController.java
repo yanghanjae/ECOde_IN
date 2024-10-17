@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
-import com.project.ecodein.dto.BoardDTO;
 import com.project.ecodein.dto.Item;
-import com.project.ecodein.dto.Stock;
 import com.project.ecodein.service.ItemService;
-import com.project.ecodein.service.StockService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -67,7 +64,7 @@ public class ItemController {
 	}
 
 	@PostMapping ("/add")
-	public String addNewBoard (Item item) {
+	public String addNewItem (Item item) {
 
 		ITEM_SERVICE.addItem (item);
 

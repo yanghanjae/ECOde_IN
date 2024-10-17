@@ -47,8 +47,8 @@ public class Board {
 	@JoinColumn (name = "user_id", referencedColumnName = "user_id", nullable = false)
 	private User user;
 
-    @OneToMany(mappedBy = "boardNo", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @OrderBy("id asc") // 댓글 정렬
-    private List<Comment> comment;
+//    @OneToMany(mappedBy = "boardNo", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+//    @OrderBy("id asc") // 댓글 정렬
+//    private List<Comment> comment;
 
 }

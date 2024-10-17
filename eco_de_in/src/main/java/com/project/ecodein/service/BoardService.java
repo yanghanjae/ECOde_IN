@@ -1,19 +1,16 @@
 package com.project.ecodein.service;
 
-import org.modelmapper.ModelMapper;
 import java.time.LocalDateTime;
-import java.util.List;
-import org.springframework.stereotype.Service;
-import com.project.ecodein.dto.BoardDTO;
-import com.project.ecodein.dto.User;
-import com.project.ecodein.entity.Board;
-import com.project.ecodein.repository.BoardRepository;
-import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import com.project.ecodein.dto.BoardDTO;
+import com.project.ecodein.entity.Board;
+import com.project.ecodein.repository.BoardRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class BoardService {
@@ -53,7 +50,7 @@ public class BoardService {
 			/* page 파라미터가 Pageable의 number 값으로 넘어오는데 해당 값이 조회시에는 인덱스 기준이 되어야 해서 -1 처리가 필요하다. */
 			pageable = PageRequest.of (pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber () - 1,
 				pageable.getPageSize (),
-				Sort.by ("boardNo").descending ());
+				Sort.by ("board_no").descending ());
 			Page<Board> boardList = boardRepository.findBoardByKeyword (search, pageable);
 			return boardList.map (board -> modelMapper.map (board, BoardDTO.class));
 

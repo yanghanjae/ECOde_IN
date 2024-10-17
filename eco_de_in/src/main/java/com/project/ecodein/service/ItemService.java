@@ -1,6 +1,5 @@
 package com.project.ecodein.service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -8,13 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.project.ecodein.dto.BoardDTO;
 import com.project.ecodein.dto.Item;
-import com.project.ecodein.dto.Stock;
-import com.project.ecodein.entity.Board;
 import com.project.ecodein.repository.ItemRepository;
-import com.project.ecodein.repository.StockRepository;
-import com.project.ecodein.repository.StorageRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,7 +53,6 @@ public class ItemService {
 	
 	@Transactional
 	public void updateItem (Item updateItem) {
-		System.out.println (updateItem);
 
 		Item foundItem = ITEM_REPOSITORY.findById (updateItem.getItemNo())
 			.orElseThrow (IllegalArgumentException::new);
