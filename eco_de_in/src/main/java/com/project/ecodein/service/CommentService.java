@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import com.project.ecodein.dto.Comment;
 import org.springframework.transaction.annotation.Transactional;
-import com.project.ecodein.dto.UpdateCommentRequest;
 import com.project.ecodein.entity.Admin;
 import com.project.ecodein.entity.Board;
+import com.project.ecodein.entity.Comment;
 import com.project.ecodein.repository.BoardRepository;
 import com.project.ecodein.repository.CommentRepository;
 
