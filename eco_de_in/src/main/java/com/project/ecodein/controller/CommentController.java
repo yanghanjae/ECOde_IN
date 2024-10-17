@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import com.project.ecodein.dto.Comment;
 import com.project.ecodein.entity.Admin;
 import com.project.ecodein.service.CommentService;
 import jakarta.servlet.http.HttpSession;

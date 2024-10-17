@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
 import com.project.ecodein.dto.BoardDTO;
-import com.project.ecodein.dto.Comment;
+import com.project.ecodein.entity.Comment;
 import com.project.ecodein.service.BoardService;
 import com.project.ecodein.service.CommentService;
 import lombok.extern.slf4j.Slf4j;

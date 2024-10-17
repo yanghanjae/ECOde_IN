@@ -1,7 +1,6 @@
 package com.project.ecodein.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import com.project.ecodein.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

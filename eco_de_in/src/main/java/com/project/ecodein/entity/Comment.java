@@ -1,10 +1,8 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
 import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import com.project.ecodein.entity.Admin;
-import com.project.ecodein.entity.Board;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +23,6 @@ import lombok.ToString;
 @AllArgsConstructor 
 @NoArgsConstructor 
 @Getter @Table(name="comment")
-
 @Entity
 @ToString
 public class Comment {
