@@ -65,7 +65,9 @@
               <span class="text">전자결재</span>
             </div>
           </a>
-          <a href="/return" data-page="return" class="menu-a">
+          <a
+              th:href="@{/return/1/{buyerCode}/all(buyerCode = ${session.user != null} ? ${session.user.buyer_code.buyerCode} : 0)}" data-page="return"
+             class="menu-a">
             <div class="menu">
               <img src="/img/icon/icon-return.png" alt="">
               <span class="text">반품관리</span>

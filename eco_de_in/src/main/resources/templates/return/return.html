@@ -202,48 +202,377 @@
       left: 35%;
     }
   </style>
-  <script>
-    function modal_extend(type) {
-      $('#modal-pos').load('/return/modal/' + type, function() {
-        $('.modal').removeClass('hidden');
-        
-        $('#dropdown-year').on('click', function () {
-          $('#yearDropdown').toggleClass('hidden');
-        });
-        
-        $('#dropdown-month').on('click', function () {
-          $('#monthDropdown').toggleClass('hidden');
-        });
-        
-        $('#dropdown-day').on('click', function () {
-          $('#dayDropdown').toggleClass('hidden');
-        });
-        
-        $('.modal-search-bubble-2').on('click', function () {
-          $('.manager-modal').toggleClass('hidden');
-        })
-        
-        $('.modal-search-bubble-1').on('click', function () {
-          $('#medium-modal').toggleClass('hidden');
-        });
-        
-        $('.medium-modal-close').on('click', function () {
-          $('#medium-modal').toggleClass('hidden');
-        });
-        
-        $('.manager-modal-close').on('click', function () {
-          $('.manager-modal').toggleClass('hidden');
-        });
-        
-        $('.manager-modal-closer').on('click', function () {
-          $('.manager-modal').toggleClass('hidden');
-        });
-        
-        $('.manager-btn-close').on('click', function () {
-          $('.manager-modal').toggleClass('hidden');
-        });
-        
+  <script th:inline="javascript">
+    function setupModalEventHandlers() {
+      $('#dropdown-year').on('click', function () {
+        $('#yearDropdown').toggleClass('hidden');
       });
+      
+      $('#dropdown-month').on('click', function () {
+        $('#monthDropdown').toggleClass('hidden');
+      });
+      
+      $('#dropdown-day').on('click', function () {
+        $('#dayDropdown').toggleClass('hidden');
+      });
+      
+      $('.modal-search-bubble-2').on('click', function () {
+        $('.manager-modal').toggleClass('hidden');
+      });
+      
+      $('.modal-search-bubble-1').on('click', function () {
+        $('#medium-modal').toggleClass('hidden');
+      });
+      
+      $('.medium-modal-close').on('click', function () {
+        $('#medium-modal').toggleClass('hidden');
+      });
+      
+      $('.manager-modal-close').on('click', function () {
+        $('.manager-modal').toggleClass('hidden');
+      });
+      
+      $('.manager-modal-closer').on('click', function () {
+        $('.manager-modal').toggleClass('hidden');
+      });
+      
+      $('.manager-btn-close').on('click', function () {
+        $('.manager-modal').toggleClass('hidden');
+      });
+      
+      $('.btn-close').on('click', function () {
+        $('.modal').toggleClass('hidden');
+        location.reload();
+      });
+      
+      function modal_year_update() {
+        const now = new Date();
+        const year_dropdown = document.querySelector('#yearDropdown ul');
+        
+        let year = now.getFullYear();
+        for (let idx = 0; idx < 4; idx++) {
+          year_dropdown.innerHTML += `
+                                   <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center" aria-labelledby="dropdown-year">
+                                      <li>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white pointer-event" onclick="year_selector (this)">
+                                          ${year++}
+                                        </span>
+                                      </li>
+                                    </ul>
+                                   `
+        }
+        
+        modal_month_update(now.getMonth());
+      }
+      
+      function modal_month_update() {
+        let defualtmonth = new Date().getMonth() + 1;
+        let month = defualtmonth;
+        const month_dropdown = document.querySelector('#monthDropdown ul');
+        
+        for (let idx = month; idx <= 12; idx++) {
+          month_dropdown.innerHTML += `
+                                  <li>
+                                  <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center" onclick="month_selector(this)">
+                                    ${month++}
+                                  </span>
+                                  </li>
+                                 `;
+        }
+        
+        modal_day_update(defualtmonth);
+      }
+      
+      function  modal_day_update(month) {
+        console.log('month : ', month)
+        const now = new Date();
+        const day = new Date(now.getFullYear(), month, 0).getDate();
+        const day_dropdown = document.querySelector('#dayDropdown ul');
+        
+        for (let idx = now.getDate(); idx <= day; idx++) {
+          day_dropdown.innerHTML += `
+                                  <li>
+                                    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="day_selector (this)">
+                                      ${idx}
+                                    </a>
+                                  </li>
+                                `;
+        }
+      }
+      
+      modal_year_update();
+      
+      function year_selector(e) {
+        const value = e.textContent;
+        const button = document.querySelector('#dropdown-year');
+        const year_dropDown = document.querySelector('#yearDropdown');
+        
+        year_dropDown.classList.add('hidden');
+        
+        button.innerHTML = `
+        ${value}
+          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+      `;
+      }
+      
+      function month_selector(e) {
+        const value = e.textContent;
+        const button = document.querySelector('#dropdown-month');
+        const month_dropdown = document.querySelector('#monthDropdown');
+        
+        month_dropdown.classList.add('hidden');
+        
+        button.innerHTML = `
+         ${value} &nbsp;&nbsp;&nbsp;
+          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+      `;
+      }
+      
+      function day_selector(e) {
+        const value = e.textContent;
+        const button = document.querySelector('#dropdown-day');
+        const day_dropdown = document.querySelector('#dayDropdown');
+        
+        day_dropdown.classList.add('hidden');
+        
+        button.innerHTML = `
+         ${value} &nbsp;&nbsp;&nbsp;
+          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+      `;
+      }
+      
+      function sub_modal_event (e) {
+        const value = e.textContent;
+        const order_input = document.querySelector('.order-input');
+        
+        order_input.value = value.trim();
+        
+        document.querySelector('#medium-modal').classList.add('hidden');
+      }
+      
+      function manager_modal_event (e) {
+        const value = e.textContent;
+        const manager_input = document.querySelector('.manager-input');
+        
+        document.querySelector('#manager-modal').classList.add('hidden');
+        
+        manager_input.value = value.trim();
+      }
+      
+      function modal_close() {
+        document.querySelector('.modal').classList.add('hidden');
+      }
+    }
+    
+    function modal_extend_regist(type) {
+      $('#modal-pos').load('/return/modal/' + type, function () {
+        $('.modal').removeClass('hidden');
+        setupModalEventHandlers();
+      });
+    }
+    
+    function modal_extend(type, returnId) {
+      let safeType = encodeURIComponent(type);
+      let payload = { returnId: returnId };
+      
+      fetch(`/return/modal/${safeType}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+          .then(response => {
+            return response.text();
+          })
+          .then(html => {
+            document.getElementById('modal-pos').innerHTML = html;
+            
+            $('.modal').removeClass('hidden');
+            setupModalEventHandlers();
+          })
+          .catch(error => {
+            console.error('Error fetching modal content:', error);
+          });
+    }
+  </script>
+  
+  <script th:inline="javascript" th:if="${session.user != null}">
+    let fetch_count = 0;
+    let item_list = [];
+    let return_item_list = [];
+    const buyer_code = [[${session.user.buyer_code.buyerCode}]];
+    
+    function fetch_orderList() {
+      document.querySelector('.modal-item-table').innerHTML = null;
+      fetch('/return/fetch-order/' + buyer_code, {
+        method: 'get',
+        headers: {'Content-Type': 'application/json'}
+      })
+          .then(res => res.json())
+          .then(data => {
+            const modal_order = document.querySelector('.modal-order-table');
+            modal_order.innerHTML = null;
+            
+            for (let idx in data) {
+              const orderDate = new Date(data[idx].order_date);
+              const dueDate = new Date(data[idx].due_date);
+              const formatting_orderDate = orderDate.getFullYear() + '년 ' + (orderDate.getMonth() + 1) + '월 ' +
+                  orderDate.getDate() + '일';
+              const formatting_dueDate = dueDate.getFullYear() + '년 ' + (dueDate.getMonth() + 1) + '월 ' +
+                  dueDate.getDate() + '일';
+              modal_order.innerHTML += `
+                          <tr class="bg-white dark:bg-gray-800 text-center">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                style="cursor: pointer;" onclick="sub_modal_event (this)" data-modal-hide="medium-modal">
+                              ${data[idx].orderNo}
+                            </th>
+                            <td class="px-6 py-4">
+                              ${formatting_orderDate}
+                            </td>
+                            <td class="px-6 py-4">
+                              ${formatting_dueDate}
+                            </td>
+                          </tr>
+                                    `;
+            }
+            
+            fetch_count = 0;
+          });
+    }
+    
+    function fetch_userList() {
+      fetch('/return/fetch-user/' + buyer_code, {
+        method: 'get',
+        headers: {'Content-Type': 'application/json'}
+      })
+          .then(res => res.json())
+          .then(data => {
+            const userList = document.querySelector('.modal-user-list');
+            userList.innerHTML = null;
+            
+            for (let idx in data) {
+              userList.innerHTML += `
+              <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    style="cursor: pointer;" onclick="manager_modal_event (this)"  data-modal-hide="manager-modal">
+                  ${data[idx].user_id}
+                </th>
+                <td class="px-6 py-4">
+                  ${data[idx].user_name}
+                </td>
+              </tr>
+            `;
+            }
+          })
+    }
+    
+    function fetch_item_list() {
+      const order_no = document.querySelector('.order-input').value;
+      
+      if (document.querySelector('.order-input').value == '') {
+        alert('발주번호가 선택되지 않았습니다.');
+        fetch_orderList();
+        document.querySelector('#medium-modal').classList.remove('hidden');
+        return;
+      }
+      
+      fetch('/return/fetch-orderDetail/' + order_no, {
+        method: 'get',
+        headers: {'Content-Type': 'application/json'}
+      })
+          .then(res => res.json())
+          .then(data => {
+            
+            const item_table = document.querySelector('.modal-item-table');
+            if (fetch_count != 1) {
+              item_list = data;
+              
+              for (let idx in data) {
+                item_table.innerHTML += `
+              <tr class="bg-white dark:bg-gray-800">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  ${data[idx].item.itemNo}
+                </th>
+                <td class="px-6 py-4">
+                  ${data[idx].item.itemName}
+                </td>
+                <td class="px-6 py-4">
+                  <input type="text" name="returnItemQty" value="${data[idx].quantity}" data-order-no="${data[idx].item.itemNo}" onchange="qty_update(${data[idx].item.itemNo}, this)">
+                </td>
+              </tr>
+            `
+              }
+            }
+            fetch_count = 1;
+          })
+    }
+    
+    function qty_update(itemNo, e) {
+      const value = e.value;
+      console.log(itemNo)
+      
+      for (let idx in item_list) {
+        if (item_list[idx].item.itemNo == itemNo) {
+          item_list[idx].quantity = value;
+        }
+      }
+    }
+    
+    function submit_event() {
+      const return_item_list = new Array(10);
+      
+      const year = parseInt(document.querySelector('#dropdown-year').textContent.trim());
+      const month = parseInt(document.querySelector('#dropdown-month').textContent.trim());
+      const day = parseInt(document.querySelector('#dropdown-day').textContent.trim());
+      const date = new Date(year, month, day);
+      
+      const user_id = document.querySelector('.manager-input').value;
+      const return_promise = document.querySelector('.return_promise').value;
+      
+      for (let idx in return_item_list) {
+        return_item_list[idx] = new Array(2);
+      }
+      
+      if (item_list == '') {
+        alert('반품할 상품이 등록되지 않았습니다.');
+      }
+      
+      console.log(item_list)
+      
+      
+      if (item_list != '' && return_item_list.length == 0) {
+        alert('반품할 상품 수량을 확인하세요.');
+      }
+      
+      const formData = new FormData();
+      
+      formData.append('orderNo', item_list[0].order.orderNo);
+      formData.append('date', date);
+      formData.append('user_id', user_id);
+      formData.append('return_promise', return_promise);
+      
+      for (let idx in item_list) {
+        formData.append('items[' + idx + ']', item_list[idx].item.itemNo);
+        formData.append('quantitys[' + idx + ']', item_list[idx].quantity);
+      }
+      
+      fetch('/return/fetch-add', {
+        method: 'post',
+        body: formData
+      })
+          .then(res => {
+            res.json();
+            if (res.ok) {
+              location.reload();
+            }
+          })
     }
   
   </script>
@@ -278,10 +607,12 @@
     <!-- 상단 메뉴 -->
     <div id="bubble-menu">
       <div class="bubble-large">
-        <a href="#" class="title_bubble">
+        <a
+            th:href="@{/return/{page}/{buyerCode}/previous(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+           class="title_bubble">
           지난달 반품 내역
         </a>
-        <div class="count-text-lg">
+        <div class="count-text-lg" th:text="${previousMonth}">
           75
         </div>
         <div class="attemp-text-lg">
@@ -289,10 +620,12 @@
         </div>
       </div>
       <div class="bubble-large">
-        <a href="#" class="title_bubble">
+        <a
+            th:href="@{/return/{page}/{buyerCode}/current(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+            class="title_bubble">
           이번달 반품 내역
         </a>
-        <div class="count-text-lg">
+        <div class="count-text-lg" th:text="${currentMonth}">
           -
         </div>
         <div class="attemp-text-lg">
@@ -301,10 +634,12 @@
       </div>
       <div class="sub-bubble">
         <div class="bubble-small">
-          <a href="#" class="regist-bubble">
+          <a
+              th:href="@{/return/{page}/{buyerCode}/accepted(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+             class="regist-bubble">
             접 수
           </a>
-          <div class="count-bubble-sm">
+          <div class="count-bubble-sm" th:text="${accepted}">
             1
           </div>
           <div class="attemp-text-sm">
@@ -312,10 +647,12 @@
           </div>
         </div>
         <div class="bubble-small">
-          <a href="#" class="process-bubble">
+          <a
+              th:href="@{/return/{page}/{buyerCode}/rejected(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+             class="process-bubble">
             진행중
           </a>
-          <div class="count-bubble-sm">
+          <div class="count-bubble-sm" th:text="${rejected}">
             1
           </div>
           <div class="attemp-text-sm">
@@ -323,10 +660,12 @@
           </div>
         </div>
         <div class="bubble-small">
-          <a href="#" class="complete-bubble">
+          <a
+              th:href="@{/return/{page}/{buyerCode}/completed(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}"
+             class="complete-bubble">
             완 료
           </a>
-          <div class="count-bubble-sm">
+          <div class="count-bubble-sm" th:text="${completed}">
             -
           </div>
           <div class="attemp-text-sm">
@@ -337,7 +676,12 @@
       </div>
       <!-- 버튼 그룹 -->
       <div id="button-group">
-        <button type="button" class="btn-return-regist" onclick="modal_extend('regist')">반품 접수</button>
+        <button type="button" class="btn-return-regist" onclick="modal_extend_regist('regist')"
+                th:if="${session.user != null}">반품
+          접수</button>
+        <a class="button btn-return-regist float-start" style="text-align: center; line-height: 33px;"
+                th:href="@{/return/{page}/{buyerCode}/all(page = ${page}, buyerCode = ${session.user == null ? 0 : session.user.buyer_code.buyerCode})}">전체
+          보기</a>
       </div>
       <!-- 테이블 -->
       <div id="table-bg">
@@ -366,167 +710,44 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
+              <tr class="bg-white dark:bg-gray-800" th:each="return: ${returns}">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    th:text="${return.returnStatus == 0 ? '반품 접수' : return.returnStatus == 1 ? '반품 진행중':'반품완료'}">
                 </th>
                 <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
+                  <a th:onclick="modal_extend('detail', [[${return.returnId}]])" th:text="${return.returnId}">CU
+                    서대문점-2024-08/11-00</a>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4" th:text="${return.returnReason}">
                   상품 변질
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4" th:text="${return.returnRegistDate}">
                   2024-10-08
                 </td>
               </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-              <tr class="bg-white dark:bg-gray-800">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  접수
-                </th>
-                <td class="px-6 py-4 font-bold">
-                  <a href="#">CU서대문점-2024-08/11-00</a>
-                </td>
-                <td class="px-6 py-4">
-                  상품 변질
-                </td>
-                <td class="px-6 py-4">
-                  2024-10-08
-                </td>
-              </tr>
-            
             </tbody>
             <tfoot>
             <tr class="font-semibold text-gray-900 dark:text-white">
               <td colspan="4">
                 <!-- 페이지네이션  -->
                 <nav aria-label="Page navigation example">
-                  <span>페이지 네이션 자리</span>
-<!--                  <ul class="pagination">-->
-<!--                    <li th:classappend="${!storages.hasPrevious} ? 'hidden'">-->
-<!--                      <a class="page-link" th:href="@{{page}(page = ${page -1})}">&lt;</a>-->
-<!--                    </li>-->
-<!--                    <li th:each="page: ${#numbers.sequence(1, storages.totalPages)}"-->
-<!--                        th:if="${page >= storages.number-5 and page <= storages.number+5}"-->
-<!--                        th:classappend="${page - 1 == storages.number} ? 'active'">-->
-<!--                      <a th:text="${page}" class="page-link" th:href="@{{page}(page = ${page})}"> </a>-->
-<!--                    </li>-->
-<!--                    <li th:classappend="${!storages.hasNext()} ? 'hidden'">-->
-<!--                      <a class="page-link" th:href="@{{page}(page = ${page + 1})}">&gt;</a>-->
-<!--                    </li>-->
-<!--                  </ul>-->
+                  <ul class="pagination">
+                    <li th:classappend="${!returns.hasPrevious} ? 'hidden'">
+                      <a class="page-link"
+                         th:href="@{/return/{page}/{buyerCode}(page = ${page -1}, buyerCode = ${session.user != null ? session.user.buyer_code.buyerCode : 0})}">
+                        &lt;</a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(1, returns.totalPages)}"
+                        th:if="${page >= returns.number-5 and page <= returns.number+5}"
+                        th:classappend="${page - 1 == returns.number} ? 'active'">
+                      <a th:text="${page}" class="page-link" th:href="@{/return/{page}/{buyerCode}(page = ${page}, buyerCode = ${session.user != null ? session.user.buyer_code.buyerCode : 0})}">
+                      </a>
+                    </li>
+                    <li th:classappend="${!returns.hasNext()} ? 'hidden'">
+                      <a class="page-link"
+                         th:href="@{/return/{page}/{buyerCode}(page = ${page + 1}, buyerCode = ${session.user != null ? session.user.buyer_code.buyerCode : 0})}">&gt;</a>
+                    </li>
+                  </ul>
                 </nav>
               </td>
             </tr>

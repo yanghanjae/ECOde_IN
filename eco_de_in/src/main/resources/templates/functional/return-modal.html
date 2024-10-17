@@ -4,133 +4,8 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-  <script>
-    function modal_year_update() {
-      const now = new Date();
-      const year_dropdown = document.querySelector('#yearDropdown ul');
-      
-      let year = now.getFullYear();
-      for (let idx = 0; idx < 4; idx++) {
-        year_dropdown.innerHTML += `
-                                   <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center" aria-labelledby="dropdown-year">
-                                      <li>
-                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white pointer-event" onclick="year_selector (this)">
-                                          ${year++}
-                                        </span>
-                                      </li>
-                                    </ul>
-                                   `
-      }
-      
-      modal_month_update(now.getMonth());
-      
-    }
-    
-    function modal_month_update() {
-      let defualtmonth = new Date().getMonth() + 1;
-      let month = defualtmonth;
-      const month_dropdown = document.querySelector('#monthDropdown ul');
-      
-      for (let idx = month; idx <= 12; idx++) {
-        month_dropdown.innerHTML += `
-                                  <li>
-                                  <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center" onclick="month_selector(this)">
-                                    ${month++}
-                                  </span>
-                                  </li>
-                                 `;
-      }
-      
-      modal_day_update(defualtmonth);
-    }
-    
-    function  modal_day_update(month) {
-      console.log('month : ', month)
-      const now = new Date();
-      const day = new Date(now.getFullYear(), month, 0).getDate();
-      const day_dropdown = document.querySelector('#dayDropdown ul');
-      
-      for (let idx = now.getDate(); idx <= day; idx++) {
-        day_dropdown.innerHTML += `
-                                  <li>
-                                    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="day_selector (this)">
-                                      ${idx}
-                                    </a>
-                                  </li>
-                                `;
-      }
-    }
-    
-    modal_year_update();
-    
-    
-    function year_selector(e) {
-      const value = e.textContent;
-      const button = document.querySelector('#dropdown-year');
-      const year_dropDown = document.querySelector('#yearDropdown');
-      
-      year_dropDown.classList.add('hidden');
-      
-      button.innerHTML = `
-        ${value}
-          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-          </svg>
-      `;
-    }
-    
-    function month_selector(e) {
-      const value = e.textContent;
-      const button = document.querySelector('#dropdown-month');
-      const month_dropdown = document.querySelector('#monthDropdown');
-      
-      month_dropdown.classList.add('hidden');
-      
-      button.innerHTML = `
-         ${value} &nbsp;&nbsp;&nbsp;
-          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-          </svg>
-      `;
-    }
-    
-    function day_selector(e) {
-      const value = e.textContent;
-      const button = document.querySelector('#dropdown-day');
-      const day_dropdown = document.querySelector('#dayDropdown');
-      
-      day_dropdown.classList.add('hidden');
-      
-      button.innerHTML = `
-         ${value} &nbsp;&nbsp;&nbsp;
-          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-          </svg>
-      `;
-    }
-    
-    function sub_modal_event (e) {
-      const value = e.textContent;
-      const order_input = document.querySelector('.order-input');
-      
-      order_input.value = value.trim();
-      
-      document.querySelector('#medium-modal').classList.add('hidden');
-    }
-    
-    function manager_modal_event (e) {
-      const value = e.textContent;
-      const manager_input = document.querySelector('.manager-input');
-      
-      document.querySelector('#manager-modal').classList.add('hidden');
-      
-      manager_input.value = value.trim();
-    }
-    
-    function modal_close() {
-      document.querySelector('.modal').classList.add('hidden');
-    }
-  </script>
+  
+  
   <title></title>
   <style>
     .modal {
@@ -300,12 +175,144 @@
     
   </style>
   <script th:inline="javascript">
+    const tab = [[${tab}]];
+    const data = [[${serviceName}]];
+    console.log(tab)
+  </script>
+  
+  <script>
+    function modal_year_update() {
+      const now = new Date();
+      const year_dropdown = document.querySelector('#yearDropdown ul');
+      
+      let year = now.getFullYear();
+      for (let idx = 0; idx < 4; idx++) {
+        year_dropdown.innerHTML += `
+                                   <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 text-center" aria-labelledby="dropdown-year">
+                                      <li>
+                                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white pointer-event" onclick="year_selector (this)">
+                                          ${year++}
+                                        </span>
+                                      </li>
+                                    </ul>
+                                   `
+      }
+      
+      modal_month_update(now.getMonth());
+    }
+    
+    function modal_month_update() {
+      let defualtmonth = new Date().getMonth() + 1;
+      let month = defualtmonth;
+      const month_dropdown = document.querySelector('#monthDropdown ul');
+      
+      for (let idx = month; idx <= 12; idx++) {
+        month_dropdown.innerHTML += `
+                                  <li>
+                                  <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center" onclick="month_selector(this)">
+                                    ${month++}
+                                  </span>
+                                  </li>
+                                 `;
+      }
+      
+      modal_day_update(defualtmonth);
+    }
+    
+    function  modal_day_update(month) {
+      console.log('month : ', month)
+      const now = new Date();
+      const day = new Date(now.getFullYear(), month, 0).getDate();
+      const day_dropdown = document.querySelector('#dayDropdown ul');
+      
+      for (let idx = now.getDate(); idx <= day; idx++) {
+        day_dropdown.innerHTML += `
+                                  <li>
+                                    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="day_selector (this)">
+                                      ${idx}
+                                    </a>
+                                  </li>
+                                `;
+      }
+    }
+    
+    modal_year_update();
+    
+    function year_selector(e) {
+      const value = e.textContent;
+      const button = document.querySelector('#dropdown-year');
+      const year_dropDown = document.querySelector('#yearDropdown');
+      
+      year_dropDown.classList.add('hidden');
+      
+      button.innerHTML = `
+        ${value}
+          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+      `;
+    }
+    
+    function month_selector(e) {
+      const value = e.textContent;
+      const button = document.querySelector('#dropdown-month');
+      const month_dropdown = document.querySelector('#monthDropdown');
+      
+      month_dropdown.classList.add('hidden');
+      
+      button.innerHTML = `
+         ${value} &nbsp;&nbsp;&nbsp;
+          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+      `;
+    }
+    
+    function day_selector(e) {
+      const value = e.textContent;
+      const button = document.querySelector('#dropdown-day');
+      const day_dropdown = document.querySelector('#dayDropdown');
+      
+      day_dropdown.classList.add('hidden');
+      
+      button.innerHTML = `
+         ${value} &nbsp;&nbsp;&nbsp;
+          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+      `;
+    }
+    
+    function sub_modal_event (e) {
+      const value = e.textContent;
+      const order_input = document.querySelector('.order-input');
+      
+      order_input.value = value.trim();
+      
+      document.querySelector('#medium-modal').classList.add('hidden');
+    }
+    
+    function manager_modal_event (e) {
+      const value = e.textContent;
+      const manager_input = document.querySelector('.manager-input');
+      
+      document.querySelector('#manager-modal').classList.add('hidden');
+      
+      manager_input.value = value.trim();
+    }
+    
+    function modal_close() {
+      document.querySelector('.modal').classList.add('hidden');
+    }
+  </script>
+  
+  <script th:inline="javascript" th:if="${session.user != null}">
     let fetch_count = 0;
     let item_list = [];
     let return_item_list = [];
     const buyer_code = [[${session.user.buyer_code.buyerCode}]];
     
-    function fetch_orderList () {
+    function fetch_orderList() {
       document.querySelector('.modal-item-table').innerHTML = null;
       fetch('/return/fetch-order/' + buyer_code, {
         method: 'get',
@@ -342,18 +349,19 @@
             fetch_count = 0;
           });
     }
-    function fetch_userList () {
+    
+    function fetch_userList() {
       fetch('/return/fetch-user/' + buyer_code, {
         method: 'get',
-        headers: {'Content-Type' : 'application/json'}
+        headers: {'Content-Type': 'application/json'}
       })
-        .then(res => res.json())
-        .then(data => {
-          const userList = document.querySelector('.modal-user-list');
-          userList.innerHTML = null;
-          
-          for (let idx in data) {
-            userList.innerHTML += `
+          .then(res => res.json())
+          .then(data => {
+            const userList = document.querySelector('.modal-user-list');
+            userList.innerHTML = null;
+            
+            for (let idx in data) {
+              userList.innerHTML += `
               <tr class="bg-white dark:bg-gray-800">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     style="cursor: pointer;" onclick="manager_modal_event (this)"  data-modal-hide="manager-modal">
@@ -364,10 +372,11 @@
                 </td>
               </tr>
             `;
-          }
-        })
+            }
+          })
     }
-    function fetch_item_list () {
+    
+    function fetch_item_list() {
       const order_no = document.querySelector('.order-input').value;
       
       if (document.querySelector('.order-input').value == '') {
@@ -379,17 +388,17 @@
       
       fetch('/return/fetch-orderDetail/' + order_no, {
         method: 'get',
-        headers: {'Content-Type' : 'application/json'}
+        headers: {'Content-Type': 'application/json'}
       })
-        .then(res => res.json())
-        .then(data => {
-          
-          const item_table = document.querySelector('.modal-item-table');
-          if (fetch_count != 1) {
-            item_list = data;
+          .then(res => res.json())
+          .then(data => {
             
-            for (let idx in data) {
-              item_table.innerHTML += `
+            const item_table = document.querySelector('.modal-item-table');
+            if (fetch_count != 1) {
+              item_list = data;
+              
+              for (let idx in data) {
+                item_table.innerHTML += `
               <tr class="bg-white dark:bg-gray-800">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   ${data[idx].item.itemNo}
@@ -398,17 +407,17 @@
                   ${data[idx].item.itemName}
                 </td>
                 <td class="px-6 py-4">
-                  <input type="text" name="quantity" value="${data[idx].quantity}" data-order-no="${data[idx].item.itemNo}" onchange="qty_update(${data[idx].item.itemNo}, this)">
+                  <input type="text" name="returnItemQty" value="${data[idx].quantity}" data-order-no="${data[idx].item.itemNo}" onchange="qty_update(${data[idx].item.itemNo}, this)">
                 </td>
               </tr>
             `
+              }
             }
-          }
-          fetch_count = 1;
-        })
+            fetch_count = 1;
+          })
     }
     
-    function qty_update (itemNo, e) {
+    function qty_update(itemNo, e) {
       const value = e.value;
       console.log(itemNo)
       
@@ -419,44 +428,65 @@
       }
     }
     
-    function submit_event () {
-      return_item_list = [];
+    function submit_event() {
+      const return_item_list = new Array(10);
+      
+      const year = parseInt(document.querySelector('#dropdown-year').textContent.trim());
+      const month = parseInt(document.querySelector('#dropdown-month').textContent.trim());
+      const day = parseInt(document.querySelector('#dropdown-day').textContent.trim());
+      const date = new Date(year, month, day);
+      
+      const user_id = document.querySelector('.manager-input').value;
+      const return_promise = document.querySelector('.return_promise').value;
+      
+      for (let idx in return_item_list) {
+        return_item_list[idx] = new Array(2);
+      }
       
       if (item_list == '') {
         alert('반품할 상품이 등록되지 않았습니다.');
       }
       
-      for (let idx in item_list) {
-        if (item_list[idx].quantity > 0) {
-          return_item_list.push(item_list[idx]);
-        }
-      }
+      console.log(item_list)
+      
       
       if (item_list != '' && return_item_list.length == 0) {
         alert('반품할 상품 수량을 확인하세요.');
       }
       
       const formData = new FormData();
-
-      for (let idx in return_item_list) {
-        formData.append('orderDetail[' + idx + '].item', return_item_list[idx].item);
-        formData.append('orderDetail[' + idx + '].quantity', return_item_list[idx].quantity);
+      
+      formData.append('orderNo', item_list[0].order.orderNo);
+      formData.append('date', date);
+      formData.append('user_id', user_id);
+      formData.append('return_promise', return_promise);
+      
+      for (let idx in item_list) {
+        formData.append('items[' + idx + ']', item_list[idx].item.itemNo);
+        formData.append('quantitys[' + idx + ']', item_list[idx].quantity);
       }
       
       fetch('/return/fetch-add', {
         method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(return_item_list),
-      });
+        body: formData
+      })
+          .then(res => {
+            res.json();
+            if (res.ok) {
+              location.reload();
+            }
+          })
     }
-    
-    
+  
   </script>
   <div class="modal">
     <div class="modal-tab">
-      <span class="modal-window-title" th:text="${tabName + buyerName}">
+      <span class="modal-window-title" th:if="${tab.equals('반품 접수 - ')}"
+            th:text="|${tab} ${session.user != null ? buyerName : '관리자 모드'}|">
+        <span>(접수완료)</span>
+      </span>
+      <span class="modal-window-title" th:if="${tab.equals('반품 상세 정보 - ')}"
+            th:text="|${tab} ${serviceName.returnId} (${serviceName.returnStatus == 0 ? '반품접수' : serviceName.returnStatus == 1 ? '반품 진행중':'반품완료'})|" >
         <span>(접수완료)</span>
       </span>
       <button class="btn-close" onclick="modal_close()">X</button>
@@ -470,8 +500,12 @@
         <span>
           <!-- Year Dropdown -->
           <button id="dropdown-year" data-dropdown-toggle="yearDropdown" data-dropdown-trigger="click"
+                  th:disabled="${serviceName != null}"
                   class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;[[${serviceName != null && serviceName.returnRegistDate != null ?
+            #dates.format(serviceName.returnRegistDate,
+            'yyyy') : ''}]]
+
             <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
             </svg>
@@ -484,8 +518,11 @@
           -
           <!-- Month Dropdown -->
           <button id="dropdown-month" data-dropdown-toggle="monthDropdown" data-dropdown-trigger="click"
+                  th:disabled="${serviceName != null}"
                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            [[${serviceName != null && serviceName.returnRegistDate != null ?
+            #dates.format(serviceName.returnRegistDate,
+            'MM') : ''}]]
             <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
           </svg>
@@ -498,8 +535,11 @@
           -
           <!-- Day Dropdown -->
           <button id="dropdown-day" data-dropdown-toggle="dayDropdown" data-dropdown-trigger="click"
+                  th:disabled="${serviceName != null}"
                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            [[${serviceName != null && serviceName.returnRegistDate != null ?
+            #dates.format(serviceName.returnRegistDate,
+            'dd') : ''}]]
             <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
           </svg>
@@ -512,12 +552,13 @@
             </ul>
           </div>
         </span>
-        <span class="guide-text ml-3">발주번호(연계)</span>
+        <span class="guide-text ml-3" th:if="${serviceName == null}">발주번호(연계)</span>
         <span>
           <input type="text" readonly data-modal-target="medium-modal" data-modal-toggle="medium-modal"
-                 onclick="fetch_orderList ()"
+                 onclick="fetch_orderList ()" th:if="${serviceName == null}"
                  class="modal-search-bubble-1 w-full md:w-auto focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <input type="text" class="order-input" style="display: inline-block; width: 165px; border-radius: 5px;"
+                 th:if="${serviceName == null}"
                  readonly>
         </span>
       </div>
@@ -525,14 +566,15 @@
         <span class="guide-text">담당자</span>
         <span>
           <input type="text" readonly data-modal-target="manager-modal" data-modal-toggle="manager-modal"
-                 onclick="fetch_userList ()"
+                 onclick="fetch_userList ()" th:disabled="${serviceName != null}"
                  class="modal-search-bubble-2 w-full md:w-auto focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <input class="manager-input" type="text" style="display: inline-block; width: 165px; border-radius: 5px;"
-                 readonly>
+                 readonly th:value="${serviceName != null ? serviceName.user.user_name : ''}">
         </span>
         <span class="guide-text" style="margin-left: 40px">반품사유</span>
         <span>
-          <input type="text" style="width: 407px; border-radius: 5px">
+          <input type="text" class="return_promise" style="width: 407px; border-radius: 5px"
+                 th:readonly="${serviceName != null}" th:value="${serviceName != null ? serviceName.returnReason : ''}">
         </span>
       </div>
     </div>
@@ -540,18 +582,31 @@
       상품 리스트
     </div>
     <div class="modal-information">
-      <button type="button" onclick="submit_event ()"
-              style="background: #81CD28; width: 61px; height: 31px; border-radius: 10px; font-size: 12px">
+      <button type="button" class="functional-btn" th:if="${serviceName == null}"
+              onclick="submit_event()"
+              style="background: #81CD28; width: 61px; height: 31px; border-radius: 10px; font-size: 12px"
+              >
         저장
       </button>
-      <button type="button" onclick="fetch_item_list ()"
+      
+      <button type="button" class="functional-btn" th:if="${serviceName != null && session.admin != null}"
+              th:onclick="|location.href='@{/return/accept/{returnId}/accept(returnId=${serviceName.returnId})}'|"
+              style="background: #81CD28; width: 61px; height: 31px; border-radius: 10px; font-size: 12px"
+      >
+        반품 승인
+      </button>
+      
+      <button type="button" onclick="fetch_item_list ()" th:if="${serviceName == null}"
               style="background: #fff; width: 120px; height: 31px; border-radius: 10px; font-size: 12px;
               border: 1px solid lightgray">
         발주 상품 일괄 등록
       </button>
       <span style="float: right; margin-right: 55px;">
-        <span style="font-weight: bold; font-size: 14px">마지막 업데이트 일자 : </span>
-        <span style="font-size: 12px">2024년 10월 08일 12시 49분</span>
+        <span style="font-weight: bold; font-size: 14px" th:if="${serviceName != null}">마지막 업데이트 일자 : </span>
+        <span style="font-size: 12px" th:if="${serviceName != null}"
+              th:text="${serviceName != null && serviceName.returnStatusUpdateDate != null ? serviceName.returnStatusUpdateDate : serviceName.returnRegistDate}">2024년
+          10월 08일 12시
+          49분</span>
       </span>
     </div>
     <div class="modal-table">
@@ -568,13 +623,24 @@
             <th scope="col" class="px-6 py-3">
               상품 수량
             </th>
-            <th scope="col" class="px-6 py-3" th:if="${!tabName.equals('반품 접수 - ')}">
+            <th scope="col" class="px-6 py-3" th:if="${!tab.equals('반품 접수 - ')}">
               입고 창고
             </th>
           </tr>
           </thead>
-          <tbody class="modal-item-table">
           
+          <tbody class="modal-item-table">
+            <tr class="bg-white dark:bg-gray-800" th:if="${items != null}" th:each="item: ${items}">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" th:text="${item.item.itemNo}">
+              </th>
+              <td class="px-6 py-4" th:text="${item.item.itemName}">
+              </td>
+              <td class="px-6 py-4" th:text="${item.returnItemQty}">
+              </td>
+              <td class="px-6 py-4">
+                반품 센터
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -673,4 +739,4 @@
       </div>
     </div>
   </div>
- 
+  

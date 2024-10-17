@@ -58,24 +58,26 @@ public class BuyerService {
 		
 	}
 
-	public Buyer buyerInsert (BuyerDTO buyer) {
+	public BuyerDTO buyerInsert (BuyerDTO buyerDTO) {
 
-		buyer.setBuyerSecureCode (seruceCodeCreate ());
-		buyer.setBuyerStatus (true);
-        buyer.setBuyerResistDate(LocalDateTime.now());
+        buyerDTO.setBuyerSecureCode (seruceCodeCreate ());
+        buyerDTO.setBuyerStatus (true);
+        buyerDTO.setBuyerResistDate(LocalDateTime.now());
 
-		return BUYER_REPOSITORY.save (MODEL_MAPPER.map(buyer, Buyer.class));
+        Buyer buyer = MODEL_MAPPER.map(buyerDTO, Buyer.class);
 
+		return MODEL_MAPPER.map(buyer, BuyerDTO.class);
 	}
 
-	public Optional<Buyer> buyerDetail (Long buyer_code) {
+	public Optional<BuyerDTO> buyerDetail (Long buyer_code) {
+        Optional<Buyer> buyer = BUYER_REPOSITORY.findById (buyer_code).stream ().findFirst ();
 
-		return BUYER_REPOSITORY.findById (buyer_code).stream ().findFirst ();
+		return buyer.map(buy -> MODEL_MAPPER.map(buy, BuyerDTO.class));
 
 	}
 	
 	public void updateStatus (BuyerDTO buyer) {
-        Optional<Buyer> oldBuyer = Optional.of(buyerDetail(buyer.getBuyerCode()).get());
+        Optional<BuyerDTO> oldBuyer = Optional.of(buyerDetail(buyer.getBuyerCode()).get());
 
         buyer.setBuyerStatus (false);
         buyer.setBuyerResistDate(oldBuyer.get().getBuyerResistDate());
@@ -85,7 +87,7 @@ public class BuyerService {
 	
 	@Transactional
 	public void updateBuyer (@ModelAttribute BuyerDTO buyer) {
-        Optional<Buyer> oldBuyer = Optional.of(buyerDetail(buyer.getBuyerCode()).get());
+        Optional<BuyerDTO> oldBuyer = Optional.of(buyerDetail(buyer.getBuyerCode()).get());
         buyer.setBuyerResistDate(oldBuyer.get().getBuyerResistDate());
         buyer.setBuyerSecureCode (oldBuyer.get().getBuyerSecureCode());
         buyer.setBuyerStatus(true);
@@ -104,7 +106,6 @@ public class BuyerService {
 		}
 
 		return sb.toString ();
-
 	}
 	
 }

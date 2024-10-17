@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "return")
+@Table(name = "returns")
 public class Return {
 
     @Id
@@ -34,5 +35,11 @@ public class Return {
 
     @Column(name = "return_regist_date")
     private Date returnRegistDate;
+
+    @Column(name = "return_status")
+    private byte returnStatus;
+
+    @Column(name = "return_status_update_date")
+    private LocalDateTime returnStatusUpdateDate;
 
 }

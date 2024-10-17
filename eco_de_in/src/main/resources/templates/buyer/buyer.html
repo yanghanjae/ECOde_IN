@@ -191,9 +191,9 @@
 			const status_off_btn = document.querySelector('.status-off');
 			const input_buyerCode = document.querySelector('.buyerCode');
 			const input_secure_code = document.querySelector('input[name="buyerSecureCode"]');
-   
-			target.classList.remove('hidden');
-   
+      
+      target.classList.remove('hidden');
+      
 			const reFetch = () => {
 				fetch('/buyer/detail/' + buyerCode, {
 					method: 'get',
@@ -214,7 +214,7 @@
 						status_off_btn.classList.remove('hidden');
 					}
 					
-				})
+				});
 			}
 			
 			reFetch ();
@@ -223,13 +223,11 @@
 		function modalDeActive () {
 			document.querySelector('#crud-modal').classList.add('hidden');
 			
-			history.reload();
+			location.reload();
 			
 		}
 	
 		function status_update () {
-      popup_modal_deActive();
-      
       const input_buyer_name = document.querySelector('input[name="buyerName"]').value;
       const input_buyer_agent = document.querySelector('input[name="buyerAgent"]').value;
       const input_buyer_number = document.querySelector('input[name="buyerNumber"]').value;
@@ -253,10 +251,11 @@
 			})
 			.then(res => res.json())
 			.then(data => {
-				console.log(data);
-			})
+        popup_modal_deActive();
+        modalActive (null, input_buyerCode);
+      })
 			.catch(err => console.log(err));
-			modalActive (null, input_buyerCode);
+			
 		}
 		
 		function popup_modal_active () {
@@ -281,7 +280,7 @@
         const input_buyer_address = document.querySelector('input[name="buyerAddress"]').value;
         const input_buyerCode = document.querySelector('.buyerCode').value;
         
-        var formData = new FormData();
+        const formData = new FormData();
         
         formData.append('buyerCode', input_buyerCode);
         formData.append('buyerAddress', input_buyer_address);
@@ -294,12 +293,14 @@
           method: 'post',
           body: formData
         })
-            .then(res => {
-							res.json();
-			        alert('거래처 수정이 완료되었습니다.');
-						})
-        
-        modalActive (null, buyer_code);
+          .then(res => {
+            res.json();
+            modalDeActive ();
+            if (res.status.ok) {
+              alert('거래처 수정이 완료되었습니다.');
+              modalActive (null, input_buyerCode);
+            }
+          })
       }
 			
 		}

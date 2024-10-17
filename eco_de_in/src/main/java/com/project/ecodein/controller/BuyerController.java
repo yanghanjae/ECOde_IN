@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.project.ecodein.dto.BuyerDTO;
 import com.project.ecodein.entity.Buyer;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,14 +67,12 @@ public class  BuyerController {
 	}
 
 	@PostMapping ("/add")
-	public String buyerAdd (@ModelAttribute BuyerDTO buyer, Model model) {
+	public String buyerAdd (@ModelAttribute BuyerDTO buyerDTO, Model model) {
 
-		Buyer _buyer = BUYER_SERVICE.buyerInsert (buyer);
+		BuyerDTO buyer = BUYER_SERVICE.buyerInsert (buyerDTO);
 
-		if (_buyer != null) {
-
+		if (buyer != null) {
 			model.addAttribute ("message", "거래처 정보가 정상 등록 되었습니다.");
-
 		}
 
 		return "redirect:/buyer/default/1?keyword=";
@@ -82,9 +81,9 @@ public class  BuyerController {
 
 	@GetMapping ("/detail/{buyer_code}")
 	@ResponseBody
-	public Optional<Buyer> modifty (@PathVariable ("buyer_code") Long buyer_code) {
+	public Optional<BuyerDTO> modifty (@PathVariable ("buyer_code") Long buyer_code) {
 
-		Optional<Buyer> buyer = BUYER_SERVICE.buyerDetail (buyer_code);
+		Optional<BuyerDTO> buyer = BUYER_SERVICE.buyerDetail (buyer_code);
 
 		log.info ("buyer - {}", buyer);
 
@@ -101,13 +100,11 @@ public class  BuyerController {
 	
 	@PostMapping ("/modify")
 	@ResponseBody
-	public String modify(@ModelAttribute BuyerDTO buyer) {
-		System.out.println ("buyer init : " + buyer);
-		
+	public ResponseEntity<String> modify(@ModelAttribute BuyerDTO buyer) {
+
 		BUYER_SERVICE.updateBuyer (buyer);
-		
-		
-		return null;
+
+		return ResponseEntity.status(200).body("수정이 완료됨");
 	}
 
 }
