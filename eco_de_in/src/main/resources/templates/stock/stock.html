@@ -303,7 +303,7 @@
 		    	&nbsp;
 		    	<label>창고 선택</label>
 		    	&nbsp;
-		    	<select class="select" name="storage_no" onchange="this.form.submit()" id="storage_no">
+		    	<select class="select" name="storageNo" onchange="this.form.submit()" id="storage_no">
 		    		<option value="">전체</option>
 		    		<option th:each="storage:${storages}" th:value="${storage.storageNo}"
 		    		th:text="${storage.storageName}" th:selected="${storage.storageNo == selectedStorage}" />
@@ -314,7 +314,7 @@
 		      &nbsp;
 		      &nbsp;
 		      <span>상품만 보기</span>
-		      <input name="is_item" type="checkbox" th:checked="${is_item}" onchange="this.form.submit()" id="is_item">
+		      <input name="isItem" type="checkbox" th:checked="${isItem}" onchange="this.form.submit()" id="is_item">
 		        <input type="text"placeholder="재고 번호, 재고명을 입력하세요." 
 		        class="search_input" name="search" th:value="${search}" id="search"> 
 		        <input type="submit" class="search_btn" value="조 회" >
@@ -426,7 +426,7 @@
 		    	<div class="modalContent">
 			    	<label>옮길 창고 : </label>
 			    	<input id="modalMove_storage_no" readonly="readonly" class="input" required="required" onclick="openStorageModal()">
-			    	<input hidden="" id="storageHidden" name="storage_no">
+			    	<input hidden="" id="storageHidden" name="storageNo">
 		    	</div>
 		    	<div class="modalContent">
 			    	<label>사진 : </label>
@@ -464,7 +464,7 @@
 		let page = element.value
 	
 		window.location.href =
-        `?page=${page}&search=${encodeURIComponent(search)}&storage_no=${storageNo}&is_item=${is_item}`
+        `?page=${page}&search=${encodeURIComponent(search)}&storage_no=${storage_no}&is_item=${is_item}`
 	}
 	
 	function openModal(element) {

@@ -60,8 +60,8 @@
 				<th>창고명</th>
 			</tr>
 			<tr th:each="storage : ${storages}">
-				<td th:text="${storage.storage_no}"></td>
-				<td th:data-value="${storage.storage_no}" th:text="${storage.storage_name}" onclick="chooseStorage(this)" class="tableHover"></td>
+				<td th:text="${storage.storageNo}"></td>
+				<td th:data-value="${storage.storageNo}" th:text="${storage.storageName}" onclick="chooseStorage(this)" class="tableHover"></td>
 			</tr>
 		</table>
 	</form>

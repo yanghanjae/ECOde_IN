@@ -1,9 +1,7 @@
 package com.project.ecodein.controller;
 
 
-import com.project.ecodein.dto.*;
-import com.project.ecodein.repository.OrderDetailRepository;
-import com.project.ecodein.service.OrderingService;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,9 +9,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.project.ecodein.dto.OrderDetail;
+import com.project.ecodein.dto.OrderPoolDTO;
+import com.project.ecodein.dto.Ordering;
+import com.project.ecodein.entity.Stock;
+import com.project.ecodein.repository.OrderDetailRepository;
+import com.project.ecodein.service.OrderingService;
 
 
 @Controller

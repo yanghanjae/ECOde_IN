@@ -1,21 +1,19 @@
 package com.project.ecodein.service;
 
-import com.project.ecodein.dto.Stock;
-import com.project.ecodein.dto.StorageDTO;
-import com.project.ecodein.entity.Storage;
-import com.project.ecodein.repository.StockRepository;
-import com.project.ecodein.repository.StorageRepository;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import com.project.ecodein.dto.StorageDTO;
+import com.project.ecodein.entity.Stock;
+import com.project.ecodein.entity.Storage;
+import com.project.ecodein.repository.StockRepository;
+import com.project.ecodein.repository.StorageRepository;
 
 @Service
 public class StorageService {

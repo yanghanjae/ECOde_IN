@@ -1,10 +1,14 @@
 package com.project.ecodein.dto;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import com.project.ecodein.entity.Admin;
 import com.project.ecodein.entity.Board;
 import com.project.ecodein.entity.Comment;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data

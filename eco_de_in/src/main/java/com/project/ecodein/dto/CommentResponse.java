@@ -26,6 +26,6 @@ public class CommentResponse {
         this.boardNo = comment.getBoardNo().getBoardNo();
 //        this.admin_name = comment.getAdmin().getAdmin_name();
 //        this.admin_Id = comment.getAdmin().getAdmin_id();
-        this.admin = comment.getAdmin().getAdmin_id();
+        this.admin = comment.getAdmin().getAdminId();
     }
 }

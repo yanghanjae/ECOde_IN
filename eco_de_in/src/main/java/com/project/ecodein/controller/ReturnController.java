@@ -2,6 +2,19 @@ package com.project.ecodein.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.project.ecodein.dto.*;
+import java.time.LocalDateTime;
+import java.util.List;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.project.ecodein.dto.OrderDetail;
+import com.project.ecodein.dto.Ordering;
+import com.project.ecodein.entity.User;
 import com.project.ecodein.repository.OrderDetailRepository;
 import com.project.ecodein.service.OrderingService;
 import com.project.ecodein.service.ReturnItemService;
@@ -66,12 +79,15 @@ public class ReturnController {
             model.addAttribute("tab", "반품 접수 - ");
 
             if (user != null) {
-                model.addAttribute("buyerName", user.getBuyer_code().getBuyerName());
+                model.addAttribute("buyerName", user.getBuyerCode().getBuyerName());
             }
         } else if (type.equals("detail")) {
             model.addAttribute("tab", "반품 상세 정보 - ");
             model.addAttribute("serviceName", RETURN_SERVICE.findById(returnId));
             model.addAttribute("items", RETURN_ITEM_SERVICE.findByReturnId(returnId));
+            model.addAttribute("tabName", "반품 상세 정보 - ");
+            model.addAttribute("serviceName", user.getBuyerCode().getBuyerName() + "-" + now.getMonthValue() +
+                "/" + now.getDayOfMonth());
         }
 
         return "functional/return-modal";

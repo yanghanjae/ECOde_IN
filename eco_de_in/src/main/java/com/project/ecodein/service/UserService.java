@@ -1,14 +1,15 @@
 package com.project.ecodein.service;
 
-import com.project.ecodein.dto.Admin;
-import com.project.ecodein.dto.User;
-import com.project.ecodein.repository.AdminRepository;
-import com.project.ecodein.repository.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import com.project.ecodein.dto.AdminDTO;
+import com.project.ecodein.dto.UserDTO;
+import com.project.ecodein.entity.User;
+import com.project.ecodein.repository.AdminRepository;
+import com.project.ecodein.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -16,17 +17,21 @@ public class UserService {
     private final AdminRepository ADMIN_REPOSITORY;
     private final UserRepository USER_REPOSITORY;
     private final PasswordEncoder PASSWORD_ENCODER;
+    private final ModelMapper MODEL_MAPPER;
 
-    public UserService(AdminRepository adminRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(AdminRepository adminRepository, UserRepository userRepository, 
+    	PasswordEncoder passwordEncoder, ModelMapper MODEL_MAPPER) {
         this.ADMIN_REPOSITORY = adminRepository;
         this.USER_REPOSITORY = userRepository;
         this.PASSWORD_ENCODER = passwordEncoder;
+        this.MODEL_MAPPER = MODEL_MAPPER;
     }
 
     // [240927] 장유빈 기능 추가
     // 기능 상세 : 관리자 메뉴 -> 관리자 승인 요청 조회 기능
-    public List<Admin> findAllByAdminRecognize () {
-        return ADMIN_REPOSITORY.findByAdminRecognize();
+    public List<AdminDTO> findAllByAdminRecognize () {
+        return ADMIN_REPOSITORY.findByAdminRecognize().stream ()
+        	.map (a -> MODEL_MAPPER.map (a, AdminDTO.class)).toList ();
     }
 
     public void adminAuthPass (String adminId) {
@@ -35,13 +40,14 @@ public class UserService {
 
     // [240930] 장유빈 기능 추가
     // 기능 상세 : 비밀번호 변경 -> 비밀번호 확인 기능
-    public Optional<User> userPasswordCheck (String user_id, String user_password) {
+    public Optional<UserDTO> userPasswordCheck (String user_id, String user_password) {
         User user = USER_REPOSITORY.findById(user_id).get();
-
-        String _password = user.getUser_password();
+        UserDTO userDTO = MODEL_MAPPER.map (user, UserDTO.class);
+        
+        String _password = user.getUserPassword();
 
         if (PASSWORD_ENCODER.matches(user_password, _password)) {
-            return Optional.of(user);
+            return Optional.of(userDTO);
         } else {
             return Optional.empty();
         }

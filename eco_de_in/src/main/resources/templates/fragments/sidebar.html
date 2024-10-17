@@ -98,10 +98,10 @@
           <img src="/img/icon/icon-user-v2.png" alt="" onclick="user_info_toggle()"
                style="cursor: pointer;">
           <div class="user-info" th:if="${session.admin != null || session.user != null}">
-          <span th:text="${session.user != null ? session.user.buyer_code.buyerName : '관리자' }">거래처 & 관리자
+          <span th:text="${session.user != null ? session.user.buyerCode.buyerName : '관리자' }">거래처 & 관리자
             표시</span>
             <span
-                th:text="${session.user != null ? session.user.user_name : session.admin.admin_name}">접속자 이름
+                th:text="${session.user != null ? session.user.userName : session.admin.adminName}">접속자 이름
             표시</span>
           </div>
           <a href="/logout">

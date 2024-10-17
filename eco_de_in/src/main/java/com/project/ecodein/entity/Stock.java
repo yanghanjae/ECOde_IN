@@ -1,6 +1,5 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
-import com.project.ecodein.entity.Storage;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,19 +1,16 @@
 package com.project.ecodein.service;
 
-import org.modelmapper.ModelMapper;
 import java.time.LocalDateTime;
-import java.util.List;
-import org.springframework.stereotype.Service;
-import com.project.ecodein.dto.BoardDTO;
-import com.project.ecodein.dto.User;
-import com.project.ecodein.entity.Board;
-import com.project.ecodein.repository.BoardRepository;
-import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import com.project.ecodein.dto.BoardDTO;
+import com.project.ecodein.entity.Board;
+import com.project.ecodein.repository.BoardRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class BoardService {
