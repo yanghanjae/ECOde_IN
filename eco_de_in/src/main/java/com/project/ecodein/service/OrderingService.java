@@ -190,7 +190,6 @@ public class OrderingService {
         return stocks.stream().map(stock -> MODEL_MAPPER.map(stock, StockDTO.class)).toList();
 //        List<Stock> stocks = STOCK_REPOSITORY.orderFindAllStock(name);
 //        return stocks.map(stocks1 -> MODEL_MAPPER.map(stocks1, Stock.class));
-
     }
 
     // 발주등록_상품등록
