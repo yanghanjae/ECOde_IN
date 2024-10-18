@@ -107,4 +107,14 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
     @Query(value = "select i.*, sum(s.quantity) as quantity, s.stock_no, s.storage_no from item i inner join (select * from stock) s on i.item_no = s.item_no " +
         "where i.item_name like concat('%', :name, '%') group by s.item_no", nativeQuery = true)
 	List<Stock> orderFindAllStock(String name);
+
+	// 재고 조회(제일 많은 재고 번호 조회)
+	@Query(value = "select stock_no from stock where item_no = :item_no order by quantity desc limit 1", nativeQuery = true)
+	int orderFindStock(int item_no);
+
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE stock SET quantity = quantity - :quantity WHERE stock_no = :stock_no", nativeQuery = true)
+	public void orderUpdateStock (@Param(value = "stock_no") int stock_no, @Param(value = "quantity") int quantity);
+
 }

@@ -1,6 +1,7 @@
 package com.project.ecodein.repository;
 
-import com.project.ecodein.dto.ApprovalStatusLable;
+import com.project.ecodein.entity.Approval;
+import com.project.ecodein.entity.ApprovalStatusLable;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,7 +13,9 @@ public interface ApprovalStatusLableRepository extends JpaRepository<ApprovalSta
         "desc limit 1", nativeQuery = true)
     ApprovalStatusLable findApprovalStatusLableById(int approval_no);
 
+    ApprovalStatusLable findTopByApprovalOrderByStatusDesc(Approval approval);
     // 최초 생성 시, 전자결재 상태 업데이트 시 사용.
+    @Transactional
     @Query(value = "insert into approval_status_lable (status, admin_id, approval_no) values (1, 'auto', :order_no)",
             nativeQuery = true)
     void autoSaveApprovalStatusble(Integer order_no);

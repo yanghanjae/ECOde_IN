@@ -1,9 +1,10 @@
 package com.project.ecodein.controller;
 
-import com.project.ecodein.dto.Approval;
-import com.project.ecodein.dto.ApprovalStatusLable;
-import com.project.ecodein.dto.OrderDetail;
+import com.project.ecodein.dto.ApprovalDTO;
+import com.project.ecodein.dto.ApprovalStatusLableDTO;
+import com.project.ecodein.dto.OrderDetailDTO;
 import com.project.ecodein.service.ApprovalService;
+import com.project.ecodein.service.OrderingService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,9 +23,11 @@ import java.util.List;
 public class ApprovalController {
 
     private final ApprovalService APPROVAL_SERVICE;
+    private final OrderingService ORDERING_SERVICE;
 
-    public ApprovalController(ApprovalService approvalService) {
+    public ApprovalController(ApprovalService approvalService, OrderingService orderingService) {
         APPROVAL_SERVICE = approvalService;
+        ORDERING_SERVICE = orderingService;
     }
 
     @GetMapping("/{page}")
@@ -33,7 +36,7 @@ public class ApprovalController {
             page = 1;
         }
 
-        Page<Approval> lists = APPROVAL_SERVICE.getApprovals((int) page);
+        Page<ApprovalDTO> lists = APPROVAL_SERVICE.getApprovals((int) page);
 
         modal.addAttribute("approvals", lists);
         return "approval/approval-list";
@@ -42,15 +45,16 @@ public class ApprovalController {
     @GetMapping("/detail/{approval_no}")
     public String approvalDetail(@PathVariable("approval_no") Integer approval_no, Model model, HttpSession session) {
         // 전자결재 정보
-        Approval approval = APPROVAL_SERVICE.getApproval(approval_no, session);
+        ApprovalDTO approval = APPROVAL_SERVICE.getApproval(approval_no, session);
         model.addAttribute("approval", approval);
 
         // 전자결재 상태
-        ApprovalStatusLable statuslable = APPROVAL_SERVICE.getApprovalStatus(approval_no);
+        ApprovalStatusLableDTO statuslable = APPROVAL_SERVICE.getApprovalStatus(approval_no);
+        log.info(String.valueOf(statuslable));
         model.addAttribute("statuslable", statuslable);
 
         // 발주정보
-        List<OrderDetail> orderDetails = APPROVAL_SERVICE.getOrderDetails(approval_no);
+        List<OrderDetailDTO> orderDetails = APPROVAL_SERVICE.getOrderDetails(approval_no);
         model.addAttribute("orderDetails", orderDetails);
 
         // 발주수량
@@ -64,5 +68,6 @@ public class ApprovalController {
     public void approvalStatusUpdate(@PathVariable("approval_no") Integer approval_no,
                                        @PathVariable("status") byte status, HttpSession session) {
         APPROVAL_SERVICE.approvalStatusUpdate(approval_no, status, session);
+        ORDERING_SERVICE.updateIsDeliveryByOrderNo(approval_no);
     }
 }

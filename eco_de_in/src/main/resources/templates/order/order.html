@@ -119,6 +119,7 @@
     .overflow-hidden {
       overflow: visible !important;
     }
+
   </style>
 </head>
 
@@ -156,17 +157,20 @@
         </button>
       </div>
 
-    <span>출고 진행상태</span>
+    <span>진행상태</span>
         <div class="inline">
           <button class="button" type="button"
                   onclick="location.href='/order/1/all'; setActiveButton(this)">전체
           </button>
-          <button type="button" class="button" onclick="location.href='/order/1/progress'; setActiveButton(this)">진행중
+          <button type="button" class="button" onclick="location.href='/order/1/accept'; setActiveButton(this)">접수
           </button>
-          <button type="button" class="button" onclick="location.href='/order/1/complete'; setActiveButton(this)">완료
+          <button type="button" class="button" onclick="location.href='/order/1/validation'; setActiveButton(this)">결재완료
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/progress'; setActiveButton(this)">출고진행
+          </button>
+          <button type="button" class="button" onclick="location.href='/order/1/complete'; setActiveButton(this)">출고완료
           </button>
         </div>
-
       </form>
     </div>
 
@@ -181,7 +185,7 @@
           <th>거래처</th>
           <th>납기일자</th>
           <th>출고 진행상태</th>
-          <th>삭제</th>
+          <th>취소</th>
         </tr>
         </thead>
         <tbody>
@@ -192,12 +196,12 @@
             <a class="order_no" th:text="${order.orderNo}"
                th:href="@{/order/detail/{orderNo}(orderNo=${order.orderNo})}"></a>
           </td>
-          <td th:text="${order.order_date}"></td>
-          <td th:text="${order.buyer_code.buyer_name}"></td>
-          <td th:text="${order.due_date}"></td>
-          <td th:text="${order.isDelivery eq 0 ? '진행중':'완료'}"></td>
+          <td th:text="${order.orderDate}"></td>
+          <td th:text="${order.buyerCode.buyer_name}"></td>
+          <td th:text="${order.dueDate}"></td>
+          <td th:text="${order.isDelivery eq 0 ? '접수': order.isDelivery eq 1 ? '결재완료' : order.isDelivery eq 2 ? '출고진행' : '출고완료'}"></td>
           <td>
-            <button class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
+            <button th:if="${order.isDelivery == 0 || order.isDelivery == 1}" class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-1 text-center dark:bg-blue-600
             dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   data-modal-target="popup-modal-a"
@@ -261,7 +265,7 @@
                       stroke-linecap="round" stroke-linejoin="round"
                       stroke-width="2"/>
               </svg>
-              <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">해당 발주건을 삭제하시겠습니까?</h3>
+              <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">해당 발주건을 취소하시겠습니까?</h3>
               <button class="delete-btn text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none
               focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center
               px-5 py-2.5 text-center"
@@ -286,39 +290,41 @@
     </div>
   </div>
 
-    <script>
-      // 삭제기능
-      function deleteOrder(orderNo) {
-        console.log(orderNo)
-        fetch(`/order/delete/${orderNo}`, {
-          method: 'get',
-          headers: {'ContentType' : 'application/json'}
-        })
-            .then(response => {
-              if (response.ok) {
-                alert("발주건이 삭제되었습니다.");
-                window.location.reload();
-              } else {
-                alert("삭제 중 오류가 발생했습니다.");
-              }
-            })
-            .catch(error => {
-              console.error('Error:', error);
-              alert("삭제 중 오류가 발생했습니다.");
-            });
-      }
+<script>
 
-     // 조회 버튼
-      function setActiveButton(clickedButton) {
-        const buttons = document.querySelectorAll('.button');
-        buttons.forEach(button => button.classList.remove('active'));
+  // 출고조회_전체/접수/결재완료/출고진행/출고완료
+  function setActiveButton(clickedButton) {
+    const buttons = document.querySelectorAll('.button');
+    buttons.forEach(button => button.classList.remove('active'));
     clickedButton.classList.add('active');
   }
 
-    function order_no_handler (orderNo) {
-      const delete_btn = document.querySelector('.delete-btn');
-    delete_btn.setAttribute('onclick', `deleteOrder(${orderNo})`);
+  // 삭제기능
+  function deleteOrder(orderNo) {
+    console.log(orderNo)
+    fetch(`/order/delete/${orderNo}`, {
+      method: 'get',
+      headers: {'ContentType' : 'application/json'}
+    })
+        .then(response => {
+          if (response.ok) {
+            alert("발주건이 취소되었습니다.");
+            window.location.reload();
+          } else {
+            alert("삭제 중 오류가 발생했습니다.");
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("삭제 중 오류가 발생했습니다.");
+        });
   }
+
+function order_no_handler (orderNo) {
+  const delete_btn = document.querySelector('.delete-btn');
+delete_btn.setAttribute('onclick', `deleteOrder(${orderNo})`);
+}
+
 </script>
 </body>
 </html>

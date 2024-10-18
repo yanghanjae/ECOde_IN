@@ -2,22 +2,32 @@ package com.project.ecodein.service;
 
 
 import com.project.ecodein.dto.*;
-import com.project.ecodein.repository.OrderDetailRepository;
-import com.project.ecodein.repository.OrderingRepository;
-import com.project.ecodein.repository.StockRepository;
+import com.project.ecodein.entity.Approval;
+import com.project.ecodein.entity.ApprovalStatusLable;
+import com.project.ecodein.entity.OrderDetail;
+import com.project.ecodein.entity.Ordering;
+import com.project.ecodein.repository.*;
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
+@Slf4j
 @Service
 public class OrderingService {
 
@@ -25,70 +35,113 @@ public class OrderingService {
 	private final OrderingRepository ORDERING_REPOSITORY;
     private final StockRepository STOCK_REPOSITORY;
     private final OrderDetailRepository ORDER_DETAIL_REPOSITORY;
+    private final ApprovalRepository APPROVAL_REPOSITORY;
+    private final ApprovalStatusLableRepository APPROVAL_STATUSLABLE_REPOSITORY;
+    private final ModelMapper MODEL_MAPPER;
+    private final HttpSession SESSION;
+    private final AdminRepository ADMIN_REPOSITORY;
 
     public OrderingService(OrderingRepository orderingRepository,
                            StockRepository stockRepository,
-                           OrderDetailRepository orderDetailRepository) {
+                           OrderDetailRepository orderDetailRepository,
+                           ApprovalRepository approvalRepository,
+                           ApprovalStatusLableRepository approvalStatusLableRepository,
+                           ModelMapper modelMapper, HttpSession session,
+                           AdminRepository adminRepository) {
+        this.MODEL_MAPPER = modelMapper;
         this.ORDERING_REPOSITORY = orderingRepository;
         this.STOCK_REPOSITORY = stockRepository;
         this.ORDER_DETAIL_REPOSITORY = orderDetailRepository;
+        this.APPROVAL_REPOSITORY = approvalRepository;
+        this.APPROVAL_STATUSLABLE_REPOSITORY = approvalStatusLableRepository;
+        this.SESSION = session;
+        this.ADMIN_REPOSITORY = adminRepository;
     }
 
     // mainPage에서 사용할 메서드
-    public List<Ordering> getOrderings() {
+    public List<OrderingDTO> getOrderings() {
         Sort sort = Sort.by(Sort.Direction.DESC, "orderNo");
-        return ORDERING_REPOSITORY.findAll(sort);
+        List<Ordering> ordering = ORDERING_REPOSITORY.findAll(sort);
+        return ordering.stream().map(ordering1 -> MODEL_MAPPER.map(ordering1, OrderingDTO.class)).toList();
     }
 
 	// 페이지네이션 및 검색 기능 구현
-	public Page<Ordering> getOrders(@Param("page") int page, @Param("query") String query,
-                                    @Param("status") String status) {
+	public Page<OrderingDTO> getOrders(@Param("page") int page, @Param("query") String query,
+                                       @Param("status") String status) {
 
+        Sort sort = Sort.by(Sort.Order.desc(query == null && status.equals("all") ? "orderNo" : "order_no"));
+        Pageable pageable = PageRequest.of(page - 1, 10, sort);
         // (전체검색)검색어 없고, 상태 체크 안한 경우
         if (query == null && status.equals("all")) {
-            System.out.printf("검색어/상태값 없음 - query : %s%n, status : %s%n", query, status);
-            Sort sort = Sort.by(Sort.Order.desc("orderNo"));
-            Pageable pageable = PageRequest.of(page - 1, 10, sort);
-            return ORDERING_REPOSITORY.findAll(pageable);
+            Page<Ordering> ordering = ORDERING_REPOSITORY.findAll(pageable);
+            return ordering.map(ordering1 -> MODEL_MAPPER.map(ordering1, OrderingDTO.class));
             // (키워드 검색) 검색어가 있는 경우
         } else if (query != null) {
-            System.out.printf("상태값 없음 - query : %s%n, status : %s%n", query, status);
-            Sort sort = Sort.by(Sort.Order.desc("order_no"));
-            Pageable pageable = PageRequest.of(page - 1, 10, sort);
-            return ORDERING_REPOSITORY.searchByQuery(query, pageable);
+            Page<Ordering> ordering = ORDERING_REPOSITORY.searchByQuery(query, pageable);
+            return ordering.map(ordering1 -> MODEL_MAPPER.map(ordering1, OrderingDTO.class));
             // (상태 검색) 상태코드가 있는 경우
         } else {
-            System.out.printf("검색어 없음 - query : %s%n, status : %s%n", query, status);
-            Sort sort = Sort.by(Sort.Order.desc("order_no"));
-            Pageable pageable = PageRequest.of(page - 1, 10, sort);
-
-            byte statusble = 2;
-
-            if (status.equals("progress")) {
-                statusble = 0;
-            } else {
-                statusble = 1;
-            }
-
-            return ORDERING_REPOSITORY.findAllByIsDelivery(statusble, pageable);
+            byte statusble = (byte) (status.equals("accept") ? 0 : status.equals("validation") ? 1 : status.equals("progress") ? 2 : 3);
+            Page<Ordering> ordering = ORDERING_REPOSITORY.findAllByIsDelivery(statusble, pageable);
+            return ordering.map(ordering1 -> MODEL_MAPPER.map(ordering1, OrderingDTO.class));
         }
 	}
 
 	// 삭제 기능
-	public void deleteOrder(int orderNo) {
-
+	public void deleteOrder(@Param("orderNo") int orderNo) {
+        deleteOrderDetail(orderNo);
         ORDERING_REPOSITORY.deleteById(orderNo);
 	}
 
+    public void deleteOrderDetail(int orderNo) {
+        ORDER_DETAIL_REPOSITORY.deleteAllByOrderNo(orderNo);
+    }
+
     // 발주등록
+    @Transactional
     public void addOrder(OrderPoolDTO orderPool) {
         //Ordering ordering = ORDERING_REPOSITORY.addsave(orderPool.getBuyer_code(), orderPool.getUser_id(), orderPool.getDue_date());
+        User user = (User)SESSION.getAttribute("user");
         Ordering ordering = new Ordering();
-        ordering.setBuyer_code(new Buyer((long) orderPool.getBuyer_code()));
-        ordering.setUser_id(new User(orderPool.getUser_id()));
-        ordering.setDue_date(orderPool.getDue_date());
-        ordering.setOrder_date(Date.valueOf(LocalDate.now()));
+        Approval approval = new Approval();
+        approval.setBuyer(user.getBuyer_code());
+        approval.setSubject(null);
+        approval.setApprovalRegistDate(LocalDateTime.now());
+        ordering.setBuyerCode(new Buyer((long) orderPool.getBuyerCode()));
+        ordering.setUserId(new User(orderPool.getUserId()));
+        ordering.setDueDate(orderPool.getDue_date());
+        ordering.setOrderDate(Date.valueOf(LocalDate.now()));
+        approval.setOrdering(ordering);
 
+        approval = APPROVAL_REPOSITORY.save(approval);
+
+        ordering.setApproval(approval);
+        Ordering order = ORDERING_REPOSITORY.save(ordering);
+        autoSaveApprovalStatusble(approval);
+
+        for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrder(order);
+            orderDetail.setItem(new Item(orderPool.getOrder_nos().get(idx)));
+            orderDetail.setQuantity(orderPool.getQuantities().get(idx));
+            ORDER_DETAIL_REPOSITORY.save(orderDetail);
+        }
+
+        // Approval approval = APPROVAL_REPOSITORY.autoSaveApproval(order.getOrderNo(), (long) Math.toIntExact(order.getBuyerCode().getBuyerCode()), null);
+
+    }
+
+    // 발주 수정
+    @Modifying
+    @Transactional
+    public void orderModify(OrderPoolDTO orderPool) {
+        Ordering ordering = new Ordering();
+        ordering.setOrderNo(orderPool.getOrderNo());
+        ordering.setBuyerCode(new Buyer((long) orderPool.getBuyerCode()));
+        ordering.setUserId(new User(orderPool.getUserId()));
+        ordering.setDueDate(orderPool.getDue_date());
+        ordering.setOrderDate(Date.valueOf(LocalDate.now()));
+        log.info("orderPool - {}", orderPool);
         Ordering order = ORDERING_REPOSITORY.save(ordering);
 
         for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
@@ -102,9 +155,12 @@ public class OrderingService {
     }
 
     // 발주등록_Stock을 이름으로 검색하는 메서드 추가
-    public List<Stock> searchStocksByName(String name) {
+    public List<Stock> searchStocksByName(String name) { // StockDTO 추가할 예정!
 
         return STOCK_REPOSITORY.orderFindAllStock(name);
+//        List<Stock> stocks = STOCK_REPOSITORY.orderFindAllStock(name);
+//        return stocks.map(stocks1 -> MODEL_MAPPER.map(stocks1, Stock.class));
+
     }
 
     // 발주등록_상품등록
@@ -130,5 +186,46 @@ public class OrderingService {
     // 발주 상세 정보 조회
     public List<OrderDetail> findOrderDetails(int orderNo) {
         return ORDER_DETAIL_REPOSITORY.findAllByOrderId(orderNo);
+    }
+
+    // 발주 상태 업데이트
+    public void updateIsDelivery (int orderNo) {
+        ORDERING_REPOSITORY.updateIsDeliveryByOrderNo(orderNo);
+        updateStock(orderNo);
+    }
+
+
+    // 상품검색_모든 상품
+//    private void stocks () {
+//        STOCK_REPOSITORY.findAll();
+//    }
+
+
+    // 발주 상세 페이지 수정
+    private void updateStock (int orderNo) {
+        List<OrderDetail> orderDetail = ORDER_DETAIL_REPOSITORY.findAllByOrderId(orderNo);
+
+        for (int i = 0; i < orderDetail.size(); i++) {
+            int stock_no = STOCK_REPOSITORY.orderFindStock(orderDetail.get(i).getItem().getItemNo());
+            STOCK_REPOSITORY.orderUpdateStock(stock_no, orderDetail.get(i).getQuantity());
+        }
+    }
+
+
+    // 전자결재 상태
+    @Transactional
+    protected void autoSaveApprovalStatusble (Approval approval) {
+        Optional<Admin> admin = ADMIN_REPOSITORY.findById("auto");
+        // APPROVAL_STATUSLABLE_REPOSITORY.autoSaveApprovalStatusble(order_no);
+        ApprovalStatusLableDTO approvalStatusLableDTO = new ApprovalStatusLableDTO();
+        approvalStatusLableDTO.setAdmin(admin.get());
+        approvalStatusLableDTO.setStatus((byte) 1);
+        approvalStatusLableDTO.setApproval(approval);
+        approvalStatusLableDTO.setUpdateLableDate(LocalDateTime.now());
+        APPROVAL_STATUSLABLE_REPOSITORY.save(MODEL_MAPPER.map(approvalStatusLableDTO, ApprovalStatusLable.class));
+    }
+
+    public void updateIsDeliveryByOrderNo(Integer approvalNo) {
+        ORDERING_REPOSITORY.updateIsDeliveryTwoByOrderNo(approvalNo);
     }
 }
