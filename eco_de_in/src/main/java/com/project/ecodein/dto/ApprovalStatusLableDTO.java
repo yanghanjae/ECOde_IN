@@ -1,5 +1,6 @@
 package com.project.ecodein.dto;
 
+import com.project.ecodein.entity.Admin;
 import com.project.ecodein.entity.Approval;
 import lombok.*;
 

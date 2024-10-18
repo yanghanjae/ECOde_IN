@@ -3,6 +3,7 @@ package com.project.ecodein.dto;
 import java.time.LocalDateTime;
 import com.project.ecodein.entity.Admin;
 import com.project.ecodein.entity.Buyer;
+import com.project.ecodein.entity.Ordering;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,5 +1,6 @@
 package com.project.ecodein.dto;
 
+import com.project.ecodein.entity.Item;
 import com.project.ecodein.entity.Ordering;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
