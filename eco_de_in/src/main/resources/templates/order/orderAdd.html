@@ -484,22 +484,20 @@
     fetch(`/order/search?query=${query}`)
         .then(response => response.json())
         .then(data => {
-          console.log(data);
           item_body.innerHTML = '';
 
-          if (Object.values(data.item) != null) {
-            console.log('data.item 있음');
-              item_body.innetHTML += `
-                  <tr>
-                      <td><img src="${data.item.itemImage}" alt="상품 이미지" width="50"></td>
-                      <td>${data}</td>
-                      <td>${data.item.itemName}</td>
-                      <td>${data.quantity}</td>
-                      <td>${data.item.itemPrice}</td>
-                      <td><button class="bg-blue-500 text-white px-4 py-2 rounded" type="button"
-                             onclick="addProduct(${data.item.itemNo}, '${data.item.itemName}', ${data.item.itemPrice}),
-                                      item_array.push(${data.item.itemNo})">선택</button></td>
-                  </tr>`;
+          if (data.item != null) {
+            item_body.innerHTML = `
+                <tr>
+                    <td><img src="${data.item.itemImage}" alt="상품 이미지" width="50"></td>
+                    <td>${data.item.itemNo}</td>
+                    <td>${data.item.itemName}</td>
+                    <td>${data.quantity}</td>
+                    <td>${data.item.itemPrice}</td>
+                    <td><button class="bg-blue-500 text-white px-4 py-2 rounded" type="button"
+                           onclick="addProduct(${data.item.itemNo}, '${data.item.itemName}', ${data.item.itemPrice}),
+                                    item_array.push(${data.item.itemNo})">선택</button></td>
+                </tr>`;
           } else {
             item_body.innerHTML = '<tr><td colspan="6">검색 결과가 없습니다.</td></tr>';
           }
