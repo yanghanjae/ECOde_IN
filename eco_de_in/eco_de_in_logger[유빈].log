@@ -2938,3 +2938,18 @@ Caused by: org.springframework.data.mapping.PropertyReferenceException: No prope
 	at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.<init>(PartTreeJpaQuery.java:101) ~[spring-data-jpa-3.3.3.jar:3.3.3]
 	... 65 common frames omitted
 
+2024-10-18T11:51:50.108+09:00 ERROR 2228 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 1 of constructor in com.project.ecodein.controller.ApprovalController required a bean of type 'com.project.ecodein.service.OrderingService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.project.ecodein.service.OrderingService' in your configuration.
+

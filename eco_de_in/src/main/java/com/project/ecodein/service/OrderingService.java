@@ -141,9 +141,11 @@ public class OrderingService {
         autoSaveApprovalStatusble(approval);
 
         for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
+            Item item = new Item();
+            item.setItemNo(orderPool.getOrder_nos().get(idx));
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrder(order);
-            orderDetail.setItem(new Item(orderPool.getOrder_nos().get(idx)));
+            orderDetail.setItem(item);
             orderDetail.setQuantity(orderPool.getQuantities().get(idx));
             ORDER_DETAIL_REPOSITORY.save(orderDetail);
         }
@@ -169,8 +171,10 @@ public class OrderingService {
 
         for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
             OrderDetail orderDetail = new OrderDetail();
+            Item item = new Item();
+            item.setItemNo(orderPool.getOrder_nos().get(idx));
             orderDetail.setOrder(order);
-            orderDetail.setItem(new Item(orderPool.getOrder_nos().get(idx)));
+            orderDetail.setItem(item);
             orderDetail.setQuantity(orderPool.getQuantities().get(idx));
             ORDER_DETAIL_REPOSITORY.save(orderDetail);
         }
