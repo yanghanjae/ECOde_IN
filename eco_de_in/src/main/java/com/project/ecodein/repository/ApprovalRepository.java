@@ -23,4 +23,6 @@ public interface ApprovalRepository extends JpaRepository<Approval, Integer> {
     @Query(value = "insert into approval (approval_no, buyer_code, approval_admin, subject)" +
                 "values (:order_no, :buyer_code, 'auto', :subject)", nativeQuery = true)
     Approval autoSaveApproval(Integer order_no, Long buyer_code, String subject);
+
+    Approval findTopByOrderByApprovalNoDesc();
 }

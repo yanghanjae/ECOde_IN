@@ -17,6 +17,7 @@ import org.modelmapper.ModelMapper;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.boot.ssl.DefaultSslBundleRegistry;
@@ -124,44 +125,45 @@ public class OrderingService {
     // 발주등록
     @Transactional
     public void addOrder(OrderPoolDTO orderPool) {
-        //Ordering ordering = ORDERING_REPOSITORY.addsave(orderPool.getBuyer_code(), orderPool.getUser_id(), orderPool.getDue_date());
-        User user = (User)SESSION.getAttribute("user");
-        Ordering ordering = new Ordering();
-        Approval approval = new Approval();
-        Buyer buyer = new Buyer();
-        buyer.setBuyerCode(user.getBuyerCode().getBuyerCode());
-        approval.setBuyer(user.getBuyerCode());
-        approval.setSubject(null);
-        approval.setApprovalRegistDate(LocalDateTime.now());
-        ordering.setBuyerCode(buyer);
-        ordering.setUserId(new User(orderPool.getUserId()));
-        ordering.setDueDate(orderPool.getDue_date());
-        ordering.setOrderDate(Date.valueOf(LocalDate.now()));
-        approval.setOrdering(ordering);
-        buyer.setBuyerCode((long) orderPool.getBuyerCode());
+        // 저장 전 저장된 정보 확인
+        Approval prevApproval = APPROVAL_REPOSITORY.findTopByOrderByApprovalNoDesc();
+        Ordering prevOrder = ORDERING_REPOSITORY.findTopByOrderByOrderNoDesc();
 
-        ordering.setBuyerCode(buyer);
-        ordering.setUserId(new User(orderPool.getUserId()));
-        ordering.setDueDate(orderPool.getDue_date());
-        ordering.setOrderDate(Date.valueOf(LocalDate.now()));
+        User user = (User)SESSION.getAttribute("user");
+
+
+        Approval approval = new Approval();
+        Buyer buyer = user.getBuyerCode();
+        Admin admin = ADMIN_REPOSITORY.findByAdminName("자동생성시스템");
+
+        approval.setBuyer(buyer);
+        approval.setApprovalRegistDate(LocalDateTime.now());
+        approval.setAdmin(admin);
+        approval.setSubject(null);
 
         approval = APPROVAL_REPOSITORY.save(approval);
-
-        ordering.setApproval(approval);
-        Ordering order = ORDERING_REPOSITORY.save(ordering);
         autoSaveApprovalStatusble(approval);
+
+        Ordering ordering = new Ordering();
+        ordering.setOrderNo(approval.getApprovalNo());
+        ordering.setBuyerCode(buyer);
+        ordering.setUserId(user);
+        ordering.setOrderDate(Date.valueOf(LocalDate.now()));
+        ordering.setDueDate(Date.valueOf(LocalDate.now()));
+        ordering.setIsDelivery((byte) 0);
+
+        ordering = ORDERING_REPOSITORY.save(ordering);
+
 
         for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
             Item item = new Item();
             item.setItemNo(orderPool.getOrder_nos().get(idx));
             OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setOrder(order);
+            orderDetail.setOrder(ordering);
             orderDetail.setItem(item);
             orderDetail.setQuantity(orderPool.getQuantities().get(idx));
             ORDER_DETAIL_REPOSITORY.save(orderDetail);
         }
-
-        // Approval approval = APPROVAL_REPOSITORY.autoSaveApproval(order.getOrderNo(), (long) Math.toIntExact(order.getBuyerCode().getBuyerCode()), null);
 
     }
 
@@ -276,5 +278,9 @@ public class OrderingService {
 
     public void updateIsDeliveryByOrderNo(Integer approvalNo) {
         ORDERING_REPOSITORY.updateIsDeliveryTwoByOrderNo(approvalNo);
+    }
+
+    public List<OrderingDTO> getOrderById (Integer approvalNo) {
+        return Collections.singletonList(MODEL_MAPPER.map(ORDERING_REPOSITORY.findById(approvalNo), OrderingDTO.class));
     }
 }

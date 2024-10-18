@@ -3,6 +3,7 @@ package com.project.ecodein.controller;
 import com.project.ecodein.dto.ApprovalDTO;
 import com.project.ecodein.dto.ApprovalStatusLableDTO;
 import com.project.ecodein.dto.OrderDetailDTO;
+import com.project.ecodein.dto.OrderingDTO;
 import com.project.ecodein.service.ApprovalService;
 import com.project.ecodein.service.OrderingService;
 import jakarta.servlet.http.HttpSession;
@@ -54,7 +55,10 @@ public class ApprovalController {
         model.addAttribute("statuslable", statuslable);
 
         // 발주정보
+        List<OrderingDTO> order = ORDERING_SERVICE.getOrderById(approval_no);
         List<OrderDetailDTO> orderDetails = APPROVAL_SERVICE.getOrderDetails(approval_no);
+        log.error(String.valueOf(order));
+        model.addAttribute("order", order);
         model.addAttribute("orderDetails", orderDetails);
 
         // 발주수량
