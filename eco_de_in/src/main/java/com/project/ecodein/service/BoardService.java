@@ -1,6 +1,7 @@
 package com.project.ecodein.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,8 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.project.ecodein.dto.BoardDTO;
+import com.project.ecodein.entity.Admin;
 import com.project.ecodein.entity.Board;
+import com.project.ecodein.entity.User;
 import com.project.ecodein.repository.BoardRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -23,6 +27,19 @@ public class BoardService {
 		this.boardRepository = boardRepository;
 		this.modelMapper = modelMapper;
 
+	}
+	
+	public List<BoardDTO> mainPageBoardList (HttpSession session) {
+		User user = (User)session.getAttribute ("user");
+		
+		if (user != null) {
+			List<Board> boardList = boardRepository.findByUser (user);
+			
+			return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
+		} else {
+            List<Board> boardList = boardRepository.findAll();
+			return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
+		}
 	}
 
 	public BoardDTO findBoardByNo (int board_no) {

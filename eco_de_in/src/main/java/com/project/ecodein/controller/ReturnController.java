@@ -108,7 +108,7 @@ public class ReturnController {
 
     @GetMapping("/fetch-user/{buyer_code}")
     @ResponseBody
-    public List<User> fetchUser (Model model, @PathVariable int buyer_code) {
+    public List<UserDTO> fetchUser (Model model, @PathVariable int buyer_code) {
         return USER_SERVICE.findAllByBuyerCode(buyer_code);
     }
 

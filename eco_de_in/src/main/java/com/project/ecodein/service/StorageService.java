@@ -3,6 +3,8 @@ package com.project.ecodein.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import com.project.ecodein.dto.StockDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,11 +55,11 @@ public class StorageService {
         return storages.map(storage -> MODEL_MAPPER.map(storage, StorageDTO.class)).orElse(null);
     }
 
-	public List<Stock> getItemStockByStorage (int storage_no) {
+	public List<StockDTO> getItemStockByStorage (int storage_no) {
         Storage storage = STORAGE_REPOSITORY.findById(storage_no).get();
         List<Stock> stocks = STOCK_REPOSITORY.findByStorage(storage);
 
-        return stocks;
+        return stocks.stream().map(stock -> MODEL_MAPPER.map(stock, StockDTO.class)).toList();
 	}
 
 	public void storageAdd (Storage storage) {
