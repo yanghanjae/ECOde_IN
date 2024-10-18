@@ -6,6 +6,8 @@ import com.project.ecodein.dto.ApprovalDTO;
 import com.project.ecodein.dto.ApprovalStatusLableDTO;
 import com.project.ecodein.dto.OrderDetailDTO;
 import com.project.ecodein.entity.Admin;
+import com.project.ecodein.entity.ApprovalStatusLable;
+import com.project.ecodein.entity.OrderDetail;
 import com.project.ecodein.repository.ApprovalRepository;
 import com.project.ecodein.repository.ApprovalStatusLableRepository;
 import com.project.ecodein.repository.OrderDetailRepository;

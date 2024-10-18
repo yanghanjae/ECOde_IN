@@ -117,15 +117,16 @@ public class OrderingService {
         User user = (User)SESSION.getAttribute("user");
         Ordering ordering = new Ordering();
         Approval approval = new Approval();
+        Buyer buyer = new Buyer();
+        buyer.setBuyerCode(user.getBuyerCode().getBuyerCode());
         approval.setBuyer(user.getBuyerCode());
         approval.setSubject(null);
         approval.setApprovalRegistDate(LocalDateTime.now());
-        ordering.setBuyerCode(new Buyer((long) orderPool.getBuyerCode()));
+        ordering.setBuyerCode(buyer);
         ordering.setUserId(new User(orderPool.getUserId()));
         ordering.setDueDate(orderPool.getDue_date());
         ordering.setOrderDate(Date.valueOf(LocalDate.now()));
         approval.setOrdering(ordering);
-        Buyer buyer = new Buyer();
         buyer.setBuyerCode((long) orderPool.getBuyerCode());
 
         ordering.setBuyerCode(buyer);
@@ -156,8 +157,10 @@ public class OrderingService {
     @Transactional
     public void orderModify(OrderPoolDTO orderPool) {
         Ordering ordering = new Ordering();
+        Buyer buyer = new Buyer();
+        buyer.setBuyerCode((long) orderPool.getBuyerCode());
         ordering.setOrderNo(orderPool.getOrderNo());
-        ordering.setBuyerCode(new Buyer((long) orderPool.getBuyerCode()));
+        ordering.setBuyerCode(buyer);
         ordering.setUserId(new User(orderPool.getUserId()));
         ordering.setDueDate(orderPool.getDue_date());
         ordering.setOrderDate(Date.valueOf(LocalDate.now()));
@@ -167,7 +170,7 @@ public class OrderingService {
         for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrder(order);
-            orderDetail.setItem(new Item(orderPool.getOrderNos().get(idx)));
+            orderDetail.setItem(new Item(orderPool.getOrder_nos().get(idx)));
             orderDetail.setQuantity(orderPool.getQuantities().get(idx));
             ORDER_DETAIL_REPOSITORY.save(orderDetail);
         }
@@ -175,9 +178,12 @@ public class OrderingService {
     }
 
     // 발주등록_Stock을 이름으로 검색하는 메서드 추가
-    public List<Stock> searchStocksByName(String name) { // StockDTO 추가할 예정!
-
-        return STOCK_REPOSITORY.orderFindAllStock(name);
+    public List<StockDTO> searchStocksByName(String name) { // StockDTO 추가할 예정!
+        Item item = new Item();
+        item.setItemName(name);
+        List<Stock> stocks = STOCK_REPOSITORY.findByItem(item);
+        //        List<Stock> stocks = STOCK_REPOSITORY.orderFindAllStock(name);
+        return stocks.stream().map(stock -> MODEL_MAPPER.map(stock, StockDTO.class)).toList();
 //        List<Stock> stocks = STOCK_REPOSITORY.orderFindAllStock(name);
 //        return stocks.map(stocks1 -> MODEL_MAPPER.map(stocks1, Stock.class));
 
@@ -235,8 +241,9 @@ public class OrderingService {
     // 전자결재 상태
     @Transactional
     protected void autoSaveApprovalStatusble (Approval approval) {
-        Optional<Admin> admin = ADMIN_REPOSITORY.findById("auto");
-        // APPROVAL_STATUSLABLE_REPOSITORY.autoSaveApprovalStatusble(order_no);
+        Admin admin = new Admin();
+        admin.setAdminId("auto");
+
         ApprovalStatusLableDTO approvalStatusLableDTO = new ApprovalStatusLableDTO();
         approvalStatusLableDTO.setAdmin(admin);
         approvalStatusLableDTO.setStatus((byte) 1);

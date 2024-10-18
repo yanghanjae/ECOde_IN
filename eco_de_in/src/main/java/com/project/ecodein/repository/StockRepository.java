@@ -2,6 +2,8 @@ package com.project.ecodein.repository;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.project.ecodein.entity.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -120,7 +122,9 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
 	public void orderUpdateStock (@Param(value = "stock_no") int stock_no, @Param(value = "quantity") int quantity);
 
 
-    List<Stock> orderFindAllStock(String name);
+    List<Stock> findByItem(Item item);
+
+//    List<Stock> orderFindAllStock(String name);
 
     // [241014] 장유빈 기능 추가
     // 기능 상세 : 창고별 재고조회 기능
