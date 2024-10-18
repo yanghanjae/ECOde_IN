@@ -1,8 +1,7 @@
 package com.project.ecodein.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import jakarta.persistence.Entity;
+import com.project.ecodein.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +21,5 @@ public class BoardDTO {
 	private LocalDateTime boardDate;
 	private User user;
 
-	private List<CommentResponse> comment;
 
 }

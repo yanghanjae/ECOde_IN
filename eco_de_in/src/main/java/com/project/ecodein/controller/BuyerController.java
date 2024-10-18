@@ -1,7 +1,11 @@
 package com.project.ecodein.controller;
 
 import java.util.Optional;
+
+import com.project.ecodein.dto.BuyerDTO;
+import com.project.ecodein.entity.Buyer;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.project.ecodein.dto.Admin;
-import com.project.ecodein.dto.Buyer;
 import com.project.ecodein.dto.Search;
 import com.project.ecodein.service.BuyerService;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -50,7 +51,7 @@ public class  BuyerController {
 
 		log.info ("search - address-{}, keyword - {}", search, keyword);
 
-		Page<Buyer> list = BUYER_SERVICE.buyers ((int) page, keyword, buyer_status);
+		Page<BuyerDTO> list = BUYER_SERVICE.buyers ((int) page, keyword, buyer_status);
 
 		model.addAttribute ("buyers", list);
 
@@ -66,26 +67,23 @@ public class  BuyerController {
 	}
 
 	@PostMapping ("/add")
-	public String buyerAdd (@ModelAttribute Buyer buyer, Model model) {
+	public String buyerAdd (@ModelAttribute BuyerDTO buyerDTO, Model model) {
 
-		Buyer _buyer = BUYER_SERVICE.buyerInsert (buyer);
+		BuyerDTO buyer = BUYER_SERVICE.buyerInsert (buyerDTO);
 
-		if (_buyer != null) {
-
+		if (buyer != null) {
 			model.addAttribute ("message", "거래처 정보가 정상 등록 되었습니다.");
-
 		}
 
-		log.info ("save buyer - {}", _buyer);
 		return "redirect:/buyer/default/1?keyword=";
 
 	}
 
 	@GetMapping ("/detail/{buyer_code}")
 	@ResponseBody
-	public Optional<Buyer> modifty (@PathVariable ("buyer_code") Long buyer_code) {
+	public Optional<BuyerDTO> modifty (@PathVariable ("buyer_code") Long buyer_code) {
 
-		Optional<Buyer> buyer = BUYER_SERVICE.buyerDetail (buyer_code);
+		Optional<BuyerDTO> buyer = BUYER_SERVICE.buyerDetail (buyer_code);
 
 		log.info ("buyer - {}", buyer);
 
@@ -93,23 +91,20 @@ public class  BuyerController {
 
 	}
 	
-	@GetMapping ("/status-update/{buyer_code}")
+	@PostMapping ("/status-update")
 	@ResponseBody
-	public int statusUpdate (@PathVariable("buyer_code") Long buyer_code) {
-		log.info ("test");
-		BUYER_SERVICE.updateStatus (buyer_code);
+	public int statusUpdate (@ModelAttribute BuyerDTO buyer) {
+		BUYER_SERVICE.updateStatus (buyer);
 		return 1;
 	}
 	
 	@PostMapping ("/modify")
 	@ResponseBody
-	public String modify(@ModelAttribute Buyer buyer) {
-		System.out.println ("buyer init : " + buyer);
-		
+	public ResponseEntity<String> modify(@ModelAttribute BuyerDTO buyer) {
+
 		BUYER_SERVICE.updateBuyer (buyer);
-		
-		
-		return null;
+
+		return ResponseEntity.status(200).body("수정이 완료됨");
 	}
 
 }

@@ -1,9 +1,10 @@
 package com.project.ecodein.service;
 
-import com.project.ecodein.dto.Admin;
+
 import com.project.ecodein.dto.ApprovalDTO;
 import com.project.ecodein.dto.ApprovalStatusLableDTO;
 import com.project.ecodein.dto.OrderDetailDTO;
+import com.project.ecodein.entity.Admin;
 import com.project.ecodein.entity.Approval;
 import com.project.ecodein.entity.ApprovalStatusLable;
 import com.project.ecodein.entity.OrderDetail;
@@ -12,13 +13,14 @@ import com.project.ecodein.repository.ApprovalStatusLableRepository;
 import com.project.ecodein.repository.OrderDetailRepository;
 import jakarta.servlet.http.HttpSession;
 import org.modelmapper.ModelMapper;
+
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,7 +54,7 @@ public class ApprovalService {
     public ApprovalDTO getApproval(int approval_no, HttpSession session) {
 
         if (APPROVAL_STATUS_LABLE.findApprovalStatusLableById(approval_no).getStatus() == 1) {
-            APPROVAL_STATUS_LABLE.updateApprovalStatus((byte) 2, ((Admin) session.getAttribute("admin")).getAdmin_id(), approval_no);
+            APPROVAL_STATUS_LABLE.updateApprovalStatus((byte) 2, ((Admin) session.getAttribute("admin")).getAdminId(), approval_no);
         }
 
 //        return APPROVAL_REPOSITORY.findById(approval_no).orElse(null);
@@ -86,7 +88,7 @@ public class ApprovalService {
     // 결재 상태 업데이트
     public void approvalStatusUpdate (Integer approval_no, byte status, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("admin");
-        String admin_id = admin.getAdmin_id();
+        String admin_id = admin.getAdminId();
         APPROVAL_STATUS_LABLE.updateApprovalStatus(status, admin_id, approval_no);
     }
 }

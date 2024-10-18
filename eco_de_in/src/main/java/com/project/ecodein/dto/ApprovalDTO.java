@@ -1,5 +1,7 @@
 package com.project.ecodein.dto;
 
+import com.project.ecodein.entity.Admin;
+import com.project.ecodein.entity.Buyer;
 import com.project.ecodein.entity.Ordering;
 import lombok.*;
 

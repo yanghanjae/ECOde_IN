@@ -1,12 +1,15 @@
 package com.project.ecodein.controller;
 
 
+
 import com.project.ecodein.dto.*;
 import com.project.ecodein.entity.OrderDetail;
 import com.project.ecodein.entity.Ordering;
 import com.project.ecodein.service.ApprovalService;
 import com.project.ecodein.service.ItemService;
 import com.project.ecodein.service.OrderingService;
+
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,9 +17,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.project.ecodein.dto.OrderPoolDTO;
+import com.project.ecodein.entity.Stock;
 
 
 @Controller
@@ -27,9 +36,7 @@ public class OrderController {
     private final OrderingService ORDERING_SERVICE;
     private final ItemService ITEM_SERVICE;
     private final ApprovalService APPROVAL_SERVICE;
-//    private final StockService STOCK_SERVICE;
 
-//    public OrderController(OrderingService ORDERING_SERVICE, ItemService ITEM_SERVICE, StockService STOCK_SERVICE) {
     public OrderController(OrderingService ORDERING_SERVICE, ItemService ITEM_SERVICE, ApprovalService approvalService) {
         this.ORDERING_SERVICE = ORDERING_SERVICE;
         this.ITEM_SERVICE = ITEM_SERVICE;

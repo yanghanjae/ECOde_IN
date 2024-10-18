@@ -161,7 +161,6 @@
       width: 10%;
     }
     
-    
     ::-webkit-scrollbar {
       width: 5px;
       height: 5px;
@@ -188,6 +187,9 @@
 
   </style>
   <script>
+    const url = URL;
+    console.log(url)
+    
     function closeModal () {
       const static_modal = document.querySelector('#static-modal');
       const update_time = document.querySelector('#update_time');
@@ -196,7 +198,7 @@
       update_time.textContent = '업데이트 안됨';
     }
     
-    function activeModal (storage_no) {
+    function activeModal (storageNo) {
       const static_modal = document.querySelector('#static-modal');
       const detail_storage_name = document.querySelectorAll('.detail_storage_name');
       const detail_storage_address = document.querySelector('.detail_storage_address');
@@ -207,21 +209,21 @@
       
       data_line.innerHTML = '';
       
-			fetch('/storage/detail/' + storage_no, {
+			fetch('/storage/detail/' + storageNo, {
 				method: 'get',
 				headers: {'Content-Type' : "application/json"}
 			})
 				.then(res => res.json())
 				.then(data => {
-					detail_storage_name[0].textContent = data.storage_name;
-					detail_storage_name[1].textContent = data.storage_name;
-          detail_storage_address.value = data.storage_site;
-          storage_num.value = data.storage_no;
-          modify_button.setAttribute('onclick', `modifyModalActive(${data.storage_no})`)
+					detail_storage_name[0].textContent = data.storageName;
+					detail_storage_name[1].textContent = data.storageName;
+          detail_storage_address.value = data.storageSite;
+          storage_num.value = data.storageNo;
+          modify_button.setAttribute('onclick', `modifyModalActive(${data.storageNo})`)
           
-          if (data.storage_status == '정상') {
+          if (data.storageStatus == '정상') {
             status_label.style.backgroundColor = '#9FF781';
-            status_label.innerText = data.storage_status;
+            status_label.innerText = data.storageStatus;
           } else {
             status_label.style.backgroundColor = '#FA5858';
             status_label.textContent = '확인필요';
@@ -249,13 +251,14 @@
 			})
 				.then(res => res.json())
 				.then(data => {
+          console.log(data)
 					for (let idx in data) {
 						data_line.innerHTML +=
             `
               <tr class="data overflow-scroll">
-                <td>${data[idx].item_no}</td>
-                <td><img src="${data[idx].item_image}" alt="" style="width: 150px; height: auto;"></td>
-                <td class="truncate md:text-clip"><a href="/stock?search=${data[idx].item_name}&storage_no=${data[idx].storage_no}">${data[idx].item_name}</a></td>
+                <td>${data[idx].stockNo}</td>
+                <td><img src="${data[idx].item.itemImage}" alt="" style="width: 150px; height: auto;"></td>
+                <td class="truncate md:text-clip"><a href="/stock?search=${data[idx].item.itemName}&storage_no=${data[idx].storage.storageNo}">${data[idx].item.itemName}</a></td>
                 <td>${data[idx].quantity}</td>
               </tr>
             `;
@@ -322,6 +325,7 @@
       const storage_name = document.querySelector('#modify_storage_name');
       const storage_address = document.querySelector('#modify_storage_address');
       const storage_no_label = document.querySelector('#storage_no');
+      const storage_status = document.querySelector('#storage_status');
       
       modify_modal.classList.remove('hidden');
       
@@ -331,9 +335,10 @@
       })
       .then(res => res.json())
       .then(data => {
-        storage_name.value = data.storage_name;
-        storage_address.value = data.storage_site;
-        storage_no_label.value = data.storage_no;
+        storage_name.value = data.storageName;
+        storage_address.value = data.storageSite;
+        storage_no_label.value = data.storageNo;
+        storage_status.value = data.storageStatus;
       })
     }
     
@@ -341,6 +346,37 @@
       const modify_modal = document.querySelector('#modify-modal');
       
       modify_modal.classList.add('hidden');
+    }
+    
+    function fetch_update_storage (e) {
+      e.preventDefault();
+      const storageName = document.querySelector('#modify_storage_name').value;
+      const storageAddress = document.querySelector('#modify_storage_address').value;
+      const storageStatus = document.querySelector('#storage_status').value;
+      const storageNo = document.querySelector('#storage_no').value;
+      
+      const formData = new FormData();
+      
+      formData.append('storageName', storageName);
+      formData.append('storageSite', storageAddress);
+      formData.append('storageStatus', storageStatus);
+      formData.append('storageNo', storageNo);
+      
+      
+      fetch('/storage/modify', {
+        method: 'post',
+        body: formData
+      })
+          .then(res => res.json())
+          .then(data => {
+            alert('창고 정보가 수정되었습니다.');
+            modifyModalDeActive ();
+            closeModal();
+            activeModal(storageNo);
+            
+          });
+      
+      
     }
   </script>
 </head>
@@ -421,24 +457,26 @@
 	            <td colspan="5">조회 결과가 존재하지 않습니다.</td>
 	          </tr>
 	          <tr th:if="${storages != null}" th:each="storage, status: ${storages}">
-	            <td th:text="${storage.storage_name}">창고 명</td>
-	            <td th:text="${storage.storage_site}">창고 구역명</td>
+	            <td th:text="${storage.storageName}">창고 명</td>
+	            <td th:text="${storage.storageSite}">창고 구역명</td>
 	            <td>
-	              <span th:if="${storage.storage_status.equals('정상')}" class="py-1 px-10 rounded-full font-bold text-white" 
+	              <span th:if="${storage.storageStatus.equals('정상')}" class="py-1 px-10 rounded-full font-bold text-white"
 											style="background-color: #9FF781">정상</span>
-	              <span th:if="${!storage.storage_status.equals('정상')}" class="py-1 px-6 rounded-full font-bold text-white" 
+	              <span th:if="${!storage.storageStatus.equals('정상')}"
+                      class="py-1 px-6 rounded-full font-bold text-white"
 											style="background-color: #FA5858">확인 필요</span>
 	            </td>
 	            <td>
 								<a class="cursor-pointer py-1 px-4 bg-yellow-300 rounded-full font-bold text-white" 
-									 th:onclick="activeModal ([[${storage.storage_no}]])">정보 보기</a>
+									 th:onclick="activeModal ([[${storage.storageNo}]])">정보 보기</a>
 						 	</td>
 	            <td>
-								<a style="cursor: pointer;" th:onclick="remove_request_control ([[${storage.storage_no}]])">삭제</a>
-                <span th:if="${!storage.storage_status.equals('정상')}" style="border-left: 2px solid black; margin: 0 5px"></span>
-                <a th:if="${!storage.storage_status.equals('정상')}" style="border-radius: 15px;
+								<a style="cursor: pointer;" th:onclick="remove_request_control ([[${storage.storageNo}]])">삭제</a>
+                <span th:if="${!storage.storageStatus.equals('정상')}"
+                      style="border-left: 2px solid black; margin: 0 5px"></span>
+                <a th:if="${!storage.storageStatus.equals('정상')}" style="border-radius: 15px;
                 background-color: limegreen; padding: 3px 8px; color: white; font-weight: bold;"
-                th:href="@{/storage/status_modify/{storage_no}/정상(storage_no = ${storage.storage_no})}">
+                th:href="@{/storage/status_modify/{storageNo}/정상(storageNo = ${storage.storageNo})}">
                   정상화
                 </a>
 							</td>
@@ -571,7 +609,7 @@
                        <div>
                            <label for="storage_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             <span class="font-bold text-xl">창고 이름</span>(Storage Name)</label>
-                           <input type="text" name="storage_name"
+                           <input type="text" name="storageName"
                                   id="storage_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
                                                            rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
                                                            p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400
@@ -580,7 +618,7 @@
                        <div>
                          <label for="storage_site" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                           <span class="font-bold text-xl">창고 주소</span>(Storage Address)</label>
-                         <input type="text" name="storage_site" id="storage_site"
+                         <input type="text" name="storageSite" id="storage_site"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
                                        dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
@@ -622,11 +660,11 @@
           </div>
           <!-- Modal body -->
           <div class="p-4 md:p-5">
-            <form class="space-y-4" action="/storage/add" method="post">
+            <form class="space-y-4" onsubmit="fetch_update_storage (event)">
               <div>
                 <label for="modify_storage_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   <span class="font-bold text-xl">창고 이름</span>(Storage Name)</label>
-                <input type="text" name="storage_name"
+                <input type="text" name="storageName"
                        id="modify_storage_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
                                                            rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
                                                            p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400
@@ -635,7 +673,7 @@
               <div>
                 <label for="modify_storage_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   <span class="font-bold text-xl">창고 주소</span>(Storage Address)</label>
-                <input type="text" name="storage_site" id="modify_storage_address"
+                <input type="text" name="storageSite" id="modify_storage_address"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
                                        dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
@@ -645,17 +683,18 @@
                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >
                   <span class="font-bold text-xl">창고 상태 변경</span>(Storage Status)
                 </label>
-                <input type="text" name="storage_no" id="storage_no"
+                <input type="text" name="storageNo" id="storage_no"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600
                                        dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required
                 >
+                <input type="hidden" name="storageStatus" id="storage_status">
               </div>
               <button type="submit" onclick="regist_modal_deactive ()"
                       class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
                                       focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
                                       dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                창고 등록하기
+                창고 정보 수정
               </button>
             </form>
           </div>

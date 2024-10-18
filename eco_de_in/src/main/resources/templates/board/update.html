@@ -44,8 +44,8 @@
 							<form method="post" th:action="@{/board/update/{boardNo}(boardNo=${board.boardNo})}" id="board_form">
 
 								<div class="user" style="display: none">
-									<input type="text" id="user_id" name="user"
-										th:value="${ session.user.user_id }">
+									<input type="text" id="userId" name="user"
+										th:value="${ session.user.userId }">
 								</div>
 								<div class="row my-2">
 									<div class="mb-3">

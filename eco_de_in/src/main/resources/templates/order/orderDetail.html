@@ -366,6 +366,7 @@
                             placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-400 sm:text-sm sm:leading-6"
                      id="client"
                      th:value="${order.buyerCode.buyer_name}"
+                     th:value="${session.user.buyer_code.buyerName}"
                      type="text" readonly>
             </div>
           </div>

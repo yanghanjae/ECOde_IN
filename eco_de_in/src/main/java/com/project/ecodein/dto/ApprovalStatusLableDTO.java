@@ -1,7 +1,6 @@
 package com.project.ecodein.dto;
 
 import com.project.ecodein.entity.Approval;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;

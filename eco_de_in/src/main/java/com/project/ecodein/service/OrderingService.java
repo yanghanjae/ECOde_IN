@@ -1,7 +1,9 @@
 package com.project.ecodein.service;
 
 
+
 import com.project.ecodein.dto.*;
+import com.project.ecodein.entity.*;
 import com.project.ecodein.entity.Approval;
 import com.project.ecodein.entity.ApprovalStatusLable;
 import com.project.ecodein.entity.OrderDetail;
@@ -10,6 +12,10 @@ import com.project.ecodein.repository.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,12 +25,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+import com.project.ecodein.dto.OrderPoolDTO;
+import com.project.ecodein.repository.OrderDetailRepository;
+import com.project.ecodein.repository.OrderingRepository;
+import com.project.ecodein.repository.StockRepository;
 
 
 @Slf4j
@@ -63,6 +70,12 @@ public class OrderingService {
         Sort sort = Sort.by(Sort.Direction.DESC, "orderNo");
         List<Ordering> ordering = ORDERING_REPOSITORY.findAll(sort);
         return ordering.stream().map(ordering1 -> MODEL_MAPPER.map(ordering1, OrderingDTO.class)).toList();
+    }
+
+    // To: ReturnController
+    public List<Ordering> getOrderings(int buyer_code) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "orderNo");
+        return ORDERING_REPOSITORY.findAllByBuyerCode(buyer_code);
     }
 
 	// 페이지네이션 및 검색 기능 구현
@@ -104,7 +117,7 @@ public class OrderingService {
         User user = (User)SESSION.getAttribute("user");
         Ordering ordering = new Ordering();
         Approval approval = new Approval();
-        approval.setBuyer(user.getBuyer_code());
+        approval.setBuyer(user.getBuyerCode());
         approval.setSubject(null);
         approval.setApprovalRegistDate(LocalDateTime.now());
         ordering.setBuyerCode(new Buyer((long) orderPool.getBuyerCode()));
@@ -112,6 +125,13 @@ public class OrderingService {
         ordering.setDueDate(orderPool.getDue_date());
         ordering.setOrderDate(Date.valueOf(LocalDate.now()));
         approval.setOrdering(ordering);
+        Buyer buyer = new Buyer();
+        buyer.setBuyerCode((long) orderPool.getBuyerCode());
+
+        ordering.setBuyerCode(buyer);
+        ordering.setUserId(new User(orderPool.getUserId()));
+        ordering.setDueDate(orderPool.getDue_date());
+        ordering.setOrderDate(Date.valueOf(LocalDate.now()));
 
         approval = APPROVAL_REPOSITORY.save(approval);
 
@@ -147,7 +167,7 @@ public class OrderingService {
         for (int idx = 0; idx < orderPool.getOrder_nos().size(); idx++) {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrder(order);
-            orderDetail.setItem(new Item(orderPool.getOrder_nos().get(idx)));
+            orderDetail.setItem(new Item(orderPool.getOrderNos().get(idx)));
             orderDetail.setQuantity(orderPool.getQuantities().get(idx));
             ORDER_DETAIL_REPOSITORY.save(orderDetail);
         }
@@ -218,7 +238,7 @@ public class OrderingService {
         Optional<Admin> admin = ADMIN_REPOSITORY.findById("auto");
         // APPROVAL_STATUSLABLE_REPOSITORY.autoSaveApprovalStatusble(order_no);
         ApprovalStatusLableDTO approvalStatusLableDTO = new ApprovalStatusLableDTO();
-        approvalStatusLableDTO.setAdmin(admin.get());
+        approvalStatusLableDTO.setAdmin(admin);
         approvalStatusLableDTO.setStatus((byte) 1);
         approvalStatusLableDTO.setApproval(approval);
         approvalStatusLableDTO.setUpdateLableDate(LocalDateTime.now());

@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import com.project.ecodein.dto.Stock;
+import com.project.ecodein.entity.Stock;
+import com.project.ecodein.entity.Storage;
 import jakarta.transaction.Transactional;
 
 public interface StockRepository extends JpaRepository<Stock, Integer> {
@@ -104,9 +105,10 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
 	@Query(value = "INSERT INTO stock(item_no, storage_no, quantity) VALUES (:item_no, :storage_no, :quantity)", nativeQuery = true)
 	public void addStock(@Param(value = "item_no") int item_no,@Param(value ="storage_no") int storage_no,@Param(value = "quantity") int quantity);
 
-    @Query(value = "select i.*, sum(s.quantity) as quantity, s.stock_no, s.storage_no from item i inner join (select * from stock) s on i.item_no = s.item_no " +
-        "where i.item_name like concat('%', :name, '%') group by s.item_no", nativeQuery = true)
-	List<Stock> orderFindAllStock(String name);
+//    @Query(value = "select i.*, sum(s.quantity) as quantity, s.stock_no, s.storage_no from item i inner join (select * from stock) s on i.item_no = s.item_no " +
+//        "where i.item_name like concat('%', :name, '%') group by s.item_no", nativeQuery = true)
+
+//	List<Stock> orderFindAllStock(String name);
 
 	// 재고 조회(제일 많은 재고 번호 조회)
 	@Query(value = "select stock_no from stock where item_no = :item_no order by quantity desc limit 1", nativeQuery = true)
@@ -116,5 +118,12 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
 	@Modifying
 	@Query(value = "UPDATE stock SET quantity = quantity - :quantity WHERE stock_no = :stock_no", nativeQuery = true)
 	public void orderUpdateStock (@Param(value = "stock_no") int stock_no, @Param(value = "quantity") int quantity);
+
+
+    List<Stock> orderFindAllStock(String name);
+
+    // [241014] 장유빈 기능 추가
+    // 기능 상세 : 창고별 재고조회 기능
+    List<Stock> findByStorage(Storage storage);
 
 }

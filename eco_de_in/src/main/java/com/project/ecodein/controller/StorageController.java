@@ -1,20 +1,20 @@
 package com.project.ecodein.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.project.ecodein.dto.Item;
-import com.project.ecodein.dto.ItemStockStorage;
-import com.project.ecodein.dto.Stock;
-import com.project.ecodein.dto.Storage;
-import com.project.ecodein.service.StorageService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
+import java.util.List;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.project.ecodein.dto.StorageDTO;
+import com.project.ecodein.entity.Stock;
+import com.project.ecodein.entity.Storage;
+import com.project.ecodein.service.StorageService;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
@@ -45,17 +45,15 @@ public class StorageController {
     
     @GetMapping("/detail/{storage_no}")
     @ResponseBody
-    public Storage storageDetail (@PathVariable Integer storage_no) {
-    	
-    	Storage storage = STORAGE_SERVICE.getStorageByStorageNo (storage_no);
+    public StorageDTO storageDetail (@PathVariable Integer storage_no) {
 
-    	return storage;
+        return STORAGE_SERVICE.getStorageByStorageNo (storage_no);
     }
 
     @GetMapping("/storageStock/{storage_no}")
     @ResponseBody
-    public List<ItemStockStorage> storageStock (@PathVariable int storage_no) {
-        List<ItemStockStorage> stockList = STORAGE_SERVICE.getItemStockByStorage(storage_no);
+    public List<Stock> storageStock (@PathVariable int storage_no) {
+        List<Stock> stockList = STORAGE_SERVICE.getItemStockByStorage(storage_no);
 
         if (stockList.isEmpty()) {
             return null;
@@ -88,4 +86,13 @@ public class StorageController {
 
         return "redirect:/storage/1";
     }
+
+    @PostMapping("/modify")
+    @ResponseBody
+    public ResponseEntity<Integer> storageModify(@ModelAttribute Storage storage) {
+        STORAGE_SERVICE.storageUpdate(storage);
+
+        return ResponseEntity.ok(storage.getStorageNo());
+    }
+
 }

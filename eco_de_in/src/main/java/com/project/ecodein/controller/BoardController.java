@@ -1,5 +1,6 @@
 package com.project.ecodein.controller;
 
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,11 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.project.ecodein.common.Pagenation;
 import com.project.ecodein.common.PagingButtonInfo;
 import com.project.ecodein.dto.BoardDTO;
+import com.project.ecodein.entity.Comment;
 import com.project.ecodein.service.BoardService;
+import com.project.ecodein.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,10 +28,11 @@ public class BoardController {
 	private Logger log = LoggerFactory.getLogger (this.getClass ());
 
 	private final BoardService boardService;
-
-	public BoardController (BoardService boardService) {
+	private final CommentService commentService;
+	public BoardController (BoardService boardService, CommentService commentService) {
 
 		this.boardService = boardService;
+		this.commentService = commentService;
 
 	}
 
@@ -38,8 +41,11 @@ public class BoardController {
 	public String findBoardByNo (@PathVariable int boardNo, Model model) {
 
 		BoardDTO board = boardService.findBoardByNo (boardNo);
+		List<Comment> commentList=commentService.findByBoardNo(boardNo);
 		model.addAttribute ("board", board);
+		model.addAttribute ("commentList", commentList);
 
+		
 		return "board/boardDetail";
 
 	}

@@ -163,7 +163,7 @@ form>input {
 								th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}"></a></td>
 							<td><a th:text="${board.boardTitle}"
 								th:href="@{/board/{boardNo}(boardNo=${board.boardNo})}"></a></td>
-							<td th:text="${board.user.user_name}"></td>
+							<td th:text="${board.user.userName}"></td>
 							<td
 								th:text="${#temporals.format(board.boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 					</tbody>

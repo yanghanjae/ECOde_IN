@@ -12,10 +12,10 @@
 			</tr>
 			<tr th:each="buyer : ${buyers}" class="list">
 				<td th:text = "${buyer.buyerCode}"></td>
-				<td th:text = "${buyer.buyer_name}" th:data-value = "${buyer.buyerCode}"  onclick=chooseName(this)></td>
+				<td th:text = "${buyer.buyerName}" th:data-value = "${buyer.buyerCode}"  onclick=chooseName(this)></td>
 			</tr>
 		</table>
-  	
+  
   </form>
 	<div id="pagination" class="pagination">
 		<button th:value="${1}"  onclick="changePage(this);" type="button"><<</button>
