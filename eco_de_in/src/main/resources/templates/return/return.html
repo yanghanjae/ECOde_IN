@@ -561,19 +561,19 @@
                   <ul class="pagination">
                     <li th:classappend="${!returns.hasPrevious} ? 'hidden'">
                       <a class="page-link"
-                         th:href="@{/return/{page}/{buyerCode}(page = ${page -1}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0})}">
+                         th:href="@{/return/{page}/{buyerCode}/{type}(page = ${page -1}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0}, type = ${type})}">
                         &lt;</a>
                     </li>
                     <li th:each="page: ${#numbers.sequence(1, returns.totalPages)}"
                         th:if="${page >= returns.number-5 and page <= returns.number+5}"
                         th:classappend="${page - 1 == returns.number} ? 'active'">
                       <a th:text="${page}" class="page-link"
-                         th:href="@{/return/{page}/{buyerCode}(page = ${page}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0})}">
+                         th:href="@{/return/{page}/{buyerCode}/{type}(page = ${page}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0}, type = ${type})}">
                       </a>
                     </li>
                     <li th:classappend="${!returns.hasNext()} ? 'hidden'">
                       <a class="page-link"
-                         th:href="@{/return/{page}/{buyerCode}(page = ${page + 1}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0})}">&gt;</a>
+                         th:href="@{/return/{page}/{buyerCode}/{type}(page = ${page + 1}, buyerCode = ${session.user != null ? session.user.buyerCode.buyerCode : 0}, type = ${type})}">&gt;</a>
                     </li>
                   </ul>
                 </nav>

@@ -209,7 +209,6 @@ public class OrderingService {
         return MODEL_MAPPER.map(stock, StockDTO.class);
 //        List<Stock> stocks = STOCK_REPOSITORY.orderFindAllStock(name);
 //        return stocks.map(stocks1 -> MODEL_MAPPER.map(stocks1, Stock.class));
-
     }
 
     // 발주등록_상품등록
