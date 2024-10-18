@@ -16344,8 +16344,8 @@ Unconditional classes:
 2024-10-18T11:21:30.016+09:00  INFO 40264 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
 2024-10-18T11:21:30.086+09:00  INFO 40264 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
 2024-10-18T11:21:30.126+09:00  INFO 40264 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-10-18T11:21:30.356+09:00 ERROR 40264 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Entity classes [com.project.ecodein.dto.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
-2024-10-18T11:21:30.357+09:00  WARN 40264 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Entity classes [com.project.ecodein.dto.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
+2024-10-18T11:21:30.356+09:00 ERROR 40264 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Entity classes [com.project.ecodein.entity.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
+2024-10-18T11:21:30.357+09:00  WARN 40264 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Entity classes [com.project.ecodein.entity.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
 2024-10-18T11:21:30.358+09:00  INFO 40264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
 2024-10-18T11:21:30.434+09:00  INFO 40264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
 2024-10-18T11:21:30.435+09:00  INFO 40264 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
@@ -16354,7 +16354,7 @@ Unconditional classes:
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
 2024-10-18T11:21:30.574+09:00 ERROR 40264 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
 
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Entity classes [com.project.ecodein.dto.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Entity classes [com.project.ecodein.entity.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806) ~[spring-beans-6.1.12.jar:6.1.12]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.12.jar:6.1.12]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.12.jar:6.1.12]
@@ -16376,7 +16376,7 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.3.3.jar:3.3.3]
-Caused by: org.hibernate.DuplicateMappingException: Entity classes [com.project.ecodein.dto.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
+Caused by: org.hibernate.DuplicateMappingException: Entity classes [com.project.ecodein.entity.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
 	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.addEntityBinding(InFlightMetadataCollectorImpl.java:337) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
 	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:259) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
 	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:399) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
@@ -16442,8 +16442,8 @@ This generated password is for development use only. Your security configuration
 2024-10-18T11:22:13.111+09:00  INFO 40264 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
 2024-10-18T11:22:13.117+09:00  INFO 40264 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
 2024-10-18T11:22:13.178+09:00  INFO 40264 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-10-18T11:22:13.344+09:00 ERROR 40264 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Entity classes [com.project.ecodein.dto.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
-2024-10-18T11:22:13.351+09:00  WARN 40264 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Entity classes [com.project.ecodein.dto.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
+2024-10-18T11:22:13.344+09:00 ERROR 40264 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Entity classes [com.project.ecodein.entity.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
+2024-10-18T11:22:13.351+09:00  WARN 40264 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Entity classes [com.project.ecodein.entity.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
 2024-10-18T11:22:13.352+09:00  INFO 40264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
 2024-10-18T11:22:13.644+09:00  INFO 40264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
 2024-10-18T11:22:13.645+09:00  INFO 40264 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
@@ -16452,7 +16452,7 @@ This generated password is for development use only. Your security configuration
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
 2024-10-18T11:22:13.662+09:00 ERROR 40264 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
 
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Entity classes [com.project.ecodein.dto.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Entity classes [com.project.ecodein.entity.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806) ~[spring-beans-6.1.12.jar:6.1.12]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600) ~[spring-beans-6.1.12.jar:6.1.12]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.12.jar:6.1.12]
@@ -16474,7 +16474,7 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.3.3.jar:3.3.3]
-Caused by: org.hibernate.DuplicateMappingException: Entity classes [com.project.ecodein.dto.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
+Caused by: org.hibernate.DuplicateMappingException: Entity classes [com.project.ecodein.entity.Approval] and [com.project.ecodein.entity.Approval] share the entity name 'Approval' (entity names must be distinct)
 	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.addEntityBinding(InFlightMetadataCollectorImpl.java:337) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
 	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:259) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]
 	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:399) ~[hibernate-core-6.5.2.Final.jar:6.5.2.Final]

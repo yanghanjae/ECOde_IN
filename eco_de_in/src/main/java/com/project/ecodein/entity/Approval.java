@@ -1,8 +1,7 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
 import java.time.LocalDateTime;
-import com.project.ecodein.entity.Admin;
-import com.project.ecodein.entity.Buyer;
+
 import com.project.ecodein.entity.Ordering;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
