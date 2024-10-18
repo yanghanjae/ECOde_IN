@@ -9,6 +9,8 @@ import com.project.ecodein.entity.ApprovalStatusLable;
 import com.project.ecodein.entity.OrderDetail;
 import com.project.ecodein.entity.Ordering;
 import com.project.ecodein.repository.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -16,6 +18,8 @@ import org.modelmapper.ModelMapper;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.boot.ssl.DefaultSslBundleRegistry;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import com.project.ecodein.dto.OrderPoolDTO;
 import com.project.ecodein.repository.OrderDetailRepository;
@@ -38,6 +44,8 @@ import com.project.ecodein.repository.StockRepository;
 @Service
 public class OrderingService {
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
 	private final OrderingRepository ORDERING_REPOSITORY;
     private final StockRepository STOCK_REPOSITORY;
@@ -47,6 +55,7 @@ public class OrderingService {
     private final ModelMapper MODEL_MAPPER;
     private final HttpSession SESSION;
     private final AdminRepository ADMIN_REPOSITORY;
+    private final ItemRepository ITEM_REPOSITORY;
 
     public OrderingService(OrderingRepository orderingRepository,
                            StockRepository stockRepository,
@@ -54,7 +63,8 @@ public class OrderingService {
                            ApprovalRepository approvalRepository,
                            ApprovalStatusLableRepository approvalStatusLableRepository,
                            ModelMapper modelMapper, HttpSession session,
-                           AdminRepository adminRepository) {
+                           AdminRepository adminRepository,
+                           ItemRepository itemRepository, DefaultSslBundleRegistry sslBundleRegistry) {
         this.MODEL_MAPPER = modelMapper;
         this.ORDERING_REPOSITORY = orderingRepository;
         this.STOCK_REPOSITORY = stockRepository;
@@ -63,6 +73,7 @@ public class OrderingService {
         this.APPROVAL_STATUSLABLE_REPOSITORY = approvalStatusLableRepository;
         this.SESSION = session;
         this.ADMIN_REPOSITORY = adminRepository;
+        this.ITEM_REPOSITORY = itemRepository;
     }
 
     // mainPage에서 사용할 메서드
@@ -182,12 +193,20 @@ public class OrderingService {
     }
 
     // 발주등록_Stock을 이름으로 검색하는 메서드 추가
-    public List<StockDTO> searchStocksByName(String name) { // StockDTO 추가할 예정!
-        Item item = new Item();
-        item.setItemName(name);
+    public StockDTO searchStocksByName(String name) { // StockDTO 추가할 예정!
+        Item item = ITEM_REPOSITORY.findByItemName(name);
         List<Stock> stocks = STOCK_REPOSITORY.findByItem(item);
-        //        List<Stock> stocks = STOCK_REPOSITORY.orderFindAllStock(name);
-        return stocks.stream().map(stock -> MODEL_MAPPER.map(stock, StockDTO.class)).toList();
+
+        Stock stock = new Stock();
+        stocks.stream().forEach(stock1 -> {
+            stock.setItem(item);
+            stock.setStockNo(stock1.getStockNo());
+            stock.setQuantity(stock1.getQuantity() + stock.getQuantity());
+            stock.setStorage(stock1.getStorage());
+        });
+
+//                List<Stock> stocks = STOCK_REPOSITORY.orderFindAllStock(name);
+        return MODEL_MAPPER.map(stock, StockDTO.class);
 //        List<Stock> stocks = STOCK_REPOSITORY.orderFindAllStock(name);
 //        return stocks.map(stocks1 -> MODEL_MAPPER.map(stocks1, Stock.class));
 
