@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.project.ecodein.dto.CommentDTO;
 import com.project.ecodein.entity.Admin;
 import com.project.ecodein.entity.Board;
 import com.project.ecodein.entity.Comment;
@@ -28,11 +29,12 @@ public class CommentService {
 	}
 
 
-	public List<Comment> findByBoardNo (int boardNo) {
+	public List<CommentDTO> findByBoardNo (int boardNo) {
 		
-		Board board =boardRepository.findById (boardNo).get ();
+		Board board =boardRepository.findById (boardNo).orElseThrow (IllegalArgumentException::new);
+		List<Comment> comment = commentRepository.findByBoardNo (board);
 		
-		return commentRepository.findByBoardNo(board);
+		return comment.stream ().map (commentContent -> modelMapper.map (commentContent, CommentDTO.class)).toList ();
 
 	}
 

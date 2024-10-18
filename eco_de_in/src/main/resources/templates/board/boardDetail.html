@@ -191,8 +191,8 @@ th {
 								</tr>
 							</thead>
 							<tbody>
-
-								<tr th:each="comment:${commentList}">
+							
+							 <tr th:each="comment:${commentList}">
 									<input type="hidden" th:value="${comment.id}" name="id">
 									<td><span th:text="${comment.comment}" class="commentspan"></span>
 										<textarea th:id="${comment.id}" class="commenttext hidden"
@@ -209,7 +209,9 @@ th {
 										<button type="button"
 											th:onclick="|location.href='@{/board/{boardNo}/delete/{id}(boardNo=${board.boardNo}, id=${comment.id})}'|" class="text-black bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">삭제</button>
 									</td>
-								</tr>
+								</tr> 
+
+
 							</tbody>
 						</table>
 
