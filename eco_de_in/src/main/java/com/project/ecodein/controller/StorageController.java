@@ -1,6 +1,8 @@
 package com.project.ecodein.controller;
 
 import java.util.List;
+
+import com.project.ecodein.dto.StockDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,8 +54,8 @@ public class StorageController {
 
     @GetMapping("/storageStock/{storage_no}")
     @ResponseBody
-    public List<Stock> storageStock (@PathVariable int storage_no) {
-        List<Stock> stockList = STORAGE_SERVICE.getItemStockByStorage(storage_no);
+    public List<StockDTO> storageStock (@PathVariable int storage_no) {
+        List<StockDTO> stockList = STORAGE_SERVICE.getItemStockByStorage(storage_no);
 
         if (stockList.isEmpty()) {
             return null;

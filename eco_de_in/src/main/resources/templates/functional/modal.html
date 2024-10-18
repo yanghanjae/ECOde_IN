@@ -149,12 +149,12 @@
         </ol>
         <hr>
         <div class="first-menu-content">
-          <input type="text" class="user_id hidden" th:value="${session.user.user_id}">
+          <input type="text" class="user_id hidden" th:value="${session.user.userId}">
           <input type="password" class="password-check" style="" autofocus>
           <button type="button" class="modify-btn" onclick="request_user_passwordCheck ()"> 비밀번호 확인 </button>
         </div>
         <div class="second-menu-content hidden">
-          <input type="text" class="user_id_second hidden" th:value="${session.user.user_id}">
+          <input type="text" class="user_id_second hidden" th:value="${session.user.userId}">
           <input type="password" class="password-first input" style="margin-bottom: 10px;" placeholder="변경할 비밀번호 입력"
                  required autofocus>
           <input type="password" class="password-second input" style="" placeholder="한번 더 입력" required>
@@ -203,6 +203,8 @@
               SECOND_MENU_COLOR.classList.add('dark:text-blue-500');
               FIRST_MENU_CONTENT.classList.add('hidden');
               SECOND_MENU_CONTENT.classList.remove('hidden');
+            } else {
+              alert('입력한 비밀번호가 일치하지 않습니다. 다시 입력 바랍니다.');
             }
           })
     }

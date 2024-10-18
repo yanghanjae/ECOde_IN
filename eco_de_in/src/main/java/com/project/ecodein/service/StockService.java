@@ -163,7 +163,6 @@ public class StockService {
 		}
 		
 	}
-
 	
 	// 재고 이동 기능 (옮길 창고에 해당 상품이 있을시, 수량만 업데이트)
 	public void moveStock (Integer moveStockNo, Integer storage_no, Integer moveQuantity) {
