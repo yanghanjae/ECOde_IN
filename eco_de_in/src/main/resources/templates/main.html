@@ -132,7 +132,7 @@
             <tbody>
               <tr th:if="${state.count <= 10}" th:each="order, state: ${orders}">
                 <td th:text="${order.orderNo}">1</td>
-                <td th:text="${order.order_date}">2024-09-15</td>
+                <td th:text="${order.orderDate}">2024-09-15</td>
                 <td th:text="${order.isDelivery == 0 ? '진행중':'완료'}">진행중</td>
               </tr>
             <tr th:if="${orders.isEmpty()}">
@@ -144,6 +144,7 @@
       </div>
       <div class="content-2">
         <p>QnA</p>
+        <p th:text="${boards}"></p>
       </div>
     </div>
   </div>

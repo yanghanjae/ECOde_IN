@@ -13,9 +13,10 @@ import java.util.List;
 public class OrderPoolDTO {
 
     private int orderNo;
-    private int buyer_code;
-    private String user_id;
+    private int buyerCode;
+    private String userId;
     private Date due_date;
     private List<Integer> order_nos;
     private List<Integer> quantities;
+
 }

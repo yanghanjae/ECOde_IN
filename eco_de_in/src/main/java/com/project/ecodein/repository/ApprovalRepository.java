@@ -1,10 +1,12 @@
 package com.project.ecodein.repository;
 
-import com.project.ecodein.dto.Approval;
+import com.project.ecodein.dto.ApprovalDTO;
+import com.project.ecodein.entity.Approval;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface ApprovalRepository extends JpaRepository<Approval, Integer> {
@@ -20,5 +22,5 @@ public interface ApprovalRepository extends JpaRepository<Approval, Integer> {
     @Transactional
     @Query(value = "insert into approval (approval_no, buyer_code, approval_admin, subject)" +
                 "values (:order_no, :buyer_code, 'auto', :subject)", nativeQuery = true)
-    Approval autoSaveApproval(Integer order_no, Integer buyer_code, String subject);
+    Approval autoSaveApproval(Integer order_no, Long buyer_code, String subject);
 }

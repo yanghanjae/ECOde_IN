@@ -1,16 +1,8 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
 import java.sql.Date;
-import com.project.ecodein.entity.Buyer;
-import com.project.ecodein.entity.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter @Setter @ToString
+@Getter @Setter @ToString(exclude = "approval")
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ordering")
@@ -31,20 +23,24 @@ public class Ordering {
 	
 	@ManyToOne
 	@JoinColumn(name = "buyer_code", referencedColumnName = "buyer_code", nullable = false)
-	private Buyer buyer_code;
+	private Buyer buyerCode;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
-	private User user_id;
+	private User userId;
 	
 	@Column(name = "order_date", nullable = false)
-	private Date order_date;
+	private Date orderDate;
 	
 	@Column(name = "due_date", nullable = false)
-	private Date due_date;
+	private Date dueDate;
 	
 	@Column(name = "is_delivery", nullable = false)
 	//private Boolean is_delivery;
 	private byte isDelivery;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "order_no", referencedColumnName = "approval_no")
+	private Approval approval;
 
 }

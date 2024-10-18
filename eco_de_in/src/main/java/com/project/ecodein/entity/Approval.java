@@ -1,8 +1,8 @@
-package com.project.ecodein.dto;
+package com.project.ecodein.entity;
 
 import java.time.LocalDateTime;
-import com.project.ecodein.entity.Admin;
-import com.project.ecodein.entity.Buyer;
+
+import com.project.ecodein.entity.Ordering;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +18,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Setter @Getter
 @NoArgsConstructor
