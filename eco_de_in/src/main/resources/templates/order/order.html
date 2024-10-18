@@ -197,14 +197,14 @@
                th:href="@{/order/detail/{orderNo}(orderNo=${order.orderNo})}"></a>
           </td>
           <td th:text="${order.orderDate}"></td>
-          <td th:text="${order.buyerCode.buyer_name}"></td>
+          <td th:text="${order.buyerCode.buyerName}"></td>
           <td th:text="${order.dueDate}"></td>
           <td th:text="${order.isDelivery eq 0 ? '접수': order.isDelivery eq 1 ? '결재완료' : order.isDelivery eq 2 ? '출고진행' : '출고완료'}"></td>
 
-          <td th:text="${order.order_date}"></td>
-          <td th:text="${order.buyer_code.buyerName}"></td>
-          <td th:text="${order.due_date}"></td>
-          <td th:text="${order.isDelivery eq 0 ? '진행중':'완료'}"></td>
+<!--          <td th:text="${order.orderDate}"></td>-->
+<!--          <td th:text="${order.buyerCode.buyerName}"></td>-->
+<!--          <td th:text="${order.dueDate}"></td>-->
+<!--          <td th:text="${order.isDelivery eq 0 ? '진행중':'완료'}"></td>-->
           <td>
             <button th:if="${order.isDelivery == 0 || order.isDelivery == 1}" class="inline text-gray bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none
            focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-1 text-center dark:bg-blue-600
