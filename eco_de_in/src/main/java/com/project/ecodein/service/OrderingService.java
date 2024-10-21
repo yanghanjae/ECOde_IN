@@ -2,24 +2,12 @@ package com.project.ecodein.service;
 
 
 
-import com.project.ecodein.dto.*;
-import com.project.ecodein.entity.*;
-import com.project.ecodein.entity.Approval;
-import com.project.ecodein.entity.ApprovalStatusLable;
-import com.project.ecodein.entity.OrderDetail;
-import com.project.ecodein.entity.Ordering;
-import com.project.ecodein.repository.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.servlet.http.HttpSession;
-import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.ssl.DefaultSslBundleRegistry;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,16 +17,30 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
+import com.project.ecodein.dto.ApprovalStatusLableDTO;
 import com.project.ecodein.dto.OrderPoolDTO;
+import com.project.ecodein.dto.OrderingDTO;
+import com.project.ecodein.dto.StockDTO;
+import com.project.ecodein.entity.Admin;
+import com.project.ecodein.entity.Approval;
+import com.project.ecodein.entity.ApprovalStatusLable;
+import com.project.ecodein.entity.Buyer;
+import com.project.ecodein.entity.Item;
+import com.project.ecodein.entity.OrderDetail;
+import com.project.ecodein.entity.Ordering;
+import com.project.ecodein.entity.Stock;
+import com.project.ecodein.entity.User;
+import com.project.ecodein.repository.AdminRepository;
+import com.project.ecodein.repository.ApprovalRepository;
+import com.project.ecodein.repository.ApprovalStatusLableRepository;
+import com.project.ecodein.repository.ItemRepository;
 import com.project.ecodein.repository.OrderDetailRepository;
 import com.project.ecodein.repository.OrderingRepository;
 import com.project.ecodein.repository.StockRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
@@ -125,7 +127,7 @@ public class OrderingService {
     // 발주등록
     @Transactional
     public void addOrder(OrderPoolDTO orderPool) {
-        // 저장 전 저장된 정보 확인
+
         Approval prevApproval = APPROVAL_REPOSITORY.findTopByOrderByApprovalNoDesc();
         Ordering prevOrder = ORDERING_REPOSITORY.findTopByOrderByOrderNoDesc();
 
@@ -166,7 +168,8 @@ public class OrderingService {
         }
 
     }
-
+    
+    
     // 발주 수정
     @Modifying
     @Transactional
