@@ -28,20 +28,27 @@ public class BoardService {
 		this.modelMapper = modelMapper;
 
 	}
-	
+
 	public List<BoardDTO> mainPageBoardList (HttpSession session) {
-		User user = (User)session.getAttribute ("user");
-		
+
+		User user = (User) session.getAttribute ("user");
+
 		if (user != null) {
+
 			List<Board> boardList = boardRepository.findByUser (user);
-			
-			return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
+
+			return boardList.stream ().map (board -> modelMapper.map (board, BoardDTO.class)).toList ();
+
 		} else {
-            List<Board> boardList = boardRepository.findAll();
-			return boardList.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
+
+			List<Board> boardList = boardRepository.findAll ();
+			return boardList.stream ().map (board -> modelMapper.map (board, BoardDTO.class)).toList ();
+
 		}
+
 	}
 
+	// 상세페이지
 	public BoardDTO findBoardByNo (int board_no) {
 
 		Board board = boardRepository.findById (board_no).orElseThrow (IllegalArgumentException::new);
@@ -49,14 +56,14 @@ public class BoardService {
 		return modelMapper.map (board, BoardDTO.class);
 
 	}
+	// 목록
 
 	public Page<BoardDTO> findBoardList (Pageable pageable, String search) {
 
-
 		if (search == null) {
 
-			/* page 파라미터가 Pageable의 number 값으로 넘어오는데 해당 값이 조회시에는 인덱스 기준이 되어야 해서 -1 처리가 필요하다. */
-			pageable = PageRequest.of (pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber () - 1,
+			// page 파라미터가 Pageable의 number 값으로 넘어오는데 해당 값이 조회시에는 인덱스 기준이 되어야 해서 -1 처리가 필요하다.
+			pageable = PageRequest.of (pageable.getPageNumber (),
 				pageable.getPageSize (),
 				Sort.by ("boardNo").descending ());
 			Page<Board> boardList = boardRepository.findAll (pageable);
@@ -64,8 +71,8 @@ public class BoardService {
 
 		} else {
 
-			/* page 파라미터가 Pageable의 number 값으로 넘어오는데 해당 값이 조회시에는 인덱스 기준이 되어야 해서 -1 처리가 필요하다. */
-			pageable = PageRequest.of (pageable.getPageNumber () <= 0 ? 0 : pageable.getPageNumber () - 1,
+			// page 파라미터가 Pageable의 number 값으로 넘어오는데 해당 값이 조회시에는 인덱스 기준이 되어야 해서 -1 처리가 필요하다.
+			pageable = PageRequest.of (pageable.getPageNumber () ,
 				pageable.getPageSize (),
 				Sort.by ("board_no").descending ());
 			Page<Board> boardList = boardRepository.findBoardByKeyword (search, pageable);
@@ -81,7 +88,9 @@ public class BoardService {
 
 		newBoard.setBoardDate (LocalDateTime.now ());
 		boardRepository.save (modelMapper.map (newBoard, Board.class));
+
 	}
+
 	// 수정
 	@Transactional
 	public void updateBoard (BoardDTO updateBoard) {
@@ -91,12 +100,15 @@ public class BoardService {
 		foundBoard.setBoardTitle (updateBoard.getBoardTitle ());
 		foundBoard.setBoardContent (updateBoard.getBoardContent ());
 		foundBoard.setBoardDate (LocalDateTime.now ());
+
 	}
+
 	// 삭제
 	@Transactional
 	public void deleteBoard (Integer boardNo) {
 
 		boardRepository.deleteById (boardNo);
+
 	}
 
 }
