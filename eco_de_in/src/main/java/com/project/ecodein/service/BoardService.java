@@ -75,15 +75,14 @@ public class BoardService {
 
 	}
 
-	// save
+	// 등록
 	@Transactional
 	public void addNewBoard (BoardDTO newBoard) {
 
 		newBoard.setBoardDate (LocalDateTime.now ());
 		boardRepository.save (modelMapper.map (newBoard, Board.class));
-
 	}
-
+	// 수정
 	@Transactional
 	public void updateBoard (BoardDTO updateBoard) {
 
@@ -92,14 +91,12 @@ public class BoardService {
 		foundBoard.setBoardTitle (updateBoard.getBoardTitle ());
 		foundBoard.setBoardContent (updateBoard.getBoardContent ());
 		foundBoard.setBoardDate (LocalDateTime.now ());
-
 	}
-
+	// 삭제
 	@Transactional
 	public void deleteBoard (Integer boardNo) {
 
 		boardRepository.deleteById (boardNo);
-
 	}
 
 }

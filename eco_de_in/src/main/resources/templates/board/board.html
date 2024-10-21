@@ -142,8 +142,7 @@ form>input {
 						value="조 회">
 				</form>
 
-
-				<button class="button-register" onclick="location.href='/board/add'">등록</button>
+				<button th:if="${session.user != null}" class="button-register" onclick="location.href='/board/add'">등록</button>
 			</div>
 
 			<div class="main-content">
